@@ -738,6 +738,206 @@
   <img src="image/SIstema Digestivo3C/Todo lo que necesitas para comer.png" alt="Todo lo que necesitas para comer bien · Vida en Calma" />
 </div>
 
+<!-- ===== VSL ===== -->
+<style>
+  .vsl-section {
+    background: #111827;
+    padding: 36px 20px 40px;
+    text-align: center;
+  }
+  .vsl-headline {
+    font-size: clamp(16px, 3.2vw, 21px);
+    font-weight: 800;
+    color: #fff;
+    max-width: 540px;
+    margin: 0 auto 10px;
+    line-height: 1.38;
+  }
+  .vsl-tap-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255,255,255,.82);
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 99px;
+    padding: 7px 18px;
+    margin-bottom: 18px;
+    animation: tapPulse 2.2s ease-in-out infinite;
+    user-select: none;
+    cursor: pointer;
+  }
+  @keyframes tapPulse {
+    0%,100% { opacity: 1; }
+    50%      { opacity: .55; }
+  }
+  .vsl-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+    aspect-ratio: 9 / 16;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 14px 56px rgba(0,0,0,.65);
+    cursor: pointer;
+    background: #000;
+  }
+  .vsl-video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+  .vsl-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: rgba(0,0,0,.28);
+    transition: opacity .3s ease;
+  }
+  .vsl-overlay.vsl-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .vsl-play-circle {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,.85);
+    background: rgba(255,255,255,.15);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: #fff;
+    padding-left: 6px;
+    transition: transform .2s, background .2s;
+    box-shadow: 0 4px 24px rgba(0,0,0,.5);
+  }
+  .vsl-overlay:hover .vsl-play-circle {
+    transform: scale(1.1);
+    background: rgba(255,255,255,.28);
+  }
+  .vsl-overlay-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255,255,255,.85);
+    background: rgba(0,0,0,.35);
+    border-radius: 99px;
+    padding: 5px 14px;
+    letter-spacing: .03em;
+  }
+  /* Pausa al vuelo — aparece brevemente al hacer clic durante reproducción */
+  .vsl-pause-flash {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .15s;
+  }
+  .vsl-pause-flash.show { opacity: 1; }
+  .vsl-pause-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(0,0,0,.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #fff;
+  }
+  /* Overlay de fin de video */
+  .vsl-ended-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: rgba(0,0,0,.55);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .4s ease;
+  }
+  .vsl-ended-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .vsl-replay-circle {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,.85);
+    background: rgba(255,255,255,.15);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: #fff;
+    transition: transform .2s, background .2s;
+    box-shadow: 0 4px 24px rgba(0,0,0,.5);
+    cursor: pointer;
+  }
+  .vsl-replay-circle:hover { transform: scale(1.1); background: rgba(255,255,255,.28); }
+  .vsl-replay-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255,255,255,.9);
+    background: rgba(0,0,0,.4);
+    border-radius: 99px;
+    padding: 5px 16px;
+  }
+</style>
+
+<div class="vsl-section">
+  <p class="vsl-headline">✨ Mirá este video antes de continuar</p>
+  <div class="vsl-tap-label" id="vslTapLabel" onclick="document.getElementById('vslOverlay').click()">
+    <i class="fa-solid fa-volume-high"></i> Tocá el video para escuchar el audio
+  </div>
+  <div class="vsl-wrap" id="vslWrap">
+    <video
+      id="vslVideo"
+      class="vsl-video"
+      src="image/VSL_App_Notion.mp4"
+      playsinline
+      muted
+      loop
+      preload="metadata">
+    </video>
+    <div class="vsl-overlay" id="vslOverlay">
+      <div class="vsl-play-circle">&#9654;</div>
+      <div class="vsl-overlay-label">🔊 Tocá para escuchar el audio</div>
+    </div>
+    <!-- Flash de pausa -->
+    <div class="vsl-pause-flash" id="vslPauseFlash">
+      <div class="vsl-pause-icon">⏸</div>
+    </div>
+    <!-- Overlay de fin de video -->
+    <div class="vsl-ended-overlay" id="vslEndedOverlay">
+      <div class="vsl-replay-circle" id="vslReplayBtn">&#8635;</div>
+      <div class="vsl-replay-label" id="vslReplayLabel" style="cursor:pointer;">▶ Volver a ver</div>
+    </div>
+  </div>
+</div>
+
 <!-- ===== HERO ===== -->
 <section class="hero">
   <div class="container">
@@ -1797,7 +1997,80 @@ document.querySelectorAll('.faq-q-sd').forEach(function (q) {
   window.addEventListener('touchend',    onEnd);
 })();
 
-/* ─── 6. SCROLL REVEAL ─── */
+/* ─── 6. VSL CLICK-TO-PLAY / PAUSE / REPLAY ─── */
+(function () {
+  var overlay      = document.getElementById('vslOverlay');
+  var video        = document.getElementById('vslVideo');
+  var tapLabel     = document.getElementById('vslTapLabel');
+  var pauseFlash   = document.getElementById('vslPauseFlash');
+  var endedOverlay = document.getElementById('vslEndedOverlay');
+  var replayBtn    = document.getElementById('vslReplayBtn');
+  var wrap         = document.getElementById('vslWrap');
+  if (!overlay || !video) return;
+
+  var activated = false;
+  var flashTimer;
+
+  /* ── Arranque silenciado en loop (preview) ── */
+  video.play().catch(function(){});
+
+  /* ── Primer clic: activar con audio (stopPropagation para no disparar el handler del wrap) ── */
+  function activar(e) {
+    if (e) e.stopPropagation();
+    activated = true;
+    overlay.classList.add('vsl-hidden');
+    if (tapLabel) tapLabel.style.display = 'none';
+    video.muted = false;
+    video.loop  = false;
+    video.currentTime = 0;
+    video.play();
+  }
+  overlay.addEventListener('click', activar);
+
+  /* ── Clic en el video durante reproducción: pausa / reanuda ── */
+  wrap.addEventListener('click', function () {
+    if (!activated) return;
+    if (endedOverlay.classList.contains('show')) return; /* ya terminó, no interferir */
+    if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
+      showFlash('⏸');
+    }
+  });
+
+  /* ── Flash visual de pausa/play ── */
+  function showFlash(icon) {
+    if (!pauseFlash) return;
+    pauseFlash.querySelector('.vsl-pause-icon').textContent = icon;
+    pauseFlash.classList.add('show');
+    clearTimeout(flashTimer);
+    flashTimer = setTimeout(function () { pauseFlash.classList.remove('show'); }, 700);
+  }
+
+  /* ── Cuando reanuda, mostrar ▶ brevemente ── */
+  video.addEventListener('play', function () {
+    if (activated && !video.muted) showFlash('▶');
+  });
+
+  /* ── Fin del video: mostrar overlay de replay ── */
+  video.addEventListener('ended', function () {
+    endedOverlay.classList.add('show');
+  });
+
+  /* ── Botón replay (ícono + texto) ── */
+  function doReplay(e) {
+    if (e) e.stopPropagation();
+    endedOverlay.classList.remove('show');
+    video.currentTime = 0;
+    video.play();
+  }
+  replayBtn.addEventListener('click', doReplay);
+  var replayLabel = document.getElementById('vslReplayLabel');
+  if (replayLabel) replayLabel.addEventListener('click', doReplay);
+})();
+
+/* ─── 7. SCROLL REVEAL ─── */
 (function () {
   var obs = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
