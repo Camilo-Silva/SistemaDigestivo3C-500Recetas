@@ -435,6 +435,10 @@
     .imagen-cabecera img { width: 100%; height: auto; display: block; }
 
     /* ===== FLOAT CTA ===== */
+    @keyframes floatPulse {
+      0%,100% { transform: translateX(-50%) scale(1);    box-shadow: 0 8px 32px rgba(0,0,0,.22); }
+      50%     { transform: translateX(-50%) scale(1.05); box-shadow: 0 12px 40px rgba(0,0,0,.32); }
+    }
     .float-cta {
       position: fixed;
       bottom: 24px;
@@ -451,10 +455,10 @@
       padding: 16px 28px;
       box-shadow: 0 8px 32px rgba(0,0,0,.22);
       cursor: pointer;
-      transition: transform .15s;
       text-decoration: none;
+      animation: floatPulse 2s ease-in-out infinite;
     }
-    .float-cta:hover { transform: translateX(-50%) translateY(-2px); }
+    .float-cta:hover { animation: none; transform: translateX(-50%) scale(1.07) translateY(-2px); box-shadow: 0 14px 44px rgba(0,0,0,.35); }
 
     /* ===== DIVISOR ===== */
     .divisor { border: none; border-top: 1px solid #E0E5DF; margin: 0; }
@@ -655,6 +659,64 @@
     @keyframes toastIn  { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: translateX(0); } }
     @keyframes toastOut { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(28px); } }
     @keyframes blink    { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    /* ===== SCROLL REVEAL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-left  { opacity: 0; transform: translateX(-28px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal-left.visible  { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(28px);  transition: opacity .55s ease, transform .55s ease; }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    /* Stagger delay para grids */
+    .reveal-stagger > * { opacity: 0; transform: translateY(22px); transition: opacity .45s ease, transform .45s ease; }
+    .reveal-stagger.visible > *:nth-child(1) { opacity:1; transform:translateY(0); transition-delay:.05s; }
+    .reveal-stagger.visible > *:nth-child(2) { opacity:1; transform:translateY(0); transition-delay:.13s; }
+    .reveal-stagger.visible > *:nth-child(3) { opacity:1; transform:translateY(0); transition-delay:.21s; }
+    .reveal-stagger.visible > *:nth-child(4) { opacity:1; transform:translateY(0); transition-delay:.29s; }
+    .reveal-stagger.visible > *:nth-child(5) { opacity:1; transform:translateY(0); transition-delay:.37s; }
+    .reveal-stagger.visible > *:nth-child(6) { opacity:1; transform:translateY(0); transition-delay:.45s; }
+    .reveal-stagger.visible > *:nth-child(n+7) { opacity:1; transform:translateY(0); transition-delay:.50s; }
+
+    /* ===== HERO ENTRANCE ===== */
+    @keyframes heroFadeUp { from { opacity:0; transform:translateY(32px); } to { opacity:1; transform:translateY(0); } }
+    .hero .tag       { animation: heroFadeUp .5s ease .1s both; }
+    .hero h1         { animation: heroFadeUp .5s ease .22s both; }
+    .hero .subtitulo { animation: heroFadeUp .5s ease .34s both; }
+    .hero .badge-row { animation: heroFadeUp .5s ease .44s both; }
+    .hero .btn-cta   { animation: heroFadeUp .5s ease .54s both; }
+    .hero .hero-trust-bar { animation: heroFadeUp .5s ease .64s both; }
+
+    /* ===== CTA PULSE ===== */
+    @keyframes ctaPulse {
+      0%,100% { box-shadow: 0 8px 32px rgba(216,167,177,.45); }
+      50%     { box-shadow: 0 8px 48px rgba(216,167,177,.75), 0 0 0 6px rgba(216,167,177,.15); }
+    }
+    .btn-cta.grande { animation: ctaPulse 2.4s ease-in-out infinite; }
+    .btn-cta.grande:hover { animation: none; transform: translateY(-3px); box-shadow: 0 14px 44px rgba(216,167,177,.65); }
+
+    /* ===== HOVER CARDS ===== */
+    .ep-card        { transition: transform .22s ease, box-shadow .22s ease; }
+    .ep-card:hover  { transform: translateY(-5px); box-shadow: 0 10px 32px rgba(122,157,142,.18); }
+    .bonus-card     { transition: transform .22s ease, box-shadow .22s ease; }
+    .bonus-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,0,0,.12); }
+    .t-card         { transition: transform .22s ease, box-shadow .22s ease; }
+    .t-card:hover   { transform: translateY(-4px) scale(1.01); box-shadow: 0 8px 24px rgba(0,0,0,.12); }
+    .faq-item-sd    { transition: background .18s ease; }
+    .faq-item-sd:hover { background: #fdf8f5; }
+    .iv2-item       { transition: background .18s ease; }
+    .iv2-item:hover { background: #faf5f2; }
+
+    /* ===== PRICING BOX ENTRANCE ===== */
+    @keyframes pricingDrop { from { opacity:0; transform:scale(.96) translateY(16px); } to { opacity:1; transform:scale(1) translateY(0); } }
+    .pricing-box-sd { animation: pricingDrop .55s ease .1s both; }
   </style>
 </head>
 <body>
@@ -700,16 +762,16 @@
 <!-- ===== DOLOR ===== -->
 <section class="seccion">
   <div class="container">
-    <div class="tag tag-rojo">¿Te suena familiar?</div>
-    <h2>El problema no es que no sepas cocinar.</h2>
-    <ul class="dolor-lista">
+    <div class="tag tag-rojo reveal">¿Te suena familiar?</div>
+    <h2 class="reveal">El problema no es que no sepas cocinar.</h2>
+    <ul class="dolor-lista reveal">
       <li>Abrís la heladera y no sabés qué cocinar</li>
       <li>Terminás comiendo cualquier cosa rápida que te cae mal</li>
       <li>Sentís hinchazón, pesadez o reflujo después de comer</li>
       <li>Perdés tiempo pensando más que cocinando</li>
       <li>Probaste recetas… pero nunca sabés cuál elegir en el momento real</li>
     </ul>
-    <div class="insight-box">
+    <div class="insight-box reveal">
       <strong>👉 El problema real es el agotamiento mental de decidir TODOS LOS DÍAS qué comer.</strong><br>
       No necesitás más recetas. Necesitás un sistema que elimine esa decisión.
     </div>
@@ -724,7 +786,7 @@
     <div class="tag">La solución</div>
     <h2>Esto no es otro recetario más.<br>Es un sistema inteligente de decisiones rápidas.</h2>
     <p class="subtitulo">Elimina el "¿qué como hoy?" con un sistema organizado según <strong>tu tiempo, tu momento y tu necesidad real</strong>.</p>
-    <div class="solucion-grid">
+    <div class="solucion-grid reveal-stagger">
       <div class="sol-card">
         <div class="ico">⏱</div>
         <h4>Por tiempo</h4>
@@ -765,7 +827,7 @@
   <div class="container texto-centro">
     <div class="tag">Resultados reales</div>
     <h2>Con este sistema vas a…</h2>
-    <div class="beneficios-grid">
+    <div class="beneficios-grid reveal-stagger">
       <div class="ben-item">
         <span class="ico">🥗</span>
         <p>Comer mejor sin perder tiempo</p>
@@ -960,7 +1022,7 @@
     <h2>Todo lo que entra en tu acceso</h2>
     <p class="subtitulo">Un sistema completo, no solo un archivo. Esto es exactamente lo que descargás el día que comprás:</p>
 
-    <div class="incluye-v2">
+    <div class="incluye-v2 reveal-stagger">
 
       <!-- Producto principal -->
       <div class="iv2-group">
@@ -1040,7 +1102,7 @@
 
     </div><!-- /incluye-v2 -->
 
-    <div class="iv2-total-row">
+    <div class="iv2-total-row reveal">
       <div style="text-align:center;">
         <div class="iv2-label">Valor total de todo lo que recibís:</div>
         <div class="iv2-val"><s style="opacity:.55;font-size:1.1rem;font-weight:600;">$120.000</s></div>
@@ -1084,7 +1146,7 @@
     <a href="#" class="pricing-savings-btn-sd">🌿 AHORRÁS $15.000 — 50% OFF</a>
 
     <div class="pricing-countdown-sd">
-      <div style="font-size:.88rem;color:#555;margin-bottom:10px;line-height:1.5;">Tu lugar solo está reservado por <strong>10 minutos</strong>,<br>en caso de no acceder se cederá a otra persona.</div>
+      <div style="font-size:.88rem;color:#555;margin-bottom:10px;line-height:1.5;">Tu lugar solo está reservado por <strong>15 minutos</strong>,<br>en caso de no acceder se cederá a otra persona.</div>
       <div class="pc-header">⏰ Precio especial solo por HOY · Jueves 09/04/2026 — Últimas horas con 50% OFF</div>
       <div class="pc-digits">
         <div class="pc-unit">
@@ -1126,7 +1188,7 @@
   <div class="container">
     <div class="tag tag-amarillo">🎁 Bonus incluidos</div>
     <h2>Más de lo que esperabas</h2>
-    <div class="bonus-stack">
+    <div class="bonus-stack reveal-stagger">
 
       <!-- Bonus 1: 500 Recetas -->
       <div class="bonus-card">
@@ -1276,7 +1338,7 @@
     <h2>6 productos completos que se suman a tu acceso</h2>
     <p class="subtitulo">Cada uno tiene un valor individual de <strong>$14.990</strong>. Los recibís todos incluidos, sin costo adicional, al adquirir el Sistema Digestivo 3C.</p>
 
-    <div class="ep-grid">
+    <div class="ep-grid reveal-stagger">
 
       <div class="ep-card">
         <img class="ep-card-img" src="image/MockUp_Reinicia_Tu_Cuerpo.png" alt="Reiniciá tu Cuerpo" />
@@ -1352,7 +1414,7 @@
 
     </div><!-- /ep-grid -->
 
-    <div class="ep-total-bar">
+    <div class="ep-total-bar reveal">
       <div style="text-align:center;">
         <div class="ep-t-label">Valor total de los 6 productos extras:</div>
         <div class="ep-t-value"><s style="opacity:.55;font-size:1.1rem;font-weight:600;">$89.940</s></div>
@@ -1394,7 +1456,7 @@
   <div class="container texto-centro">
     <div class="tag tag-rojo">Sé lo que estás pensando</div>
     <h2>Respondemos tus dudas</h2>
-    <div class="obj-grid">
+    <div class="obj-grid reveal-stagger">
       <div class="obj-item">
         <div class="pregunta">❌ "No tengo tiempo"</div>
         <div class="respuesta">Justamente está hecho para eso. <strong>Las recetas son de 5, 10 o 20 min.</strong> Si tenés 5 minutos, tenés tiempo.</div>
@@ -1421,7 +1483,7 @@
     <div class="tag">¿Es para vos?</div>
     <h2 style="font-size:clamp(24px,4vw,36px);margin-bottom:8px;">Sé honesta con vos misma</h2>
     <p class="subtitulo">Este sistema funciona para quienes quieren resultados reales — no para quienes buscan magia sin hacer nada.</p>
-    <div class="forwho-grid">
+    <div class="forwho-grid reveal-stagger">
       <div class="forwho-card forwho-card--yes">
         <h3>✅ Este sistema es para vos si:</h3>
         <ul class="forwho-list forwho-list--yes">
@@ -1477,7 +1539,7 @@
 <!-- ===== GARANTÍA ===== -->
 <section class="seccion seccion-verde">
   <div class="container">
-    <div class="garantia-box">
+    <div class="garantia-box reveal">
       <img src="image/SIstema Digestivo3C/7 días garantía en oro.png" alt="Garantía 7 días" style="width:200px;height:auto;margin:0 auto 8px;display:block;" />
       <h3>Probalo sin riesgo</h3>
       <p>Si en los primeros <strong>7 días</strong> no sentís más claridad, menos estrés y mayor facilidad para decidir qué comer…</p>
@@ -1552,7 +1614,7 @@
 </footer>
 
 <!-- ===== FLOAT CTA ===== -->
-<a href="#oferta" class="float-cta">⚡ Quiero comer mejor sin pensar →</a>
+<a href="#comprar" class="float-cta">💚 COMPRAR AHORA — 50% OFF 💚</a>
 
 <!-- ===== TOAST CONTAINER ===== -->
 <div class="toast-container" id="toastContainer"></div>
@@ -1564,7 +1626,7 @@
   var KEY = 'vc_sd3c_countdown_v1';
   var end = +sessionStorage.getItem(KEY);
   if (!end || end < Date.now()) {
-    end = Date.now() + (60 * 60) * 1000;
+    end = Date.now() + (15 * 60) * 1000;
     sessionStorage.setItem(KEY, end);
   }
   function tick() {
@@ -1733,6 +1795,22 @@ document.querySelectorAll('.faq-q-sd').forEach(function (q) {
   wrapper.addEventListener('touchstart', onStart, { passive: true });
   window.addEventListener('touchmove',   onMove,  { passive: false });
   window.addEventListener('touchend',    onEnd);
+})();
+
+/* ─── 6. SCROLL REVEAL ─── */
+(function () {
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-stagger').forEach(function (el) {
+    obs.observe(el);
+  });
 })();
 </script>
 
