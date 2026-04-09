@@ -1,0 +1,83 @@
+<style>
+  :root { --red: #d8a7b1; --red-dark: #b8879a; --dark: #2c1f1b; --text: #4a3a32; --cream: #f1ebe5; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  .section-label { display: inline-block; background: rgba(216,167,177,.12); color: #d8a7b1; font-family: 'Montserrat', sans-serif !important; font-size: 12px !important; font-weight: 700; padding: 4px 14px; border-radius: 20px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1.2px; }
+  .section-title { text-align: center; font-size: 34px !important; margin-bottom: 8px; font-family: 'Montserrat', sans-serif !important; }
+  .section-subtitle { text-align: center; color: #666; margin-bottom: 44px; font-size: 16px !important; }
+  .solution-section { background: var(--cream); padding: 70px 20px; text-align: center; }
+  .method-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, #f9f0f3, #ede5e1); border: 2px solid #a39384;
+    border-radius: 14px; padding: 12px 28px; font-family: 'Montserrat', sans-serif !important;
+    font-weight: 900; font-size: 20px !important; color: var(--dark); margin-bottom: 32px;
+  }
+  .method-badge i { color: var(--red); font-size: 22px !important; }
+  .method-features { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 640px; margin: 0 auto 28px; text-align: left; }
+  .method-feature {
+    background: #fff; border: 1.5px solid #d4c4bc; border-radius: 10px;
+    padding: 14px 18px; display: flex; align-items: flex-start; gap: 10px;
+    font-size: 15px !important; color: var(--text);
+  }
+  .method-feature i { color: var(--red); font-size: 16px !important; margin-top: 2px; flex-shrink: 0; }
+  .method-not-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 24px; }
+  .method-not-item {
+    background: rgba(216,167,177,.08); border: 1px solid rgba(216,167,177,.25);
+    border-radius: 30px; padding: 8px 20px; font-family: 'Montserrat', sans-serif !important;
+    font-weight: 700; font-size: 14px !important; color: var(--red-dark);
+  }
+  .method-not-item i { color: var(--red); margin-right: 4px; }
+  @media (max-width: 768px) { .method-features { grid-template-columns: 1fr; } }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<section class="solution-section">
+    <div class="container">
+        <div class="section-label"><i class="fa-solid fa-seedling"></i> La solución</div>
+        <h2 class="section-title">Conocé el Método Reset<br>Antiinflamatorio Express™</h2>
+        <p class="section-subtitle">Un sistema simple diseñado para mujeres reales que necesitan resultados sin complicarse</p>
+
+        <div class="method-badge">
+            <i class="fa-solid fa-leaf"></i>
+            🌿 Método Reset Antiinflamatorio Express™
+        </div>
+
+        <div class="method-features">
+            <div class="method-feature">
+                <i class="fa-solid fa-check-circle"></i>
+                <span><strong>Combinaciones de alimentos</strong> listas en 5 minutos</span>
+            </div>
+            <div class="method-feature">
+                <i class="fa-solid fa-check-circle"></i>
+                <span><strong>Rutinas antiinflamatorias</strong> de mañana y noche</span>
+            </div>
+            <div class="method-feature">
+                <i class="fa-solid fa-check-circle"></i>
+                <span><strong>Estrategia "Sin Cocina"</strong> para días sin tiempo</span>
+            </div>
+            <div class="method-feature">
+                <i class="fa-solid fa-check-circle"></i>
+                <span><strong>Adaptado a días caóticos</strong> — funciona en tu vida real</span>
+            </div>
+        </div>
+
+        <div class="method-not-list">
+            <span class="method-not-item"><i class="fa-solid fa-arrow-right"></i> No es una dieta</span>
+            <span class="method-not-item"><i class="fa-solid fa-arrow-right"></i> No es un detox extremo</span>
+            <span class="method-not-item"><i class="fa-solid fa-arrow-right"></i> Es un sistema que podés sostener</span>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Solución — Método",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Solución — Método"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,188 @@
+<style>
+  :root { --red: #d8a7b1; --red-dark: #b8879a; --dark: #2c1f1b; --text: #4a3a32; --cream: #f1ebe5; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  @keyframes shimmer { 0% { left: -100%; } 100% { left: 200%; } }
+  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .pricing-section { background: var(--cream); padding: 44px 20px; border-top: 1px solid #d8c8c0; }
+  .pricing-box { max-width: 480px; margin: 0 auto; text-align: center; }
+  .pricing-stars { color: #f5a623; font-size: 19px !important; margin-bottom: 4px; }
+  .pricing-reviews { font-size: 14px !important; color: #777; margin-bottom: 22px; }
+  .pricing-reviews strong { color: #333; }
+  .pricing-main-price { font-family: 'Montserrat', sans-serif !important; font-weight: 900; font-size: 40px !important; color: #111; line-height: 1; margin-bottom: 6px; }
+  .pricing-old-price { font-size: 16px !important; color: #aaa; text-decoration: line-through; margin-bottom: 16px; }
+  .pricing-savings-btn { display: inline-block; background: linear-gradient(135deg, #e0b8c3, #d8a7b1); color: #fff; font-family: 'Montserrat', sans-serif !important; font-weight: 800; font-size: 16px !important; padding: 13px 28px; border-radius: 30px; margin-bottom: 10px; box-shadow: 0 4px 14px rgba(216,167,177,.45); text-decoration: none; cursor: pointer; transition: transform .18s ease, box-shadow .18s ease; position: relative; overflow: hidden; }
+  .pricing-savings-btn::after { content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent); animation: shimmer 2.5s infinite; }
+  .pricing-savings-btn:hover { transform: scale(1.06) translateY(-2px); box-shadow: 0 8px 24px rgba(216,167,177,.65); }
+  .pricing-countdown { background: linear-gradient(135deg, #f1ebe5, #f1ebe5); border: 2px solid #a39384; border-radius: 12px; padding: 16px 18px; margin: 14px 0; text-align: center; font-family: 'Montserrat', sans-serif !important; }
+  .pricing-countdown .pc-header { font-size: 14px !important; font-weight: 700; color: #a39384; margin-bottom: 10px; }
+  .pricing-countdown .pc-digits { display: flex; justify-content: center; gap: 6px; align-items: flex-end; margin-bottom: 10px; }
+  .pricing-countdown .pc-unit { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .pricing-countdown .pc-num { background: #a39384; color: #fff; font-size: 29px !important; font-weight: 900; padding: 6px 14px; border-radius: 8px; min-width: 52px; line-height: 1; }
+  .pricing-countdown .pc-lbl { font-size: 10px !important; font-weight: 700; color: #d8a7b1; text-transform: uppercase; letter-spacing: .5px; }
+  .pricing-countdown .pc-sep { font-size: 29px !important; font-weight: 900; color: #d8a7b1; line-height: 1; padding-bottom: 6px; }
+  .pricing-countdown .pc-footer { font-size: 12px !important; color: #888; font-family: 'Open Sans', sans-serif !important; }
+  .pricing-offer-btn { display: block; background: linear-gradient(180deg, #e0b8c3, #d8a7b1); color: #fff; font-family: 'Montserrat', sans-serif !important; font-weight: 800; font-size: 17px !important; padding: 15px; border-radius: 10px; text-decoration: none; margin-bottom: 24px; cursor: pointer; transition: transform .18s ease, box-shadow .18s ease; position: relative; overflow: hidden; box-shadow: 0 8px 0 #b8879a, 0 12px 24px rgba(216,167,177,.4); }
+  .pricing-offer-btn::after { content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent); animation: shimmer 2.5s infinite; }
+  .pricing-offer-btn:hover { transform: translateY(3px); box-shadow: 0 5px 0 #b8879a, 0 8px 18px rgba(216,167,177,.3); }
+  .pricing-trust-list { list-style: none; text-align: left; display: inline-block; margin-bottom: 22px; }
+  .pricing-trust-list li { font-size: 14px !important; color: #444; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  @keyframes liveBlink { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0; transform: scale(.7); } }
+  @keyframes liveRing { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(2.8); opacity: 0; } }
+  .pricing-live { display: flex !important; align-items: center; justify-content: center; gap: 8px; font-size: 14px !important; font-family: 'Montserrat', sans-serif !important; font-weight: 700; color: #333; margin-bottom: 10px; }
+  .pricing-live-dot { width: 12px !important; height: 12px !important; border-radius: 50% !important; background: #3483fa !important; flex-shrink: 0 !important; position: relative !important; display: inline-block !important; animation: liveBlink 1s ease-in-out infinite; }
+  .pricing-live-dot::after { content: '' !important; position: absolute !important; inset: 0; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; border-radius: 50% !important; background: #3483fa !important; animation: liveRing 1s ease-out infinite; }
+  .pricing-urgency { font-family: 'Montserrat', sans-serif !important; font-weight: 800; font-size: 14px !important; color: var(--red); text-transform: uppercase; letter-spacing: .5px; }
+  @media (max-width: 768px) {
+    .pricing-main-price { font-size: 32px !important; }
+    .pricing-offer-btn { font-size: 15px !important; padding: 14px; }
+    .pricing-countdown .pc-num { font-size: 24px !important; min-width: 44px; }
+  }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<section class="pricing-section">
+    <div class="pricing-box">
+        <div class="pricing-stars">★★★★★</div>
+        <div class="pricing-reviews"><strong>4.9/5</strong> — reservado para las primeras compradoras</div>
+
+        <div class="pricing-main-price">{{ section.settings.price_new }}</div>
+        <div class="pricing-old-price">{{ section.settings.price_old }}</div>
+        <a href="{{ section.settings.savings_url }}" class="pricing-savings-btn"><i class="fa-solid fa-fire"></i> {{ section.settings.savings_text }}</a>
+
+        <div class="pricing-countdown">
+            <div class="pc-header"><i class="fa-regular fa-bell"></i> {{ section.settings.countdown_header }}</div>
+            <div class="pc-digits">
+                <div class="pc-unit">
+                    <span class="pc-num" id="ub-h">01</span>
+                    <span class="pc-lbl">horas</span>
+                </div>
+                <span class="pc-sep">:</span>
+                <div class="pc-unit">
+                    <span class="pc-num" id="ub-m">00</span>
+                    <span class="pc-lbl">minutos</span>
+                </div>
+                <span class="pc-sep">:</span>
+                <div class="pc-unit">
+                    <span class="pc-num" id="ub-s">00</span>
+                    <span class="pc-lbl">segundos</span>
+                </div>
+            </div>
+            <div class="pc-footer">{{ section.settings.countdown_footer }}</div>
+        </div>
+
+        <a href="{{ section.settings.cta_url }}" class="pricing-offer-btn"><i class="fa-solid fa-leaf"></i> {{ section.settings.cta_text }}</a>
+
+        <ul class="pricing-trust-list">
+            <li><i class="fa-solid fa-bolt" style="color:#f5a623"></i> Acceso inmediato por mail</li>
+            <li><i class="fa-solid fa-lock" style="color:#555"></i> Pago seguro mediante Mercado Pago</li>
+            <li><i class="fa-solid fa-square-check" style="color:#d8a7b1"></i> Garantía "Cuerpo Más Liviano o No Pagás"</li>
+        </ul>
+
+        <div class="pricing-live">
+            <div class="pricing-live-dot"></div>
+            <span><span id="pricing-live-count">12</span> mujeres viendo este método ahora</span>
+        </div>
+        <div class="pricing-urgency"><i class="fa-solid fa-fire"></i> {{ section.settings.urgency_text }}</div>
+    </div>
+</section>
+
+<script>
+(function () {
+  var KEY = 'vc_reinicia_countdown_v1';
+  var end = +sessionStorage.getItem(KEY);
+  if (!end || end < Date.now()) {
+    end = Date.now() + (60 * 60) * 1000;
+    sessionStorage.setItem(KEY, end);
+  }
+  function tick() {
+    var diff = Math.max(0, end - Date.now());
+    var h = Math.floor(diff / 3600000);
+    var m = Math.floor((diff % 3600000) / 60000);
+    var s = Math.floor((diff % 60000) / 1000);
+    var elH = document.getElementById('ub-h');
+    var elM = document.getElementById('ub-m');
+    var elS = document.getElementById('ub-s');
+    if (elH) elH.textContent = String(h).padStart(2, '0');
+    if (elM) elM.textContent = String(m).padStart(2, '0');
+    if (elS) elS.textContent = String(s).padStart(2, '0');
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  /* Live viewers counter */
+  var pool = [11, 12, 14, 16, 17, 19, 21, 23, 24, 26, 28, 31];
+  function pickRandom() { return pool[Math.floor(Math.random() * pool.length)]; }
+  var liveEl = document.getElementById('pricing-live-count');
+  if (liveEl) {
+    liveEl.textContent = pickRandom();
+    setInterval(function () { liveEl.textContent = pickRandom(); }, 4500);
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Pricing Box",
+  "settings": [
+    {
+      "type": "text",
+      "id": "price_new",
+      "label": "Precio actual",
+      "default": "$9.999"
+    },
+    {
+      "type": "text",
+      "id": "price_old",
+      "label": "Precio tachado",
+      "default": "$33.330"
+    },
+    {
+      "type": "text",
+      "id": "savings_text",
+      "label": "Texto de ahorro",
+      "default": "AHORRÁS $23.331"
+    },
+    {
+      "type": "url",
+      "id": "savings_url",
+      "label": "URL del botón de ahorro"
+    },
+    {
+      "type": "text",
+      "id": "countdown_header",
+      "label": "Header del countdown",
+      "default": "Precio en oferta: ¡Últimas horas con 70% OFF!"
+    },
+    {
+      "type": "text",
+      "id": "countdown_footer",
+      "label": "Footer del countdown",
+      "default": "Cuando el contador llegue a cero, el precio vuelve a $33.330."
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "URL del CTA principal"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Texto del CTA principal",
+      "default": "¡QUIERO EMPEZAR MI RESET AHORA!"
+    },
+    {
+      "type": "text",
+      "id": "urgency_text",
+      "label": "Texto de urgencia",
+      "default": "El precio en oferta está por vencer"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pricing Box"
+    }
+  ]
+}
+{% endschema %}

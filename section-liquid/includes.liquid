@@ -1,0 +1,63 @@
+<style>
+  :root { --red: #d8a7b1; --red-dark: #b8879a; --dark: #2c1f1b; --text: #4a3a32; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  .section-label { display: inline-block; background: rgba(216,167,177,.12); color: #d8a7b1; font-family: 'Montserrat', sans-serif !important; font-size: 12px !important; font-weight: 700; padding: 4px 14px; border-radius: 20px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1.2px; }
+  .section-title { text-align: center; font-size: 34px !important; margin-bottom: 8px; font-family: 'Montserrat', sans-serif !important; }
+  .section-subtitle { text-align: center; color: #666; margin-bottom: 44px; font-size: 16px !important; }
+  .includes-section { background: #fff; padding: 60px 20px; border-top: 1px solid #d8c8c0; }
+  .includes-box { background: linear-gradient(135deg, #f9f0f3, #f3dde4); border: 2px solid #a39384; border-radius: 16px; padding: 36px 40px; max-width: 640px; margin: 32px auto 0; }
+  .includes-box h3 { font-family: 'Montserrat', sans-serif !important; font-weight: 900; font-size: 20px !important; color: var(--dark); margin-bottom: 20px; text-align: center; }
+  .includes-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .includes-list li { display: flex; align-items: center; gap: 9px; font-size: 15px !important; color: var(--text); font-family: 'Open Sans', sans-serif !important; }
+  .includes-list li i { color: var(--red); font-size: 14px !important; flex-shrink: 0; }
+  @media (max-width: 768px) { .includes-list { grid-template-columns: 1fr; } .includes-box { padding: 24px 20px; } .section-title { font-size: 28px !important; } }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<section class="includes-section">
+    <div class="container">
+        <div class="section-label"><i class="fa-solid fa-box-open"></i> Contenido del protocolo</div>
+        <h2 class="section-title">¿Qué incluye el Protocolo Reset de 14 Días?</h2>
+        <p class="section-subtitle">Todo lo que necesitás para empezar hoy mismo — sin vueltas</p>
+        <div class="includes-box">
+            <h3><i class="fa-solid fa-diamond" style="color:var(--red);margin-right:8px;"></i> Protocolo Reset de 14 Días</h3>
+            <ul class="includes-list">
+                <li><i class="fa-solid fa-check-circle"></i> Paso a paso diario para los 14 días</li>
+                <li><i class="fa-solid fa-check-circle"></i> Comidas simples (sin cocinar)</li>
+                <li><i class="fa-solid fa-check-circle"></i> Rutinas fáciles de seguir</li>
+                <li><i class="fa-solid fa-check-circle"></i> Seguimiento de síntomas incluido</li>
+                <li><i class="fa-solid fa-check-circle"></i> Combinaciones antiinflamatorias listas</li>
+                <li><i class="fa-solid fa-check-circle"></i> Estrategia para días sin tiempo</li>
+                <li><i class="fa-solid fa-check-circle"></i> Rutinas de mañana y noche</li>
+                <li><i class="fa-solid fa-check-circle"></i> Formato PDF de alta calidad — para siempre</li>
+            </ul>
+        </div>
+    </div>
+    <img src="{{ section.settings.mockup_image | img_url: 'master' }}" alt="{{ section.settings.mockup_alt }}" style="width:calc(100% + 40px);margin-left:-20px;height:auto;display:block;margin-top:28px;">
+</section>
+
+{% schema %}
+{
+  "name": "Qué Incluye",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "mockup_image",
+      "label": "Imagen mockup del protocolo"
+    },
+    {
+      "type": "text",
+      "id": "mockup_alt",
+      "label": "Alt de la imagen",
+      "default": "Reiniciá tu Cuerpo — Protocolo principal"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Qué Incluye"
+    }
+  ]
+}
+{% endschema %}

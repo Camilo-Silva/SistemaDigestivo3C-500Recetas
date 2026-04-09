@@ -1,0 +1,71 @@
+<style>
+  :root { --red: #d8a7b1; --red-dark: #b8879a; --dark: #2c1f1b; --text: #4a3a32; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  @keyframes shimmer { 0% { left: -100%; } 100% { left: 200%; } }
+  .final-cta { background: linear-gradient(135deg, #2c1f1b, #d8a7b1); color: #fff; padding: 70px 20px; text-align: center; }
+  .final-cta h2 { font-size: 37px !important; margin-bottom: 14px; font-family: 'Montserrat', sans-serif !important; }
+  .final-cta p { font-size: 17px !important; color: rgba(255,255,255,.85); margin-bottom: 28px; max-width: 680px; margin-left: auto; margin-right: auto; }
+  .cta-wrap { text-align: center; }
+  .cta-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(180deg, #e0b8c3, #d8a7b1); color: #fff; font-family: 'Montserrat', sans-serif !important; font-size: 19px !important; font-weight: 900; text-decoration: none; padding: 22px 36px; border-radius: 10px; text-transform: uppercase; letter-spacing: .5px; box-shadow: 0 8px 0 #b8879a, 0 12px 30px rgba(216,167,177,.4); transition: all .15s ease; max-width: 640px; width: 100%; margin: 10px auto; position: relative; overflow: hidden; }
+  .cta-btn::after { content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent); animation: shimmer 2.5s infinite; }
+  .cta-btn:hover { transform: translateY(3px); box-shadow: 0 5px 0 #b8879a, 0 8px 18px rgba(216,167,177,.3); }
+  .cta-sub { font-size: 12px !important; color: #999; margin-top: 8px; }
+  .cta-sub.light { color: rgba(255,255,255,.6); }
+  @media (max-width: 768px) { .final-cta h2 { font-size: 27px !important; } .cta-btn { font-size: 16px !important; padding: 18px 18px; } }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<section class="final-cta">
+    <div class="container">
+        <h2>{{ section.settings.headline }}</h2>
+        <p>{{ section.settings.body }}</p>
+        <div class="cta-wrap">
+            <a href="{{ section.settings.cta_url }}" class="cta-btn"><i class="fa-solid fa-leaf"></i> {{ section.settings.cta_text }}</a>
+            <p class="cta-sub light">{{ section.settings.trust_text }}</p>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Final CTA",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Empezá hoy tu Reset de 14 días y volvé a sentirte bien en tu cuerpo."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Párrafo de cuerpo",
+      "default": "La hinchazón, el cansancio y esa sensación de no poder sostener nada no son \"parte de la vida\". Tienen solución — y el método está acá. Simple, realista y diseñado para vos."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Texto del botón",
+      "default": "QUIERO DESINFLAMARME SIN COMPLICARME"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "URL del botón CTA (link de pago)"
+    },
+    {
+      "type": "text",
+      "id": "trust_text",
+      "label": "Texto de confianza",
+      "default": "Solo $9.999 ARS · Acceso en segundos · Garantía \"Cuerpo Más Liviano o No Pagás\""
+    }
+  ],
+  "presets": [
+    {
+      "name": "Final CTA"
+    }
+  ]
+}
+{% endschema %}

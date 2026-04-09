@@ -1,0 +1,53 @@
+<style>
+  :root { --red: #d8a7b1; --red-dark: #b8879a; --dark: #2c1f1b; --text: #4a3a32; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  .payment-section { background: #fff; padding: 44px 20px; text-align: center; border-top: 1px solid #d8c8c0; }
+  .payment-section h3 { font-family: 'Montserrat', sans-serif !important; font-size: 14px !important; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 22px; }
+  .pay-img { display: block; max-width: 420px; width: 100%; margin: 0 auto 18px; }
+  .ml-img { display: block; max-width: 280px; width: 100%; margin: 0 auto 24px; }
+  .ssl-badge { display: inline-flex; align-items: center; gap: 6px; background: #f9f0f3; color: #a39384; font-size: 12px !important; font-weight: 700; padding: 6px 14px; border-radius: 20px; margin-top: 14px; font-family: 'Montserrat', sans-serif !important; }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<section class="payment-section" style="padding-top:44px;padding-bottom:0;">
+    <div class="container" style="padding-bottom:0;">
+        <img src="{{ section.settings.ml_image | img_url: 'master' }}" alt="MercadoLíder Platinum" class="ml-img" style="margin-bottom:24px;">
+    </div>
+    <div style="border-top:1px solid #d8c8c0;margin:0 -20px;"></div>
+    <div class="container" style="padding-top:24px;padding-bottom:44px;">
+        <h3>Métodos de pago</h3>
+        <img src="{{ section.settings.pay_image | img_url: 'master' }}" alt="Métodos de pago: Mercado Pago, Visa, Mastercard" class="pay-img">
+        <div><span class="ssl-badge"><i class="fa-solid fa-lock"></i> {{ section.settings.ssl_text }}</span></div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Formas de Pago",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "ml_image",
+      "label": "Imagen MercadoLíder"
+    },
+    {
+      "type": "image_picker",
+      "id": "pay_image",
+      "label": "Imagen métodos de pago"
+    },
+    {
+      "type": "text",
+      "id": "ssl_text",
+      "label": "Texto badge SSL",
+      "default": "Sitio protegido con SSL — Tus datos nunca se comparten con terceros"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Formas de Pago"
+    }
+  ]
+}
+{% endschema %}

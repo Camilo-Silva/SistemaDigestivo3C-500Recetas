@@ -1,0 +1,318 @@
+<style>
+  :root { --red: #d8a7b1; --red-dark: #b8879a; --dark: #2c1f1b; --text: #4a3a32; --cream: #f1ebe5; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  @keyframes shimmer { 0% { left: -100%; } 100% { left: 200%; } }
+  .section-label { display: inline-block; background: rgba(216,167,177,.12); color: var(--red-dark); font-family: 'Montserrat', sans-serif !important; font-size: 12px !important; font-weight: 700; padding: 4px 14px; border-radius: 20px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1.2px; }
+  .section-title { text-align: center; font-size: 34px !important; margin-bottom: 8px; font-family: 'Montserrat', sans-serif !important; color: var(--dark); }
+  .section-subtitle { text-align: center; color: #555; margin-bottom: 44px; font-size: 16px !important; }
+  .offer-section { background: var(--cream); color: var(--text); text-align: center; }
+  .offer-band { padding: 50px 5px; }
+  .offer-band--dark { background: var(--cream); color: var(--dark); padding: 50px 20px; }
+  .bonus-carousel { position: relative; max-width: 100%; margin: 0 auto; padding: 0; }
+  .bc-track-wrapper { overflow: hidden; border-radius: 16px; }
+  .bc-track { display: flex; transition: transform .7s cubic-bezier(.4,0,.2,1); will-change: transform; }
+  .bc-slide { min-width: 100%; }
+  .bc-card { background: #fff; border: 2px solid rgba(216,167,177,.25); border-radius: 16px; text-align: center; display: flex; flex-direction: column; align-items: center; box-shadow: 0 4px 18px rgba(216,167,177,.10); overflow: hidden; }
+  .bc-mockup { width: 100%; background: #f9f0f3; display: flex; align-items: center; justify-content: center; overflow: hidden; border-bottom: 2px solid rgba(216,167,177,.15); min-height: 200px; }
+  .bc-mockup img { width: 100%; height: auto; display: block; object-fit: cover; }
+  .bc-body { padding: 28px 28px 32px; display: flex; flex-direction: column; align-items: center; width: 100%; }
+  .bc-name { font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 18px !important; color: var(--dark); margin-bottom: 12px; line-height: 1.35; max-width: 70%; }
+  .bc-badge { display: inline-block; background: rgba(216,167,177,.12); color: var(--red-dark); font-size: 12px !important; font-weight: 700; padding: 4px 14px; border-radius: 10px; margin-bottom: 10px; }
+  .bc-desc { font-size: 14px !important; color: #666; margin-top: 8px; line-height: 1.6; }
+  .bc-desc-text { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; transition: none; }
+  .bc-desc-text.expanded { display: block; -webkit-line-clamp: unset; }
+  .bc-desc-toggle { background: none; border: none; color: var(--red); font-size: 13px !important; font-weight: 700; cursor: pointer; padding: 4px 0 0; display: inline-block; font-family: 'Montserrat', sans-serif !important; }
+  .bc-arrow { position: absolute; top: calc(50% - 22px); transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; background: #fff; border: 2px solid rgba(216,167,177,.5); color: var(--red); font-size: 24px !important; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s, border-color .2s, transform .2s; z-index: 5; line-height: 1; box-shadow: 0 2px 10px rgba(0,0,0,.15); padding: 0; }
+  .bc-arrow:hover { background: rgba(216,167,177,.12); border-color: var(--red); transform: translateY(-50%) scale(1.08); }
+  .bc-prev { left: 5px; } .bc-next { right: 5px; }
+  .bc-dots { display: flex; gap: 8px; justify-content: center; margin-top: 16px; }
+  .bc-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(216,167,177,.25); border: none; cursor: pointer; transition: background .25s, transform .25s; padding: 0; }
+  .bc-dot.bc-dot--active { background: var(--red); transform: scale(1.3); }
+  .value-stack { margin-top: 32px; padding: 36px; background: rgba(255,255,255,.7); border: 2px solid #d8c8c0; border-radius: 16px; max-width: 760px; margin-left: auto; margin-right: auto; text-align: center; }
+  .real-value { text-decoration: line-through; color: #a39384; font-size: 16px !important; font-weight: 600; margin-bottom: 8px; }
+  .big-price { font-family: 'Montserrat', sans-serif !important; font-size: 51px !important; font-weight: 900; color: var(--red); line-height: 1; }
+  .ars-price { font-size: 18px !important; color: #777; margin-top: 6px; }
+  .cta-wrap { text-align: center; }
+  .cta-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(180deg, #e0b8c3, #d8a7b1); color: #fff; font-family: 'Montserrat', sans-serif !important; font-size: 19px !important; font-weight: 900; text-decoration: none; padding: 22px 36px; border-radius: 10px; text-transform: uppercase; letter-spacing: .5px; box-shadow: 0 8px 0 #b8879a, 0 12px 30px rgba(216,167,177,.4); transition: all .15s ease; max-width: 640px; width: 100%; margin: 10px auto; position: relative; overflow: hidden; }
+  .cta-btn::after { content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent); animation: shimmer 2.5s infinite; }
+  .cta-btn:hover { transform: translateY(3px); box-shadow: 0 5px 0 #b8879a, 0 8px 18px rgba(216,167,177,.3); }
+  .cta-sub { font-size: 12px !important; color: #999; margin-top: 8px; }
+  .cta-sub.light { color: rgba(255,255,255,.6); }
+  @media (max-width: 768px) { .big-price { font-size: 38px !important; } .cta-btn { font-size: 16px !important; padding: 18px 18px; } .section-title { font-size: 28px !important; } }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<section class="offer-section">
+
+    <div class="offer-band">
+        <div class="container">
+            <div class="section-label"><i class="fa-solid fa-gift"></i> La oferta completa</div>
+            <h2 class="section-title">Esto No Es Solo un Ebook.</h2>
+            <p class="section-subtitle">Hoy te llevás el <strong style="color:var(--red)">Método Reset Completo</strong> con todos los bonos incluidos — sin costo adicional.</p>
+            <p style="font-family:'Montserrat',sans-serif;font-weight:800;font-size: 19px !important;color:var(--dark);margin-top:28px;"><i class="fa-solid fa-box-open"></i> Todo lo que recibís hoy:</p>
+        </div>
+    </div>
+
+    <!-- CAROUSEL BONOS -->
+    <div class="offer-band">
+        <div class="container">
+            <div class="bonus-carousel" id="bonus-carousel">
+                <div class="bc-track-wrapper">
+                    <div class="bc-track" id="bc-track">
+
+                        <div class="bc-slide">
+                            <div class="bc-card">
+                                <div class="bc-mockup" style="background:#f1ebe5;">
+                                    <img src="{{ section.settings.img_main | img_url: 'master' }}" alt="Protocolo Principal">
+                                </div>
+                                <div class="bc-body">
+                                    <div class="bc-name">Protocolo Principal: "Reiniciá tu Cuerpo — El Método Natural para Desinflamarte desde Adentro"</div>
+                                    <div class="bc-badge">INCLUIDO EN TU COMPRA</div>
+                                    <p class="bc-desc">El sistema completo de 14 días: paso a paso diario, combinaciones de alimentos listas en 5 minutos, estrategia sin cocina, rutinas de mañana y noche, y seguimiento de síntomas. En PDF de alta calidad, tuyo para siempre.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bc-slide">
+                            <div class="bc-card">
+                                <div class="bc-mockup" style="background:#f1ebe5;">
+                                    <img src="{{ section.settings.img_bono1 | img_url: 'master' }}" alt="Bono 1 — Qué Comer Cuando No Tenés Tiempo">
+                                </div>
+                                <div class="bc-body">
+                                    <div class="bc-name">🎁 Bono #1 — Guía "Qué Comer Cuando No Tenés Tiempo"</div>
+                                    <div class="bc-badge">GRATIS CON TU COMPRA</div>
+                                    <p class="bc-desc">Soluciones rápidas y antiinflamatorias para días caóticos. Sin planificación, sin cocinar, sin excusas. Abrís, elegís y en minutos tenés lo que necesitás — aunque el día salió completamente de control.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bc-slide">
+                            <div class="bc-card">
+                                <div class="bc-mockup" style="background:#f1ebe5;">
+                                    <img src="{{ section.settings.img_bono2 | img_url: 'master' }}" alt="Bono 2 — Rutinas Express Antiinflamación">
+                                </div>
+                                <div class="bc-body">
+                                    <div class="bc-name">🎁 Bono #2 — Rutinas Express Antiinflamación</div>
+                                    <div class="bc-badge">GRATIS CON TU COMPRA</div>
+                                    <p class="bc-desc">Rutinas de mañana y noche de menos de 10 minutos diseñadas para activar tu sistema antiinflamatorio natural. Sin equipamiento, sin experiencia previa. Empezás el día diferente y lo cerrás diferente.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bc-slide">
+                            <div class="bc-card">
+                                <div class="bc-mockup" style="background:#f1ebe5;">
+                                    <img src="{{ section.settings.img_bono3 | img_url: 'master' }}" alt="Bono 3 — Lista Anti-Hinchazón del Super">
+                                </div>
+                                <div class="bc-body">
+                                    <div class="bc-name">🎁 Bono #3 — Lista Anti-Hinchazón del Super</div>
+                                    <div class="bc-badge">GRATIS CON TU COMPRA</div>
+                                    <p class="bc-desc">La lista exacta de lo que tenés que tener en casa para el reset. Comprá sin dudar, sin perder tiempo leyendo etiquetas ni preguntarte si está bien. Simple, directa y adaptada a cualquier supermercado.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bc-slide">
+                            <div class="bc-card">
+                                <div class="bc-mockup" style="background:#f1ebe5;">
+                                    <img src="{{ section.settings.img_bono4 | img_url: 'master' }}" alt="Bono 4 — Plan de Emergencia 24 hs">
+                                </div>
+                                <div class="bc-body">
+                                    <div class="bc-name">🎁 Bono #4 — Plan de Emergencia 24 hs</div>
+                                    <div class="bc-badge">GRATIS CON TU COMPRA</div>
+                                    <p class="bc-desc">Para cuando te "descarrilaste" y necesitás volver al control rápido. Un protocolo de 24 horas para desinflarte, resetear y retomar sin culpa. El salvavidas para los días después del cumpleaños, el asado o el viaje.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bc-slide">
+                            <div class="bc-card">
+                                <div class="bc-mockup" style="background:#f1ebe5;">
+                                    <img src="{{ section.settings.img_bono5 | img_url: 'master' }}" alt="Bono 5 — Menú de 7 días sin cocina">
+                                </div>
+                                <div class="bc-body">
+                                    <div class="bc-name">🎁 Bono #5 — Menú de 7 días sin cocina</div>
+                                    <div class="bc-badge">GRATIS CON TU COMPRA</div>
+                                    <p class="bc-desc">Una semana completa de comidas antiinflamatorias sin prender el fuego. Todo listo para armar en minutos, con alimentos simples que conseguís en cualquier super. Ideal para cuando el tiempo no sobra y el cuerpo necesita un descanso.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <button class="bc-arrow bc-prev" aria-label="Anterior">&#8249;</button>
+                <button class="bc-arrow bc-next" aria-label="Siguiente">&#8250;</button>
+                <div class="bc-dots" id="bc-dots"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VALOR TOTAL -->
+    <div class="offer-band--dark" style="padding-top:0;padding-left:0;padding-right:0;">
+        <img src="{{ section.settings.img_pack | img_url: 'master' }}" alt="Pack completo — Reiniciá tu Cuerpo + Bonos" style="width:100%;height:auto;display:block;">
+        <div class="container">
+            <div class="value-stack" style="padding-top:32px;">
+                <div class="real-value">{{ section.settings.real_value_text }}</div>
+                <div class="big-price">{{ section.settings.price_big }}</div>
+                <div class="ars-price">{{ section.settings.price_sub }}</div>
+            </div>
+            <div class="cta-wrap" style="margin-top:28px">
+                <a href="{{ section.settings.cta_url }}" class="cta-btn"><i class="fa-solid fa-arrow-right"></i> {{ section.settings.cta_text }}</a>
+                <p class="cta-sub" style="color:#aaa"><i class="fa-solid fa-bolt"></i> Descarga instantánea &nbsp;·&nbsp; <i class="fa-solid fa-lock"></i> Pago 100% seguro &nbsp;·&nbsp; <i class="fa-solid fa-shield-halved"></i> Garantía incluida</p>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<script>
+(function () {
+  var carousel = document.getElementById('bonus-carousel');
+  if (!carousel) return;
+  var track    = document.getElementById('bc-track');
+  var slides   = Array.from(carousel.querySelectorAll('.bc-slide'));
+  var dotsWrap = document.getElementById('bc-dots');
+  var total    = slides.length;
+  var current  = 0;
+  var autoTimer;
+  var INTERVAL = 7000;
+  var paused   = false;
+
+  slides.forEach(function (_, i) {
+    var dot = document.createElement('button');
+    dot.className = 'bc-dot' + (i === 0 ? ' bc-dot--active' : '');
+    dot.setAttribute('aria-label', 'Ir a ' + (i + 1));
+    dot.addEventListener('click', function () { goTo(i); resetTimer(); });
+    dotsWrap.appendChild(dot);
+  });
+
+  function goTo(index) {
+    current = (index + total) % total;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    carousel.querySelectorAll('.bc-dot').forEach(function (d, i) {
+      d.classList.toggle('bc-dot--active', i === current);
+    });
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  function resetTimer() {
+    clearInterval(autoTimer);
+    if (!paused) autoTimer = setInterval(next, INTERVAL);
+  }
+
+  carousel.querySelector('.bc-prev').addEventListener('click', function () { prev(); resetTimer(); });
+  carousel.querySelector('.bc-next').addEventListener('click', function () { next(); resetTimer(); });
+
+  var touchStartX = 0;
+  carousel.addEventListener('touchstart', function (e) {
+    touchStartX = e.touches[0].clientX;
+    paused = true; clearInterval(autoTimer);
+  }, { passive: true });
+  carousel.addEventListener('touchend', function (e) {
+    var diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) { diff > 0 ? next() : prev(); }
+    paused = false; resetTimer();
+  }, { passive: true });
+
+  carousel.addEventListener('mousedown',  function () { paused = true;  clearInterval(autoTimer); });
+  carousel.addEventListener('mouseup',    function () { paused = false; resetTimer(); });
+  carousel.addEventListener('mouseleave', function () { paused = false; resetTimer(); });
+
+  resetTimer();
+
+  /* Descripción expandible */
+  carousel.querySelectorAll('.bc-desc').forEach(function (desc) {
+    var originalText = desc.innerHTML;
+    desc.innerHTML = '<span class="bc-desc-text">' + originalText + '</span>' +
+      '<button class="bc-desc-toggle">Ver más ▾</button>';
+    var textEl    = desc.querySelector('.bc-desc-text');
+    var toggleBtn = desc.querySelector('.bc-desc-toggle');
+    toggleBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var expanded = textEl.classList.toggle('expanded');
+      toggleBtn.textContent = expanded ? 'Ver menos ▴' : 'Ver más ▾';
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Oferta — Stack de Bonos",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "img_main",
+      "label": "Imagen — Protocolo Principal"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_bono1",
+      "label": "Imagen — Bono 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_bono2",
+      "label": "Imagen — Bono 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_bono3",
+      "label": "Imagen — Bono 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_bono4",
+      "label": "Imagen — Bono 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_bono5",
+      "label": "Imagen — Bono 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_pack",
+      "label": "Imagen — Pack completo"
+    },
+    {
+      "type": "text",
+      "id": "real_value_text",
+      "label": "Texto valor real",
+      "default": "Valor real de todo el paquete: $71.000 ARS — hoy lo llevás todo por solo:"
+    },
+    {
+      "type": "text",
+      "id": "price_big",
+      "label": "Precio grande",
+      "default": "$9.999"
+    },
+    {
+      "type": "text",
+      "id": "price_sub",
+      "label": "Subtexto precio",
+      "default": "pesos argentinos — un único pago"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "URL del CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Texto del CTA",
+      "default": "QUIERO ACCESO INMEDIATO AHORA"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Oferta — Stack de Bonos"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,78 @@
+<style>
+  :root {
+    --red: #d8a7b1; --red-dark: #b8879a; --dark: #2c1f1b;
+    --text: #4a3a32; --cream: #f1ebe5; --pink-light: #f3dde4;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  .section-label {
+    display: inline-block; background: rgba(216,167,177,.12); color: #d8a7b1;
+    font-family: 'Montserrat', sans-serif !important; font-size: 12px !important; font-weight: 700;
+    padding: 4px 14px; border-radius: 20px; margin-bottom: 12px;
+    text-transform: uppercase; letter-spacing: 1.2px;
+  }
+  .section-title { text-align: center; font-size: 34px !important; margin-bottom: 8px; font-family: 'Montserrat', sans-serif !important; }
+  .pain-section { background: #fff; padding: 60px 20px; border-top: 1px solid #d8c8c0; }
+  .pain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 32px; }
+  .pain-card {
+    background: linear-gradient(135deg, #fff8f0, #fdeede); border: 1px solid #f5c4a0;
+    border-radius: 12px; padding: 20px; text-align: center;
+  }
+  .pain-icon {
+    display: flex; align-items: center; justify-content: center;
+    width: 52px; height: 52px; border-radius: 14px;
+    background: linear-gradient(135deg, #f3dde4, #e8c8d0);
+    margin: 0 auto 14px; font-size: 22px !important; color: var(--red-dark);
+  }
+  .pain-card p { font-size: 14px !important; color: #555; }
+  .pain-card strong { display: block; font-family: 'Montserrat', sans-serif !important; font-size: 15px !important; color: #333; margin-bottom: 6px; }
+  @media (max-width: 768px) { .pain-grid { grid-template-columns: 1fr; } }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<section class="pain-section">
+    <div class="container">
+        <div class="section-label"><i class="fa-solid fa-triangle-exclamation"></i> ¿Te sentís identificada?</div>
+        <h2 class="section-title" style="text-align:left;font-size: 29px !important;margin-bottom:8px;">Si sentís que…</h2>
+        <p style="color:#666;font-size: 16px !important;">No es falta de disciplina. <strong>Es que te enseñaron mal.</strong></p>
+        <div class="pain-grid">
+            <div class="pain-card">
+                <div class="pain-icon"><i class="fa-solid fa-wind"></i></div>
+                <strong>Vivís hinchada aunque no comas "tan mal"</strong>
+                <p>Te cuidas, elegís bien y aun así el abdomen siempre está pesado. No tiene sentido — y tiene solución.</p>
+            </div>
+            <div class="pain-card">
+                <div class="pain-icon"><i class="fa-solid fa-battery-quarter"></i></div>
+                <strong>Te levantás cansada y sin energía</strong>
+                <p>Dormís tus horas y amanecés igual de agotada. El café ya no alcanza. Tu cuerpo pide un reset real.</p>
+            </div>
+            <div class="pain-card">
+                <div class="pain-icon"><i class="fa-solid fa-clock"></i></div>
+                <strong>Tu digestión es lenta o pesada</strong>
+                <p>Siempre esa sensación de pesadez después de comer. Tu intestino está enviando una señal que no podés ignorar.</p>
+            </div>
+            <div class="pain-card">
+                <div class="pain-icon"><i class="fa-solid fa-arrows-rotate"></i></div>
+                <strong>Probaste mil cosas pero no lográs sostener nada</strong>
+                <p>Empezás bien, después todo se complica. No es tu culpa — los sistemas que probaste no estaban diseñados para tu vida real.</p>
+            </div>
+        </div>
+        <div style="text-align:center;margin-top:36px;">
+            <p style="font-family:'Montserrat',sans-serif;font-weight:700;font-size: 18px !important;color:var(--dark);">Si te reconocés en alguna de estas situaciones:</p>
+            <p style="color:#666;font-size: 16px !important;margin-top:6px;max-width:560px;margin-left:auto;margin-right:auto;">No es falta de disciplina. Es que te enseñaron que para desinflamarte necesitás sacrificio — y eso es falso.</p>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Dolor — Identificación",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Dolor — Identificación"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,65 @@
+<style>
+  :root { --red: #d8a7b1; --red-dark: #b8879a; --dark: #2c1f1b; --text: #4a3a32; --cream: #f1ebe5; --pink-light: #f3dde4; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  .cta-wrap { text-align: center; }
+  .cta-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(180deg, #e0b8c3, #d8a7b1); color: #fff; font-family: 'Montserrat', sans-serif !important; font-size: 19px !important; font-weight: 900; text-decoration: none; padding: 22px 36px; border-radius: 10px; text-transform: uppercase; letter-spacing: .5px; box-shadow: 0 8px 0 #b8879a, 0 12px 30px rgba(216,167,177,.4); transition: all .15s ease; max-width: 640px; width: 100%; margin: 10px auto; position: relative; overflow: hidden; }
+  .cta-btn::after { content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent); animation: shimmer 2.5s infinite; }
+  @keyframes shimmer { 0% { left: -100%; } 100% { left: 200%; } }
+  .cta-btn:hover { transform: translateY(3px); box-shadow: 0 5px 0 #b8879a, 0 8px 18px rgba(216,167,177,.3); }
+  .cta-sub { font-size: 12px !important; color: #999; margin-top: 8px; }
+  @media (max-width: 768px) { .cta-btn { font-size: 16px !important; padding: 18px 18px; } }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<section style="background:var(--cream);padding:32px 20px;text-align:center;border-top:3px solid var(--pink-light);border-bottom:3px solid var(--pink-light);">
+    <div class="container">
+        <p style="font-family:'Montserrat',sans-serif;font-weight:800;font-size: 18px !important;color:var(--text);margin-bottom:6px;">{{ section.settings.headline }}</p>
+        <p style="color:#777;margin-bottom:20px;font-size: 15px !important;">{{ section.settings.subtext }}</p>
+        <a href="{{ section.settings.cta_url }}" class="cta-btn" style="display:inline-flex;"><i class="fa-solid fa-leaf"></i> {{ section.settings.cta_text }}</a>
+        <p style="margin-top:14px;font-size: 13px !important;color:#aaa;"><i class="fa-solid fa-shield-halved"></i> {{ section.settings.trust_text }}</p>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Mid CTA",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "¿Ya te reconociste en alguna de estas mujeres?"
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtexto",
+      "default": "El ebook completo + 5 bonos por un único pago de $9.999"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Texto del botón",
+      "default": "QUIERO DESINFLAMARME SIN COMPLICARME"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "URL del botón CTA (link de pago)"
+    },
+    {
+      "type": "text",
+      "id": "trust_text",
+      "label": "Texto de confianza",
+      "default": "Garantía \"Cuerpo Más Liviano o No Pagás\" · Acceso instantáneo"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mid CTA"
+    }
+  ]
+}
+{% endschema %}

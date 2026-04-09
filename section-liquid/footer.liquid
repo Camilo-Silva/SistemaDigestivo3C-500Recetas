@@ -1,0 +1,63 @@
+<style>
+  :root { --red: #d8a7b1; --red-dark: #b8879a; --dark: #2c1f1b; --text: #4a3a32; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  footer { background: #0d0d0d; color: #555; text-align: center; padding: 28px 20px; font-size: 12px !important; }
+  footer a { color: #777; text-decoration: none; }
+  footer a:hover { color: #fff; }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+<footer>
+    <div class="container">
+        <p>© {{ 'now' | date: '%Y' }} {{ section.settings.brand_name }} · Todos los derechos reservados</p>
+        <p style="margin-top:4px;font-size: 12px !important;color:#444;max-width:700px;margin-left:auto;margin-right:auto;">
+            {{ section.settings.disclaimer }}
+        </p>
+        <p style="margin-top:8px">
+            <a href="{{ section.settings.url_terms }}">Términos y Condiciones</a> &nbsp;·&nbsp;
+            <a href="{{ section.settings.url_privacy }}">Política de Privacidad</a> &nbsp;·&nbsp;
+            <a href="{{ section.settings.url_contact }}">Contacto y Soporte</a>
+        </p>
+    </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Nombre de la marca",
+      "default": "Vida en Calma"
+    },
+    {
+      "type": "textarea",
+      "id": "disclaimer",
+      "label": "Disclaimer legal",
+      "default": "Este producto es un ebook educativo de bienestar general. No constituye consejo médico, diagnóstico ni tratamiento. Ante cualquier condición de salud, consultá con un profesional médico calificado. Los resultados individuales pueden variar."
+    },
+    {
+      "type": "url",
+      "id": "url_terms",
+      "label": "URL Términos y Condiciones"
+    },
+    {
+      "type": "url",
+      "id": "url_privacy",
+      "label": "URL Política de Privacidad"
+    },
+    {
+      "type": "url",
+      "id": "url_contact",
+      "label": "URL Contacto y Soporte"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer"
+    }
+  ]
+}
+{% endschema %}

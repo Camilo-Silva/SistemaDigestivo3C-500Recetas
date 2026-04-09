@@ -1,0 +1,252 @@
+<style>
+  :root { --red: #d8a7b1; --red-dark: #b8879a; --dark: #2c1f1b; --text: #4a3a32; --yellow: #ffd60a; --pink-light: #f3dde4; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  .section-label { display: inline-block; background: rgba(216,167,177,.12); color: #d8a7b1; font-family: 'Montserrat', sans-serif !important; font-size: 12px !important; font-weight: 700; padding: 4px 14px; border-radius: 20px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1.2px; }
+  .section-title { text-align: center; font-size: 34px !important; margin-bottom: 8px; font-family: 'Montserrat', sans-serif !important; }
+  .section-subtitle { text-align: center; color: #666; margin-bottom: 44px; font-size: 16px !important; }
+  .testimonials-section { padding: 70px 0; background: var(--pink-light); overflow: hidden; }
+  .testimonials-section > .container { padding-bottom: 40px; }
+  .carousel-wrapper { overflow: hidden; cursor: grab; }
+  .carousel-wrapper.is-dragging { cursor: grabbing; user-select: none; }
+  .carousel-row { display: flex; width: max-content; gap: 20px; padding: 0 10px 20px; animation: scroll-left 38s linear infinite; }
+  .carousel-row--right { animation: scroll-right 38s linear infinite; }
+  @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  @keyframes scroll-right { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+  .carousel-wrapper:hover .carousel-row { animation-play-state: paused; }
+  .t-card { background: #fff; border-radius: 14px; padding: 24px; border: 1px solid #d4c4bc; position: relative; width: 360px; flex-shrink: 0; box-shadow: 0 2px 14px rgba(216,167,177,.08); }
+  .t-card::before { content: '"'; position: absolute; top: -8px; left: 18px; font-size: 72px !important; color: var(--red); font-family: Georgia, serif; line-height: 1; opacity: .15; }
+  .stars { color: var(--yellow); font-size: 16px !important; margin-bottom: 10px; }
+  .t-text { font-size: 15px !important; color: #444; font-style: italic; margin-bottom: 16px; }
+  .t-author { display: flex; align-items: center; gap: 11px; }
+  .t-avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex-shrink: 0; overflow: hidden; border: 2px solid rgba(216,167,177,.4); }
+  .t-name { font-weight: 700; font-size: 14px !important; color: #222; }
+  .t-city { font-size: 12px !important; color: #888; }
+  .verified { display: inline-flex; align-items: center; gap: 3px; background: #f9f0f3; color: #a39384; font-size: 11px !important; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-top: 3px; }
+  @media (max-width: 768px) { .t-card { width: 290px; } .section-title { font-size: 28px !important; } }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<section class="testimonials-section">
+    <div class="container">
+        <div class="section-label"><i class="fa-solid fa-comments"></i> Resultados reales</div>
+        <h2 class="section-title">Mujeres Como Vos Que Ya Lo Vivieron</h2>
+        <p class="section-subtitle">14 días y una vida real — así funciona el método</p>
+    </div>
+    <div class="carousel-wrapper">
+
+        <!-- ── Fila 1 ── -->
+        <div class="carousel-row">
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Siempre pensé que si no cocinaba no podía cuidarme. El método me demostró lo contrario. En la primera semana ya sentí menos hinchazón. Al día 14 me di cuenta que era la primera vez en años que me sentía liviana. Y todo en 5 minutos, como prometía."</p>
+                <div class="t-author">
+                    <img class="t-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Marcela A.">
+                    <div><div class="t-name">Marcela A.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Buenos Aires</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Trabajo 10 horas por día y nunca pude sostener nada. Este método fue diferente porque no me pedía tiempo que no tengo. El Plan de Emergencia 24 hs me salvó más de una vez. A los 14 días bajé 3kg y dejé de tener el abdomen inflado todo el tiempo."</p>
+                <div class="t-author">
+                    <img class="t-avatar" src="https://randomuser.me/api/portraits/women/63.jpg" alt="Valeria R.">
+                    <div><div class="t-name">Valeria R.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Córdoba</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"La Lista Anti-Hinchazón del Super cambió mi forma de comprar. Antes tardaba una hora dudando qué llevar. Ahora entro, llevo lo de la lista y sé exactamente qué hacer con eso. Simple, rápido y funciona. Mi digestión mejoró brutal."</p>
+                <div class="t-author">
+                    <img class="t-avatar" src="https://randomuser.me/api/portraits/women/26.jpg" alt="Carolina F.">
+                    <div><div class="t-name">Carolina F.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Rosario</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <!-- duplicado seamless -->
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Siempre pensé que si no cocinaba no podía cuidarme. El método me demostró lo contrario. En la primera semana ya sentí menos hinchazón. Al día 14 me di cuenta que era la primera vez en años que me sentía liviana. Y todo en 5 minutos, como prometía."</p>
+                <div class="t-author">
+                    <img class="t-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Marcela A.">
+                    <div><div class="t-name">Marcela A.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Buenos Aires</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Trabajo 10 horas por día y nunca pude sostener nada. Este método fue diferente porque no me pedía tiempo que no tengo. El Plan de Emergencia 24 hs me salvó más de una vez. A los 14 días bajé 3kg y dejé de tener el abdomen inflado todo el tiempo."</p>
+                <div class="t-author">
+                    <img class="t-avatar" src="https://randomuser.me/api/portraits/women/63.jpg" alt="Valeria R.">
+                    <div><div class="t-name">Valeria R.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Córdoba</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"La Lista Anti-Hinchazón del Super cambió mi forma de comprar. Antes tardaba una hora dudando qué llevar. Ahora entro, llevo lo de la lista y sé exactamente qué hacer con eso. Simple, rápido y funciona. Mi digestión mejoró brutal."</p>
+                <div class="t-author">
+                    <img class="t-avatar" src="https://randomuser.me/api/portraits/women/26.jpg" alt="Carolina F.">
+                    <div><div class="t-name">Carolina F.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Rosario</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Fila 2 ── -->
+        <div class="carousel-row carousel-row--right">
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Probé de todo: infusiones, dietas, apps. Siempre abandonaba al tercer día porque era muy complicado. Este método es ridículamente simple. Hice el reset completo y por primera vez en años me desperté con energía real de verdad."</p>
+                <div class="t-author">
+                    <img class="t-avatar" src="https://randomuser.me/api/portraits/women/45.jpg" alt="Laura M.">
+                    <div><div class="t-name">Laura M.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Mendoza</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Las rutinas de mañana del bono son un antes y un después. 10 minutos que cambian el día entero. Empecé el reset y al day 7 mi marido me preguntó qué estaba haciendo diferente porque me veía diferente. No cambié nada radical — solo el método."</p>
+                <div class="t-author">
+                    <img class="t-avatar" src="https://randomuser.me/api/portraits/women/57.jpg" alt="Soledad L.">
+                    <div><div class="t-name">Soledad L.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Salta</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Compré escéptica porque ya había tirado dinero en mil cosas. Pero el precio era razonable y tenía garantía. Lo apliqué los 14 días. La hinchazón bajó, el cansancio bajó y lo mejor: pude sostenerlo. Nunca había podido sostener nada. Recomendado 100%."</p>
+                <div class="t-author">
+                    <img class="t-avatar" src="https://randomuser.me/api/portraits/women/37.jpg" alt="Agustina P.">
+                    <div><div class="t-name">Agustina P.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Santa Fe</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <!-- duplicado seamless -->
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Probé de todo: infusiones, dietas, apps. Siempre abandonaba al tercer día porque era muy complicado. Este método es ridículamente simple. Hice el reset completo y por primera vez en años me desperté con energía real de verdad."</p>
+                <div class="t-author">
+                    <img class="t-avatar" src="https://randomuser.me/api/portraits/women/45.jpg" alt="Laura M.">
+                    <div><div class="t-name">Laura M.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Mendoza</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Las rutinas de mañana del bono son un antes y un después. 10 minutos que cambian el día entero. Empecé el reset y al day 7 mi marido me preguntó qué estaba haciendo diferente porque me veía diferente. No cambié nada radical — solo el método."</p>
+                <div class="t-author">
+                    <img class="t-avatar" src="https://randomuser.me/api/portraits/women/57.jpg" alt="Soledad L.">
+                    <div><div class="t-name">Soledad L.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Salta</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Compré escéptica porque ya había tirado dinero en mil cosas. Pero el precio era razonable y tenía garantía. Lo apliqué los 14 días. La hinchazón bajó, el cansancio bajó y lo mejor: pude sostenerlo. Nunca había podido sostener nada. Recomendado 100%."</p>
+                <div class="t-author">
+                    <img class="t-avatar" src="https://randomuser.me/api/portraits/women/37.jpg" alt="Agustina P.">
+                    <div><div class="t-name">Agustina P.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Santa Fe</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+(function () {
+    var wrapper = document.querySelector('.carousel-wrapper');
+    if (!wrapper) return;
+    var rows = Array.from(wrapper.querySelectorAll('.carousel-row'));
+    var DURATION = 38;
+
+    function getTranslateX(el) {
+        var t = window.getComputedStyle(el).transform;
+        if (!t || t === 'none') return 0;
+        var vals = t.replace('matrix(', '').replace(')', '').split(',');
+        return parseFloat(vals[4]) || 0;
+    }
+
+    function resumeRows(finalXArr) {
+        rows.forEach(function (row, i) {
+            var halfWidth = row.scrollWidth / 2;
+            var isRight   = row.classList.contains('carousel-row--right');
+            var progress  = isRight
+                ? (finalXArr[i] + halfWidth) / halfWidth
+                : -finalXArr[i] / halfWidth;
+            progress = Math.max(0, Math.min(1, progress));
+            row.style.animationDelay     = -(progress * DURATION) + 's';
+            row.style.transform          = '';
+            row.style.animationName      = '';
+            row.style.animationPlayState = 'running';
+        });
+    }
+
+    var isDown    = false;
+    var startX    = 0;
+    var startY    = 0;
+    var startArr  = [];
+    var direction = null;
+
+    function clientX(e) { return e.touches ? e.touches[0].clientX : e.clientX; }
+    function clientY(e) { return e.touches ? e.touches[0].clientY : e.clientY; }
+
+    wrapper.addEventListener('mouseleave', function () {
+        if (isDown) return;
+        rows.forEach(function (row) { row.style.animationPlayState = ''; });
+    });
+
+    function onStart(e) {
+        isDown    = true;
+        startX    = clientX(e);
+        startY    = clientY(e);
+        direction = null;
+        startArr  = rows.map(getTranslateX);
+    }
+
+    function onMove(e) {
+        if (!isDown) return;
+        var dx = clientX(e) - startX;
+        var dy = clientY(e) - startY;
+        if (direction === null && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
+            direction = Math.abs(dx) >= Math.abs(dy) ? 'h' : 'v';
+            if (direction === 'h') {
+                rows.forEach(function (row, i) {
+                    row.style.animationName = 'none';
+                    row.style.transform     = 'translateX(' + startArr[i] + 'px)';
+                });
+                wrapper.classList.add('is-dragging');
+            }
+        }
+        if (direction === 'h') {
+            e.preventDefault();
+            rows.forEach(function (row, i) {
+                row.style.transform = 'translateX(' + (startArr[i] + dx) + 'px)';
+            });
+        }
+    }
+
+    function onEnd(e) {
+        if (!isDown) return;
+        isDown = false;
+        if (direction === 'h') {
+            wrapper.classList.remove('is-dragging');
+            var cx    = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+            var delta = cx - startX;
+            resumeRows(startArr.map(function (x) { return x + delta; }));
+        }
+        direction = null;
+    }
+
+    wrapper.addEventListener('mousedown',  onStart);
+    window.addEventListener('mousemove',   onMove);
+    window.addEventListener('mouseup',     onEnd);
+    wrapper.addEventListener('touchstart', onStart, { passive: true });
+    window.addEventListener('touchmove',   onMove,  { passive: false });
+    window.addEventListener('touchend',    onEnd);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Testimonios",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Testimonios"
+    }
+  ]
+}
+{% endschema %}

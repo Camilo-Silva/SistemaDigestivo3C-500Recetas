@@ -1,0 +1,68 @@
+<style>
+  :root {
+    --red: #d8a7b1; --red-dark: #b8879a; --dark: #2c1f1b; --text: #4a3a32;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  .section-label { display: inline-block; background: rgba(255,255,255,.12); color: #c8b8b0; font-family: 'Montserrat', sans-serif !important; font-size: 12px !important; font-weight: 700; padding: 4px 14px; border-radius: 20px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1.2px; }
+  .belief-section { background: linear-gradient(160deg, #2c1f1b 0%, #a39384 100%); color: #fff; padding: 70px 20px; text-align: center; }
+  .belief-section h2 { font-size: 32px !important; margin-bottom: 10px; color: #fff; font-family: 'Montserrat', sans-serif !important; }
+  .belief-intro { font-size: 16px !important; color: rgba(255,255,255,.7); margin-bottom: 36px; }
+  .belief-no-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin-bottom: 40px; }
+  .belief-no-card {
+    background: rgba(255,255,255,.06); border: 1.5px solid rgba(255,100,100,.3); border-radius: 12px;
+    padding: 18px 28px; display: flex; align-items: center; gap: 12px;
+    font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 16px !important;
+    color: #ffbcbc; min-width: 260px; text-align: left;
+  }
+  .belief-no-card i { font-size: 21px !important; color: #ff6b6b; flex-shrink: 0; }
+  .belief-punch {
+    background: rgba(216,167,177,.1); border: 1.5px solid rgba(216,167,177,.35);
+    border-radius: 14px; padding: 28px 36px; max-width: 640px; margin: 0 auto;
+  }
+  .belief-punch p { font-size: 18px !important; font-family: 'Montserrat', sans-serif !important; font-weight: 700; color: #c8b8b0; margin-bottom: 10px; }
+  .belief-punch strong { color: #fff; font-size: 19px !important; }
+  @media (max-width: 768px) { .belief-no-grid { flex-direction: column; align-items: center; } .belief-no-card { min-width: 0; width: 100%; max-width: 360px; } .belief-punch { padding: 20px 18px; } }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<section class="belief-section">
+    <div class="container">
+        <div class="section-label"><i class="fa-solid fa-bomb"></i> Rompiendo el mito</div>
+        <h2>Te hicieron creer que para desinflamarte necesitás…</h2>
+        <p class="belief-intro">Pero ninguna de estas cosas es real. Y eso ya lo sabés — por eso seguís buscando.</p>
+
+        <div class="belief-no-grid">
+            <div class="belief-no-card">
+                <i class="fa-solid fa-xmark"></i>
+                Cocinar complicado horas en la cocina
+            </div>
+            <div class="belief-no-card">
+                <i class="fa-solid fa-xmark"></i>
+                Hacer dietas estrictas e insostenibles
+            </div>
+            <div class="belief-no-card">
+                <i class="fa-solid fa-xmark"></i>
+                Tener tiempo libre que no tenés
+            </div>
+        </div>
+
+        <div class="belief-punch">
+            <p><i class="fa-solid fa-arrow-right"></i> La verdad que nadie te contó:</p>
+            <strong>El problema no es lo que comés… es cómo lo estás combinando y sosteniendo en tu día a día.</strong>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Romper Creencia",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Romper Creencia"
+    }
+  ]
+}
+{% endschema %}

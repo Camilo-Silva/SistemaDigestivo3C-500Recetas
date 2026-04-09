@@ -1,0 +1,83 @@
+<style>
+  :root { --red: #d8a7b1; --red-dark: #b8879a; --dark: #2c1f1b; --text: #4a3a32; --violet: #ede5e1; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  .faq-section { padding: 70px 20px; background: var(--violet); }
+  .faq-section h2 { text-align: center; font-size: 32px !important; margin-bottom: 38px; font-family: 'Montserrat', sans-serif !important; }
+  .faq-item { background: #fff; border-radius: 10px; margin-bottom: 10px; border: 1px solid #d4c4bc; overflow: hidden; }
+  .faq-q { padding: 17px 22px; font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 16px !important; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--dark); user-select: none; }
+  .faq-q .arr { transition: transform .3s; font-size: 12px !important; color: var(--red); }
+  .faq-a { padding: 0 22px; font-size: 15px !important; color: #555; max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .3s ease; }
+  .faq-item.open .faq-a { max-height: 400px; padding: 0 22px 18px; }
+  .faq-item.open .arr { transform: rotate(180deg); }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<section class="faq-section">
+    <div class="container">
+        <h2><i class="fa-solid fa-circle-question"></i> Preguntas Frecuentes</h2>
+
+        <div class="faq-item">
+            <div class="faq-q">¿Cómo recibo el ebook después de comprar? <span class="arr">▼</span></div>
+            <div class="faq-a">Inmediatamente después del pago recibís un email con el link de descarga. Acceso instantáneo, 24/7, desde cualquier dispositivo — celular, tablet o computadora. Sin esperas.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿De verdad funciona sin cocinar nada? <span class="arr">▼</span></div>
+            <div class="faq-a">Sí. El método fue diseñado específicamente para mujeres que no tienen tiempo o ganas de cocinar. Todas las combinaciones están pensadas con alimentos que se consiguen listos, se arman en 5 minutos o requieren preparación mínima. No hay recetas complicadas.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿Necesito comprar alimentos especiales o caros? <span class="arr">▼</span></div>
+            <div class="faq-a">No. El método trabaja con alimentos reales que conseguís en cualquier supermercado o verdulería. Nada de superfoods importados, suplementos costosos ni productos de marca. La Lista Anti-Hinchazón del Super (Bono #3) te dice exactamente qué comprar.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿Funciona si tengo un día a día muy caótico y sin rutinas? <span class="arr">▼</span></div>
+            <div class="faq-a">Fue diseñado exactamente para eso. La Guía "Qué comer cuando no tenés tiempo" (Bono #1) y el Plan de Emergencia 24 hs (Bono #4) son herramientas pensadas para los días que se van de control. No necesitás rutinas perfectas para que funcione.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿En cuánto tiempo veo resultados? <span class="arr">▼</span></div>
+            <div class="faq-a">Muchas mujeres reportan menos hinchazón y más energía en los primeros 5-7 días. Los cambios consolidados — digestión, liviandad, control — se afianzan al completar los 14 días del protocolo. Cada cuerpo es diferente, pero el sistema está optimizado para resultados rápidos.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿Tengo que dejar de comer lo que me gusta? <span class="arr">▼</span></div>
+            <div class="faq-a">El reset pide algunos ajustes en los 14 días — no prohibiciones de por vida. El objetivo es que aprendas qué le funciona a tu cuerpo para que después puedas comer de todo con información. No es una dieta restrictiva permanente.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿Sirve si tengo problemas de salud como tiroides, colon irritable o resistencia a la insulina? <span class="arr">▼</span></div>
+            <div class="faq-a">El método se basa en principios de alimentación antiinflamatoria que son beneficiosos para la mayoría de las personas. Sin embargo, si tenés una condición médica diagnosticada, siempre recomendamos consultarlo primero con tu médico. Este ebook es complementario, no reemplaza el consejo médico profesional.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿La garantía de devolución es real? <span class="arr">▼</span></div>
+            <div class="faq-a">100% real. Si dentro de las 2 semanas no notás ningún resultado, mandás un email a soporte y te devolvemos el dinero completo — sin preguntas, sin formularios y sin demoras. El riesgo es nuestro, no tuyo.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿Tengo acceso de por vida al material? <span class="arr">▼</span></div>
+            <div class="faq-a">Sí. El ebook y todos los bonos son tuyos para siempre — los descargás, los guardás y los usás cuando quieras, cuantas veces quieras. Sin suscripciones, sin vencimientos.</div>
+        </div>
+    </div>
+</section>
+
+<script>
+(function () {
+  document.querySelectorAll('.faq-q').forEach(function (q) {
+    q.addEventListener('click', function () {
+      var item   = q.parentElement;
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function (i) { i.classList.remove('open'); });
+      if (!isOpen) { item.classList.add('open'); }
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [],
+  "presets": [
+    {
+      "name": "FAQ"
+    }
+  ]
+}
+{% endschema %}

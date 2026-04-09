@@ -1,0 +1,101 @@
+<style>
+  :root { --red: #d8a7b1; --red-dark: #b8879a; --dark: #2c1f1b; --text: #4a3a32; --blue-light: #f9f0f3; --shadow: 0 4px 20px rgba(0,0,0,0.1); }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  .section-title { text-align: center; font-size: 34px !important; margin-bottom: 8px; font-family: 'Montserrat', sans-serif !important; }
+  .section-subtitle { text-align: center; color: #666; margin-bottom: 44px; font-size: 16px !important; }
+  .benefits-section { background: var(--blue-light); padding: 70px 20px; }
+  .benefits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .benefit-card { background: #fff; border-radius: 12px; box-shadow: var(--shadow); border-left: 4px solid var(--red); overflow: hidden; cursor: pointer; }
+  .benefit-card-header { display: flex; align-items: center; gap: 12px; padding: 16px 18px; user-select: none; }
+  .b-icon { font-size: 19px !important; color: var(--red); flex-shrink: 0; }
+  .benefit-card-header h4 { font-size: 15px !important; margin: 0; flex: 1; color: var(--dark); font-family: 'Montserrat', sans-serif !important; }
+  .b-arr { font-size: 11px !important; color: var(--red); transition: transform .3s; flex-shrink: 0; }
+  .benefit-card.open .b-arr { transform: rotate(180deg); }
+  .benefit-card-body { max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .3s ease; padding: 0 18px; font-size: 14px !important; color: #555; }
+  .benefit-card.open .benefit-card-body { max-height: 200px; padding: 0 18px 16px; }
+  @media (max-width: 768px) { .benefits-grid { grid-template-columns: 1fr; } .section-title { font-size: 28px !important; } }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<section class="benefits-section">
+    <div class="container">
+        <h2 class="section-title">En solo 14 días podés empezar a notar:</h2>
+        <p class="section-subtitle">Resultados reales para mujeres reales — sin complicarte la vida</p>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-card-header">
+                    <span class="b-icon"><i class="fa-solid fa-face-smile"></i></span>
+                    <h4>Menos hinchazón</h4>
+                    <span class="b-arr">▼</span>
+                </div>
+                <div class="benefit-card-body">Ese abdomen pesado y distendido que normalizaste empieza a ceder desde los primeros días del reset. Las combinaciones de alimentos correctas hacen que tu digestión trabaje a tu favor, no en tu contra.</div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-card-header">
+                    <span class="b-icon"><i class="fa-solid fa-bolt"></i></span>
+                    <h4>Más energía durante el día</h4>
+                    <span class="b-arr">▼</span>
+                </div>
+                <div class="benefit-card-body">Sin el "bajón" de las 3 de la tarde, sin depender del café. Cuando reducís la inflamación interna, tu cuerpo deja de gastar energía "apagando incendios" y la sentís disponible para vos.</div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-card-header">
+                    <span class="b-icon"><i class="fa-solid fa-seedling"></i></span>
+                    <h4>Mejor digestión</h4>
+                    <span class="b-arr">▼</span>
+                </div>
+                <div class="benefit-card-body">Sabrás qué le sienta bien a tu cuerpo y qué no — sin necesitar hacerte estudios ni consultas costosas. La digestión se vuelve liviana, regular y sin pesadez.</div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-card-header">
+                    <span class="b-icon"><i class="fa-solid fa-feather"></i></span>
+                    <h4>Sensación de liviandad en el cuerpo</h4>
+                    <span class="b-arr">▼</span>
+                </div>
+                <div class="benefit-card-body">Esa sensación de "estar en tu cuerpo" que hace tiempo no sentís. No solo exterior — una liviandad real, de adentro hacia afuera, que notás en cómo te movés y cómo te sentís.</div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-card-header">
+                    <span class="b-icon"><i class="fa-solid fa-brain"></i></span>
+                    <h4>Más control sobre lo que comés</h4>
+                    <span class="b-arr">▼</span>
+                </div>
+                <div class="benefit-card-body">Dejarás de sentir que la comida te controla a vos. Con un sistema claro y simple, las decisiones se vuelven automáticas — sin culpa, sin ansiedad y sin privación.</div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-card-header">
+                    <span class="b-icon"><i class="fa-solid fa-clock"></i></span>
+                    <h4>Todo en 5 minutos — de verdad</h4>
+                    <span class="b-arr">▼</span>
+                </div>
+                <div class="benefit-card-body">Cada combinación del método está pensada para tu vida: sin recetas largas, sin mise en place, sin pensar demasiado. Abrís el ebook, elegís tu opción y en 5 minutos estás lista.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+(function () {
+  document.querySelectorAll('.benefit-card').forEach(function (card) {
+    card.addEventListener('click', function () {
+      var isOpen = card.classList.contains('open');
+      document.querySelectorAll('.benefit-card').forEach(function (c) { c.classList.remove('open'); });
+      if (!isOpen) { card.classList.add('open'); }
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Beneficios — Resultados",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Beneficios — Resultados"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,107 @@
+<style>
+  .ticker-bar {
+    background: #d8a7b1;
+    padding: 10px 0;
+    overflow: hidden;
+    position: relative;
+    border-top: 2px solid #a39384;
+    border-bottom: 2px solid #a39384;
+  }
+  .ticker-track {
+    display: flex;
+    width: max-content;
+    animation: ticker-scroll 34s linear infinite;
+  }
+  .ticker-bar:hover .ticker-track {
+    animation-play-state: paused;
+  }
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    white-space: nowrap;
+    padding: 0 48px;
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 700;
+    font-size: 13px !important;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+  }
+  .ticker-item .t-icon {
+    font-size: 15px !important;
+    flex-shrink: 0;
+    width: 16px;
+    text-align: center;
+    color: rgba(255,255,255,.6);
+  }
+  @keyframes ticker-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @media (max-width: 768px) {
+    .ticker-item { font-size: 11px !important; padding: 0 24px; }
+  }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<div class="ticker-bar" aria-label="Información de compra" role="marquee">
+    <div class="ticker-track">
+        <span class="ticker-item"><i class="t-icon fa-solid fa-shield-halved"></i> {{ section.settings.item_1 }}</span>
+        <span class="ticker-item"><i class="t-icon fa-solid fa-bolt"></i> {{ section.settings.item_2 }}</span>
+        <span class="ticker-item"><i class="t-icon fa-solid fa-envelope"></i> {{ section.settings.item_3 }}</span>
+        <span class="ticker-item"><i class="t-icon fa-solid fa-leaf"></i> {{ section.settings.item_4 }}</span>
+        <span class="ticker-item"><i class="t-icon fa-solid fa-lock"></i> {{ section.settings.item_5 }}</span>
+        <!-- duplicado seamless -->
+        <span class="ticker-item"><i class="t-icon fa-solid fa-shield-halved"></i> {{ section.settings.item_1 }}</span>
+        <span class="ticker-item"><i class="t-icon fa-solid fa-bolt"></i> {{ section.settings.item_2 }}</span>
+        <span class="ticker-item"><i class="t-icon fa-solid fa-envelope"></i> {{ section.settings.item_3 }}</span>
+        <span class="ticker-item"><i class="t-icon fa-solid fa-leaf"></i> {{ section.settings.item_4 }}</span>
+        <span class="ticker-item"><i class="t-icon fa-solid fa-lock"></i> {{ section.settings.item_5 }}</span>
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "Ticker Bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "item_1",
+      "label": "Ítem 1",
+      "default": "Pago 100% Seguro con Mercado Pago"
+    },
+    {
+      "type": "text",
+      "id": "item_2",
+      "label": "Ítem 2",
+      "default": "70% OFF por Tiempo Limitado"
+    },
+    {
+      "type": "text",
+      "id": "item_3",
+      "label": "Ítem 3",
+      "default": "Acceso Inmediato por Mail"
+    },
+    {
+      "type": "text",
+      "id": "item_4",
+      "label": "Ítem 4",
+      "default": "Método Antiinflamatorio Express — 14 Días"
+    },
+    {
+      "type": "text",
+      "id": "item_5",
+      "label": "Ítem 5",
+      "default": "PAGO 100% SEGURO — TARJETAS DE TODO EL MUNDO"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ticker Bar"
+    }
+  ]
+}
+{% endschema %}

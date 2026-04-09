@@ -1,0 +1,148 @@
+<style>
+  :root {
+    --red: #d8a7b1; --red-dark: #b8879a; --dark: #2c1f1b;
+    --text: #4a3a32; --yellow: #ffd60a; --green: #a39384;
+    --green-mid: #d8a7b1; --shadow: 0 4px 20px rgba(0,0,0,0.1);
+    --cream: #f1ebe5; --blue-light: #f9f0f3; --pink-light: #f3dde4; --violet: #ede5e1;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Open Sans', sans-serif !important; color: var(--text); line-height: 1.7; background: var(--cream); }
+  h1,h2,h3,h4 { font-family: 'Montserrat', sans-serif !important; line-height: 1.2; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  .section-label {
+    display: inline-block; background: rgba(216,167,177,.12); color: #d8a7b1;
+    font-family: 'Montserrat', sans-serif !important; font-size: 12px !important; font-weight: 700;
+    padding: 4px 14px; border-radius: 20px; margin-bottom: 12px;
+    text-transform: uppercase; letter-spacing: 1.2px;
+  }
+  .hero {
+    background: linear-gradient(160deg, #f1ebe5 60%, #f9f0f3 100%);
+    color: var(--dark); text-align: center; padding: 75px 20px 0;
+  }
+  .hero-mockup { width: calc(100% + 40px); margin-left: -20px; height: auto; display: block; margin-top: 36px; }
+  .pre-headline {
+    display: inline-block; background: rgba(216,167,177,.12); border: 1px solid var(--red);
+    color: var(--red); font-family: 'Montserrat', sans-serif !important; font-size: 13px !important; font-weight: 700;
+    padding: 6px 18px; border-radius: 20px; margin-bottom: 20px;
+    text-transform: uppercase; letter-spacing: 1.2px;
+  }
+  .hero h1 { font-size: 45px !important; font-weight: 900; margin-bottom: 20px; color: var(--dark); }
+  .hero h1 .hl { color: var(--red); }
+  .hero-sub { font-size: 18px !important; color: #a39384; max-width: 680px; margin: 0 auto 8px; }
+  .hero-pills {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+    margin: 0 auto 36px; max-width: 680px;
+  }
+  .hero-pill {
+    display: inline-flex; align-items: center; gap: 6px; background: #fff;
+    border: 1.5px solid #a39384; color: #a39384; font-family: 'Montserrat', sans-serif !important;
+    font-size: 13px !important; font-weight: 700; padding: 7px 14px; border-radius: 30px;
+  }
+  .hero-pill i { color: var(--red); font-size: 14px !important; }
+  .cta-wrap { text-align: center; }
+  .cta-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    background: linear-gradient(180deg, #e0b8c3, #d8a7b1); color: #fff;
+    font-family: 'Montserrat', sans-serif !important; font-size: 19px !important; font-weight: 900;
+    text-decoration: none; padding: 22px 36px; border-radius: 10px;
+    text-transform: uppercase; letter-spacing: .5px;
+    box-shadow: 0 8px 0 #b8879a, 0 12px 30px rgba(216,167,177,.4);
+    transition: all .15s ease; max-width: 640px; width: 100%;
+    margin: 10px auto; position: relative; overflow: hidden;
+  }
+  .cta-btn::after {
+    content: ''; position: absolute; top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent);
+    animation: shimmer 2.5s infinite;
+  }
+  @keyframes shimmer { 0% { left: -100%; } 100% { left: 200%; } }
+  .cta-btn:hover { transform: translateY(3px); box-shadow: 0 5px 0 #b8879a, 0 8px 18px rgba(216,167,177,.3); }
+  .cta-sub { font-size: 12px !important; color: #999; margin-top: 8px; }
+  @media (max-width: 768px) { .hero h1 { font-size: 32px !important; } .cta-btn { font-size: 16px !important; padding: 18px 18px; } }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<header class="hero">
+    <div class="container">
+        <p class="pre-headline"><i class="fa-solid fa-fire-flame-curved"></i> {{ section.settings.pre_headline }}</p>
+        <h1>{{ section.settings.headline }}</h1>
+        <p class="hero-sub" style="margin-bottom:16px;">{{ section.settings.subheadline_1 }}</p>
+        <p class="hero-sub" style="font-weight:600;color:var(--red-dark);">{{ section.settings.subheadline_2 }}</p>
+
+        <div class="hero-pills" style="margin-top:28px;">
+            <span class="hero-pill"><i class="fa-solid fa-check"></i> Sin cocinar</span>
+            <span class="hero-pill"><i class="fa-solid fa-check"></i> Sin dietas extremas</span>
+            <span class="hero-pill"><i class="fa-solid fa-check"></i> 5 min por comida</span>
+            <span class="hero-pill"><i class="fa-solid fa-check"></i> Resultados en 14 días</span>
+            <span class="hero-pill"><i class="fa-solid fa-check"></i> Para días caóticos</span>
+        </div>
+
+    </div>
+
+    {% if section.settings.mockup_image != blank %}
+    <img src="{{ section.settings.mockup_image | img_url: 'master' }}" alt="{{ section.settings.mockup_image.alt | escape }}" class="hero-mockup">
+    {% endif %}
+
+    <div class="container">
+        <div class="cta-wrap" style="padding:36px 0 40px;">
+            <a href="{{ section.settings.cta_url }}" class="cta-btn"><i class="fa-solid fa-arrow-right"></i> {{ section.settings.cta_text }}</a>
+            <p class="cta-sub"><i class="fa-solid fa-lock"></i> Compra segura &nbsp;·&nbsp; <i class="fa-solid fa-bolt"></i> Acceso instantáneo &nbsp;·&nbsp; <i class="fa-solid fa-shield-halved"></i> Garantía sin preguntas</p>
+        </div>
+    </div>
+</header>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "pre_headline",
+      "label": "Pre-headline",
+      "default": "Para mujeres que viven a mil y quieren sentirse bien de verdad"
+    },
+    {
+      "type": "textarea",
+      "id": "headline",
+      "label": "Headline principal",
+      "default": "Desinflamá tu cuerpo en <span class=\"hl\">14 días</span><br>sin cocinar, sin dietas extremas<br>y sin dedicar más de <span class=\"hl\">5 minutos</span> por comida"
+    },
+    {
+      "type": "text",
+      "id": "subheadline_1",
+      "label": "Subtítulo 1",
+      "default": "Aunque vivas a mil, trabajes todo el día o ya hayas intentado \"comer mejor\" sin éxito."
+    },
+    {
+      "type": "text",
+      "id": "subheadline_2",
+      "label": "Subtítulo 2 (destacado)",
+      "default": "Volvé a sentirte liviana, con energía y en control de tu cuerpo sin complicarte la vida."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Texto del botón CTA",
+      "default": "QUIERO EMPEZAR EL RESET AHORA"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "URL del botón CTA (link de pago)"
+    },
+    {
+      "type": "image_picker",
+      "id": "mockup_image",
+      "label": "Imagen del mockup (pack completo)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}

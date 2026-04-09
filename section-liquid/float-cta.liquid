@@ -1,0 +1,80 @@
+<style>
+  @keyframes floatBounce {
+    0%,100% { transform: translateX(-50%) translateY(0) scale(1); box-shadow: 0 6px 24px rgba(0,0,0,0.35); }
+    40%      { transform: translateX(-50%) translateY(-6px) scale(1.06); box-shadow: 0 14px 32px rgba(0,0,0,0.3); }
+    60%      { transform: translateX(-50%) translateY(-3px) scale(1.03); }
+  }
+  @keyframes floatBounce-right {
+    0%,100% { transform: translateY(0) scale(1); box-shadow: 0 6px 24px rgba(0,0,0,0.35); }
+    40%      { transform: translateY(-6px) scale(1.06); box-shadow: 0 14px 32px rgba(0,0,0,0.3); }
+    60%      { transform: translateY(-3px) scale(1.03); }
+  }
+  .float-cta {
+    display: flex;
+    position: fixed;
+    bottom: 20px;
+    right: 28px;
+    left: auto;
+    transform: none;
+    z-index: 9999;
+    background: linear-gradient(135deg, #d8a7b1, #a39384);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 800;
+    font-size: 16px !important;
+    padding: 14px 32px;
+    border-radius: 50px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+    text-decoration: none;
+    white-space: nowrap;
+    letter-spacing: .5px;
+    align-items: center;
+    gap: 10px;
+    animation: floatBounce-right 2.2s ease-in-out infinite;
+  }
+  .float-cta:hover {
+    animation: none;
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.4);
+  }
+  @media (max-width: 768px) {
+    .float-cta {
+      right: auto;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: floatBounce 2.2s ease-in-out infinite;
+    }
+    .float-cta:hover { transform: translateX(-50%) translateY(-2px) scale(1.04); }
+  }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<a href="{{ section.settings.cta_url }}" class="float-cta">
+  <i class="fa-solid fa-leaf"></i> {{ section.settings.cta_text }}
+</a>
+
+{% schema %}
+{
+  "name": "Botón Flotante",
+  "settings": [
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "URL del botón (link de pago)"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Texto del botón",
+      "default": "EMPEZAR EL RESET"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Botón Flotante"
+    }
+  ]
+}
+{% endschema %}

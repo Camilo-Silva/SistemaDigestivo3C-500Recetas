@@ -1,0 +1,1997 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reiniciá tu Cuerpo — Desinflamate en 14 Días Sin Cocinar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* ===== VARIABLES ===== */
+        :root {
+            --red:       #d8a7b1;
+            --red-dark:  #b8879a;
+            --dark:      #2c1f1b;
+            --light-bg:  #f1ebe5;
+            --text:      #4a3a32;
+            --white:     #fff;
+            --yellow:    #ffd60a;
+            --green:     #a39384;
+            --green-mid: #d8a7b1;
+            --shadow:    0 4px 20px rgba(0,0,0,0.1);
+            --cream:     #f1ebe5;
+            --blue-light:#f9f0f3;
+            --pink-light:#f3dde4;
+            --violet:    #ede5e1;
+        }
+
+        /* ===== FLOATING MOBILE CTA ===== */
+        @keyframes floatBounce {
+            0%,100% { transform:translateX(-50%) translateY(0) scale(1); box-shadow:0 6px 24px rgba(0,0,0,0.35); }
+            40%      { transform:translateX(-50%) translateY(-6px) scale(1.06); box-shadow:0 14px 32px rgba(0,0,0,0.3); }
+            60%      { transform:translateX(-50%) translateY(-3px) scale(1.03); }
+        }
+        .float-cta {
+            display:none;
+            position:fixed;
+            bottom:20px;
+            right:28px;
+            left:auto;
+            transform:none;
+            z-index:9999;
+            background:linear-gradient(135deg,#d8a7b1,#a39384);
+            color:#fff;
+            font-family:'Montserrat',sans-serif;
+            font-weight:800;
+            font-size:1rem;
+            padding:14px 32px;
+            border-radius:50px;
+            box-shadow:0 6px 24px rgba(0,0,0,0.35);
+            text-decoration:none;
+            white-space:nowrap;
+            letter-spacing:.5px;
+            align-items:center;
+            gap:10px;
+            animation:floatBounce-right 2.2s ease-in-out infinite;
+        }
+        @keyframes floatBounce-right {
+            0%,100% { transform:translateY(0) scale(1); box-shadow:0 6px 24px rgba(0,0,0,0.35); }
+            40%      { transform:translateY(-6px) scale(1.06); box-shadow:0 14px 32px rgba(0,0,0,0.3); }
+            60%      { transform:translateY(-3px) scale(1.03); }
+        }
+        .float-cta:hover { animation:none; transform:translateY(-2px) scale(1.04); box-shadow:0 10px 28px rgba(0,0,0,0.4); }
+        .float-cta { display:flex; }
+        @media(max-width:768px) {
+            .float-cta {
+                right:auto;
+                left:50%;
+                transform:translateX(-50%);
+                animation:floatBounce 2.2s ease-in-out infinite;
+            }
+            .float-cta:hover { transform:translateX(-50%) translateY(-2px) scale(1.04); }
+        }
+
+        /* ===== RESET ===== */
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Open Sans',sans-serif; color:var(--text); line-height:1.7; background:var(--cream); }
+        h1,h2,h3,h4 { font-family:'Montserrat',sans-serif; line-height:1.2; }
+        .container { max-width:900px; margin:0 auto; padding:0 20px; }
+
+        /* ===== COUNTDOWN EN PRICING BOX ===== */
+        .pricing-countdown {
+            background:linear-gradient(135deg,#f1ebe5,#f1ebe5);
+            border:2px solid #a39384;
+            border-radius:12px;
+            padding:16px 18px;
+            margin:14px 0;
+            text-align:center;
+            font-family:'Montserrat',sans-serif;
+        }
+        .pricing-countdown .pc-header {
+            font-size:.85rem;
+            font-weight:700;
+            color:#a39384;
+            margin-bottom:10px;
+        }
+        .pricing-countdown .pc-digits {
+            display:flex;
+            justify-content:center;
+            gap:6px;
+            align-items:flex-end;
+            margin-bottom:10px;
+        }
+        .pricing-countdown .pc-unit {
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap:2px;
+        }
+        .pricing-countdown .pc-num {
+            background:#a39384;
+            color:#fff;
+            font-size:1.8rem;
+            font-weight:900;
+            padding:6px 14px;
+            border-radius:8px;
+            min-width:52px;
+            line-height:1;
+        }
+        .pricing-countdown .pc-lbl {
+            font-size:.65rem;
+            font-weight:700;
+            color:#d8a7b1;
+            text-transform:uppercase;
+            letter-spacing:.5px;
+        }
+        .pricing-countdown .pc-sep {
+            font-size:1.8rem;
+            font-weight:900;
+            color:#d8a7b1;
+            line-height:1;
+            padding-bottom:6px;
+        }
+        .pricing-countdown .pc-footer {
+            font-size:.75rem;
+            color:#888;
+            font-family:'Open Sans',sans-serif;
+        }
+
+        /* ===== TICKER BAR ===== */
+        .ticker-bar {
+            background:#d8a7b1;
+            padding:10px 0;
+            overflow:hidden;
+            position:relative;
+            border-top:2px solid #a39384;
+            border-bottom:2px solid #a39384;
+        }
+        .ticker-track {
+            display:flex;
+            width:max-content;
+            animation: ticker-scroll 34s linear infinite;
+        }
+        .ticker-bar:hover .ticker-track { animation-play-state:paused; }
+        .ticker-item {
+            display:inline-flex;
+            align-items:center;
+            gap:9px;
+            white-space:nowrap;
+            padding:0 48px;
+            font-family:'Montserrat',sans-serif;
+            font-weight:700;
+            font-size:.85rem;
+            color:#fff;
+            text-transform:uppercase;
+            letter-spacing:.6px;
+        }
+        .ticker-item .t-icon {
+            font-size:.9rem;
+            flex-shrink:0;
+            width:16px;
+            text-align:center;
+            color:#fff;
+        }
+        @keyframes ticker-scroll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(160deg, #f1ebe5 60%, #f9f0f3 100%);
+            color:var(--dark);
+            text-align:center;
+            padding:75px 20px 65px;
+        }
+        .pre-headline {
+            display:inline-block;
+            background:rgba(216,167,177,.12);
+            border:1px solid var(--red);
+            color:var(--red);
+            font-family:'Montserrat',sans-serif;
+            font-size:.82rem;
+            font-weight:700;
+            padding:6px 18px;
+            border-radius:20px;
+            margin-bottom:20px;
+            text-transform:uppercase;
+            letter-spacing:1.2px;
+        }
+        .hero h1 { font-size:2.8rem; font-weight:900; margin-bottom:20px; color:var(--dark); }
+        .hero h1 .hl  { color:var(--red); }
+        .hero-sub {
+            font-size:1.15rem;
+            color:#a39384;
+            max-width:680px;
+            margin:0 auto 8px;
+        }
+        .hero-social-proof { font-size:.9rem; color:#d8a7b1; margin-bottom:38px; }
+        .hero-social-proof span { color:var(--red); font-weight:700; }
+
+        /* ===== WHAT-FOR PILLS ===== */
+        .hero-pills {
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:10px;
+            margin:0 auto 36px;
+            max-width:680px;
+        }
+        .hero-pill {
+            display:inline-flex;
+            align-items:center;
+            gap:6px;
+            background:#fff;
+            border:1.5px solid #a39384;
+            color:#a39384;
+            font-family:'Montserrat',sans-serif;
+            font-size:.8rem;
+            font-weight:700;
+            padding:7px 14px;
+            border-radius:30px;
+        }
+        .hero-pill i { color:var(--red); font-size:.85rem; }
+
+        /* ===== CTA BUTTON ===== */
+        .cta-wrap { text-align:center; }
+        .cta-btn {
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            gap:10px;
+            background:linear-gradient(180deg,#e0b8c3,#d8a7b1);
+            color:#fff;
+            font-family:'Montserrat',sans-serif;
+            font-size:1.2rem;
+            font-weight:900;
+            text-decoration:none;
+            padding:22px 36px;
+            border-radius:10px;
+            text-transform:uppercase;
+            letter-spacing:.5px;
+            box-shadow:0 8px 0 #b8879a, 0 12px 30px rgba(216,167,177,.4);
+            transition:all .15s ease;
+            max-width:640px;
+            width:100%;
+            margin:10px auto;
+            position:relative;
+            overflow:hidden;
+        }
+        .cta-btn::after {
+            content:'';
+            position:absolute;
+            top:0; left:-100%;
+            width:60%; height:100%;
+            background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);
+            animation:shimmer 2.5s infinite;
+        }
+        @keyframes shimmer { 0%{left:-100%} 100%{left:200%} }
+        .cta-btn:hover {
+            transform:translateY(3px);
+            box-shadow:0 5px 0 #b8879a, 0 8px 18px rgba(216,167,177,.3);
+        }
+        .cta-sub { font-size:.78rem; color:#999; margin-top:8px; }
+        .cta-sub.light { color:rgba(255,255,255,.6); }
+
+        /* ===== SECTION LABEL ===== */
+        .section-label {
+            display:inline-block;
+            background:rgba(216,167,177,.12);
+            color:#d8a7b1;
+            font-family:'Montserrat',sans-serif;
+            font-size:.75rem;
+            font-weight:700;
+            padding:4px 14px;
+            border-radius:20px;
+            margin-bottom:12px;
+            text-transform:uppercase;
+            letter-spacing:1.2px;
+        }
+
+        /* ===== PAIN POINTS ===== */
+        .pain-section {
+            background:#fff;
+            padding:60px 20px;
+            border-top:1px solid #d8c8c0;
+        }
+        .pain-grid {
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:18px;
+            margin-top:32px;
+        }
+        .pain-card {
+            background:linear-gradient(135deg,#fff8f0,#fdeede);
+            border:1px solid #f5c4a0;
+            border-radius:12px;
+            padding:20px;
+            text-align:center;
+        }
+        .pain-icon {
+            display:flex; align-items:center; justify-content:center;
+            width:52px; height:52px; border-radius:14px;
+            background:linear-gradient(135deg,#f3dde4,#e8c8d0);
+            margin:0 auto 14px;
+            font-size:1.4rem;
+            color:var(--red-dark);
+        }
+        .pain-card p { font-size:.88rem; color:#555; }
+        .pain-card strong { display:block; font-family:'Montserrat',sans-serif; font-size:.95rem; color:#333; margin-bottom:6px; }
+
+        /* ===== ROMPER CREENCIA ===== */
+        .belief-section {
+            background:linear-gradient(160deg,#2c1f1b 0%,#a39384 100%);
+            color:#fff;
+            padding:70px 20px;
+            text-align:center;
+        }
+        .belief-section .section-label { background:rgba(255,255,255,.12); color:#c8b8b0; }
+        .belief-section h2 { font-size:2rem; margin-bottom:10px; color:#fff; }
+        .belief-section .belief-intro { font-size:1rem; color:rgba(255,255,255,.7); margin-bottom:36px; }
+        .belief-no-grid {
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:18px;
+            margin-bottom:40px;
+        }
+        .belief-no-card {
+            background:rgba(255,255,255,.06);
+            border:1.5px solid rgba(255,100,100,.3);
+            border-radius:12px;
+            padding:18px 28px;
+            display:flex;
+            align-items:center;
+            gap:12px;
+            font-family:'Montserrat',sans-serif;
+            font-weight:700;
+            font-size:1rem;
+            color:#ffbcbc;
+            min-width:260px;
+            text-align:left;
+        }
+        .belief-no-card i { font-size:1.3rem; color:#ff6b6b; flex-shrink:0; }
+        .belief-punch {
+            background:rgba(216,167,177,.1);
+            border:1.5px solid rgba(216,167,177,.35);
+            border-radius:14px;
+            padding:28px 36px;
+            max-width:640px;
+            margin:0 auto;
+        }
+        .belief-punch p {
+            font-size:1.1rem;
+            font-family:'Montserrat',sans-serif;
+            font-weight:700;
+            color:#c8b8b0;
+            margin-bottom:10px;
+        }
+        .belief-punch strong { color:#fff; font-size:1.18rem; }
+
+        /* ===== SOLUTION / MECHANISM ===== */
+        .solution-section {
+            background:var(--cream);
+            padding:70px 20px;
+            text-align:center;
+        }
+        .method-badge {
+            display:inline-flex;
+            align-items:center;
+            gap:10px;
+            background:linear-gradient(135deg,#f9f0f3,#ede5e1);
+            border:2px solid #a39384;
+            border-radius:14px;
+            padding:12px 28px;
+            font-family:'Montserrat',sans-serif;
+            font-weight:900;
+            font-size:1.25rem;
+            color:var(--dark);
+            margin-bottom:32px;
+        }
+        .method-badge i { color:var(--red); font-size:1.4rem; }
+        .method-features {
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:14px;
+            max-width:640px;
+            margin:0 auto 28px;
+            text-align:left;
+        }
+        .method-feature {
+            background:#fff;
+            border:1.5px solid #d4c4bc;
+            border-radius:10px;
+            padding:14px 18px;
+            display:flex;
+            align-items:flex-start;
+            gap:10px;
+            font-size:.93rem;
+            color:var(--text);
+        }
+        .method-feature i { color:var(--red); font-size:1rem; margin-top:2px; flex-shrink:0; }
+        .method-not-list {
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:12px;
+            margin-top:24px;
+        }
+        .method-not-item {
+            background:rgba(216,167,177,.08);
+            border:1px solid rgba(216,167,177,.25);
+            border-radius:30px;
+            padding:8px 20px;
+            font-family:'Montserrat',sans-serif;
+            font-weight:700;
+            font-size:.85rem;
+            color:var(--red-dark);
+        }
+        .method-not-item i { color:var(--red); margin-right:4px; }
+
+        /* ===== BENEFITS ===== */
+        .benefits-section { background:var(--blue-light); padding:70px 20px; }
+        .section-title { text-align:center; font-size:2.1rem; margin-bottom:8px; }
+        .section-subtitle { text-align:center; color:#666; margin-bottom:44px; font-size:.97rem; }
+        .benefits-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+        .benefit-card {
+            background:#fff;
+            border-radius:12px;
+            box-shadow:var(--shadow);
+            border-left:4px solid var(--red);
+            overflow:hidden;
+            cursor:pointer;
+        }
+        .benefit-card-header {
+            display:flex;
+            align-items:center;
+            gap:12px;
+            padding:16px 18px;
+            user-select:none;
+        }
+        .b-icon { font-size:1.2rem; color:var(--red); flex-shrink:0; }
+        .benefit-card-header h4 { font-size:.95rem; margin:0; flex:1; color:var(--dark); }
+        .b-arr {
+            font-size:.7rem;
+            color:var(--red);
+            transition:transform .3s;
+            flex-shrink:0;
+        }
+        .benefit-card.open .b-arr { transform:rotate(180deg); }
+        .benefit-card-body {
+            max-height:0;
+            overflow:hidden;
+            transition:max-height .35s ease, padding .3s ease;
+            padding:0 18px;
+            font-size:.88rem;
+            color:#555;
+        }
+        .benefit-card.open .benefit-card-body { max-height:200px; padding:0 18px 16px; }
+
+        /* ===== QUÉ INCLUYE ===== */
+        .includes-section {
+            background:#fff;
+            padding:60px 20px;
+            border-top:1px solid #d8c8c0;
+        }
+        .includes-box {
+            background:linear-gradient(135deg,#f9f0f3,#f3dde4);
+            border:2px solid #a39384;
+            border-radius:16px;
+            padding:36px 40px;
+            max-width:640px;
+            margin:32px auto 0;
+        }
+        .includes-box h3 {
+            font-family:'Montserrat',sans-serif;
+            font-weight:900;
+            font-size:1.25rem;
+            color:var(--dark);
+            margin-bottom:20px;
+            text-align:center;
+        }
+        .includes-list {
+            list-style:none;
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:12px;
+        }
+        .includes-list li {
+            display:flex;
+            align-items:center;
+            gap:9px;
+            font-size:.93rem;
+            color:var(--text);
+            font-family:'Open Sans',sans-serif;
+        }
+        .includes-list li i { color:var(--red); font-size:.9rem; flex-shrink:0; }
+
+        /* ===== TESTIMONIALS CAROUSEL ===== */
+        .testimonials-section { padding:70px 0; background:var(--pink-light); overflow:hidden; }
+        .testimonials-section > .container { padding-bottom:40px; }
+        .carousel-wrapper { overflow:hidden; cursor:grab; }
+        .carousel-wrapper.is-dragging { cursor:grabbing; user-select:none; }
+        .carousel-row {
+            display:flex;
+            width:max-content;
+            gap:20px;
+            padding:0 10px 20px;
+            animation: scroll-left 38s linear infinite;
+        }
+        .carousel-row--right {
+            animation: scroll-right 38s linear infinite;
+        }
+        @keyframes scroll-left {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes scroll-right {
+            0%   { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+        .carousel-wrapper:hover .carousel-row { animation-play-state:paused; }
+        .t-card {
+            background:#fff;
+            border-radius:14px;
+            padding:24px;
+            border:1px solid #d4c4bc;
+            position:relative;
+            width:360px;
+            flex-shrink:0;
+            box-shadow:0 2px 14px rgba(216,167,177,.08);
+        }
+        .t-card::before {
+            content:'"';
+            position:absolute;
+            top:-8px; left:18px;
+            font-size:4.5rem;
+            color:var(--red);
+            font-family:Georgia,serif;
+            line-height:1;
+            opacity:.15;
+        }
+        .stars { color:var(--yellow); font-size:1rem; margin-bottom:10px; }
+        .t-text { font-size:.93rem; color:#444; font-style:italic; margin-bottom:16px; }
+        .t-author { display:flex; align-items:center; gap:11px; }
+        .t-avatar {
+            width:44px; height:44px;
+            border-radius:50%;
+            object-fit:cover;
+            flex-shrink:0;
+            overflow:hidden;
+            border:2px solid rgba(216,167,177,.4);
+        }
+        .t-name  { font-weight:700; font-size:.88rem; color:#222; }
+        .t-city  { font-size:.78rem; color:#888; }
+        .verified {
+            display:inline-flex; align-items:center; gap:3px;
+            background:#f9f0f3; color:#a39384;
+            font-size:.7rem; font-weight:700;
+            padding:2px 8px; border-radius:10px; margin-top:3px;
+        }
+
+        /* ===== PRODUCT CARD ===== */
+        .product-card-section { background:var(--cream); padding:0 0 40px; }
+        .product-card {
+            background:#fff;
+            border:1px solid #d4c4bc;
+            border-radius:0;
+            max-width:100%;
+            margin:0 auto;
+            overflow:hidden;
+            box-shadow:0 4px 20px rgba(0,0,0,.09);
+        }
+        .product-card-img { width:100%; display:block; background:#f1ebe5; }
+        .product-card-body { padding:22px 24px 28px; }
+        .product-card-title {
+            font-family:'Montserrat',sans-serif;
+            font-weight:900;
+            font-size:1.35rem;
+            color:#111;
+            margin-bottom:14px;
+            line-height:1.25;
+        }
+        .product-price-row {
+            display:flex;
+            align-items:center;
+            gap:12px;
+            margin-bottom:14px;
+            flex-wrap:wrap;
+        }
+        .product-price-old { font-size:.95rem; color:#999; text-decoration:line-through; }
+        .product-price-new {
+            font-family:'Montserrat',sans-serif;
+            font-weight:900;
+            font-size:1.6rem;
+            color:#111;
+        }
+        .product-off-badge {
+            background:var(--red);
+            color:#fff;
+            font-family:'Montserrat',sans-serif;
+            font-weight:700;
+            font-size:.75rem;
+            padding:4px 10px;
+            border-radius:6px;
+            text-transform:uppercase;
+            letter-spacing:.5px;
+        }
+        .product-stock {
+            display:inline-flex;
+            align-items:center;
+            gap:6px;
+            font-size:.82rem;
+            font-family:'Montserrat',sans-serif;
+            font-weight:700;
+            color:#e65100;
+            margin-bottom:18px;
+        }
+        .product-stock-dot {
+            width:7px; height:7px; border-radius:50%;
+            background:#f44336; animation:blink 1s infinite; flex-shrink:0;
+        }
+        .product-cta {
+            display:block;
+            background:linear-gradient(180deg,#d8a7b1,#b8879a);
+            color:#fff;
+            text-align:center;
+            font-family:'Montserrat',sans-serif;
+            font-weight:700;
+            font-size:1rem;
+            padding:14px;
+            border-radius:8px;
+            text-decoration:none;
+            transition:opacity .15s;
+            position:relative;
+            overflow:hidden;
+        }
+        .product-cta::after {
+            content:'';
+            position:absolute;
+            top:0; left:-100%;
+            width:60%; height:100%;
+            background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);
+            animation:shimmer 2.5s infinite;
+        }
+        .product-cta:hover { opacity:.88; }
+
+        /* ===== PRICING BOX ===== */
+        .pricing-section { background:var(--cream); padding:44px 20px; border-top:1px solid #d8c8c0; }
+        .pricing-box { max-width:480px; margin:0 auto; text-align:center; }
+        .pricing-stars { color:#f5a623; font-size:1.2rem; margin-bottom:4px; }
+        .pricing-reviews { font-size:.85rem; color:#777; margin-bottom:22px; }
+        .pricing-reviews strong { color:#333; }
+        .pricing-main-price {
+            font-family:'Montserrat',sans-serif;
+            font-weight:900;
+            font-size:2.5rem;
+            color:#111;
+            line-height:1;
+            margin-bottom:6px;
+        }
+        .pricing-old-price { font-size:1rem; color:#aaa; text-decoration:line-through; margin-bottom:16px; }
+        .pricing-savings-btn {
+            display:inline-block;
+            background:linear-gradient(135deg,#e0b8c3,#d8a7b1);
+            color:#fff;
+            font-family:'Montserrat',sans-serif;
+            font-weight:800;
+            font-size:1rem;
+            padding:13px 28px;
+            border-radius:30px;
+            margin-bottom:10px;
+            box-shadow:0 4px 14px rgba(216,167,177,.45);
+            text-decoration:none;
+            cursor:pointer;
+            transition:transform .18s ease, box-shadow .18s ease;
+            position:relative;
+            overflow:hidden;
+        }
+        .pricing-savings-btn::after {
+            content:'';
+            position:absolute;
+            top:0; left:-100%;
+            width:60%; height:100%;
+            background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);
+            animation:shimmer 2.5s infinite;
+        }
+        .pricing-savings-btn:hover {
+            transform:scale(1.06) translateY(-2px);
+            box-shadow:0 8px 24px rgba(216,167,177,.65);
+        }
+        .pricing-launch { font-size:.82rem; color:#666; margin-bottom:24px; }
+        .pricing-launch i { color:#f5a623; }
+        .pricing-offer-btn {
+            display:block;
+            background:linear-gradient(180deg,#e0b8c3,#d8a7b1);
+            color:#fff;
+            font-family:'Montserrat',sans-serif;
+            font-weight:800;
+            font-size:1.05rem;
+            padding:15px;
+            border-radius:10px;
+            text-decoration:none;
+            margin-bottom:24px;
+            cursor:pointer;
+            transition:transform .18s ease, box-shadow .18s ease;
+            position:relative;
+            overflow:hidden;
+            box-shadow:0 8px 0 #b8879a, 0 12px 24px rgba(216,167,177,.4);
+        }
+        .pricing-offer-btn::after {
+            content:'';
+            position:absolute;
+            top:0; left:-100%;
+            width:60%; height:100%;
+            background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);
+            animation:shimmer 2.5s infinite;
+        }
+        .pricing-offer-btn:hover {
+            transform:translateY(3px);
+            box-shadow:0 5px 0 #b8879a, 0 8px 18px rgba(216,167,177,.3);
+        }
+        .pricing-trust-list {
+            list-style:none;
+            text-align:left;
+            display:inline-block;
+            margin-bottom:22px;
+        }
+        .pricing-trust-list li {
+            font-size:.88rem;
+            color:#444;
+            margin-bottom:8px;
+            display:flex;
+            align-items:center;
+            gap:8px;
+        }
+        .pricing-live {
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:8px;
+            font-size:.88rem;
+            font-family:'Montserrat',sans-serif;
+            font-weight:700;
+            color:#333;
+            margin-bottom:10px;
+        }
+        .pricing-live-dot {
+            width:10px; height:10px; border-radius:50%;
+            background:#3483fa; flex-shrink:0;
+        }
+        .pricing-urgency {
+            font-family:'Montserrat',sans-serif;
+            font-weight:800;
+            font-size:.85rem;
+            color:var(--red);
+            text-transform:uppercase;
+            letter-spacing:.5px;
+        }
+
+        /* ===== OFFER STACK ===== */
+        .offer-section { background:var(--cream); color:var(--text); text-align:center; }
+        .offer-band { padding:50px 5px; }
+        .offer-band--dark { background:var(--cream); color:var(--dark); padding:50px 20px; }
+        .offer-section .section-label { background:rgba(216,167,177,.12); color:var(--red-dark); }
+        .offer-section .section-title  { color:var(--dark); }
+        .offer-section .section-subtitle { color:#555; }
+
+        /* ── Bonus Carousel ── */
+        .bonus-carousel { position:relative; max-width:100%; margin:0 auto; padding:0; }
+        .bc-track-wrapper { overflow:hidden; border-radius:16px; }
+        .bc-track { display:flex; transition:transform .7s cubic-bezier(.4,0,.2,1); will-change:transform; }
+        .bc-slide { min-width:100%; }
+        .bc-card {
+            background:#fff;
+            border:2px solid rgba(216,167,177,.25);
+            border-radius:16px;
+            text-align:center;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            box-shadow:0 4px 18px rgba(216,167,177,.10);
+            overflow:hidden;
+        }
+        .bc-mockup {
+            width:100%; background:#f9f0f3;
+            display:flex; align-items:center; justify-content:center;
+            overflow:hidden; border-bottom:2px solid rgba(216,167,177,.15);
+            min-height:200px;
+        }
+        .bc-mockup img { width:100%; height:auto; display:block; object-fit:cover; }
+        .bc-mockup-placeholder { color:rgba(216,167,177,.35); font-size:3.5rem; }
+        .bc-body { padding:28px 28px 32px; display:flex; flex-direction:column; align-items:center; width:100%; }
+        .bc-name {
+            font-family:'Montserrat',sans-serif;
+            font-weight:700; font-size:1.1rem;
+            color:var(--dark); margin-bottom:12px; line-height:1.35; max-width:70%;
+        }
+        .bc-badge {
+            display:inline-block; background:rgba(216,167,177,.12);
+            color:var(--red-dark); font-size:.72rem; font-weight:700;
+            padding:4px 14px; border-radius:10px; margin-bottom:10px;
+        }
+        .bc-desc { font-size:.88rem; color:#666; margin-top:8px; line-height:1.6; }
+        .bc-desc-text { display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; transition:none; }
+        .bc-desc-text.expanded { display:block; -webkit-line-clamp:unset; }
+        .bc-desc-toggle { background:none; border:none; color:var(--red); font-size:.8rem; font-weight:700; cursor:pointer; padding:4px 0 0; display:inline-block; }
+        .bc-arrow {
+            position:absolute; top:calc(50% - 22px); transform:translateY(-50%);
+            width:40px; height:40px; border-radius:50%;
+            background:#fff; border:2px solid rgba(216,167,177,.5); color:var(--red);
+            font-size:1.5rem; cursor:pointer;
+            display:flex; align-items:center; justify-content:center;
+            transition:background .2s, border-color .2s, transform .2s;
+            z-index:5; line-height:1; box-shadow:0 2px 10px rgba(0,0,0,.15); padding:0;
+        }
+        .bc-arrow:hover { background:rgba(216,167,177,.12); border-color:var(--red); transform:translateY(-50%) scale(1.08); }
+        .bc-prev { left:5px; }
+        .bc-next { right:5px; }
+        .bc-dots { display:flex; gap:8px; justify-content:center; margin-top:16px; }
+        .bc-dot {
+            width:10px; height:10px; border-radius:50%;
+            background:rgba(216,167,177,.25); border:none; cursor:pointer;
+            transition:background .25s, transform .25s; padding:0;
+        }
+        .bc-dot.bc-dot--active { background:var(--red); transform:scale(1.3); }
+        .value-stack {
+            margin-top:32px; padding:36px;
+            background:rgba(255,255,255,.7); border:2px solid #d8c8c0;
+            border-radius:16px; max-width:760px;
+            margin-left:auto; margin-right:auto; text-align:center;
+        }
+        .real-value { text-decoration:line-through; color:#a39384; font-size:1rem; font-weight:600; margin-bottom:8px; }
+        .big-price { font-family:'Montserrat',sans-serif; font-size:3.2rem; font-weight:900; color:var(--red); line-height:1; }
+        .ars-price { font-size:1.1rem; color:#777; margin-top:6px; }
+
+        /* ===== PARA QUIÉN ES / NO ES ===== */
+        .forwho-section { background:#fff; padding:70px 20px; border-top:1px solid #d8c8c0; }
+        .forwho-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:36px; }
+        .forwho-card {
+            border-radius:14px;
+            padding:28px 24px;
+        }
+        .forwho-card--yes {
+            background:linear-gradient(135deg,#f9f0f3,#f3dde4);
+            border:2px solid #a39384;
+        }
+        .forwho-card--no {
+            background:linear-gradient(135deg,#fff5f5,#ffe8e8);
+            border:2px solid #f5c4c4;
+        }
+        .forwho-card h3 {
+            font-family:'Montserrat',sans-serif;
+            font-weight:900;
+            font-size:1.1rem;
+            margin-bottom:18px;
+            display:flex;
+            align-items:center;
+            gap:8px;
+        }
+        .forwho-card--yes h3 { color:#1a6e2e; }
+        .forwho-card--no  h3 { color:#8b2020; }
+        .forwho-list { list-style:none; }
+        .forwho-list li {
+            display:flex;
+            align-items:flex-start;
+            gap:10px;
+            font-size:.92rem;
+            color:#444;
+            margin-bottom:12px;
+            line-height:1.5;
+        }
+        .forwho-list li i { flex-shrink:0; margin-top:2px; font-size:.95rem; }
+        .forwho-list--yes li i { color:#2e7d45; }
+        .forwho-list--no  li i { color:#cc3333; }
+
+        /* ===== GUARANTEE ===== */
+        .guarantee-section { background:var(--cream); color:var(--dark); padding:70px 20px; text-align:center; }
+        .guarantee-box {
+            border:2px solid #d8c8c0;
+            padding:45px;
+            border-radius:16px;
+            background:rgba(255,255,255,.7);
+            max-width:760px;
+            margin:0 auto;
+        }
+        .g-icon   { font-size:4rem; margin-bottom:18px; color:var(--red); }
+        .b-icon i { color:var(--red); }
+        .guarantee-box h2 { color:var(--dark); margin-bottom:18px; font-size:1.9rem; }
+        .guarantee-box p  { font-size:1.02rem; color:#555; margin-bottom:18px; }
+        .guarantee-list { list-style:none; text-align:left; display:inline-block; margin:18px 0; }
+        .guarantee-list li {
+            display:flex; align-items:center; gap:10px;
+            font-size:.97rem; color:#444; margin-bottom:10px;
+        }
+        .guarantee-list li i { color:var(--red); }
+
+        /* ===== FAQ ===== */
+        .faq-section { padding:70px 20px; background:var(--violet); }
+        .faq-section h2 { text-align:center; font-size:2rem; margin-bottom:38px; }
+        .faq-item { background:#fff; border-radius:10px; margin-bottom:10px; border:1px solid #d4c4bc; overflow:hidden; }
+        .faq-q {
+            padding:17px 22px;
+            font-family:'Montserrat',sans-serif;
+            font-weight:700;
+            font-size:.97rem;
+            cursor:pointer;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            color:var(--dark);
+            user-select:none;
+        }
+        .faq-q .arr { transition:transform .3s; font-size:.75rem; color:var(--red); }
+        .faq-a {
+            padding:0 22px;
+            font-size:.93rem;
+            color:#555;
+            max-height:0;
+            overflow:hidden;
+            transition:max-height .4s ease, padding .3s ease;
+        }
+        .faq-item.open .faq-a  { max-height:400px; padding:0 22px 18px; }
+        .faq-item.open .arr    { transform:rotate(180deg); }
+
+        /* ===== CLOSING ===== */
+        .closing-section {
+            background:linear-gradient(135deg,#f9f0f3,#ede5e1);
+            padding:60px 20px;
+            text-align:center;
+            border-top:1px solid #d8c8c0;
+        }
+        .closing-section h2 { font-size:2rem; color:var(--dark); margin-bottom:14px; }
+        .closing-section p { font-size:1.08rem; color:#d8a7b1; max-width:600px; margin:0 auto 10px; }
+        .closing-punch {
+            font-family:'Montserrat',sans-serif;
+            font-weight:900;
+            font-size:1.4rem;
+            color:var(--red);
+            margin:18px 0 32px;
+        }
+
+        /* ===== FINAL CTA ===== */
+        .final-cta {
+            background:linear-gradient(135deg,#2c1f1b,#d8a7b1);
+            color:#fff;
+            padding:70px 20px;
+            text-align:center;
+        }
+        .final-cta h2 { font-size:2.3rem; margin-bottom:14px; }
+        .final-cta p  { font-size:1.08rem; color:rgba(255,255,255,.85); margin-bottom:28px; max-width:680px; margin-left:auto; margin-right:auto; }
+
+        /* ===== PAYMENT ===== */
+        .payment-section { background:#fff; padding:44px 20px; text-align:center; border-top:1px solid #d8c8c0; }
+        .payment-section h3 {
+            font-family:'Montserrat',sans-serif; font-size:.85rem; font-weight:600;
+            color:#999; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:22px;
+        }
+        .pay-img { display:block; max-width:420px; width:100%; margin:0 auto 18px; }
+        .ml-img { display:block; max-width:280px; width:100%; margin:0 auto 24px; }
+        .cuotas-note { font-size:.88rem; color:#555; margin-top:4px; }
+        .ssl-badge {
+            display:inline-flex; align-items:center; gap:6px;
+            background:#f9f0f3; color:#a39384; font-size:.78rem; font-weight:700;
+            padding:6px 14px; border-radius:20px; margin-top:14px;
+            font-family:'Montserrat',sans-serif;
+        }
+
+        /* ===== FOOTER ===== */
+        footer { background:#0d0d0d; color:#555; text-align:center; padding:28px 20px; font-size:.78rem; }
+        footer a { color:#777; text-decoration:none; }
+        footer a:hover { color:#fff; }
+
+        /* ===== TOAST ===== */
+        .toast-container {
+            position:fixed; top:60px; right:14px;
+            z-index:10000; display:flex; flex-direction:column;
+            gap:7px; pointer-events:none;
+        }
+        .toast {
+            background:#fff; border-left:3px solid var(--green-mid);
+            border-radius:8px; padding:8px 11px;
+            box-shadow:0 4px 16px rgba(0,0,0,.14);
+            display:flex; align-items:center; gap:8px;
+            max-width:240px; font-size:.75rem;
+            animation:toastIn .3s ease forwards;
+            font-family:'Open Sans',sans-serif;
+        }
+        .toast.out { animation:toastOut .3s ease forwards; }
+        .t-av {
+            width:30px; height:30px; border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            font-family:'Montserrat',sans-serif; font-weight:700;
+            font-size:.78rem; color:#fff; flex-shrink:0;
+        }
+        .toast-body strong { display:block; color:#111; font-size:.78rem; line-height:1.2; }
+        .toast-body span   { color:#666; font-size:.72rem; }
+        .toast-check { color:var(--green-mid); font-size:.95rem; margin-left:auto; flex-shrink:0; }
+        @keyframes toastIn  { from{opacity:0;transform:translateX(28px)} to{opacity:1;transform:translateX(0)} }
+        @keyframes toastOut { from{opacity:1;transform:translateX(0)} to{opacity:0;transform:translateX(28px)} }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+        /* ===== RESPONSIVE ===== */
+        @media(max-width:768px){
+            .hero h1            { font-size:2rem; }
+            .benefits-grid      { grid-template-columns:1fr; }
+            .pain-grid          { grid-template-columns:1fr; }
+            .method-features    { grid-template-columns:1fr; }
+            .includes-list      { grid-template-columns:1fr; }
+            .forwho-grid        { grid-template-columns:1fr; }
+            .belief-no-grid     { flex-direction:column; align-items:center; }
+            .belief-no-card     { min-width:0; width:100%; max-width:360px; }
+            .t-card             { width:290px; }
+            .guarantee-box      { padding:24px 16px; }
+            .cta-btn            { font-size:1rem; padding:18px 18px; }
+            .big-price          { font-size:2.4rem; }
+            .final-cta h2       { font-size:1.7rem; }
+            .section-title      { font-size:1.75rem; }
+            .product-card-section   { padding:0 0 32px; }
+            .product-card       { max-width:100%; border-radius:0; box-shadow:none; border-left:none; border-right:none; }
+            .product-card-body  { padding:20px 20px 24px; }
+            .includes-box       { padding:24px 20px; }
+            .closing-section h2 { font-size:1.6rem; }
+            .belief-punch       { padding:20px 18px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════ TICKER BAR ═══════════════════ -->
+<div class="ticker-bar" aria-label="Información de compra" role="marquee">
+    <div class="ticker-track">
+        <span class="ticker-item"><i class="t-icon fa-solid fa-shield-halved"></i> Pago 100% Seguro con Mercado Pago</span>
+        <span class="ticker-item"><i class="t-icon fa-solid fa-bolt"></i> 70% OFF por Tiempo Limitado</span>
+        <span class="ticker-item"><i class="t-icon fa-solid fa-envelope"></i> Acceso Inmediato por Mail</span>
+        <span class="ticker-item"><i class="t-icon fa-solid fa-leaf"></i> Método Antiinflamatorio Express — 14 Días</span>
+        <!-- <span class="ticker-item"><i class="t-icon fa-solid fa-globe"></i> COMPRÁ DESDE TODA LATAM EN TU MONEDA LOCAL</span> -->
+        <span class="ticker-item"><i class="t-icon fa-solid fa-lock"></i> PAGO 100% SEGURO — TARJETAS DE TODO EL MUNDO</span>
+        <span class="ticker-item"><i class="t-icon fa-solid fa-shield-halved"></i> Pago 100% Seguro con Mercado Pago</span>
+        <span class="ticker-item"><i class="t-icon fa-solid fa-bolt"></i> 70% OFF por Tiempo Limitado</span>
+        <span class="ticker-item"><i class="t-icon fa-solid fa-envelope"></i> Acceso Inmediato por Mail</span>
+        <span class="ticker-item"><i class="t-icon fa-solid fa-leaf"></i> Método Antiinflamatorio Express — 14 Días</span>
+        <!-- <span class="ticker-item"><i class="t-icon fa-solid fa-globe"></i> COMPRÁ DESDE TODA LATAM EN TU MONEDA LOCAL</span> -->
+        <span class="ticker-item"><i class="t-icon fa-solid fa-lock"></i> PAGO 100% SEGURO — TARJETAS DE TODO EL MUNDO</span>
+    </div>
+</div>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<header class="hero">
+    <div class="container">
+        <p class="pre-headline"><i class="fa-solid fa-fire-flame-curved"></i> Para mujeres que viven a mil y quieren sentirse bien de verdad</p>
+        <h1>
+            Desinflamá tu cuerpo en <span class="hl">14 días</span><br>
+            sin cocinar, sin dietas extremas<br>
+            y sin dedicar más de <span class="hl">5 minutos</span> por comida
+        </h1>
+        <p class="hero-sub" style="margin-bottom:16px;">Aunque vivas a mil, trabajes todo el día o ya hayas intentado "comer mejor" sin éxito.</p>
+        <p class="hero-sub" style="font-weight:600;color:var(--red-dark);">Volvé a sentirte liviana, con energía y en control de tu cuerpo sin complicarte la vida.</p>
+
+        <div class="hero-pills" style="margin-top:28px;">
+            <span class="hero-pill"><i class="fa-solid fa-check"></i> Sin cocinar</span>
+            <span class="hero-pill"><i class="fa-solid fa-check"></i> Sin dietas extremas</span>
+            <span class="hero-pill"><i class="fa-solid fa-check"></i> 5 min por comida</span>
+            <span class="hero-pill"><i class="fa-solid fa-check"></i> Resultados en 14 días</span>
+            <span class="hero-pill"><i class="fa-solid fa-check"></i> Para días caóticos</span>
+        </div>
+
+        <div class="cta-wrap">
+            <a href="#comprar" class="cta-btn"><i class="fa-solid fa-arrow-right"></i> QUIERO EMPEZAR EL RESET AHORA</a>
+            <p class="cta-sub"><i class="fa-solid fa-lock"></i> Compra segura &nbsp;·&nbsp; <i class="fa-solid fa-bolt"></i> Acceso instantáneo &nbsp;·&nbsp; <i class="fa-solid fa-shield-halved"></i> Garantía sin preguntas</p>
+        </div>
+    </div>
+</header>
+
+<!-- ═══════════════════ DOLOR / IDENTIFICACIÓN ═══════════════════ -->
+<section class="pain-section">
+    <div class="container">
+        <div class="section-label"><i class="fa-solid fa-triangle-exclamation"></i> ¿Te sentís identificada?</div>
+        <h2 class="section-title" style="text-align:left;font-size:1.8rem;margin-bottom:8px;">Si sentís que…</h2>
+        <p style="color:#666;font-size:.97rem;">No es falta de disciplina. <strong>Es que te enseñaron mal.</strong></p>
+        <div class="pain-grid">
+            <div class="pain-card">
+                <div class="pain-icon"><i class="fa-solid fa-wind"></i></div>
+                <strong>Vivís hinchada aunque no comas "tan mal"</strong>
+                <p>Te cuidas, elegís bien y aun así el abdomen siempre está pesado. No tiene sentido — y tiene solución.</p>
+            </div>
+            <div class="pain-card">
+                <div class="pain-icon"><i class="fa-solid fa-battery-quarter"></i></div>
+                <strong>Te levantás cansada y sin energía</strong>
+                <p>Dormís tus horas y amanecés igual de agotada. El café ya no alcanza. Tu cuerpo pide un reset real.</p>
+            </div>
+            <div class="pain-card">
+                <div class="pain-icon"><i class="fa-solid fa-clock"></i></div>
+                <strong>Tu digestión es lenta o pesada</strong>
+                <p>Siempre esa sensación de pesadez después de comer. Tu intestino está enviando una señal que no podés ignorar.</p>
+            </div>
+            <div class="pain-card">
+                <div class="pain-icon"><i class="fa-solid fa-arrows-rotate"></i></div>
+                <strong>Probaste mil cosas pero no lográs sostener nada</strong>
+                <p>Empezás bien, después todo se complica. No es tu culpa — los sistemas que probaste no estaban diseñados para tu vida real.</p>
+            </div>
+        </div>
+        <div style="text-align:center;margin-top:36px;">
+            <p style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.15rem;color:var(--dark);">Si te reconocés en alguna de estas situaciones:</p>
+            <p style="color:#666;font-size:.97rem;margin-top:6px;max-width:560px;margin-left:auto;margin-right:auto;">No es falta de disciplina. Es que te enseñaron que para desinflamarte necesitás sacrificio — y eso es falso.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════ ROMPER CREENCIA ═══════════════════ -->
+<section class="belief-section">
+    <div class="container">
+        <div class="section-label"><i class="fa-solid fa-bomb"></i> Rompiendo el mito</div>
+        <h2>Te hicieron creer que para desinflamarte necesitás…</h2>
+        <p class="belief-intro">Pero ninguna de estas cosas es real. Y eso ya lo sabés — por eso seguís buscando.</p>
+
+        <div class="belief-no-grid">
+            <div class="belief-no-card">
+                <i class="fa-solid fa-xmark"></i>
+                Cocinar complicado horas en la cocina
+            </div>
+            <div class="belief-no-card">
+                <i class="fa-solid fa-xmark"></i>
+                Hacer dietas estrictas e insostenibles
+            </div>
+            <div class="belief-no-card">
+                <i class="fa-solid fa-xmark"></i>
+                Tener tiempo libre que no tenés
+            </div>
+        </div>
+
+        <div class="belief-punch">
+            <p><i class="fa-solid fa-arrow-right"></i> La verdad que nadie te contó:</p>
+            <strong>El problema no es lo que comés… es cómo lo estás combinando y sosteniendo en tu día a día.</strong>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════ SOLUCIÓN / MECANISMO ÚNICO ═══════════════════ -->
+<section class="solution-section">
+    <div class="container">
+        <div class="section-label"><i class="fa-solid fa-seedling"></i> La solución</div>
+        <h2 class="section-title">Conocé el Método Reset<br>Antiinflamatorio Express™</h2>
+        <p class="section-subtitle">Un sistema simple diseñado para mujeres reales que necesitan resultados sin complicarse</p>
+
+        <div class="method-badge">
+            <i class="fa-solid fa-leaf"></i>
+            🌿 Método Reset Antiinflamatorio Express™
+        </div>
+
+        <div class="method-features">
+            <div class="method-feature">
+                <i class="fa-solid fa-check-circle"></i>
+                <span><strong>Combinaciones de alimentos</strong> listas en 5 minutos</span>
+            </div>
+            <div class="method-feature">
+                <i class="fa-solid fa-check-circle"></i>
+                <span><strong>Rutinas antiinflamatorias</strong> de mañana y noche</span>
+            </div>
+            <div class="method-feature">
+                <i class="fa-solid fa-check-circle"></i>
+                <span><strong>Estrategia "Sin Cocina"</strong> para días sin tiempo</span>
+            </div>
+            <div class="method-feature">
+                <i class="fa-solid fa-check-circle"></i>
+                <span><strong>Adaptado a días caóticos</strong> — funciona en tu vida real</span>
+            </div>
+        </div>
+
+        <div class="method-not-list">
+            <span class="method-not-item"><i class="fa-solid fa-arrow-right"></i> No es una dieta</span>
+            <span class="method-not-item"><i class="fa-solid fa-arrow-right"></i> No es un detox extremo</span>
+            <span class="method-not-item"><i class="fa-solid fa-arrow-right"></i> Es un sistema que podés sostener</span>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════ PRODUCT SHOWCASE + PRECIO ═══════════════════ -->
+<section class="product-card-section" id="comprar">
+    <div class="product-card">
+        <div class="bc-mockup" style="background:#f1ebe5;padding:0;">
+            <img src="image/MockUp_Reinicia_Tu_Cuerpo.png" alt="Reiniciá tu Cuerpo — Portada" style="width:100%;height:auto;max-height:none;object-fit:cover;display:block;">
+        </div>
+        <div class="product-card-body">
+                <div class="product-card-title">Reiniciá tu Cuerpo: El Método Natural para Desinflamarte desde Adentro<br>+ 5 Bonos</div>
+                <div class="product-price-row">
+                    <span class="product-price-old">$33.330</span>
+                    <span class="product-price-new">$9.999</span>
+                    <span class="product-off-badge">OFERTA -70% OFF</span>
+                </div>
+                <div class="product-stock"><span class="product-stock-dot"></span> Precio de lanzamiento — pocas horas disponible</div>
+                <a href="#" class="product-cta">COMPRAR AHORA — ACCESO INMEDIATO</a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════ PRICING BOX ═══════════════════ -->
+<section class="pricing-section">
+    <div class="pricing-box">
+        <div class="pricing-stars">★★★★★</div>
+        <div class="pricing-reviews"><strong>4.9/5</strong> — reservado para las primeras compradoras</div>
+
+        <div class="pricing-main-price">$9.999</div>
+        <div class="pricing-old-price">$33.330</div>
+        <a href="#" class="pricing-savings-btn"><i class="fa-solid fa-fire"></i> AHORRÁS $23.331</a>
+
+        <div class="pricing-countdown">
+            <div class="pc-header"><i class="fa-regular fa-bell"></i> Oferta de lanzamiento: ¡Últimas horas con 70% OFF!</div>
+            <div class="pc-digits">
+                <div class="pc-unit">
+                    <span class="pc-num" id="ub-h">01</span>
+                    <span class="pc-lbl">horas</span>
+                </div>
+                <span class="pc-sep">:</span>
+                <div class="pc-unit">
+                    <span class="pc-num" id="ub-m">00</span>
+                    <span class="pc-lbl">minutos</span>
+                </div>
+                <span class="pc-sep">:</span>
+                <div class="pc-unit">
+                    <span class="pc-num" id="ub-s">00</span>
+                    <span class="pc-lbl">segundos</span>
+                </div>
+            </div>
+            <div class="pc-footer">Cuando el contador llegue a cero, el precio vuelve a $33.330.</div>
+        </div>
+
+        <a href="#" class="pricing-offer-btn"><i class="fa-solid fa-leaf"></i> ¡QUIERO EMPEZAR MI RESET AHORA!</a>
+
+        <ul class="pricing-trust-list">
+            <li><i class="fa-solid fa-bolt" style="color:#f5a623"></i> Acceso inmediato por mail</li>
+            <li><i class="fa-solid fa-lock" style="color:#555"></i> Pago seguro mediante Mercado Pago</li>
+            <li><i class="fa-solid fa-square-check" style="color:#d8a7b1"></i> Garantía "Cuerpo Más Liviano o No Pagás"</li>
+        </ul>
+
+        <div class="pricing-live">
+            <div class="pricing-live-dot"></div>
+            <span><span id="pricing-live-count">12</span> mujeres viendo este método ahora</span>
+        </div>
+        <div class="pricing-urgency"><i class="fa-solid fa-fire"></i> El precio de lanzamiento está por vencer</div>
+    </div>
+</section>
+
+<!-- ═══════════════════ BENEFICIOS / RESULTADOS ═══════════════════ -->
+<section class="benefits-section">
+    <div class="container">
+        <h2 class="section-title">En solo 14 días podés empezar a notar:</h2>
+        <p class="section-subtitle">Resultados reales para mujeres reales — sin complicarte la vida</p>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-card-header">
+                    <span class="b-icon"><i class="fa-solid fa-face-smile"></i></span>
+                    <h4>Menos hinchazón</h4>
+                    <span class="b-arr">▼</span>
+                </div>
+                <div class="benefit-card-body">Ese abdomen pesado y distendido que normalizaste empieza a ceder desde los primeros días del reset. Las combinaciones de alimentos correctas hacen que tu digestión trabaje a tu favor, no en tu contra.</div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-card-header">
+                    <span class="b-icon"><i class="fa-solid fa-bolt"></i></span>
+                    <h4>Más energía durante el día</h4>
+                    <span class="b-arr">▼</span>
+                </div>
+                <div class="benefit-card-body">Sin el "bajón" de las 3 de la tarde, sin depender del café. Cuando reducís la inflamación interna, tu cuerpo deja de gastar energía "apagando incendios" y la sentís disponible para vos.</div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-card-header">
+                    <span class="b-icon"><i class="fa-solid fa-seedling"></i></span>
+                    <h4>Mejor digestión</h4>
+                    <span class="b-arr">▼</span>
+                </div>
+                <div class="benefit-card-body">Sabrás qué le sienta bien a tu cuerpo y qué no — sin necesitar hacerte estudios ni consultas costosas. La digestión se vuelve liviana, regular y sin pesadez.</div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-card-header">
+                    <span class="b-icon"><i class="fa-solid fa-feather"></i></span>
+                    <h4>Sensación de liviandad en el cuerpo</h4>
+                    <span class="b-arr">▼</span>
+                </div>
+                <div class="benefit-card-body">Esa sensación de "estar en tu cuerpo" que hace tiempo no sentís. No solo exterior — una liviandad real, de adentro hacia afuera, que notás en cómo te movés y cómo te sentís.</div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-card-header">
+                    <span class="b-icon"><i class="fa-solid fa-brain"></i></span>
+                    <h4>Más control sobre lo que comés</h4>
+                    <span class="b-arr">▼</span>
+                </div>
+                <div class="benefit-card-body">Dejarás de sentir que la comida te controla a vos. Con un sistema claro y simple, las decisiones se vuelven automáticas — sin culpa, sin ansiedad y sin privación.</div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-card-header">
+                    <span class="b-icon"><i class="fa-solid fa-clock"></i></span>
+                    <h4>Todo en 5 minutos — de verdad</h4>
+                    <span class="b-arr">▼</span>
+                </div>
+                <div class="benefit-card-body">Cada combinación del método está pensada para tu vida: sin recetas largas, sin mise en place, sin pensar demasiado. Abrís el ebook, elegís tu opción y en 5 minutos estás lista.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════ QUÉ INCLUYE ═══════════════════ -->
+<section class="includes-section">
+    <div class="container">
+        <div class="section-label"><i class="fa-solid fa-box-open"></i> Contenido del protocolo</div>
+        <h2 class="section-title">¿Qué incluye el Protocolo Reset de 14 Días?</h2>
+        <p class="section-subtitle">Todo lo que necesitás para empezar hoy mismo — sin vueltas</p>
+        <div class="includes-box">
+            <h3><i class="fa-solid fa-diamond" style="color:var(--red);margin-right:8px;"></i> Protocolo Reset de 14 Días</h3>
+            <ul class="includes-list">
+                <li><i class="fa-solid fa-check-circle"></i> Paso a paso diario para los 14 días</li>
+                <li><i class="fa-solid fa-check-circle"></i> Comidas simples (sin cocinar)</li>
+                <li><i class="fa-solid fa-check-circle"></i> Rutinas fáciles de seguir</li>
+                <li><i class="fa-solid fa-check-circle"></i> Seguimiento de síntomas incluido</li>
+                <li><i class="fa-solid fa-check-circle"></i> Combinaciones antiinflamatorias listas</li>
+                <li><i class="fa-solid fa-check-circle"></i> Estrategia para días sin tiempo</li>
+                <li><i class="fa-solid fa-check-circle"></i> Rutinas de mañana y noche</li>
+                <li><i class="fa-solid fa-check-circle"></i> Formato PDF de alta calidad — para siempre</li>
+            </ul>
+        </div>
+    </div>
+    <img src="image/MockUp_Reinicia_Tu_Cuerpo.png" alt="Reiniciá tu Cuerpo — Protocolo principal" style="width:calc(100% + 40px);margin-left:-20px;height:auto;display:block;margin-top:28px;">
+</section>
+
+<!-- ═══════════════════ TESTIMONIOS ═══════════════════ -->
+<section class="testimonials-section">
+    <div class="container">
+        <div class="section-label"><i class="fa-solid fa-comments"></i> Resultados reales</div>
+        <h2 class="section-title">Mujeres Como Vos Que Ya Lo Vivieron</h2>
+        <p class="section-subtitle">14 días y una vida real — así funciona el método</p>
+    </div>
+    <div class="carousel-wrapper">
+
+        <!-- ── Fila 1 ── -->
+        <div class="carousel-row">
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Siempre pensé que si no cocinaba no podía cuidarme. El método me demostró lo contrario. En la primera semana ya sentí menos hinchazón. Al día 14 me di cuenta que era la primera vez en años que me sentía liviana. Y todo en 5 minutos, como prometía."</p>
+                <div class="t-author">
+                    <img class="t-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Marcela A.">
+                    <div><div class="t-name">Marcela A.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Buenos Aires</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Trabajo 10 horas por día y nunca pude sostener nada. Este método fue diferente porque no me pedía tiempo que no tengo. El Plan de Emergencia 24 hs me salvó más de una vez. A los 14 días bajé 3kg y dejé de tener el abdomen inflado todo el tiempo."</p>
+                <div class="t-author">
+                    <img class="t-avatar" src="https://randomuser.me/api/portraits/women/63.jpg" alt="Valeria R.">
+                    <div><div class="t-name">Valeria R.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Córdoba</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"La Lista Anti-Hinchazón del Super cambió mi forma de comprar. Antes tardaba una hora dudando qué llevar. Ahora entro, llevo lo de la lista y sé exactamente qué hacer con eso. Simple, rápido y funciona. Mi digestión mejoró brutal."</p>
+                <div class="t-author">
+                    <img class="t-avatar" src="https://randomuser.me/api/portraits/women/26.jpg" alt="Carolina F.">
+                    <div><div class="t-name">Carolina F.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Rosario</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <!-- duplicado seamless -->
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Siempre pensé que si no cocinaba no podía cuidarme. El método me demostró lo contrario. En la primera semana ya sentí menos hinchazón. Al día 14 me di cuenta que era la primera vez en años que me sentía liviana. Y todo en 5 minutos, como prometía."</p>
+                <div class="t-author">
+                    <img class="t-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Marcela A.">
+                    <div><div class="t-name">Marcela A.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Buenos Aires</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Trabajo 10 horas por día y nunca pude sostener nada. Este método fue diferente porque no me pedía tiempo que no tengo. El Plan de Emergencia 24 hs me salvó más de una vez. A los 14 días bajé 3kg y dejé de tener el abdomen inflado todo el tiempo."</p>
+                <div class="t-author">
+                    <img class="t-avatar" src="https://randomuser.me/api/portraits/women/63.jpg" alt="Valeria R.">
+                    <div><div class="t-name">Valeria R.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Córdoba</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"La Lista Anti-Hinchazón del Super cambió mi forma de comprar. Antes tardaba una hora dudando qué llevar. Ahora entro, llevo lo de la lista y sé exactamente qué hacer con eso. Simple, rápido y funciona. Mi digestión mejoró brutal."</p>
+                <div class="t-author">
+                    <img class="t-avatar" src="https://randomuser.me/api/portraits/women/26.jpg" alt="Carolina F.">
+                    <div><div class="t-name">Carolina F.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Rosario</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Fila 2 ── -->
+        <div class="carousel-row carousel-row--right">
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Probé de todo: infusiones, dietas, apps. Siempre abandonaba al tercer día porque era muy complicado. Este método es ridículamente simple. Hice el reset completo y por primera vez en años me desperté con energía real de verdad."</p>
+                <div class="t-author">
+                    <img class="t-avatar" src="https://randomuser.me/api/portraits/women/45.jpg" alt="Laura M.">
+                    <div><div class="t-name">Laura M.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Mendoza</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Las rutinas de mañana del bono son un antes y un después. 10 minutos que cambian el día entero. Empecé el reset y al day 7 mi marido me preguntó qué estaba haciendo diferente porque me veía diferente. No cambié nada radical — solo el método."</p>
+                <div class="t-author">
+                    <img class="t-avatar" src="https://randomuser.me/api/portraits/women/57.jpg" alt="Soledad L.">
+                    <div><div class="t-name">Soledad L.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Salta</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Compré escéptica porque ya había tirado dinero en mil cosas. Pero el precio era razonable y tenía garantía. Lo apliqué los 14 días. La hinchazón bajó, el cansancio bajó y lo mejor: pude sostenerlo. Nunca había podido sostener nada. Recomendado 100%."</p>
+                <div class="t-author">
+                    <img class="t-avatar" src="https://randomuser.me/api/portraits/women/37.jpg" alt="Agustina P.">
+                    <div><div class="t-name">Agustina P.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Santa Fe</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <!-- duplicado seamless -->
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Probé de todo: infusiones, dietas, apps. Siempre abandonaba al tercer día porque era muy complicado. Este método es ridículamente simple. Hice el reset completo y por primera vez en años me desperté con energía real de verdad."</p>
+                <div class="t-author">
+                    <img class="t-avatar" src="https://randomuser.me/api/portraits/women/45.jpg" alt="Laura M.">
+                    <div><div class="t-name">Laura M.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Mendoza</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Las rutinas de mañana del bono son un antes y un después. 10 minutos que cambian el día entero. Empecé el reset y al day 7 mi marido me preguntó qué estaba haciendo diferente porque me veía diferente. No cambié nada radical — solo el método."</p>
+                <div class="t-author">
+                    <img class="t-avatar" src="https://randomuser.me/api/portraits/women/57.jpg" alt="Soledad L.">
+                    <div><div class="t-name">Soledad L.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Salta</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Compré escéptica porque ya había tirado dinero en mil cosas. Pero el precio era razonable y tenía garantía. Lo apliqué los 14 días. La hinchazón bajó, el cansancio bajó y lo mejor: pude sostenerlo. Nunca había podido sostener nada. Recomendado 100%."</p>
+                <div class="t-author">
+                    <img class="t-avatar" src="https://randomuser.me/api/portraits/women/37.jpg" alt="Agustina P.">
+                    <div><div class="t-name">Agustina P.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Santa Fe</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ═══════════════════ MID CTA ═══════════════════ -->
+<section style="background:var(--cream);padding:32px 20px;text-align:center;border-top:3px solid var(--pink-light);border-bottom:3px solid var(--pink-light);">
+    <div class="container">
+        <p style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.15rem;color:var(--text);margin-bottom:6px;">¿Ya te reconociste en alguna de estas mujeres?</p>
+        <p style="color:#777;margin-bottom:20px;font-size:.95rem;">El ebook completo + 5 bonos por un único pago de <strong style="color:var(--red);">$9.999</strong></p>
+        <a href="#comprar" class="cta-btn" style="display:inline-flex;"><i class="fa-solid fa-leaf"></i> QUIERO DESINFLAMARME SIN COMPLICARME</a>
+        <p style="margin-top:14px;font-size:.8rem;color:#aaa;"><i class="fa-solid fa-shield-halved"></i> Garantía "Cuerpo Más Liviano o No Pagás" &nbsp;·&nbsp; <i class="fa-solid fa-bolt"></i> Acceso instantáneo</p>
+    </div>
+</section>
+
+<!-- ═══════════════════ OFERTA STACK / BONOS ═══════════════════ -->
+<section class="offer-section">
+
+    <div class="offer-band">
+        <div class="container">
+            <div class="section-label"><i class="fa-solid fa-gift"></i> La oferta completa</div>
+            <h2 class="section-title">Esto No Es Solo un Ebook.</h2>
+            <p class="section-subtitle">Hoy te llevás el <strong style="color:var(--red)">Método Reset Completo</strong> con todos los bonos incluidos — sin costo adicional.</p>
+            <p style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.2rem;color:var(--dark);margin-top:28px;"><i class="fa-solid fa-box-open"></i> Todo lo que recibís hoy:</p>
+        </div>
+    </div>
+
+    <!-- CAROUSEL BONOS -->
+    <div class="offer-band">
+        <div class="container">
+            <div class="bonus-carousel" id="bonus-carousel">
+                <div class="bc-track-wrapper">
+                    <div class="bc-track" id="bc-track">
+
+                        <div class="bc-slide">
+                            <div class="bc-card">
+                                <div class="bc-mockup" style="background:#f1ebe5;">
+                                    <img src="image/MockUp_Reinicia_Tu_Cuerpo.png" alt="Protocolo Principal">
+                                </div>
+                                <div class="bc-body">
+                                    <div class="bc-name">Protocolo Principal: "Reiniciá tu Cuerpo — El Método Natural para Desinflamarte desde Adentro"</div>
+                                    <div class="bc-badge">INCLUIDO EN TU COMPRA</div>
+                                    <p class="bc-desc">El sistema completo de 14 días: paso a paso diario, combinaciones de alimentos listas en 5 minutos, estrategia sin cocina, rutinas de mañana y noche, y seguimiento de síntomas. En PDF de alta calidad, tuyo para siempre.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bc-slide">
+                            <div class="bc-card">
+                                <div class="bc-mockup" style="background:#f1ebe5;">
+                                    <img src="image/MockUp_Bono1.png" alt="Bono 1 — Qué Comer Cuando No Tenés Tiempo">
+                                </div>
+                                <div class="bc-body">
+                                    <div class="bc-name">🎁 Bono #1 — Guía "Qué Comer Cuando No Tenés Tiempo"</div>
+                                    <div class="bc-badge">GRATIS CON TU COMPRA</div>
+                                    <p class="bc-desc">Soluciones rápidas y antiinflamatorias para días caóticos. Sin planificación, sin cocinar, sin excusas. Abrís, elegís y en minutos tenés lo que necesitás — aunque el día salió completamente de control.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bc-slide">
+                            <div class="bc-card">
+                                <div class="bc-mockup" style="background:#f1ebe5;">
+                                    <img src="image/MockUp_Bono2.png" alt="Bono 2 — Rutinas Express Antiinflamación">
+                                </div>
+                                <div class="bc-body">
+                                    <div class="bc-name">🎁 Bono #2 — Rutinas Express Antiinflamación</div>
+                                    <div class="bc-badge">GRATIS CON TU COMPRA</div>
+                                    <p class="bc-desc">Rutinas de mañana y noche de menos de 10 minutos diseñadas para activar tu sistema antiinflamatorio natural. Sin equipamiento, sin experiencia previa. Empezás el día diferente y lo cerrás diferente.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bc-slide">
+                            <div class="bc-card">
+                                <div class="bc-mockup" style="background:#f1ebe5;">
+                                    <img src="image/MockUp_Bono3.png" alt="Bono 3 — Lista Anti-Hinchazón del Super">
+                                </div>
+                                <div class="bc-body">
+                                    <div class="bc-name">🎁 Bono #3 — Lista Anti-Hinchazón del Super</div>
+                                    <div class="bc-badge">GRATIS CON TU COMPRA</div>
+                                    <p class="bc-desc">La lista exacta de lo que tenés que tener en casa para el reset. Comprá sin dudar, sin perder tiempo leyendo etiquetas ni preguntarte si está bien. Simple, directa y adaptada a cualquier supermercado.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bc-slide">
+                            <div class="bc-card">
+                                <div class="bc-mockup" style="background:#f1ebe5;">
+                                    <img src="image/MockUp_Bono4.png" alt="Bono 4 — Plan de Emergencia 24 hs">
+                                </div>
+                                <div class="bc-body">
+                                    <div class="bc-name">🎁 Bono #4 — Plan de Emergencia 24 hs</div>
+                                    <div class="bc-badge">GRATIS CON TU COMPRA</div>
+                                    <p class="bc-desc">Para cuando te "descarrilaste" y necesitás volver al control rápido. Un protocolo de 24 horas para desinflarte, resetear y retomar sin culpa. El salvavidas para los días después del cumpleaños, el asado o el viaje.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bc-slide">
+                            <div class="bc-card">
+                                <div class="bc-mockup" style="background:#f1ebe5;">
+                                    <img src="image/MockUp_Bono5.png" alt="Bono 5 — Menú de 7 días sin cocina">
+                                </div>
+                                <div class="bc-body">
+                                    <div class="bc-name">🎁 Bono #5 — Menú de 7 días sin cocina</div>
+                                    <div class="bc-badge">GRATIS CON TU COMPRA</div>
+                                    <p class="bc-desc">Una semana completa de comidas antiinflamatorias sin prender el fuego. Todo listo para armar en minutos, con alimentos simples que conseguís en cualquier super. Ideal para cuando el tiempo no sobra y el cuerpo necesita un descanso.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <button class="bc-arrow bc-prev" aria-label="Anterior">&#8249;</button>
+                <button class="bc-arrow bc-next" aria-label="Siguiente">&#8250;</button>
+                <div class="bc-dots" id="bc-dots"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VALOR TOTAL -->
+    <div class="offer-band--dark" style="padding-top:0;padding-left:0;padding-right:0;">
+        <img src="image/MockUp_Pack.png" alt="Pack completo — Reiniciá tu Cuerpo + Bonos" style="width:100%;height:auto;display:block;">
+        <div class="container">
+            <div class="value-stack" style="padding-top:32px;">
+                <div class="real-value">Valor real de todo el paquete: $71.000 ARS — hoy lo llevás todo por solo:</div>
+                <div class="big-price">$9.999</div>
+                <div class="ars-price">pesos argentinos — un único pago</div>
+            </div>
+            <div class="cta-wrap" style="margin-top:28px">
+                <a href="#" class="cta-btn"><i class="fa-solid fa-arrow-right"></i> QUIERO ACCESO INMEDIATO AHORA</a>
+                <p class="cta-sub" style="color:#aaa"><i class="fa-solid fa-bolt"></i> Descarga instantánea &nbsp;·&nbsp; <i class="fa-solid fa-lock"></i> Pago 100% seguro &nbsp;·&nbsp; <i class="fa-solid fa-shield-halved"></i> Garantía incluida</p>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- ═══════════════════ PARA QUIÉN ES / NO ES ═══════════════════ -->
+<section class="forwho-section">
+    <div class="container">
+        <div class="section-label"><i class="fa-solid fa-user-check"></i> ¿Es para vos?</div>
+        <h2 class="section-title">Sé honesta con vos misma</h2>
+        <p class="section-subtitle">Este método funciona para quien está lista para un sistema real — no para soluciones mágicas.</p>
+        <div class="forwho-grid">
+            <div class="forwho-card forwho-card--yes">
+                <h3><i class="fa-solid fa-circle-check" style="color:#2e7d45;"></i> Este método es para vos si:</h3>
+                <ul class="forwho-list forwho-list--yes">
+                    <li><i class="fa-solid fa-check"></i> No tenés tiempo para cocinar y necesitás opciones reales para tu vida</li>
+                    <li><i class="fa-solid fa-check"></i> Vivís con exigencia diaria y querés algo que se adapte a eso</li>
+                    <li><i class="fa-solid fa-check"></i> Ya intentaste mejorar tus hábitos sin éxito y buscás algo diferente</li>
+                    <li><i class="fa-solid fa-check"></i> Querés algo simple, realista y efectivo — sin vueltas</li>
+                </ul>
+            </div>
+            <div class="forwho-card forwho-card--no">
+                <h3><i class="fa-solid fa-circle-xmark" style="color:#cc3333;"></i> No es para vos si:</h3>
+                <ul class="forwho-list forwho-list--no">
+                    <li><i class="fa-solid fa-xmark"></i> Buscás soluciones mágicas sin hacer absolutamente nada</li>
+                    <li><i class="fa-solid fa-xmark"></i> Querés dietas estrictas o extremas que te digan qué comer al gramo</li>
+                    <li><i class="fa-solid fa-xmark"></i> No estás dispuesta a hacer cambios simples en tu día a día</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════ FORMAS DE PAGO ═══════════════════ -->
+<section class="payment-section" style="padding-top:44px;padding-bottom:0;">
+    <div class="container" style="padding-bottom:0;">
+        <img src="image/ML.png" alt="MercadoLíder Platinum" class="ml-img" style="margin-bottom:24px;">
+    </div>
+    <div style="border-top:1px solid #d8c8c0;margin:0 -20px;"></div>
+    <div class="container" style="padding-top:24px;padding-bottom:44px;">
+        <h3>Métodos de pago</h3>
+        <img src="image/MetodosPago.png" alt="Métodos de pago: Mercado Pago, Visa, Mastercard" class="pay-img">
+        <div><span class="ssl-badge"><i class="fa-solid fa-lock"></i> Sitio protegido con SSL — Tus datos nunca se comparten con terceros</span></div>
+    </div>
+</section>
+
+<!-- ═══════════════════ GARANTÍA ═══════════════════ -->
+<section class="guarantee-section">
+    <div class="container">
+        <div class="guarantee-box">
+            <div class="g-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="section-label" style="margin-bottom:14px;"><i class="fa-solid fa-shield-halved"></i> Garantía de 14 días</div>
+            <h2>"Cuerpo Más Liviano o No Pagás"</h2>
+            <p>Aplicá el método 14 días. Si no sentís ninguno de estos cambios:</p>
+            <ul class="guarantee-list">
+                <li><i class="fa-solid fa-check-circle"></i> Menos hinchazón</li>
+                <li><i class="fa-solid fa-check-circle"></i> Más liviandad en el cuerpo</li>
+                <li><i class="fa-solid fa-check-circle"></i> Mejor digestión</li>
+            </ul>
+            <p><strong style="color:var(--red)">Te devolvemos el dinero. Sin riesgos. Sin preguntas.</strong></p>
+            <p>El reset funciona. Pero si con vos no funciona, el riesgo lo asumo <em>yo</em> — no vos.</p>
+            <p style="font-size:.88rem;color:#999"><i class="fa-solid fa-envelope"></i> Solo mandás un mail a soporte y listo. Sin formularios, sin burocracia, sin excusas.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════ CIERRE ═══════════════════ -->
+<section class="closing-section">
+    <div class="container">
+        <h2>No necesitás más información.</h2>
+        <p>Sabés que algo tiene que cambiar. Tenés el dolor, tenés las ganas — lo que te faltaba era el sistema correcto.</p>
+        <p class="closing-punch">👉 Este es ese sistema.</p>
+        <p style="font-size:.95rem;color:#555;max-width:500px;margin:0 auto;">Diseñado para tu vida real. Sin cocinar. Sin tiempo extra. Con resultados en 14 días.</p>
+    </div>
+</section>
+
+<!-- ═══════════════════ FAQ ═══════════════════ -->
+<section class="faq-section">
+    <div class="container">
+        <h2><i class="fa-solid fa-circle-question"></i> Preguntas Frecuentes</h2>
+
+        <div class="faq-item">
+            <div class="faq-q">¿Cómo recibo el ebook después de comprar? <span class="arr">▼</span></div>
+            <div class="faq-a">Inmediatamente después del pago recibís un email con el link de descarga. Acceso instantáneo, 24/7, desde cualquier dispositivo — celular, tablet o computadora. Sin esperas.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿De verdad funciona sin cocinar nada? <span class="arr">▼</span></div>
+            <div class="faq-a">Sí. El método fue diseñado específicamente para mujeres que no tienen tiempo o ganas de cocinar. Todas las combinaciones están pensadas con alimentos que se consiguen listos, se arman en 5 minutos o requieren preparación mínima. No hay recetas complicadas.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿Necesito comprar alimentos especiales o caros? <span class="arr">▼</span></div>
+            <div class="faq-a">No. El método trabaja con alimentos reales que conseguís en cualquier supermercado o verdulería. Nada de superfoods importados, suplementos costosos ni productos de marca. La Lista Anti-Hinchazón del Super (Bono #3) te dice exactamente qué comprar.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿Funciona si tengo un día a día muy caótico y sin rutinas? <span class="arr">▼</span></div>
+            <div class="faq-a">Fue diseñado exactamente para eso. La Guía "Qué comer cuando no tenés tiempo" (Bono #1) y el Plan de Emergencia 24 hs (Bono #4) son herramientas pensadas para los días que se van de control. No necesitás rutinas perfectas para que funcione.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿En cuánto tiempo veo resultados? <span class="arr">▼</span></div>
+            <div class="faq-a">Muchas mujeres reportan menos hinchazón y más energía en los primeros 5-7 días. Los cambios consolidados — digestión, liviandad, control — se afianzan al completar los 14 días del protocolo. Cada cuerpo es diferente, pero el sistema está optimizado para resultados rápidos.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿Tengo que dejar de comer lo que me gusta? <span class="arr">▼</span></div>
+            <div class="faq-a">El reset pide algunos ajustes en los 14 días — no prohibiciones de por vida. El objetivo es que aprendas qué le funciona a tu cuerpo para que después puedas comer de todo con información. No es una dieta restrictiva permanente.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿Sirve si tengo problemas de salud como tiroides, colon irritable o resistencia a la insulina? <span class="arr">▼</span></div>
+            <div class="faq-a">El método se basa en principios de alimentación antiinflamatoria que son beneficiosos para la mayoría de las personas. Sin embargo, si tenés una condición médica diagnosticada, siempre recomendamos consultarlo primero con tu médico. Este ebook es complementario, no reemplaza el consejo médico profesional.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿La garantía de devolución es real? <span class="arr">▼</span></div>
+            <div class="faq-a">100% real. Si dentro de las 2 semanas no notás ningún resultado, mandás un email a soporte y te devolvemos el dinero completo — sin preguntas, sin formularios y sin demoras. El riesgo es nuestro, no tuyo.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿Tengo acceso de por vida al material? <span class="arr">▼</span></div>
+            <div class="faq-a">Sí. El ebook y todos los bonos son tuyos para siempre — los descargás, los guardás y los usás cuando quieras, cuantas veces quieras. Sin suscripciones, sin vencimientos.</div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════ FINAL CTA ═══════════════════ -->
+<section class="final-cta">
+    <div class="container">
+        <h2>Empezá hoy tu Reset de 14 días<br>y volvé a sentirte bien en tu cuerpo.</h2>
+        <p>La hinchazón, el cansancio y esa sensación de no poder sostener nada no son "parte de la vida". Tienen solución — y el método está acá. Simple, realista y diseñado para vos.</p>
+        <div class="cta-wrap">
+            <a href="#comprar" class="cta-btn"><i class="fa-solid fa-leaf"></i> QUIERO DESINFLAMARME SIN COMPLICARME</a>
+            <p class="cta-sub light">Solo $9.999 ARS &nbsp;·&nbsp; Acceso en segundos &nbsp;·&nbsp; Garantía "Cuerpo Más Liviano o No Pagás"</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer>
+    <div class="container">
+        <p>© 2026 Vida en Calma · Todos los derechos reservados</p>
+        <p style="margin-top:4px;font-size:.72rem;color:#444;max-width:700px;margin-left:auto;margin-right:auto;">
+            Este producto es un ebook educativo de bienestar general. No constituye consejo médico, diagnóstico ni tratamiento. Ante cualquier condición de salud, consultá con un profesional médico calificado. Los resultados individuales pueden variar.
+        </p>
+        <p style="margin-top:8px">
+            <a href="#">Términos y Condiciones</a> &nbsp;·&nbsp;
+            <a href="#">Política de Privacidad</a> &nbsp;·&nbsp;
+            <a href="#">Contacto y Soporte</a>
+        </p>
+    </div>
+</footer>
+
+<!-- Botón flotante -->
+<a href="#comprar" class="float-cta"><i class="fa-solid fa-leaf"></i> EMPEZAR EL RESET</a>
+
+<!-- ═══════════════════ TOAST CONTAINER ═══════════════════ -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ═══════════════════ JAVASCRIPT ═══════════════════ -->
+<script>
+/* ─── 1. COUNTDOWN TIMER ─── */
+(function () {
+    var KEY = 'vc_reinicia_countdown_v1';
+    var end = +sessionStorage.getItem(KEY);
+    if (!end || end < Date.now()) {
+        end = Date.now() + (60 * 60) * 1000;
+        sessionStorage.setItem(KEY, end);
+    }
+    function tick() {
+        var diff = Math.max(0, end - Date.now());
+        var h = Math.floor(diff / 3600000);
+        var m = Math.floor((diff % 3600000) / 60000);
+        var s = Math.floor((diff % 60000) / 1000);
+        document.getElementById('ub-h').textContent = String(h).padStart(2, '0');
+        document.getElementById('ub-m').textContent = String(m).padStart(2, '0');
+        document.getElementById('ub-s').textContent = String(s).padStart(2, '0');
+    }
+    tick();
+    setInterval(tick, 1000);
+})();
+
+/* ─── 2. LIVE VIEWERS COUNTER ─── */
+(function () {
+    var pool = [7, 8, 9, 11, 12, 14, 16, 19];
+    function pickRandom() { return pool[Math.floor(Math.random() * pool.length)]; }
+    var els = [document.getElementById('pricing-live-count')];
+    var cur = pickRandom();
+    els.forEach(function(el){ if(el) el.textContent = cur; });
+    setInterval(function () {
+        cur = pickRandom();
+        els.forEach(function(el){ if(el) el.textContent = cur; });
+    }, 4500);
+})();
+
+/* ─── 3. PURCHASE TOAST NOTIFICATIONS ─── */
+(function () {
+    var buyers = [
+        { name: 'Valentina M.',  city: 'Buenos Aires',  ini: 'VM', bg: 'linear-gradient(135deg,#d8a7b1,#a39384)' },
+        { name: 'Lucía R.',      city: 'Córdoba',        ini: 'LR', bg: 'linear-gradient(135deg,#3d9970,#2d6a4f)' },
+        { name: 'Sofía P.',      city: 'Rosario',        ini: 'SP', bg: 'linear-gradient(135deg,#7b2d8b,#4a1060)' },
+        { name: 'Camila F.',     city: 'Mendoza',        ini: 'CF', bg: 'linear-gradient(135deg,#e07b00,#c45c00)' },
+        { name: 'Florencia B.',  city: 'Mar del Plata',  ini: 'FB', bg: 'linear-gradient(135deg,#007bc1,#005a8e)' },
+        { name: 'Martina T.',    city: 'Salta',          ini: 'MT', bg: 'linear-gradient(135deg,#1a1f71,#3546c5)' },
+        { name: 'Julieta C.',    city: 'La Plata',       ini: 'JC', bg: 'linear-gradient(135deg,#d8a7b1,#a39384)' },
+        { name: 'Paula A.',      city: 'Tucumán',        ini: 'PA', bg: 'linear-gradient(135deg,#3d9970,#2d6a4f)' },
+        { name: 'Romina G.',     city: 'Santa Fe',       ini: 'RG', bg: 'linear-gradient(135deg,#7b2d8b,#4a1060)' },
+        { name: 'Agustina L.',   city: 'Bahía Blanca',   ini: 'AL', bg: 'linear-gradient(135deg,#e07b00,#c45c00)' },
+        { name: 'Carolina V.',   city: 'San Juan',       ini: 'CV', bg: 'linear-gradient(135deg,#007bc1,#005a8e)' },
+        { name: 'Micaela H.',    city: 'Neuquén',        ini: 'MH', bg: 'linear-gradient(135deg,#1a1f71,#3546c5)' },
+        { name: 'Natalia S.',    city: 'Paraná',         ini: 'NS', bg: 'linear-gradient(135deg,#d8a7b1,#a39384)' },
+        { name: 'Gabriela M.',   city: 'Resistencia',    ini: 'GM', bg: 'linear-gradient(135deg,#3d9970,#2d6a4f)' },
+        { name: 'Verónica P.',   city: 'La Rioja',       ini: 'VP', bg: 'linear-gradient(135deg,#7b2d8b,#4a1060)' }
+    ];
+    var times = ['hace 1 min', 'hace 2 min', 'hace 3 min', 'hace 5 min', 'recién ahora', 'hace 8 min'];
+    var container = document.getElementById('toastContainer');
+    var idx = Math.floor(Math.random() * buyers.length);
+
+    function showToast() {
+        var b   = buyers[idx % buyers.length]; idx++;
+        var t   = times[Math.floor(Math.random() * times.length)];
+        var div = document.createElement('div');
+        div.className = 'toast';
+        div.innerHTML =
+            '<div class="t-av" style="background:' + b.bg + '">' + b.ini + '</div>' +
+            '<div class="toast-body">' +
+            '<strong>' + b.name + ' de ' + b.city + '</strong>' +
+            '<span>acaba de iniciar su reset — ' + t + '</span>' +
+            '</div>' +
+            '<div class="toast-check">✔</div>';
+        container.appendChild(div);
+        setTimeout(function () {
+            div.classList.add('out');
+            setTimeout(function () { div.remove(); }, 380);
+        }, 4800);
+    }
+
+    setTimeout(function () {
+        showToast();
+        setInterval(showToast, 25000 + Math.random() * 15000);
+    }, 30000);
+})();
+
+/* ─── 4. FAQ ACCORDION ─── */
+document.querySelectorAll('.faq-q').forEach(function (q) {
+    q.addEventListener('click', function () {
+        var item   = q.parentElement;
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(function (i) { i.classList.remove('open'); });
+        if (!isOpen) { item.classList.add('open'); }
+    });
+});
+
+/* ─── 5. BENEFITS ACCORDION ─── */
+document.querySelectorAll('.benefit-card').forEach(function (card) {
+    card.addEventListener('click', function () {
+        var isOpen = card.classList.contains('open');
+        document.querySelectorAll('.benefit-card').forEach(function (c) { c.classList.remove('open'); });
+        if (!isOpen) { card.classList.add('open'); }
+    });
+});
+
+/* ─── 6. CAROUSEL DRAG (testimonios) ─── */
+(function () {
+    var wrapper = document.querySelector('.carousel-wrapper');
+    if (!wrapper) return;
+    var rows = Array.from(wrapper.querySelectorAll('.carousel-row'));
+    var DURATION = 38;
+
+    function getTranslateX(el) {
+        var t = window.getComputedStyle(el).transform;
+        if (!t || t === 'none') return 0;
+        var vals = t.replace('matrix(', '').replace(')', '').split(',');
+        return parseFloat(vals[4]) || 0;
+    }
+
+    function resumeRows(finalXArr) {
+        rows.forEach(function (row, i) {
+            row.style.animation = 'none';
+            row.style.transform = 'translateX(' + finalXArr[i] + 'px)';
+            void row.offsetWidth;
+            var animName = row.classList.contains('carousel-row--right') ? 'scroll-right' : 'scroll-left';
+            row.style.animation = animName + ' ' + DURATION + 's linear infinite';
+            row.style.animationPlayState = 'running';
+        });
+    }
+
+    var isDown    = false;
+    var startX    = 0;
+    var startY    = 0;
+    var startArr  = [];
+    var direction = null;
+
+    function clientX(e) { return e.touches ? e.touches[0].clientX : e.clientX; }
+    function clientY(e) { return e.touches ? e.touches[0].clientY : e.clientY; }
+
+    wrapper.addEventListener('mouseleave', function () {
+        if (isDown) return;
+        rows.forEach(function (row) { row.style.animationPlayState = ''; });
+    });
+
+    function onStart(e) {
+        isDown    = true;
+        startX    = clientX(e);
+        startY    = clientY(e);
+        direction = null;
+        startArr  = rows.map(getTranslateX);
+    }
+
+    function onMove(e) {
+        if (!isDown) return;
+        var dx = clientX(e) - startX;
+        var dy = clientY(e) - startY;
+        if (direction === null && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
+            direction = Math.abs(dx) >= Math.abs(dy) ? 'h' : 'v';
+            if (direction === 'h') {
+                rows.forEach(function (row) { row.style.animation = 'none'; });
+                wrapper.classList.add('is-dragging');
+            }
+        }
+        if (direction === 'h') {
+            if (e.cancelable) e.preventDefault();
+            rows.forEach(function (row, i) {
+                row.style.transform = 'translateX(' + (startArr[i] + dx) + 'px)';
+            });
+        }
+    }
+
+    function onEnd() {
+        if (!isDown) return;
+        isDown = false;
+        if (direction === 'h') {
+            wrapper.classList.remove('is-dragging');
+            var finalArr = rows.map(getTranslateX);
+            resumeRows(finalArr);
+        }
+        direction = null;
+    }
+
+    wrapper.addEventListener('mousedown',  onStart);
+    window.addEventListener('mousemove',   onMove);
+    window.addEventListener('mouseup',     onEnd);
+    wrapper.addEventListener('touchstart', onStart, { passive: true });
+    window.addEventListener('touchmove',   onMove,  { passive: false });
+    window.addEventListener('touchend',    onEnd);
+})();
+
+/* ─── 7. BONUS CAROUSEL ─── */
+(function () {
+    var carousel = document.getElementById('bonus-carousel');
+    if (!carousel) return;
+    var track    = document.getElementById('bc-track');
+    var slides   = Array.from(carousel.querySelectorAll('.bc-slide'));
+    var dotsWrap = document.getElementById('bc-dots');
+    var total    = slides.length;
+    var current  = 0;
+    var autoTimer;
+    var INTERVAL = 7000;
+    var paused = false;
+
+    slides.forEach(function (_, i) {
+        var dot = document.createElement('button');
+        dot.className = 'bc-dot' + (i === 0 ? ' bc-dot--active' : '');
+        dot.setAttribute('aria-label', 'Ir a ' + (i + 1));
+        dot.addEventListener('click', function () { goTo(i); resetTimer(); });
+        dotsWrap.appendChild(dot);
+    });
+
+    function goTo(index) {
+        current = (index + total) % total;
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        carousel.querySelectorAll('.bc-dot').forEach(function (d, i) {
+            d.classList.toggle('bc-dot--active', i === current);
+        });
+    }
+
+    function next() { goTo(current + 1); }
+    function prev() { goTo(current - 1); }
+
+    function resetTimer() {
+        clearInterval(autoTimer);
+        if (!paused) autoTimer = setInterval(next, INTERVAL);
+    }
+
+    carousel.querySelector('.bc-prev').addEventListener('click', function () { prev(); resetTimer(); });
+    carousel.querySelector('.bc-next').addEventListener('click', function () { next(); resetTimer(); });
+
+    /* Swipe táctil + pausar al mantener presionado */
+    var touchStartX = 0;
+    carousel.addEventListener('touchstart', function (e) {
+        touchStartX = e.touches[0].clientX;
+        paused = true; clearInterval(autoTimer);
+    }, { passive: true });
+    carousel.addEventListener('touchend', function (e) {
+        var diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) { diff > 0 ? next() : prev(); }
+        paused = false; resetTimer();
+    }, { passive: true });
+
+    /* Pausar al mantener click del mouse */
+    carousel.addEventListener('mousedown',  function () { paused = true;  clearInterval(autoTimer); });
+    carousel.addEventListener('mouseup',    function () { paused = false; resetTimer(); });
+    carousel.addEventListener('mouseleave', function () { paused = false; resetTimer(); });
+
+    resetTimer();
+
+    /* Descripción expandible */
+    carousel.querySelectorAll('.bc-desc').forEach(function (desc) {
+        var originalText = desc.innerHTML;
+        desc.innerHTML = '<span class="bc-desc-text">' + originalText + '</span>' +
+            '<button class="bc-desc-toggle">Ver más ▾</button>';
+        var textEl   = desc.querySelector('.bc-desc-text');
+        var toggleBtn = desc.querySelector('.bc-desc-toggle');
+        toggleBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var expanded = textEl.classList.toggle('expanded');
+            toggleBtn.textContent = expanded ? 'Ver menos ▴' : 'Ver más ▾';
+        });
+    });
+})();
+</script>
+</body>
+</html>

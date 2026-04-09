@@ -1,0 +1,61 @@
+<style>
+  :root { --red: #d8a7b1; --red-dark: #b8879a; --dark: #2c1f1b; --text: #4a3a32; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  .section-label { display: inline-block; background: rgba(216,167,177,.12); color: #d8a7b1; font-family: 'Montserrat', sans-serif !important; font-size: 12px !important; font-weight: 700; padding: 4px 14px; border-radius: 20px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1.2px; }
+  .section-title { text-align: center; font-size: 34px !important; margin-bottom: 8px; font-family: 'Montserrat', sans-serif !important; }
+  .section-subtitle { text-align: center; color: #666; margin-bottom: 44px; font-size: 16px !important; }
+  .forwho-section { background: #fff; padding: 70px 20px; border-top: 1px solid #d8c8c0; }
+  .forwho-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 36px; }
+  .forwho-card { border-radius: 14px; padding: 28px 24px; }
+  .forwho-card--yes { background: linear-gradient(135deg, #f9f0f3, #f3dde4); border: 2px solid #a39384; }
+  .forwho-card--no { background: linear-gradient(135deg, #fff5f5, #ffe8e8); border: 2px solid #f5c4c4; }
+  .forwho-card h3 { font-family: 'Montserrat', sans-serif !important; font-weight: 900; font-size: 18px !important; margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+  .forwho-card--yes h3 { color: #1a6e2e; } .forwho-card--no h3 { color: #8b2020; }
+  .forwho-list { list-style: none; }
+  .forwho-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 15px !important; color: #444; margin-bottom: 12px; line-height: 1.5; }
+  .forwho-list li i { flex-shrink: 0; margin-top: 2px; font-size: 15px !important; }
+  .forwho-list--yes li i { color: #2e7d45; } .forwho-list--no li i { color: #cc3333; }
+  @media (max-width: 768px) { .forwho-grid { grid-template-columns: 1fr; } .section-title { font-size: 28px !important; } }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<section class="forwho-section">
+    <div class="container">
+        <div class="section-label"><i class="fa-solid fa-user-check"></i> ¿Es para vos?</div>
+        <h2 class="section-title">Sé honesta con vos misma</h2>
+        <p class="section-subtitle">Este método funciona para quien está lista para un sistema real — no para soluciones mágicas.</p>
+        <div class="forwho-grid">
+            <div class="forwho-card forwho-card--yes">
+                <h3><i class="fa-solid fa-circle-check" style="color:#2e7d45;"></i> Este método es para vos si:</h3>
+                <ul class="forwho-list forwho-list--yes">
+                    <li><i class="fa-solid fa-check"></i> No tenés tiempo para cocinar y necesitás opciones reales para tu vida</li>
+                    <li><i class="fa-solid fa-check"></i> Vivís con exigencia diaria y querés algo que se adapte a eso</li>
+                    <li><i class="fa-solid fa-check"></i> Ya intentaste mejorar tus hábitos sin éxito y buscás algo diferente</li>
+                    <li><i class="fa-solid fa-check"></i> Querés algo simple, realista y efectivo — sin vueltas</li>
+                </ul>
+            </div>
+            <div class="forwho-card forwho-card--no">
+                <h3><i class="fa-solid fa-circle-xmark" style="color:#cc3333;"></i> No es para vos si:</h3>
+                <ul class="forwho-list forwho-list--no">
+                    <li><i class="fa-solid fa-xmark"></i> Buscás soluciones mágicas sin hacer absolutamente nada</li>
+                    <li><i class="fa-solid fa-xmark"></i> Querés dietas estrictas o extremas que te digan qué comer al gramo</li>
+                    <li><i class="fa-solid fa-xmark"></i> No estás dispuesta a hacer cambios simples en tu día a día</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Para Quién Es",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Para Quién Es"
+    }
+  ]
+}
+{% endschema %}

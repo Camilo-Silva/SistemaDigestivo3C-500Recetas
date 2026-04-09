@@ -1,0 +1,106 @@
+<style>
+  :root { --red: #d8a7b1; --red-dark: #b8879a; --dark: #2c1f1b; --text: #4a3a32; --cream: #f1ebe5; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  .product-card-section { background: var(--cream); padding: 0 0 40px; }
+  .product-card { background: #fff; border: 1px solid #d4c4bc; border-radius: 0; max-width: 100%; margin: 0 auto; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,.09); }
+  .product-card-body { padding: 22px 24px 28px; }
+  .product-card-title { font-family: 'Montserrat', sans-serif !important; font-weight: 900; font-size: 22px !important; color: #111; margin-bottom: 14px; line-height: 1.25; }
+  .product-price-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+  .product-price-old { font-size: 15px !important; color: #999; text-decoration: line-through; }
+  .product-price-new { font-family: 'Montserrat', sans-serif !important; font-weight: 900; font-size: 26px !important; color: #111; }
+  .product-off-badge { background: var(--red); color: #fff; font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 12px !important; padding: 4px 10px; border-radius: 6px; text-transform: uppercase; letter-spacing: .5px; }
+  .product-stock { display: inline-flex; align-items: center; gap: 6px; font-size: 13px !important; font-family: 'Montserrat', sans-serif !important; font-weight: 700; color: #e65100; margin-bottom: 18px; }
+  .product-stock-dot { width: 7px; height: 7px; border-radius: 50%; background: #f44336; animation: blink 1s infinite; flex-shrink: 0; }
+  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .product-cta { display: block; background: linear-gradient(180deg, #d8a7b1, #b8879a); color: #fff; text-align: center; font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 16px !important; padding: 14px; border-radius: 8px; text-decoration: none; transition: opacity .15s; position: relative; overflow: hidden; }
+  .product-cta::after { content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent); animation: shimmer 2.5s infinite; }
+  @keyframes shimmer { 0% { left: -100%; } 100% { left: 200%; } }
+  .product-cta:hover { opacity: .88; }
+  @media (max-width: 768px) { .product-card-section { padding: 0 0 32px; } .product-card { border-radius: 0; box-shadow: none; border-left: none; border-right: none; } .product-card-body { padding: 20px 20px 24px; } }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<section class="product-card-section" id="comprar">
+    <div class="product-card">
+        <div class="bc-mockup" style="background:#f1ebe5;padding:0;">
+            <img src="{{ section.settings.product_image | img_url: 'master' }}" alt="{{ section.settings.product_image_alt }}" style="width:100%;height:auto;max-height:none;object-fit:cover;display:block;">
+        </div>
+        <div class="product-card-body">
+            <div class="product-card-title">{{ section.settings.product_title }}</div>
+            <div class="product-price-row">
+                <span class="product-price-old">{{ section.settings.price_old }}</span>
+                <span class="product-price-new">{{ section.settings.price_new }}</span>
+                <span class="product-off-badge">{{ section.settings.badge_text }}</span>
+            </div>
+            <div class="product-stock"><span class="product-stock-dot"></span> {{ section.settings.stock_text }}</div>
+            <a href="{{ section.settings.cta_url }}" class="product-cta">{{ section.settings.cta_text }}</a>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Card",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Imagen del producto"
+    },
+    {
+      "type": "text",
+      "id": "product_image_alt",
+      "label": "Alt de la imagen",
+      "default": "Reiniciá tu Cuerpo — Portada"
+    },
+    {
+      "type": "text",
+      "id": "product_title",
+      "label": "Título del producto",
+      "default": "Reiniciá tu Cuerpo: El Método Natural para Desinflamarte desde Adentro + 5 Bonos"
+    },
+    {
+      "type": "text",
+      "id": "price_old",
+      "label": "Precio tachado",
+      "default": "$33.330"
+    },
+    {
+      "type": "text",
+      "id": "price_new",
+      "label": "Precio actual",
+      "default": "$9.999"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge de oferta",
+      "default": "OFERTA -70% OFF"
+    },
+    {
+      "type": "text",
+      "id": "stock_text",
+      "label": "Texto de stock/urgencia",
+      "default": "Precio en oferta — pocas horas disponible"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "URL del botón CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Texto del botón CTA",
+      "default": "COMPRAR AHORA — ACCESO INMEDIATO"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Card"
+    }
+  ]
+}
+{% endschema %}
