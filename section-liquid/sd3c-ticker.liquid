@@ -1,0 +1,80 @@
+<style>
+  :root {
+    --verde: #7a9d8e;
+    --blanco: #FFFFFF;
+  }
+  .sd3c-ticker-wrap {
+    background: var(--verde);
+    color: var(--blanco);
+    padding: 10px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .sd3c-ticker-content {
+    display: inline-flex;
+    align-items: center;
+    animation: sd3cTicker 30s linear infinite;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    gap: 0;
+  }
+  .sd3c-ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 0 28px;
+  }
+  .sd3c-ticker-item + .sd3c-ticker-item::before {
+    content: '·';
+    margin-right: 28px;
+    opacity: .5;
+  }
+  .sd3c-t-icon { font-size: 12px; opacity: .9; }
+  @keyframes sd3cTicker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+</style>
+
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<div class="sd3c-ticker-wrap">
+  <span class="sd3c-ticker-content">
+    <span class="sd3c-ticker-item"><i class="sd3c-t-icon fa-solid fa-envelope"></i> {{ section.settings.item_1 }}</span>
+    <span class="sd3c-ticker-item"><i class="sd3c-t-icon fa-solid fa-bolt"></i> {{ section.settings.item_2 }}</span>
+    <span class="sd3c-ticker-item"><i class="sd3c-t-icon fa-solid fa-shield-halved"></i> {{ section.settings.item_3 }}</span>
+    <!-- duplicado seamless -->
+    <span class="sd3c-ticker-item"><i class="sd3c-t-icon fa-solid fa-envelope"></i> {{ section.settings.item_1 }}</span>
+    <span class="sd3c-ticker-item"><i class="sd3c-t-icon fa-solid fa-bolt"></i> {{ section.settings.item_2 }}</span>
+    <span class="sd3c-ticker-item"><i class="sd3c-t-icon fa-solid fa-shield-halved"></i> {{ section.settings.item_3 }}</span>
+  </span>
+</div>
+
+{% schema %}
+{
+  "name": "SD3C Ticker Bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "item_1",
+      "label": "Ítem 1",
+      "default": "Acceso Inmediato por Mail"
+    },
+    {
+      "type": "text",
+      "id": "item_2",
+      "label": "Ítem 2",
+      "default": "50% OFF por Tiempo Limitado"
+    },
+    {
+      "type": "text",
+      "id": "item_3",
+      "label": "Ítem 3",
+      "default": "Pago 100% Seguro con Mercado Pago"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SD3C Ticker Bar"
+    }
+  ]
+}
+{% endschema %}

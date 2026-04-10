@@ -1,0 +1,286 @@
+<style>
+  .sd3c-vsl-section {
+    background: #111827;
+    padding: 36px 20px 40px;
+    text-align: center;
+  }
+  .sd3c-vsl-headline {
+    font-size: clamp(16px, 3.2vw, 21px);
+    font-weight: 800;
+    color: #fff;
+    max-width: 540px;
+    margin: 0 auto 10px;
+    line-height: 1.38;
+  }
+  .sd3c-vsl-tap-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255,255,255,.82);
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 99px;
+    padding: 7px 18px;
+    margin-bottom: 18px;
+    animation: sd3cTapPulse 2.2s ease-in-out infinite;
+    user-select: none;
+    cursor: pointer;
+  }
+  @keyframes sd3cTapPulse { 0%,100% { opacity: 1; } 50% { opacity: .55; } }
+  .sd3c-vsl-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+    aspect-ratio: 9 / 16;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 14px 56px rgba(0,0,0,.65);
+    cursor: pointer;
+    background: #000;
+  }
+  .sd3c-vsl-video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+  .sd3c-vsl-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: rgba(0,0,0,.28);
+    transition: opacity .3s ease;
+  }
+  .sd3c-vsl-overlay.sd3c-vsl-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .sd3c-vsl-play-circle {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,.85);
+    background: rgba(255,255,255,.15);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: #fff;
+    padding-left: 6px;
+    transition: transform .2s, background .2s;
+    box-shadow: 0 4px 24px rgba(0,0,0,.5);
+  }
+  .sd3c-vsl-overlay:hover .sd3c-vsl-play-circle { transform: scale(1.1); background: rgba(255,255,255,.28); }
+  .sd3c-vsl-overlay-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255,255,255,.85);
+    background: rgba(0,0,0,.35);
+    border-radius: 99px;
+    padding: 5px 14px;
+    letter-spacing: .03em;
+  }
+  .sd3c-vsl-pause-flash {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .15s;
+  }
+  .sd3c-vsl-pause-flash.show { opacity: 1; }
+  .sd3c-vsl-pause-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(0,0,0,.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #fff;
+  }
+  .sd3c-vsl-ended-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: rgba(0,0,0,.55);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .4s ease;
+  }
+  .sd3c-vsl-ended-overlay.show { opacity: 1; pointer-events: auto; }
+  .sd3c-vsl-replay-circle {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,.85);
+    background: rgba(255,255,255,.15);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: #fff;
+    transition: transform .2s, background .2s;
+    box-shadow: 0 4px 24px rgba(0,0,0,.5);
+    cursor: pointer;
+  }
+  .sd3c-vsl-replay-circle:hover { transform: scale(1.1); background: rgba(255,255,255,.28); }
+  .sd3c-vsl-replay-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255,255,255,.9);
+    background: rgba(0,0,0,.4);
+    border-radius: 99px;
+    padding: 5px 16px;
+    cursor: pointer;
+  }
+</style>
+
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<div class="sd3c-vsl-section">
+  <p class="sd3c-vsl-headline">{{ section.settings.headline }}</p>
+  <div class="sd3c-vsl-tap-label" id="sd3cVslTapLabel" onclick="document.getElementById('sd3cVslOverlay').click()">
+    <i class="fa-solid fa-volume-high"></i> {{ section.settings.tap_label }}
+  </div>
+  <div class="sd3c-vsl-wrap" id="sd3cVslWrap">
+    <video
+      id="sd3cVslVideo"
+      class="sd3c-vsl-video"
+      src="{{ section.settings.video_url }}"
+      playsinline
+      muted
+      loop
+      preload="metadata">
+    </video>
+    <div class="sd3c-vsl-overlay" id="sd3cVslOverlay">
+      <div class="sd3c-vsl-play-circle">&#9654;</div>
+      <div class="sd3c-vsl-overlay-label">🔊 Tocá para escuchar el audio</div>
+    </div>
+    <div class="sd3c-vsl-pause-flash" id="sd3cVslPauseFlash">
+      <div class="sd3c-vsl-pause-icon">⏸</div>
+    </div>
+    <div class="sd3c-vsl-ended-overlay" id="sd3cVslEndedOverlay">
+      <div class="sd3c-vsl-replay-circle" id="sd3cVslReplayBtn">&#8635;</div>
+      <div class="sd3c-vsl-replay-label" id="sd3cVslReplayLabel">▶ Volver a ver</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var overlay      = document.getElementById('sd3cVslOverlay');
+  var video        = document.getElementById('sd3cVslVideo');
+  var tapLabel     = document.getElementById('sd3cVslTapLabel');
+  var pauseFlash   = document.getElementById('sd3cVslPauseFlash');
+  var endedOverlay = document.getElementById('sd3cVslEndedOverlay');
+  var replayBtn    = document.getElementById('sd3cVslReplayBtn');
+  var replayLabel  = document.getElementById('sd3cVslReplayLabel');
+  var wrap         = document.getElementById('sd3cVslWrap');
+  if (!overlay || !video) return;
+
+  var activated = false;
+  var flashTimer;
+
+  video.play().catch(function(){});
+
+  function activar(e) {
+    if (e) e.stopPropagation();
+    activated = true;
+    overlay.classList.add('sd3c-vsl-hidden');
+    if (tapLabel) tapLabel.style.display = 'none';
+    video.muted = false;
+    video.loop  = false;
+    video.currentTime = 0;
+    video.play();
+  }
+  overlay.addEventListener('click', activar);
+
+  wrap.addEventListener('click', function () {
+    if (!activated) return;
+    if (endedOverlay.classList.contains('show')) return;
+    if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
+      showFlash('⏸');
+    }
+  });
+
+  function showFlash(icon) {
+    if (!pauseFlash) return;
+    pauseFlash.querySelector('.sd3c-vsl-pause-icon').textContent = icon;
+    pauseFlash.classList.add('show');
+    clearTimeout(flashTimer);
+    flashTimer = setTimeout(function () { pauseFlash.classList.remove('show'); }, 700);
+  }
+
+  video.addEventListener('play', function () {
+    if (activated && !video.muted) showFlash('▶');
+  });
+
+  video.addEventListener('ended', function () {
+    endedOverlay.classList.add('show');
+  });
+
+  function doReplay(e) {
+    if (e) e.stopPropagation();
+    endedOverlay.classList.remove('show');
+    video.currentTime = 0;
+    video.play();
+  }
+  replayBtn.addEventListener('click', doReplay);
+  if (replayLabel) replayLabel.addEventListener('click', doReplay);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "SD3C VSL",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Título sobre el video",
+      "default": "✨ Mirá este video antes de continuar"
+    },
+    {
+      "type": "text",
+      "id": "tap_label",
+      "label": "Cartelito debajo del título",
+      "default": "Tocá el video para escuchar el audio"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "URL del video (ruta relativa o absoluta)",
+      "default": "image/VSL_App_Notion.mp4"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SD3C VSL"
+    }
+  ]
+}
+{% endschema %}

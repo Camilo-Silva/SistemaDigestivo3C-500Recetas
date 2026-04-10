@@ -1,0 +1,87 @@
+<style>
+  :root {
+    --verde: #7a9d8e;
+    --verde-fondo: #eaf4f0;
+    --rosa: #d8a7b1;
+    --gris-oscuro: #1C1C1E;
+    --gris-medio: #4A4A4A;
+    --blanco: #FFFFFF;
+    --fondo: #f1ebe5;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; }
+
+  .sd3c-urgencia-section { background: var(--fondo); padding: 60px 20px; }
+  .sd3c-urgencia-container { max-width: 780px; margin: 0 auto; }
+  .sd3c-urgencia-bar {
+    background: #f5e8ec;
+    border: 1.5px solid var(--rosa);
+    border-radius: 14px;
+    padding: 16px 20px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: #5a3d44;
+    margin: 0 0 28px;
+  }
+  .sd3c-urgencia-cta-wrap { text-align: center; }
+  .sd3c-urgencia-btn {
+    display: inline-block;
+    background: var(--rosa);
+    color: var(--gris-oscuro);
+    font-weight: 800;
+    font-size: 1.1rem;
+    padding: 18px 36px;
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: 0 8px 0 #c4a0aa, 0 12px 24px rgba(216,167,177,.4);
+    transition: transform .18s, box-shadow .18s;
+    margin-bottom: 16px;
+    display: inline-block;
+  }
+  .sd3c-urgencia-btn:hover { transform: translateY(3px); box-shadow: 0 5px 0 #c4a0aa, 0 8px 18px rgba(216,167,177,.3); }
+  .sd3c-urgencia-trust { display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 12px; font-size: .82rem; color: #666; }
+  .sd3c-urgencia-trust span { display: flex; align-items: center; gap: 5px; }
+</style>
+
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<section class="sd3c-urgencia-section">
+  <div class="sd3c-urgencia-container">
+    <div class="sd3c-urgencia-bar">
+      ⏳ Acceso disponible hoy con todos los bonus incluidos. El bonus de la App puede retirarse en cualquier momento.
+    </div>
+    <div class="sd3c-urgencia-cta-wrap">
+      <a href="{{ section.settings.cta_url }}" class="sd3c-urgencia-btn">{{ section.settings.cta_text }}</a>
+      <div class="sd3c-urgencia-trust">
+        <span><i class="fa-solid fa-lock"></i> Compra segura</span>
+        <span><i class="fa-solid fa-bolt"></i> Acceso inmediato</span>
+        <span><i class="fa-solid fa-shield-halved"></i> Garantía 7 días sin preguntas</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SD3C Urgencia",
+  "settings": [
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "URL del botón CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Texto del botón",
+      "default": "👉 Empieza hoy a comer mejor sin pensar"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SD3C Urgencia"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,257 @@
+<style>
+  :root {
+    --verde: #7a9d8e;
+    --verde-claro: #9dbcb3;
+    --verde-fondo: #eaf4f0;
+    --gris-oscuro: #1C1C1E;
+    --gris-medio: #4A4A4A;
+    --blanco: #FFFFFF;
+    --fondo: #f9f0f3;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.65; }
+  .sd3c-container { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+  .sd3c-tag-verde {
+    display: inline-block; background: var(--verde-fondo); color: var(--verde);
+    font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 99px; margin-bottom: 16px;
+  }
+  .sd3c-test-h2 { font-size: clamp(24px, 4vw, 36px); font-weight: 800; margin-bottom: 8px; line-height: 1.25; }
+  .sd3c-subtitulo { font-size: clamp(16px, 2vw, 20px); color: var(--gris-medio); margin-bottom: 32px; }
+  .sd3c-testimonials-section { padding: 72px 0; background: var(--fondo); overflow: hidden; }
+  .sd3c-testimonials-section > .sd3c-container { padding-bottom: 40px; }
+  .sd3c-carousel-wrapper { overflow: hidden; cursor: grab; }
+  .sd3c-carousel-wrapper.is-dragging { cursor: grabbing; user-select: none; }
+  .sd3c-carousel-row {
+    display: flex; width: max-content; gap: 20px;
+    padding: 0 10px 20px;
+    animation: sd3cScrollLeft 38s linear infinite;
+  }
+  .sd3c-carousel-row--right { animation: sd3cScrollRight 38s linear infinite; }
+  @keyframes sd3cScrollLeft  { 0% { transform: translateX(0);    } 100% { transform: translateX(-50%); } }
+  @keyframes sd3cScrollRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0);    } }
+  .sd3c-carousel-wrapper:hover .sd3c-carousel-row { animation-play-state: paused; }
+  .sd3c-t-card {
+    background: var(--blanco); border-radius: 14px; padding: 24px;
+    border: 1px solid #d4c4bc; position: relative; width: 360px;
+    flex-shrink: 0; box-shadow: 0 2px 14px rgba(122,157,142,.08);
+    transition: transform .22s ease, box-shadow .22s ease;
+  }
+  .sd3c-t-card:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 8px 24px rgba(0,0,0,.12); }
+  .sd3c-t-card::before {
+    content: '"'; position: absolute; top: -8px; left: 18px;
+    font-size: 4.5rem; color: var(--verde); font-family: Georgia, serif;
+    line-height: 1; opacity: .15;
+  }
+  .sd3c-stars { color: #f5a623; font-size: 1rem; margin-bottom: 10px; }
+  .sd3c-t-text { font-size: .93rem; color: #444; font-style: italic; margin-bottom: 16px; }
+  .sd3c-t-author { display: flex; align-items: center; gap: 11px; }
+  .sd3c-t-avatar {
+    width: 44px; height: 44px; border-radius: 50%; object-fit: cover;
+    flex-shrink: 0; overflow: hidden; border: 2px solid rgba(122,157,142,.4);
+  }
+  .sd3c-t-name { font-weight: 700; font-size: .88rem; color: #222; }
+  .sd3c-t-city { font-size: .78rem; color: #888; }
+  .sd3c-verified {
+    display: inline-flex; align-items: center; gap: 3px;
+    background: var(--verde-fondo); color: var(--verde);
+    font-size: .7rem; font-weight: 700; padding: 2px 8px;
+    border-radius: 10px; margin-top: 3px;
+  }
+  @media (max-width: 600px) { .sd3c-t-card { width: 290px; } }
+</style>
+
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<section class="sd3c-testimonials-section">
+  <div class="sd3c-container">
+    <div class="sd3c-tag-verde">✨ Resultados reales</div>
+    <h2 class="sd3c-test-h2">Personas que ya dejaron de pensar qué comer</h2>
+    <p class="sd3c-subtitulo">El sistema en acción — en vidas reales y días reales</p>
+  </div>
+  <div class="sd3c-carousel-wrapper">
+
+    <!-- Fila 1 (izquierda) -->
+    <div class="sd3c-carousel-row">
+      <div class="sd3c-t-card">
+        <div class="sd3c-stars">★★★★★</div>
+        <p class="sd3c-t-text">"Antes abría la heladera y me bloqueaba. Con el filtro por tiempo, elijo '10 min' y en segundos tengo exactamente qué cocinar. Mi digestión mejoró brutal desde la primera semana. Ya no improviso más."</p>
+        <div class="sd3c-t-author">
+          <img class="sd3c-t-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Valentina M.">
+          <div><div class="sd3c-t-name">Valentina M.</div><div class="sd3c-t-city">📍 Buenos Aires</div><div class="sd3c-verified">✔ Compra verificada</div></div>
+        </div>
+      </div>
+      <div class="sd3c-t-card">
+        <div class="sd3c-stars">★★★★★</div>
+        <p class="sd3c-t-text">"El árbol de decisión es brillante. Dos preguntas y ya sé qué cocinar. Sin pensar, sin dudar. Bajé la hinchazón que tenía después de cenar y por fin siento que como bien sin que me tome el día entero."</p>
+        <div class="sd3c-t-author">
+          <img class="sd3c-t-avatar" src="https://randomuser.me/api/portraits/women/63.jpg" alt="Florencia B.">
+          <div><div class="sd3c-t-name">Florencia B.</div><div class="sd3c-t-city">📍 Córdoba</div><div class="sd3c-verified">✔ Compra verificada</div></div>
+        </div>
+      </div>
+      <div class="sd3c-t-card">
+        <div class="sd3c-stars">★★★★★</div>
+        <p class="sd3c-t-text">"La app de Vida en Calma es increíble. Le pongo los ingredientes que tengo y me sugiere recetas al instante. Nunca más el 'no tengo nada en casa'. Y el Modo Automático me resolvió el día completo en un clic."</p>
+        <div class="sd3c-t-author">
+          <img class="sd3c-t-avatar" src="https://randomuser.me/api/portraits/women/26.jpg" alt="Luciana R.">
+          <div><div class="sd3c-t-name">Luciana R.</div><div class="sd3c-t-city">📍 Rosario</div><div class="sd3c-verified">✔ Compra verificada</div></div>
+        </div>
+      </div>
+      <!-- duplicado seamless -->
+      <div class="sd3c-t-card">
+        <div class="sd3c-stars">★★★★★</div>
+        <p class="sd3c-t-text">"Antes abría la heladera y me bloqueaba. Con el filtro por tiempo, elijo '10 min' y en segundos tengo exactamente qué cocinar. Mi digestión mejoró brutal desde la primera semana. Ya no improviso más."</p>
+        <div class="sd3c-t-author">
+          <img class="sd3c-t-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Valentina M.">
+          <div><div class="sd3c-t-name">Valentina M.</div><div class="sd3c-t-city">📍 Buenos Aires</div><div class="sd3c-verified">✔ Compra verificada</div></div>
+        </div>
+      </div>
+      <div class="sd3c-t-card">
+        <div class="sd3c-stars">★★★★★</div>
+        <p class="sd3c-t-text">"El árbol de decisión es brillante. Dos preguntas y ya sé qué cocinar. Sin pensar, sin dudar. Bajé la hinchazón que tenía después de cenar y por fin siento que como bien sin que me tome el día entero."</p>
+        <div class="sd3c-t-author">
+          <img class="sd3c-t-avatar" src="https://randomuser.me/api/portraits/women/63.jpg" alt="Florencia B.">
+          <div><div class="sd3c-t-name">Florencia B.</div><div class="sd3c-t-city">📍 Córdoba</div><div class="sd3c-verified">✔ Compra verificada</div></div>
+        </div>
+      </div>
+      <div class="sd3c-t-card">
+        <div class="sd3c-stars">★★★★★</div>
+        <p class="sd3c-t-text">"La app de Vida en Calma es increíble. Le pongo los ingredientes que tengo y me sugiere recetas al instante. Nunca más el 'no tengo nada en casa'. Y el Modo Automático me resolvió el día completo en un clic."</p>
+        <div class="sd3c-t-author">
+          <img class="sd3c-t-avatar" src="https://randomuser.me/api/portraits/women/26.jpg" alt="Luciana R.">
+          <div><div class="sd3c-t-name">Luciana R.</div><div class="sd3c-t-city">📍 Rosario</div><div class="sd3c-verified">✔ Compra verificada</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fila 2 (derecha) -->
+    <div class="sd3c-carousel-row sd3c-carousel-row--right">
+      <div class="sd3c-t-card">
+        <div class="sd3c-stars">★★★★★</div>
+        <p class="sd3c-t-text">"Tengo colon irritable y siempre tenía miedo de inflamarme. Las recetas clasificadas por necesidad digestiva fueron un antes y después. Ahora como tranquila sabiendo que cada opción cuida mi digestión."</p>
+        <div class="sd3c-t-author">
+          <img class="sd3c-t-avatar" src="https://randomuser.me/api/portraits/women/45.jpg" alt="Sofía P.">
+          <div><div class="sd3c-t-name">Sofía P.</div><div class="sd3c-t-city">📍 Mendoza</div><div class="sd3c-verified">✔ Compra verificada</div></div>
+        </div>
+      </div>
+      <div class="sd3c-t-card">
+        <div class="sd3c-stars">★★★★★</div>
+        <p class="sd3c-t-text">"Trabajo 10 horas por día. Lo que más me cambió fue el filtro de '5 minutos'. Tengo opciones concretas para cuando llego tarde y sin ganas. Sin hinchazón y sin la culpa de haber comido cualquier cosa rápida."</p>
+        <div class="sd3c-t-author">
+          <img class="sd3c-t-avatar" src="https://randomuser.me/api/portraits/women/57.jpg" alt="Carolina V.">
+          <div><div class="sd3c-t-name">Carolina V.</div><div class="sd3c-t-city">📍 Salta</div><div class="sd3c-verified">✔ Compra verificada</div></div>
+        </div>
+      </div>
+      <div class="sd3c-t-card">
+        <div class="sd3c-stars">★★★★★</div>
+        <p class="sd3c-t-text">"La plantilla Notion es una obra de arte. Filtro por tiempo, tipo de comida o ingrediente con un clic. Ya no tengo que abrir el ebook cada vez — todo está al alcance desde el celular en cualquier momento del día."</p>
+        <div class="sd3c-t-author">
+          <img class="sd3c-t-avatar" src="https://randomuser.me/api/portraits/women/37.jpg" alt="Martina L.">
+          <div><div class="sd3c-t-name">Martina L.</div><div class="sd3c-t-city">📍 Santa Fe</div><div class="sd3c-verified">✔ Compra verificada</div></div>
+        </div>
+      </div>
+      <!-- duplicado seamless -->
+      <div class="sd3c-t-card">
+        <div class="sd3c-stars">★★★★★</div>
+        <p class="sd3c-t-text">"Tengo colon irritable y siempre tenía miedo de inflamarme. Las recetas clasificadas por necesidad digestiva fueron un antes y después. Ahora como tranquila sabiendo que cada opción cuida mi digestión."</p>
+        <div class="sd3c-t-author">
+          <img class="sd3c-t-avatar" src="https://randomuser.me/api/portraits/women/45.jpg" alt="Sofía P.">
+          <div><div class="sd3c-t-name">Sofía P.</div><div class="sd3c-t-city">📍 Mendoza</div><div class="sd3c-verified">✔ Compra verificada</div></div>
+        </div>
+      </div>
+      <div class="sd3c-t-card">
+        <div class="sd3c-stars">★★★★★</div>
+        <p class="sd3c-t-text">"Trabajo 10 horas por día. Lo que más me cambió fue el filtro de '5 minutos'. Tengo opciones concretas para cuando llego tarde y sin ganas. Sin hinchazón y sin la culpa de haber comido cualquier cosa rápida."</p>
+        <div class="sd3c-t-author">
+          <img class="sd3c-t-avatar" src="https://randomuser.me/api/portraits/women/57.jpg" alt="Carolina V.">
+          <div><div class="sd3c-t-name">Carolina V.</div><div class="sd3c-t-city">📍 Salta</div><div class="sd3c-verified">✔ Compra verificada</div></div>
+        </div>
+      </div>
+      <div class="sd3c-t-card">
+        <div class="sd3c-stars">★★★★★</div>
+        <p class="sd3c-t-text">"La plantilla Notion es una obra de arte. Filtro por tiempo, tipo de comida o ingrediente con un clic. Ya no tengo que abrir el ebook cada vez — todo está al alcance desde el celular en cualquier momento del día."</p>
+        <div class="sd3c-t-author">
+          <img class="sd3c-t-avatar" src="https://randomuser.me/api/portraits/women/37.jpg" alt="Martina L.">
+          <div><div class="sd3c-t-name">Martina L.</div><div class="sd3c-t-city">📍 Santa Fe</div><div class="sd3c-verified">✔ Compra verificada</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function () {
+  var wrapper = document.querySelector('.sd3c-carousel-wrapper');
+  if (!wrapper) return;
+  var rows = Array.from(wrapper.querySelectorAll('.sd3c-carousel-row'));
+  var DURATION = 38;
+
+  function getTranslateX(el) {
+    var t = window.getComputedStyle(el).transform;
+    if (!t || t === 'none') return 0;
+    var vals = t.replace('matrix(', '').replace(')', '').split(',');
+    return parseFloat(vals[4]) || 0;
+  }
+
+  function resumeRows(finalXArr) {
+    rows.forEach(function (row, i) {
+      var isRight = row.classList.contains('sd3c-carousel-row--right');
+      var D = row.scrollWidth / 2;
+      var currentX = finalXArr[i];
+      var animName = isRight ? 'sd3cScrollRight' : 'sd3cScrollLeft';
+      var t = isRight ? DURATION * (currentX / D + 1) : -currentX * DURATION / D;
+      t = ((t % DURATION) + DURATION) % DURATION;
+      row.style.transform = '';
+      row.style.animation = animName + ' ' + DURATION + 's linear -' + t.toFixed(3) + 's infinite';
+    });
+  }
+
+  var isDown = false, startX = 0, startY = 0, startArr = [], direction = null;
+  function clientX(e) { return e.touches ? e.touches[0].clientX : e.clientX; }
+  function clientY(e) { return e.touches ? e.touches[0].clientY : e.clientY; }
+
+  wrapper.addEventListener('mouseleave', function () {
+    if (isDown) return;
+    rows.forEach(function (row) { row.style.animationPlayState = ''; });
+  });
+
+  function onStart(e) { isDown = true; startX = clientX(e); startY = clientY(e); direction = null; startArr = rows.map(getTranslateX); }
+  function onMove(e) {
+    if (!isDown) return;
+    var dx = clientX(e) - startX, dy = clientY(e) - startY;
+    if (direction === null && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
+      direction = Math.abs(dx) >= Math.abs(dy) ? 'h' : 'v';
+      if (direction === 'h') { rows.forEach(function (row) { row.style.animation = 'none'; }); wrapper.classList.add('is-dragging'); }
+    }
+    if (direction === 'h') {
+      if (e.cancelable) e.preventDefault();
+      rows.forEach(function (row, i) { row.style.transform = 'translateX(' + (startArr[i] + dx) + 'px)'; });
+    }
+  }
+  function onEnd() {
+    if (!isDown) return; isDown = false;
+    if (direction === 'h') { wrapper.classList.remove('is-dragging'); resumeRows(rows.map(getTranslateX)); }
+    direction = null;
+  }
+
+  wrapper.addEventListener('mousedown',  onStart);
+  window.addEventListener('mousemove',   onMove);
+  window.addEventListener('mouseup',     onEnd);
+  wrapper.addEventListener('touchstart', onStart, { passive: true });
+  window.addEventListener('touchmove',   onMove,  { passive: false });
+  window.addEventListener('touchend',    onEnd);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "SD3C Testimonios",
+  "settings": [],
+  "presets": [
+    {
+      "name": "SD3C Testimonios"
+    }
+  ]
+}
+{% endschema %}

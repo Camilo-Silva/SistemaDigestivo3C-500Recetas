@@ -1,0 +1,73 @@
+<style>
+  :root {
+    --verde: #7a9d8e;
+    --verde-claro: #9dbcb3;
+    --verde-fondo: #eaf4f0;
+    --rosa: #d8a7b1;
+    --gris-oscuro: #1C1C1E;
+    --gris-medio: #4A4A4A;
+    --blanco: #FFFFFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; }
+
+  .sd3c-cierre-section { background: var(--verde-fondo); color: var(--gris-oscuro); padding: 80px 20px; text-align: center; }
+  .sd3c-cierre-container { max-width: 780px; margin: 0 auto; }
+  .sd3c-cierre-section h2 { font-size: clamp(26px,4.5vw,44px); font-weight: 900; margin-bottom: 14px; line-height: 1.2; }
+  .sd3c-cierre-section p { font-size: 18px; color: var(--gris-medio); margin-bottom: 36px; max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+  .sd3c-cierre-btn {
+    display: inline-block;
+    background: var(--rosa);
+    color: var(--gris-oscuro);
+    font-weight: 800;
+    font-size: 1.1rem;
+    padding: 18px 40px;
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: 0 8px 0 #c4a0aa, 0 12px 24px rgba(216,167,177,.4);
+    transition: transform .18s, box-shadow .18s;
+    margin-bottom: 18px;
+  }
+  .sd3c-cierre-btn:hover { transform: translateY(3px); box-shadow: 0 5px 0 #c4a0aa, 0 8px 18px rgba(216,167,177,.3); }
+  .sd3c-cierre-trust { display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; font-size: .82rem; color: #666; }
+  .sd3c-cierre-trust span { display: flex; align-items: center; gap: 5px; }
+</style>
+
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<section class="sd3c-cierre-section">
+  <div class="sd3c-cierre-container">
+    <h2>No necesitás más recetas.<br>Necesitás dejar de pensar.</h2>
+    <p>Un sistema completo que resuelve el "¿qué como hoy?" para siempre: ebook, plantilla Notion y la app Vida en Calma incluidos.</p>
+    <a href="{{ section.settings.cta_url }}" class="sd3c-cierre-btn">{{ section.settings.cta_text }}</a>
+    <div class="sd3c-cierre-trust">
+      <span><i class="fa-solid fa-lock"></i> Compra segura</span>
+      <span><i class="fa-solid fa-bolt"></i> Acceso inmediato</span>
+      <span><i class="fa-solid fa-shield-halved"></i> Garantía 7 días sin preguntas</span>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SD3C Cierre",
+  "settings": [
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "URL del botón CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Texto del botón",
+      "default": "👉 Quiero acceso ahora"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SD3C Cierre"
+    }
+  ]
+}
+{% endschema %}

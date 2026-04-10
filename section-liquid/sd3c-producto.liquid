@@ -1,0 +1,112 @@
+<style>
+  :root {
+    --verde: #7a9d8e;
+    --verde-claro: #9dbcb3;
+    --verde-fondo: #eaf4f0;
+    --rosa: #d8a7b1;
+    --gris-oscuro: #1C1C1E;
+    --blanco: #FFFFFF;
+    --fondo: #f1ebe5;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; }
+  .sd3c-product-section { background: var(--fondo); padding: 0 0 40px; }
+  .sd3c-product-card {
+    background: var(--blanco); border: 1px solid #d4c4bc; border-radius: 0;
+    max-width: 100%; margin: 0 auto; overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,.09);
+  }
+  .sd3c-product-card-body { padding: 22px 24px 28px; }
+  .sd3c-product-title { font-weight: 900; font-size: 1.35rem; color: #111; margin-bottom: 14px; line-height: 1.25; }
+  .sd3c-product-price-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+  .sd3c-price-old { font-size: .95rem; color: #999; text-decoration: line-through; }
+  .sd3c-price-new { font-weight: 900; font-size: 1.6rem; color: #111; }
+  .sd3c-off-badge {
+    background: var(--rosa); color: var(--gris-oscuro); font-weight: 700;
+    font-size: .75rem; padding: 4px 10px; border-radius: 6px; text-transform: uppercase;
+  }
+  .sd3c-product-stock {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: .82rem; font-weight: 700; color: #e65100; margin-bottom: 18px;
+  }
+  .sd3c-stock-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #f44336; animation: sd3cBlink 1s infinite; flex-shrink: 0;
+  }
+  @keyframes sd3cBlink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .sd3c-product-cta-btn {
+    display: block; background: linear-gradient(180deg, #9dbcb3, #7a9d8e);
+    color: var(--blanco); text-align: center; font-weight: 700; font-size: 1rem;
+    padding: 14px; border-radius: 8px; text-decoration: none; transition: opacity .15s;
+  }
+  .sd3c-product-cta-btn:hover { opacity: .88; }
+</style>
+
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<section class="sd3c-product-section" id="comprar">
+  <div class="sd3c-product-card">
+    <div style="background:#eaf4f0;padding:0;">
+      {% if section.settings.img_producto != blank %}
+        <img src="{{ section.settings.img_producto | img_url: 'master' }}" alt="{{ section.settings.img_producto.alt | escape }}" style="width:100%;height:auto;display:block;">
+      {% endif %}
+    </div>
+    <div class="sd3c-product-card-body">
+      <div class="sd3c-product-title">{{ section.settings.product_title }}</div>
+      <div class="sd3c-product-price-row">
+        <span class="sd3c-price-old">{{ section.settings.price_old }}</span>
+        <span class="sd3c-price-new">{{ section.settings.price_new }}</span>
+        <span class="sd3c-off-badge">OFERTA ESPECIAL</span>
+      </div>
+      <div class="sd3c-product-stock"><span class="sd3c-stock-dot"></span> Precio especial — disponible por tiempo limitado</div>
+      <a href="{{ section.settings.cta_url }}" class="sd3c-product-cta-btn">{{ section.settings.cta_text }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SD3C Producto",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "img_producto",
+      "label": "Imagen del producto"
+    },
+    {
+      "type": "text",
+      "id": "product_title",
+      "label": "Título del producto",
+      "default": "Ebook Sistema Digestivo 3C | 500 Recetas + App Vida en Calma + Plantilla Notion"
+    },
+    {
+      "type": "text",
+      "id": "price_old",
+      "label": "Precio tachado",
+      "default": "$29.999"
+    },
+    {
+      "type": "text",
+      "id": "price_new",
+      "label": "Precio actual",
+      "default": "$14.999"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "URL del botón comprar"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Texto del botón comprar",
+      "default": "COMPRAR AHORA — ACCESO INMEDIATO"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SD3C Producto"
+    }
+  ]
+}
+{% endschema %}

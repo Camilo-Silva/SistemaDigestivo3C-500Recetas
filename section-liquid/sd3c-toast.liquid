@@ -1,0 +1,81 @@
+<style>
+  .sd3c-toast-container { position: fixed; bottom: 90px; left: 16px; z-index: 1000; display: flex; flex-direction: column; gap: 10px; font-family: 'Segoe UI', system-ui, sans-serif; }
+  .sd3c-toast {
+    background: #fff; border-radius: 12px; padding: 12px 14px;
+    display: flex; align-items: center; gap: 11px;
+    box-shadow: 0 6px 28px rgba(0,0,0,.16); border: 1px solid rgba(0,0,0,.08);
+    max-width: 290px; animation: sd3cToastIn .35s cubic-bezier(.18,.89,.32,1.28);
+  }
+  .sd3c-toast.out { animation: sd3cToastOut .32s ease forwards; }
+  @keyframes sd3cToastIn  { from { opacity:0; transform:translateY(16px) scale(.94); } to { opacity:1; transform:translateY(0) scale(1); } }
+  @keyframes sd3cToastOut { to   { opacity:0; transform:translateY(10px) scale(.96); } }
+  .sd3c-t-av { width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.78rem; font-weight:800; color:#fff; flex-shrink:0; }
+  .sd3c-toast-body { flex:1; }
+  .sd3c-toast-body strong { display:block; font-size:.82rem; color:#111; line-height:1.3; }
+  .sd3c-toast-body span   { display:block; font-size:.75rem; color:#888; margin-top:2px; }
+  .sd3c-toast-check { color:#3483fa; font-size:1rem; flex-shrink:0; }
+</style>
+
+<div class="sd3c-toast-container" id="sd3cToastContainer"></div>
+
+<script>
+(function () {
+  var buyers = [
+    { name: 'Valentina M.',  city: 'Buenos Aires',  ini: 'VM', bg: 'linear-gradient(135deg,#7a9d8e,#9dbcb3)' },
+    { name: 'Lucía R.',      city: 'Córdoba',        ini: 'LR', bg: 'linear-gradient(135deg,#3d9970,#2d6a4f)' },
+    { name: 'Sofía P.',      city: 'Rosario',        ini: 'SP', bg: 'linear-gradient(135deg,#d8a7b1,#c4757f)' },
+    { name: 'Camila F.',     city: 'Mendoza',        ini: 'CF', bg: 'linear-gradient(135deg,#e07b00,#c45c00)' },
+    { name: 'Florencia B.',  city: 'Mar del Plata',  ini: 'FB', bg: 'linear-gradient(135deg,#007bc1,#005a8e)' },
+    { name: 'Martina T.',    city: 'Salta',          ini: 'MT', bg: 'linear-gradient(135deg,#1a1f71,#3546c5)' },
+    { name: 'Julieta C.',    city: 'La Plata',       ini: 'JC', bg: 'linear-gradient(135deg,#7a9d8e,#9dbcb3)' },
+    { name: 'Paula A.',      city: 'Tucumán',        ini: 'PA', bg: 'linear-gradient(135deg,#3d9970,#2d6a4f)' },
+    { name: 'Romina G.',     city: 'Santa Fe',       ini: 'RG', bg: 'linear-gradient(135deg,#d8a7b1,#c4757f)' },
+    { name: 'Agustina L.',   city: 'Bahía Blanca',   ini: 'AL', bg: 'linear-gradient(135deg,#e07b00,#c45c00)' },
+    { name: 'Carolina V.',   city: 'San Juan',       ini: 'CV', bg: 'linear-gradient(135deg,#007bc1,#005a8e)' },
+    { name: 'Micaela H.',    city: 'Neuquén',        ini: 'MH', bg: 'linear-gradient(135deg,#1a1f71,#3546c5)' },
+    { name: 'Natalia S.',    city: 'Paraná',         ini: 'NS', bg: 'linear-gradient(135deg,#7a9d8e,#9dbcb3)' },
+    { name: 'Gabriela M.',   city: 'Resistencia',    ini: 'GM', bg: 'linear-gradient(135deg,#3d9970,#2d6a4f)' },
+    { name: 'Verónica P.',   city: 'La Rioja',       ini: 'VP', bg: 'linear-gradient(135deg,#d8a7b1,#c4757f)' }
+  ];
+  var times = ['hace 1 min', 'hace 2 min', 'hace 3 min', 'hace 5 min', 'recién ahora', 'hace 8 min'];
+  var container = document.getElementById('sd3cToastContainer');
+  var idx = Math.floor(Math.random() * buyers.length);
+
+  function showToast() {
+    if (!container) return;
+    var b   = buyers[idx % buyers.length]; idx++;
+    var t   = times[Math.floor(Math.random() * times.length)];
+    var div = document.createElement('div');
+    div.className = 'sd3c-toast';
+    div.innerHTML =
+      '<div class="sd3c-t-av" style="background:' + b.bg + '">' + b.ini + '</div>' +
+      '<div class="sd3c-toast-body">' +
+        '<strong>' + b.name + ' de ' + b.city + '</strong>' +
+        '<span>acaba de acceder al sistema — ' + t + '</span>' +
+      '</div>' +
+      '<div class="sd3c-toast-check">✔</div>';
+    container.appendChild(div);
+    setTimeout(function () {
+      div.classList.add('out');
+      setTimeout(function () { div.remove(); }, 380);
+    }, 4800);
+  }
+
+  setTimeout(function () {
+    showToast();
+    setInterval(showToast, 25000 + Math.random() * 15000);
+  }, 30000);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "SD3C Toast",
+  "settings": [],
+  "presets": [
+    {
+      "name": "SD3C Toast"
+    }
+  ]
+}
+{% endschema %}

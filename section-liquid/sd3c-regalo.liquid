@@ -1,0 +1,77 @@
+<style>
+  :root {
+    --verde: #7a9d8e;
+    --verde-claro: #9dbcb3;
+    --rosa: #d8a7b1;
+    --rojo: #c4757f;
+    --gris-oscuro: #1C1C1E;
+    --blanco: #FFFFFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; }
+
+  .sd3c-regalo-section { background: linear-gradient(145deg, #2a2a42, #3e3468); color: var(--blanco); padding: 80px 20px; text-align: center; }
+  .sd3c-regalo-tag { display: inline-block; background: rgba(255,255,255,.12); color: rgba(255,255,255,.9); font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; padding: 5px 16px; border-radius: 99px; margin-bottom: 18px; border: 1px solid rgba(255,255,255,.22); }
+  .sd3c-regalo-section h2 { font-size: clamp(24px,4vw,38px); margin-bottom: 10px; color: var(--blanco); font-weight: 900; }
+  .sd3c-regalo-sub { font-size: 1.05rem; color: rgba(255,255,255,.65); max-width: 520px; margin: 0 auto 36px; line-height: 1.6; }
+  .sd3c-regalo-book-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: 20px; padding: 34px 30px; max-width: 500px; margin: 0 auto 28px; }
+  .sd3c-regalo-book-card .rb-pretitle { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #f9d55b; margin-bottom: 8px; }
+  .sd3c-regalo-book-card .rb-ebook-img { width: 100%; max-width: 260px; border-radius: 12px; margin: 10px auto 18px; display: block; box-shadow: 0 6px 28px rgba(0,0,0,.35); }
+  .sd3c-regalo-book-card .rb-title { font-size: 1.3rem; font-weight: 900; margin-bottom: 5px; line-height: 1.3; }
+  .sd3c-regalo-book-card .rb-subtitle { font-size: .92rem; color: rgba(255,255,255,.6); margin-bottom: 26px; }
+  .sd3c-regalo-code-box { background: rgba(255,255,255,.08); border: 2px dashed rgba(255,255,255,.35); border-radius: 12px; padding: 20px 16px; }
+  .sd3c-regalo-code-box .rc-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: rgba(255,255,255,.5); margin-bottom: 8px; }
+  .sd3c-regalo-code-box .rc-code { font-size: 2.8rem; font-weight: 900; letter-spacing: .35em; color: #f9d55b; font-family: 'Courier New', monospace; line-height: 1; }
+  .sd3c-regalo-code-box .rc-desc { font-size: .8rem; color: rgba(255,255,255,.55); margin-top: 8px; }
+  .sd3c-regalo-cta-btn { display: inline-block; background: #f9d55b; color: #2a2a42; font-weight: 800; font-size: 1.05rem; padding: 17px 42px; border-radius: 30px; text-decoration: none; transition: transform .18s, box-shadow .18s; box-shadow: 0 6px 28px rgba(249,213,91,.35); margin-top: 8px; }
+  .sd3c-regalo-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(249,213,91,.5); }
+  .sd3c-regalo-disclaimer { font-size: .78rem; color: rgba(255,255,255,.4); margin-top: 14px; max-width: 420px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+</style>
+
+<section class="sd3c-regalo-section">
+  <div style="max-width:780px;margin:0 auto;padding:0 20px;">
+    <div class="sd3c-regalo-tag">🎁 Exclusivo para compradores</div>
+    <h2>Y además… un regalo de nuestra parte</h2>
+    <p class="sd3c-regalo-sub">Porque queremos acompañarte más allá de la alimentación, te regalamos un ebook completo para que empieces a transformar también tus hábitos y creencias limitantes.</p>
+
+    <div class="sd3c-regalo-book-card">
+      <div class="rb-pretitle">📖 Ebook digital — Para vos, sin costo</div>
+      {% if section.settings.img_ebook != blank %}
+        <img class="rb-ebook-img" src="{{ section.settings.img_ebook | img_url: 'master' }}" alt="Dejar Costumbres que te Estancan — Ebook">
+      {% endif %}
+      <div class="rb-title">Dejar Costumbres que te Estancan</div>
+      <div class="rb-subtitle">Libertáte de hábitos limitantes y transforma tu vida</div>
+      <div class="sd3c-regalo-code-box">
+        <div class="rc-label">Tu código de descuento</div>
+        <div class="rc-code">VIDA</div>
+        <div class="rc-desc">100% de descuento · Acceso gratuito · Solo para vos</div>
+      </div>
+    </div>
+
+    <a href="{{ section.settings.cta_url }}" class="sd3c-regalo-cta-btn">🎁 Quiero canjear mi regalo →</a>
+    <p class="sd3c-regalo-disclaimer">Al hacer clic serás redirigida a nuestros productos. Allí encontrarás las instrucciones para aplicar el código <strong style="color:#f9d55b;">VIDA</strong> y descargar tu ebook gratis.</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SD3C Regalo",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "img_ebook",
+      "label": "Imagen portada ebook"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "URL botón canjear regalo"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SD3C Regalo"
+    }
+  ]
+}
+{% endschema %}

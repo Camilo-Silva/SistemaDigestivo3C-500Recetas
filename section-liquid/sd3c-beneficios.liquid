@@ -1,0 +1,88 @@
+<style>
+  :root {
+    --verde: #7a9d8e;
+    --verde-claro: #9dbcb3;
+    --gris-oscuro: #1C1C1E;
+    --gris-medio: #4A4A4A;
+    --blanco: #FFFFFF;
+    --fondo: #f1ebe5;
+    --radio: 14px;
+    --sombra: 0 4px 24px rgba(122,157,142,.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.65; }
+  .sd3c-container { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+  .sd3c-seccion { padding: 72px 0; background: var(--fondo); }
+  .sd3c-tag-verde {
+    display: inline-block; background: #eaf4f0; color: var(--verde);
+    font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 99px; margin-bottom: 16px;
+  }
+  .sd3c-ben-h2 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; margin-bottom: 16px; line-height: 1.25; text-align: center; }
+  .sd3c-beneficios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px;
+    margin-top: 36px;
+  }
+  .sd3c-ben-item {
+    background: var(--blanco);
+    border-radius: var(--radio);
+    padding: 22px 18px;
+    box-shadow: var(--sombra);
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .sd3c-ben-item .ico { font-size: 28px; flex-shrink: 0; }
+  .sd3c-ben-item p { font-size: 15px; font-weight: 600; }
+  .texto-centro { text-align: center; }
+  /* Reveal stagger */
+  .sd3c-reveal-stagger > * { opacity: 0; transform: translateY(22px); transition: opacity .45s ease, transform .45s ease; }
+  .sd3c-reveal-stagger.visible > *:nth-child(1) { opacity:1; transform:translateY(0); transition-delay:.05s; }
+  .sd3c-reveal-stagger.visible > *:nth-child(2) { opacity:1; transform:translateY(0); transition-delay:.13s; }
+  .sd3c-reveal-stagger.visible > *:nth-child(3) { opacity:1; transform:translateY(0); transition-delay:.21s; }
+  .sd3c-reveal-stagger.visible > *:nth-child(4) { opacity:1; transform:translateY(0); transition-delay:.29s; }
+  .sd3c-reveal-stagger.visible > *:nth-child(5) { opacity:1; transform:translateY(0); transition-delay:.37s; }
+  .sd3c-reveal-stagger.visible > *:nth-child(6) { opacity:1; transform:translateY(0); transition-delay:.45s; }
+</style>
+
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<section class="sd3c-seccion">
+  <div class="sd3c-container texto-centro">
+    <div class="sd3c-tag-verde">Resultados reales</div>
+    <h2 class="sd3c-ben-h2">Con este sistema vas a…</h2>
+    <div class="sd3c-beneficios-grid sd3c-reveal-stagger">
+      <div class="sd3c-ben-item"><span class="ico">🥗</span><p>Comer mejor sin perder tiempo</p></div>
+      <div class="sd3c-ben-item"><span class="ico">🌬</span><p>Reducir hinchazón, gases y pesadez</p></div>
+      <div class="sd3c-ben-item"><span class="ico">💡</span><p>Ahorrar energía mental (clave)</p></div>
+      <div class="sd3c-ben-item"><span class="ico">🚫</span><p>Dejar de improvisar todos los días</p></div>
+      <div class="sd3c-ben-item"><span class="ico">✨</span><p>Sentirte liviana y en control</p></div>
+      <div class="sd3c-ben-item"><span class="ico">🎯</span><p>Tener claridad total sobre qué comer</p></div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.sd3c-reveal-stagger').forEach(function (el) { obs.observe(el); });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "SD3C Beneficios",
+  "settings": [],
+  "presets": [
+    {
+      "name": "SD3C Beneficios"
+    }
+  ]
+}
+{% endschema %}

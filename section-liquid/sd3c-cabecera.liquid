@@ -1,0 +1,28 @@
+<style>
+  .sd3c-cabecera { width: 100%; line-height: 0; }
+  .sd3c-cabecera img { width: 100%; height: auto; display: block; }
+</style>
+
+<div class="sd3c-cabecera">
+  {% if section.settings.img_cabecera != blank %}
+    <img src="{{ section.settings.img_cabecera | img_url: 'master' }}" alt="{{ section.settings.img_cabecera.alt | escape }}" />
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "SD3C Cabecera",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "img_cabecera",
+      "label": "Imagen cabecera (full width)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SD3C Cabecera"
+    }
+  ]
+}
+{% endschema %}

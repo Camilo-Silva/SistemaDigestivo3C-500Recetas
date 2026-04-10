@@ -1,0 +1,52 @@
+<style>
+  :root { --gris-oscuro: #1C1C1E; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; }
+
+  .sd3c-footer { background: var(--gris-oscuro, #1C1C1E); color: rgba(255,255,255,.5); text-align: center; padding: 28px 20px; font-size: 13px; }
+  .sd3c-footer a { color: rgba(255,255,255,.6); text-decoration: underline; }
+  .sd3c-footer a:hover { color: rgba(255,255,255,.85); }
+</style>
+
+<footer class="sd3c-footer">
+  <p>© {{ section.settings.anio }} {{ section.settings.brand }} · Todos los derechos reservados</p>
+  <p style="margin-top:6px;">
+    <a href="{{ section.settings.url_privacidad }}">Política de privacidad</a> ·
+    <a href="{{ section.settings.url_terminos }}">Términos y condiciones</a>
+  </p>
+</footer>
+
+{% schema %}
+{
+  "name": "SD3C Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand",
+      "label": "Nombre de marca",
+      "default": "Vida en Calma"
+    },
+    {
+      "type": "text",
+      "id": "anio",
+      "label": "Año",
+      "default": "2026"
+    },
+    {
+      "type": "url",
+      "id": "url_privacidad",
+      "label": "URL política de privacidad"
+    },
+    {
+      "type": "url",
+      "id": "url_terminos",
+      "label": "URL términos y condiciones"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SD3C Footer"
+    }
+  ]
+}
+{% endschema %}

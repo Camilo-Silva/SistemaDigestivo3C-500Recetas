@@ -1,0 +1,61 @@
+<style>
+  :root {
+    --rosa: #d8a7b1;
+    --gris-oscuro: #1C1C1E;
+  }
+  @keyframes sd3cFloatPulse {
+    0%,100% { transform: translateX(-50%) scale(1);    box-shadow: 0 8px 32px rgba(0,0,0,.22); }
+    50%     { transform: translateX(-50%) scale(1.05); box-shadow: 0 12px 40px rgba(0,0,0,.32); }
+  }
+  .sd3c-float-cta {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    width: min(460px, calc(100% - 32px));
+    background: var(--rosa);
+    color: var(--gris-oscuro);
+    text-align: center;
+    font-size: 16px;
+    font-weight: 800;
+    border-radius: 99px;
+    padding: 16px 28px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.22);
+    cursor: pointer;
+    text-decoration: none;
+    animation: sd3cFloatPulse 2s ease-in-out infinite;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+  }
+  .sd3c-float-cta:hover {
+    animation: none;
+    transform: translateX(-50%) scale(1.07) translateY(-2px);
+    box-shadow: 0 14px 44px rgba(0,0,0,.35);
+  }
+</style>
+
+<a href="{{ section.settings.cta_url }}" class="sd3c-float-cta">{{ section.settings.cta_text }}</a>
+
+{% schema %}
+{
+  "name": "SD3C Float CTA",
+  "settings": [
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "URL del botón flotante"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Texto del botón",
+      "default": "💚 COMPRAR AHORA — 50% OFF 💚"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SD3C Float CTA"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,196 @@
+<style>
+  :root {
+    --verde: #7a9d8e;
+    --verde-claro: #9dbcb3;
+    --verde-fondo: #eaf4f0;
+    --rosa: #d8a7b1;
+    --rojo: #c4757f;
+    --gris-oscuro: #1C1C1E;
+    --gris-medio: #4A4A4A;
+    --blanco: #FFFFFF;
+    --radio: 14px;
+    --sombra: 0 4px 24px rgba(122,157,142,.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.65; }
+  .sd3c-container { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+  .sd3c-seccion-gris { background: #ede8e2; padding: 72px 0; }
+  .sd3c-tag-verde {
+    display: inline-block; background: var(--verde-fondo); color: var(--verde);
+    font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 99px; margin-bottom: 16px;
+  }
+  .sd3c-incl-h2 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; margin-bottom: 16px; line-height: 1.25; }
+  .sd3c-subtitulo { font-size: clamp(16px, 2vw, 20px); color: var(--gris-medio); margin-bottom: 32px; }
+  .sd3c-incluye-v2 { display: flex; flex-direction: column; gap: 18px; margin-top: 36px; }
+  .sd3c-iv2-group { background: var(--blanco); border-radius: 14px; overflow: hidden; box-shadow: var(--sombra); }
+  .sd3c-iv2-group-header {
+    display: flex; align-items: center; gap: 12px;
+    padding: 13px 20px; font-weight: 800; font-size: .82rem;
+    letter-spacing: .07em; text-transform: uppercase;
+  }
+  .sd3c-iv2-group-header.principal { background: var(--verde); color: var(--blanco); }
+  .sd3c-iv2-group-header.bonus     { background: #eaf4f0; color: var(--verde); }
+  .sd3c-iv2-group-header.premium   { background: linear-gradient(90deg, #f5e8ec, #f5e4e6); color: var(--rojo); }
+  .sd3c-iv2-group-header.regalo    { background: linear-gradient(90deg, #2a2a42, #3e3468); color: #f9d55b; }
+  .sd3c-iv2-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 14px 20px; border-top: 1px solid #f0e8e2;
+  }
+  .sd3c-iv2-item:first-of-type { border-top: none; }
+  .sd3c-iv2-check { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+  .sd3c-iv2-item strong { display: block; font-size: .9rem; color: #111; margin-bottom: 2px; line-height: 1.3; }
+  .sd3c-iv2-item span  { font-size: .8rem; color: #999; line-height: 1.4; }
+  .sd3c-iv2-badge {
+    display: inline-block; font-size: .65rem; font-weight: 800;
+    letter-spacing: .06em; text-transform: uppercase; border-radius: 99px;
+    padding: 2px 8px; margin-left: 6px; vertical-align: middle;
+  }
+  .sd3c-iv2-badge--verde { background: var(--verde-fondo); color: var(--verde); border: 1px solid var(--verde-claro); }
+  .sd3c-iv2-badge--rosa  { background: #f5e4e6; color: var(--rojo); }
+  .sd3c-iv2-badge--gold  { background: #fdf3d0; color: #9a7a00; }
+  .sd3c-iv2-total-row {
+    background: var(--verde); color: var(--blanco);
+    border-radius: 14px; padding: 18px 22px;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    gap: 10px; margin-top: 6px;
+  }
+  .sd3c-iv2-total-row .iv2-label { font-size: .85rem; opacity: .82; }
+  .sd3c-iv2-total-row .iv2-val   { font-size: 1.5rem; font-weight: 900; }
+  /* Reveal */
+  .sd3c-reveal { opacity: 0; transform: translateY(28px); transition: opacity .55s ease, transform .55s ease; }
+  .sd3c-reveal.visible { opacity: 1; transform: translateY(0); }
+  .sd3c-reveal-stagger > * { opacity: 0; transform: translateY(22px); transition: opacity .45s ease, transform .45s ease; }
+  .sd3c-reveal-stagger.visible > *:nth-child(1) { opacity:1; transform:translateY(0); transition-delay:.05s; }
+  .sd3c-reveal-stagger.visible > *:nth-child(2) { opacity:1; transform:translateY(0); transition-delay:.13s; }
+  .sd3c-reveal-stagger.visible > *:nth-child(3) { opacity:1; transform:translateY(0); transition-delay:.21s; }
+  .sd3c-reveal-stagger.visible > *:nth-child(4) { opacity:1; transform:translateY(0); transition-delay:.29s; }
+</style>
+
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<section class="sd3c-seccion-gris" id="oferta">
+  <div class="sd3c-container">
+    <div class="sd3c-tag-verde">Qué recibís</div>
+    <h2 class="sd3c-incl-h2">Todo lo que entra en tu acceso</h2>
+    <p class="sd3c-subtitulo">Un sistema completo, no solo un archivo. Esto es exactamente lo que descargás el día que comprás:</p>
+
+    <div class="sd3c-incluye-v2 sd3c-reveal-stagger">
+
+      <div class="sd3c-iv2-group">
+        <div class="sd3c-iv2-group-header principal">📚 Producto principal</div>
+        <div class="sd3c-iv2-item">
+          <span class="sd3c-iv2-check" style="color:var(--verde);">✔</span>
+          <div>
+            <strong>Sistema Digestivo 3C — Ebook completo (PDF) <span class="sd3c-iv2-badge sd3c-iv2-badge--verde">PRINCIPAL</span></strong>
+            <span>El método Claro, Calmante y Conveniente. 500 recetas organizadas por tiempo (5, 10 o 20 min), momento del día y necesidad digestiva. Incluye árbol de decisión y combinaciones de día y semana completos.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sd3c-iv2-group">
+        <div class="sd3c-iv2-group-header bonus">🎁 Bonos incluidos sin costo adicional</div>
+        <div class="sd3c-iv2-item">
+          <span class="sd3c-iv2-check" style="color:var(--verde);">✔</span>
+          <div>
+            <strong>Plantilla Notion con las 500 recetas <span class="sd3c-iv2-badge sd3c-iv2-badge--verde">SUPER BONO</span></strong>
+            <span>Todas las recetas en una base de datos filtrable. Por tiempo, tipo de comida o ingrediente — en un clic, desde cualquier dispositivo.</span>
+          </div>
+        </div>
+        <div class="sd3c-iv2-item">
+          <span class="sd3c-iv2-check" style="color:var(--rojo);">✔</span>
+          <div>
+            <strong>App Vida en Calma — Acceso completo <span class="sd3c-iv2-badge sd3c-iv2-badge--rosa">PREMIUM EXCLUSIVO</span></strong>
+            <span>Filtros inteligentes, modo "¿qué cocino con esto?", un clic para elegir, modo automático de día completo y lista de mercado por días. La herramienta que más tiempo te ahorra.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sd3c-iv2-group">
+        <div class="sd3c-iv2-group-header premium">⭐ 6 productos extras — valor {{ section.settings.valor_extras }}</div>
+        <div class="sd3c-iv2-item">
+          <span class="sd3c-iv2-check" style="color:var(--rojo);">✔</span>
+          <div><strong>Reiniciá tu Cuerpo — Ebook completo (14 días)</strong><span>El método natural para desinflamarte desde adentro. Paso a paso diario, rutinas express y seguimiento de síntomas.</span></div>
+        </div>
+        <div class="sd3c-iv2-item">
+          <span class="sd3c-iv2-check" style="color:var(--rojo);">✔</span>
+          <div><strong>Guía: Qué Comer Cuando No Tenés Tiempo</strong><span>Soluciones antiinflamatorias rápidas para días caóticos, sin planificar y sin cocinar.</span></div>
+        </div>
+        <div class="sd3c-iv2-item">
+          <span class="sd3c-iv2-check" style="color:var(--rojo);">✔</span>
+          <div><strong>Rutinas Express Antiinflamación</strong><span>Rutinas de mañana y noche de menos de 10 minutos para activar tu sistema natural.</span></div>
+        </div>
+        <div class="sd3c-iv2-item">
+          <span class="sd3c-iv2-check" style="color:var(--rojo);">✔</span>
+          <div><strong>Lista Anti-Hinchazón del Super + Plan de Emergencia 24 hs + Menú 7 días sin cocina</strong><span>Tres guías prácticas para tener siempre una salida lista.</span></div>
+        </div>
+      </div>
+
+      <div class="sd3c-iv2-group">
+        <div class="sd3c-iv2-group-header regalo">🎁 Regalo exclusivo para compradores</div>
+        <div class="sd3c-iv2-item">
+          <span class="sd3c-iv2-check" style="color:#f9d55b;">✔</span>
+          <div>
+            <strong>Dejar Costumbres que te Estancan — Ebook <span class="sd3c-iv2-badge sd3c-iv2-badge--gold">CODIGO = VIDA</span></strong>
+            <span>Libertate de hábitos limitantes y transforma tu vida. Lo recibís gratis con el código VIDA, con instrucciones incluidas al momento de comprar.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="sd3c-iv2-total-row sd3c-reveal">
+      <div style="text-align:center;">
+        <div class="iv2-label">Valor total de todo lo que recibís:</div>
+        <div class="iv2-val"><s style="opacity:.55;font-size:1.1rem;font-weight:600;">{{ section.settings.valor_total }}</s></div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:.72rem;opacity:.72;text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px;">Todo incluido — hoy pagás solo</div>
+        <div style="font-size:2rem;font-weight:900;line-height:1;">{{ section.settings.precio_final }}</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function () {
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.sd3c-reveal, .sd3c-reveal-stagger').forEach(function (el) { obs.observe(el); });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "SD3C Incluye",
+  "settings": [
+    {
+      "type": "text",
+      "id": "valor_extras",
+      "label": "Valor 6 productos extras",
+      "default": "$89.940"
+    },
+    {
+      "type": "text",
+      "id": "valor_total",
+      "label": "Valor total tachado",
+      "default": "$120.000"
+    },
+    {
+      "type": "text",
+      "id": "precio_final",
+      "label": "Precio final (hoy pagás)",
+      "default": "$14.999"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SD3C Incluye"
+    }
+  ]
+}
+{% endschema %}

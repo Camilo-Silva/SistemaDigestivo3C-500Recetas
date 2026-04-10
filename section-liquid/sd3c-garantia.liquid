@@ -1,0 +1,76 @@
+<style>
+  :root {
+    --verde: #7a9d8e;
+    --verde-claro: #9dbcb3;
+    --verde-fondo: #eaf4f0;
+    --gris-oscuro: #1C1C1E;
+    --gris-medio: #4A4A4A;
+    --gris-suave: #a39384;
+    --blanco: #FFFFFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; }
+
+  .sd3c-garantia-section { background: var(--verde-fondo); padding: 72px 20px; }
+  .sd3c-garantia-box {
+    border: 3px solid var(--verde);
+    border-radius: 20px;
+    padding: 40px 32px;
+    text-align: center;
+    background: var(--blanco);
+    max-width: 580px;
+    margin: 0 auto;
+    box-shadow: 0 4px 24px rgba(122,157,142,.12);
+  }
+  .sd3c-garantia-img { width: 200px; height: auto; margin: 0 auto 16px; display: block; }
+  .sd3c-garantia-box h3 { color: var(--verde); font-size: clamp(20px,3vw,26px); margin-bottom: 12px; }
+  .sd3c-garantia-box p { color: var(--gris-medio); margin-top: 12px; font-size: 16px; line-height: 1.6; }
+  .sd3c-garantia-box .g-precio { margin-top: 12px; font-weight: 700; color: var(--verde); font-size: 18px; }
+  .sd3c-garantia-box .g-nota { margin-top: 8px; font-size: 13px; color: var(--gris-suave); }
+
+  .sd3c-garantia-reveal { opacity: 0; transform: translateY(20px); transition: opacity .55s, transform .55s; }
+  .sd3c-garantia-reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+
+<section class="sd3c-garantia-section">
+  <div class="sd3c-garantia-box sd3c-garantia-reveal">
+    {% if section.settings.img_garantia != blank %}
+      <img class="sd3c-garantia-img" src="{{ section.settings.img_garantia | img_url: 'master' }}" alt="Garantía 7 días">
+    {% endif %}
+    <h3>Probalo sin riesgo</h3>
+    <p>Si en los primeros <strong>7 días</strong> no sentís más claridad, menos estrés y mayor facilidad para decidir qué comer…</p>
+    <p class="g-precio">Te devolvemos el 100% de tu dinero.</p>
+    <p class="g-nota">Sin preguntas, sin complicaciones.</p>
+  </div>
+</section>
+
+<script>
+(function () {
+  var el = document.querySelector('.sd3c-garantia-reveal');
+  if (!el) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  io.observe(el);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "SD3C Garantía",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "img_garantia",
+      "label": "Imagen badge garantía"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SD3C Garantía"
+    }
+  ]
+}
+{% endschema %}

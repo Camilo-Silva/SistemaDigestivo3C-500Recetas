@@ -1,0 +1,96 @@
+<style>
+  :root {
+    --verde: #7a9d8e;
+    --verde-claro: #9dbcb3;
+    --verde-fondo: #eaf4f0;
+    --rosa: #d8a7b1;
+    --rojo: #c4757f;
+    --gris-oscuro: #1C1C1E;
+    --gris-medio: #4A4A4A;
+    --blanco: #FFFFFF;
+    --fondo: #f1ebe5;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; }
+
+  .sd3c-forwho-section { background: var(--fondo); padding: 72px 20px; }
+  .sd3c-forwho-container { max-width: 780px; margin: 0 auto; }
+  .sd3c-forwho-tag { display: inline-block; background: var(--verde-fondo); color: var(--verde); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 12px; border-radius: 99px; margin-bottom: 16px; }
+  .sd3c-forwho-heading { font-size: clamp(22px,4vw,34px); font-weight: 900; margin-bottom: 8px; }
+  .sd3c-forwho-sub { font-size: clamp(15px,2vw,18px); color: var(--gris-medio); margin-bottom: 36px; }
+  .sd3c-forwho-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .sd3c-forwho-card { background: var(--blanco); border-radius: 16px; padding: 28px 24px; border: 1px solid #d4c4bc; }
+  .sd3c-forwho-card h3 { font-size: 1.05rem; font-weight: 800; margin-bottom: 18px; line-height: 1.35; }
+  .sd3c-forwho-card--yes { border-top: 4px solid var(--verde); }
+  .sd3c-forwho-card--no  { border-top: 4px solid var(--rojo); }
+  .sd3c-forwho-list { list-style: none; }
+  .sd3c-forwho-list li { font-size: .88rem; color: var(--gris-medio); padding: 8px 0; display: flex; align-items: flex-start; gap: 10px; border-bottom: 1px solid #f0e8e3; line-height: 1.45; }
+  .sd3c-forwho-list li:last-child { border-bottom: none; }
+  .sd3c-fwi-yes { color: var(--verde); font-weight: 800; flex-shrink: 0; }
+  .sd3c-fwi-no  { color: var(--rojo);  font-weight: 800; flex-shrink: 0; }
+
+  .sd3c-forwho-reveal { opacity: 0; transform: translateY(20px); transition: opacity .5s, transform .5s; }
+  .sd3c-forwho-reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 600px) {
+    .sd3c-forwho-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<section class="sd3c-forwho-section">
+  <div class="sd3c-forwho-container">
+    <div class="sd3c-forwho-tag">¿Es para vos?</div>
+    <h2 class="sd3c-forwho-heading">Sé honesta con vos misma</h2>
+    <p class="sd3c-forwho-sub">Este sistema funciona para quienes quieren resultados reales — no para quienes buscan magia sin hacer nada.</p>
+    <div class="sd3c-forwho-grid">
+
+      <div class="sd3c-forwho-card sd3c-forwho-card--yes sd3c-forwho-reveal">
+        <h3>✅ Este sistema es para vos si:</h3>
+        <ul class="sd3c-forwho-list">
+          <li><span class="sd3c-fwi-yes">✔</span> Abrís la heladera y no sabés qué cocinar todos los días</li>
+          <li><span class="sd3c-fwi-yes">✔</span> Terminás comiendo cualquier cosa rápida que te cae mal</li>
+          <li><span class="sd3c-fwi-yes">✔</span> Querés comer mejor pero sin perder tiempo pensando</li>
+          <li><span class="sd3c-fwi-yes">✔</span> Buscás recetas organizadas según tu tiempo y tu situación real</li>
+          <li><span class="sd3c-fwi-yes">✔</span> Sentís hinchazón y querés saber exactamente qué comer</li>
+        </ul>
+      </div>
+
+      <div class="sd3c-forwho-card sd3c-forwho-card--no sd3c-forwho-reveal">
+        <h3>❌ No es para vos si:</h3>
+        <ul class="sd3c-forwho-list">
+          <li><span class="sd3c-fwi-no">✗</span> Buscás una dieta rígida que te diga qué comer al gramo</li>
+          <li><span class="sd3c-fwi-no">✗</span> No estás dispuesta a dedicar ni 5 minutos a cocinar</li>
+          <li><span class="sd3c-fwi-no">✗</span> Esperás resultados sin ningún tipo de cambio en tus hábitos</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var items = document.querySelectorAll('.sd3c-forwho-reveal');
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e, i) {
+      if (e.isIntersecting) {
+        setTimeout(function () { e.target.classList.add('visible'); }, i * 180);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  items.forEach(function (el) { io.observe(el); });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "SD3C Para Quién",
+  "settings": [],
+  "presets": [
+    {
+      "name": "SD3C Para Quién"
+    }
+  ]
+}
+{% endschema %}

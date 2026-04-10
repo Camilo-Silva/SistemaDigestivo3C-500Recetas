@@ -1,0 +1,121 @@
+<style>
+  :root {
+    --verde: #7a9d8e;
+    --verde-claro: #9dbcb3;
+    --verde-fondo: #eaf4f0;
+    --gris-oscuro: #1C1C1E;
+    --gris-medio: #4A4A4A;
+    --blanco: #FFFFFF;
+    --fondo: #f1ebe5;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; }
+
+  .sd3c-faq-section { background: var(--fondo); padding: 72px 20px; }
+  .sd3c-faq-container { max-width: 780px; margin: 0 auto; }
+  .sd3c-faq-section h2 { font-size: clamp(24px,4vw,36px); font-weight: 900; margin-bottom: 32px; }
+  .sd3c-faq-item { background: var(--blanco); border-radius: 12px; margin-bottom: 10px; border: 1px solid #d4c4bc; overflow: hidden; }
+  .sd3c-faq-q {
+    padding: 18px 22px;
+    font-weight: 700;
+    font-size: .97rem;
+    color: var(--gris-oscuro);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    user-select: none;
+    line-height: 1.4;
+  }
+  .sd3c-faq-q:hover { background: var(--verde-fondo); }
+  .sd3c-faq-arr { font-size: .8rem; color: var(--verde); flex-shrink: 0; transition: transform .25s; }
+  .sd3c-faq-item.open .sd3c-faq-arr { transform: rotate(180deg); }
+  .sd3c-faq-a {
+    max-height: 0;
+    overflow: hidden;
+    font-size: .9rem;
+    color: var(--gris-medio);
+    line-height: 1.65;
+    transition: max-height .35s ease, padding .35s ease;
+    padding: 0 22px;
+  }
+  .sd3c-faq-item.open .sd3c-faq-a { max-height: 300px; padding: 0 22px 18px; }
+</style>
+
+<section class="sd3c-faq-section">
+  <div class="sd3c-faq-container">
+    <h2>❓ Preguntas Frecuentes</h2>
+
+    <div class="sd3c-faq-item">
+      <div class="sd3c-faq-q">¿Cómo recibo el acceso después de comprar? <span class="sd3c-faq-arr">▼</span></div>
+      <div class="sd3c-faq-a">Inmediatamente después del pago recibís un email con todo lo incluido: el ebook Sistema Digestivo 3C (500 recetas), el acceso a la app Vida en Calma, la plantilla Notion, los 6 productos extras y las instrucciones para canjear el ebook regalo con el código VIDA. Acceso instantáneo, 24/7, desde cualquier dispositivo — celular, tablet o computadora. Sin esperas.</div>
+    </div>
+
+    <div class="sd3c-faq-item">
+      <div class="sd3c-faq-q">¿Las recetas de 5 minutos son realmente de 5 minutos? <span class="sd3c-faq-arr">▼</span></div>
+      <div class="sd3c-faq-a">Sí. El sistema está diseñado específicamente para personas sin tiempo. Las recetas de 5 min son combinaciones simples con ingredientes que ya tenés o que requieren cero cocción. Las de 10 y 20 minutos son igualmente sencillas — el tiempo incluye prep y cocción total.</div>
+    </div>
+
+    <div class="sd3c-faq-item">
+      <div class="sd3c-faq-q">¿Necesito saber cocinar para usar el sistema? <span class="sd3c-faq-arr">▼</span></div>
+      <div class="sd3c-faq-a">Para nada. Está diseñado para principiantes totales. Los ingredientes son simples, los pasos cortísimos y el árbol de decisión te guía sin que tengas que pensar nada. Si podés seguir instrucciones básicas, podés usarlo.</div>
+    </div>
+
+    <div class="sd3c-faq-item">
+      <div class="sd3c-faq-q">¿En qué formato está el ebook y la plantilla Notion? <span class="sd3c-faq-arr">▼</span></div>
+      <div class="sd3c-faq-a">El ebook está en PDF de alta calidad — descargable, guardable y accesible para siempre sin suscripciones. La plantilla Notion se duplica con un clic a tu cuenta gratuita de Notion y queda disponible en todos tus dispositivos para filtrar recetas al instante.</div>
+    </div>
+
+    <div class="sd3c-faq-item">
+      <div class="sd3c-faq-q">¿La app Vida en Calma funciona en Android e iOS? <span class="sd3c-faq-arr">▼</span></div>
+      <div class="sd3c-faq-a">Depende del dispositivo. En <strong>Android</strong> podés descargar la app nativa y usarla <strong>sin conexión a internet</strong>. En <strong>iPhone</strong> el acceso es mediante la app web, por lo que necesitás red para usarla. En ambos casos el acceso es de por vida — sin suscripción mensual, sin costos adicionales.</div>
+    </div>
+
+    <div class="sd3c-faq-item">
+      <div class="sd3c-faq-q">¿Sirve si tengo intolerancias o problemas digestivos? <span class="sd3c-faq-arr">▼</span></div>
+      <div class="sd3c-faq-a">Las recetas están clasificadas también por necesidad digestiva (liviano, antiinflamatorio, sin hinchazón), lo que facilita filtrar opciones según tu situación. Sin embargo, si tenés condiciones médicas diagnosticadas, siempre es recomendable consultar con un profesional de la salud — este sistema es complementario, no reemplaza el consejo médico.</div>
+    </div>
+
+    <div class="sd3c-faq-item">
+      <div class="sd3c-faq-q">¿El buscador de ingredientes realmente funciona? <span class="sd3c-faq-arr">▼</span></div>
+      <div class="sd3c-faq-a">Sí. Tanto en la app como en la plantilla Notion podés buscar por los ingredientes que tenés en casa y el sistema te muestra qué podés cocinar en ese momento. Se termina para siempre el "no tengo nada para hacer".</div>
+    </div>
+
+    <div class="sd3c-faq-item">
+      <div class="sd3c-faq-q">¿La garantía de 7 días es real? <span class="sd3c-faq-arr">▼</span></div>
+      <div class="sd3c-faq-a">100% real. Si dentro de los primeros 7 días no sentís que el sistema te ayuda a decidir qué comer más fácil, con menos estrés y sin hinchazón, mandás un mail a soporte y te devolvemos el dinero completo. Sin formularios, sin preguntas, sin demoras.</div>
+    </div>
+
+    <div class="sd3c-faq-item">
+      <div class="sd3c-faq-q">¿Tengo acceso de por vida al material? <span class="sd3c-faq-arr">▼</span></div>
+      <div class="sd3c-faq-a">Sí. El ebook, la plantilla Notion y el acceso a la app son tuyos para siempre — sin suscripciones, sin vencimientos. Descargás, duplicás y usás cuando quieras, cuantas veces quieras.</div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function () {
+  document.querySelectorAll('.sd3c-faq-q').forEach(function (q) {
+    q.addEventListener('click', function () {
+      var item = q.parentElement;
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.sd3c-faq-item').forEach(function (i) { i.classList.remove('open'); });
+      if (!isOpen) { item.classList.add('open'); }
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "SD3C FAQ",
+  "settings": [],
+  "presets": [
+    {
+      "name": "SD3C FAQ"
+    }
+  ]
+}
+{% endschema %}

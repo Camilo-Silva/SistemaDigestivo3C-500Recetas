@@ -1,0 +1,107 @@
+<style>
+  :root {
+    --verde: #7a9d8e;
+    --verde-fondo: #eaf4f0;
+    --rojo: #c4757f;
+    --gris-oscuro: #1C1C1E;
+    --gris-medio: #4A4A4A;
+    --blanco: #FFFFFF;
+    --fondo: #f1ebe5;
+    --radio: 14px;
+    --sombra: 0 4px 24px rgba(122,157,142,.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.65; }
+  .sd3c-container { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+  .sd3c-seccion { padding: 72px 0; }
+  .sd3c-tag-rojo {
+    display: inline-block;
+    background: #f5e4e6;
+    color: var(--rojo);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 99px;
+    margin-bottom: 16px;
+  }
+  .sd3c-dolor-h2 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; margin-bottom: 16px; line-height: 1.25; }
+  .sd3c-dolor-lista {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 32px 0;
+  }
+  .sd3c-dolor-lista li {
+    background: var(--blanco);
+    border-left: 4px solid var(--rojo);
+    border-radius: 0 var(--radio) var(--radio) 0;
+    padding: 14px 18px;
+    font-weight: 500;
+    box-shadow: var(--sombra);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .sd3c-dolor-lista li::before { content: "😔"; font-size: 20px; }
+  .sd3c-insight-box {
+    background: #f5e4e6;
+    border-radius: var(--radio);
+    padding: 16px 20px;
+    margin-top: 24px;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .sd3c-insight-box strong { color: var(--rojo); }
+  .sd3c-divisor { border: none; border-top: 1px solid #E0E5DF; margin: 0; }
+  /* Scroll reveal */
+  .sd3c-reveal { opacity: 0; transform: translateY(28px); transition: opacity .55s ease, transform .55s ease; }
+  .sd3c-reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<section class="sd3c-seccion">
+  <div class="sd3c-container">
+    <div class="sd3c-tag-rojo sd3c-reveal">¿Te suena familiar?</div>
+    <h2 class="sd3c-dolor-h2 sd3c-reveal">El problema no es que no sepas cocinar.</h2>
+    <ul class="sd3c-dolor-lista sd3c-reveal">
+      <li>Abrís la heladera y no sabés qué cocinar</li>
+      <li>Terminás comiendo cualquier cosa rápida que te cae mal</li>
+      <li>Sentís hinchazón, pesadez o reflujo después de comer</li>
+      <li>Perdés tiempo pensando más que cocinando</li>
+      <li>Probaste recetas… pero nunca sabés cuál elegir en el momento real</li>
+    </ul>
+    <div class="sd3c-insight-box sd3c-reveal">
+      <strong>👉 El problema real es el agotamiento mental de decidir TODOS LOS DÍAS qué comer.</strong><br>
+      No necesitás más recetas. Necesitás un sistema que elimine esa decisión.
+    </div>
+  </div>
+</section>
+
+<hr class="sd3c-divisor" />
+
+<script>
+(function () {
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.sd3c-reveal').forEach(function (el) { obs.observe(el); });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "SD3C Dolor",
+  "settings": [],
+  "presets": [
+    {
+      "name": "SD3C Dolor"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,82 @@
+<style>
+  :root {
+    --verde: #7a9d8e;
+    --verde-fondo: #eaf4f0;
+    --rosa: #d8a7b1;
+    --rojo: #c4757f;
+    --gris-oscuro: #1C1C1E;
+    --gris-medio: #4A4A4A;
+    --blanco: #FFFFFF;
+    --fondo: #f1ebe5;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; }
+
+  .sd3c-obj-section { background: #ede8e2; padding: 72px 20px; }
+  .sd3c-obj-container { max-width: 780px; margin: 0 auto; text-align: center; }
+  .sd3c-obj-tag { display: inline-block; background: #f5e4e6; color: var(--rojo); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 12px; border-radius: 99px; margin-bottom: 16px; }
+  .sd3c-obj-heading { font-size: clamp(24px,4vw,34px); font-weight: 900; margin-bottom: 36px; }
+  .sd3c-obj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; text-align: left; }
+  .sd3c-obj-item { background: var(--blanco); border-radius: 14px; padding: 24px 22px; border: 1px solid #d4c4bc; box-shadow: 0 3px 14px rgba(0,0,0,.06); }
+  .sd3c-obj-item .obj-pregunta { font-weight: 800; font-size: 1rem; margin-bottom: 10px; color: var(--rojo); }
+  .sd3c-obj-item .obj-respuesta { font-size: .9rem; color: var(--gris-medio); line-height: 1.55; }
+
+  .sd3c-obj-reveal { opacity: 0; transform: translateY(18px); transition: opacity .5s, transform .5s; }
+  .sd3c-obj-reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 520px) {
+    .sd3c-obj-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<section class="sd3c-obj-section">
+  <div class="sd3c-obj-container">
+    <div class="sd3c-obj-tag">Sé lo que estás pensando</div>
+    <h2 class="sd3c-obj-heading">Respondemos tus dudas</h2>
+    <div class="sd3c-obj-grid">
+      <div class="sd3c-obj-item sd3c-obj-reveal">
+        <div class="obj-pregunta">❌ "No tengo tiempo"</div>
+        <div class="obj-respuesta">Justamente está hecho para eso. <strong>Las recetas son de 5, 10 o 20 min.</strong> Si tenés 5 minutos, tenés tiempo.</div>
+      </div>
+      <div class="sd3c-obj-item sd3c-obj-reveal">
+        <div class="obj-pregunta">❌ "Es complicado"</div>
+        <div class="obj-respuesta">Todo está <strong>simplificado al máximo.</strong> Si podés abrir una app, podés usarlo.</div>
+      </div>
+      <div class="sd3c-obj-item sd3c-obj-reveal">
+        <div class="obj-pregunta">❌ "No sé cocinar"</div>
+        <div class="obj-respuesta">Está diseñado <strong>para principiantes totales.</strong> Ingredientes simples, pasos cortísimos.</div>
+      </div>
+      <div class="sd3c-obj-item sd3c-obj-reveal">
+        <div class="obj-pregunta">❌ "No quiero pensar"</div>
+        <div class="obj-respuesta"><strong>No tenés que pensar.</strong> El sistema decide por vos. Un clic y ya sabés qué hacer.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var items = document.querySelectorAll('.sd3c-obj-reveal');
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e, i) {
+      if (e.isIntersecting) {
+        setTimeout(function () { e.target.classList.add('visible'); }, i * 130);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  items.forEach(function (el) { io.observe(el); });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "SD3C Objeciones",
+  "settings": [],
+  "presets": [
+    {
+      "name": "SD3C Objeciones"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,158 @@
+<style>
+  :root {
+    --verde: #7a9d8e;
+    --verde-claro: #9dbcb3;
+    --verde-fondo: #eaf4f0;
+    --rosa: #d8a7b1;
+    --rojo: #c4757f;
+    --gris-oscuro: #1C1C1E;
+    --fondo: #f1ebe5;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; }
+
+  .sd3c-bonus-section { background: linear-gradient(160deg, #2a1f2e 0%, #1a1a2e 100%); padding: 48px 20px; text-align: center; }
+  .sd3c-bonus-tag { display: inline-block; background: var(--rosa); color: #1a0a10; font-weight: 800; font-size: .7rem; text-transform: uppercase; letter-spacing: 1px; padding: 4px 12px; border-radius: 20px; margin-bottom: 14px; }
+  .sd3c-bonus-heading { color: #fff; font-size: 1.8rem; font-weight: 900; margin-bottom: 8px; }
+  .sd3c-bonus-sub { color: #bbb; font-size: .9rem; margin-bottom: 36px; }
+  .sd3c-bonus-stack { display: flex; flex-direction: column; gap: 16px; max-width: 480px; margin: 0 auto; }
+
+  .sd3c-bonus-card { background: #2c2242; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
+  .sd3c-bonus-banda { padding: 16px 20px 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .sd3c-bonus-banda-info { text-align: left; flex: 1; }
+  .sd3c-bonus-num { font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #444; display: inline-block; padding: 2px 8px; border-radius: 10px; margin-bottom: 5px; }
+  .sd3c-bonus-card-title { font-weight: 800; font-size: 1rem; line-height: 1.3; }
+  .sd3c-bonus-card-sub { font-size: .8rem; color: #bbb; margin-top: 4px; }
+  .sd3c-bonus-img { width: 80px; height: 80px; object-fit: cover; border-radius: 10px; flex-shrink: 0; }
+
+  .sd3c-bonus-contenido { border-top: 1px solid rgba(255,255,255,.06); padding: 14px 20px; }
+  .sd3c-bonus-list { list-style: none; margin: 0; padding: 0; text-align: left; }
+  .sd3c-bonus-list li { font-size: .82rem; color: #ccc; padding: 4px 0; display: flex; align-items: flex-start; gap: 8px; line-height: 1.35; }
+  .sd3c-bonus-list li::before { content: '✓'; color: var(--verde-claro); font-weight: 800; flex-shrink: 0; }
+
+  /* card colors */
+  .sd3c-bc-1 .sd3c-bonus-banda { background: linear-gradient(120deg, #3d6b5e, #2c4e44); }
+  .sd3c-bc-1 .sd3c-bonus-card-title { color: #c8e8df; }
+  .sd3c-bc-1 .sd3c-bonus-num { background: #c8e8df; }
+  .sd3c-bc-2 .sd3c-bonus-banda { background: linear-gradient(120deg, #604878, #3d2e52); }
+  .sd3c-bc-2 .sd3c-bonus-card-title { color: #e0c8f5; }
+  .sd3c-bc-2 .sd3c-bonus-num { background: #e0c8f5; }
+  .sd3c-bc-3 .sd3c-bonus-banda { background: linear-gradient(120deg, #895472, #5a3048); }
+  .sd3c-bc-3 .sd3c-bonus-card-title { color: #f5d0e0; }
+  .sd3c-bc-3 .sd3c-bonus-num { background: #f5d0e0; }
+
+  /* reveal */
+  .sd3c-bonus-reveal { opacity: 0; transform: translateY(22px); transition: opacity .5s, transform .5s; }
+  .sd3c-bonus-reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
+
+<section class="sd3c-bonus-section" id="bonos">
+  <span class="sd3c-bonus-tag">🎁 Incluye de regalo</span>
+  <h2 class="sd3c-bonus-heading">Todo lo que recibís con tu compra</h2>
+  <p class="sd3c-bonus-sub">Un sistema completo — no solo recetas</p>
+
+  <div class="sd3c-bonus-stack">
+
+    <!-- Card 1: 500 Recetas -->
+    <div class="sd3c-bonus-card sd3c-bc-1 sd3c-bonus-reveal">
+      <div class="sd3c-bonus-banda">
+        <div class="sd3c-bonus-banda-info">
+          <span class="sd3c-bonus-num">Principal</span>
+          <div class="sd3c-bonus-card-title">500 Recetas Sin Pensar<br>Sistema Digestivo 3C</div>
+          <div class="sd3c-bonus-card-sub">Recetario digital · Acceso inmediato</div>
+        </div>
+        {% if section.settings.img_portada != blank %}
+          <img class="sd3c-bonus-img" src="{{ section.settings.img_portada | img_url: 'master' }}" alt="Portada 500 Recetas">
+        {% endif %}
+      </div>
+      <div class="sd3c-bonus-contenido">
+        <ul class="sd3c-bonus-list">
+          <li>500 recetas clasificadas por tipo de ingrediente y momento del día</li>
+          <li>Categorías: desayuno, almuerzo, merienda, cena y técnicas de cocina</li>
+          <li>Cada receta con paso a paso claro, sin ingredientes raros</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Card 2: App Notion -->
+    <div class="sd3c-bonus-card sd3c-bc-2 sd3c-bonus-reveal">
+      <div class="sd3c-bonus-banda">
+        <div class="sd3c-bonus-banda-info">
+          <span class="sd3c-bonus-num">Bono 1</span>
+          <div class="sd3c-bonus-card-title">App Vida en Calma:<br>decisiones fáciles</div>
+          <div class="sd3c-bonus-card-sub">Aplicación Notion · Gratis de regalo</div>
+        </div>
+        {% if section.settings.img_app != blank %}
+          <img class="sd3c-bonus-img" src="{{ section.settings.img_app | img_url: 'master' }}" alt="App Vida en Calma">
+        {% endif %}
+      </div>
+      <div class="sd3c-bonus-contenido">
+        <ul class="sd3c-bonus-list">
+          <li>App interactiva en Notion para organizar tu semana alimentaria</li>
+          <li>Filtrá recetas por tiempo disponible, ingredientes o momento del día</li>
+          <li>Conectada directamente al recetario — todo en un solo lugar</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Card 3: Cronograma -->
+    <div class="sd3c-bonus-card sd3c-bc-3 sd3c-bonus-reveal">
+      <div class="sd3c-bonus-banda">
+        <div class="sd3c-bonus-banda-info">
+          <span class="sd3c-bonus-num">Bono 2</span>
+          <div class="sd3c-bonus-card-title">Cronograma 7 días:<br>cómo empezar desde cero</div>
+          <div class="sd3c-bonus-card-sub">Guía de arranque · PDF descargable</div>
+        </div>
+        <div style="width:80px;height:80px;border-radius:10px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:2.4rem;flex-shrink:0;">📅</div>
+      </div>
+      <div class="sd3c-bonus-contenido">
+        <ul class="sd3c-bonus-list">
+          <li>Plan de 7 días listo para usar — sin tener que planificar nada vos</li>
+          <li>Recetas seleccionadas para los primeros días, con lista de compras incluida</li>
+          <li>Ideal para arrancar sin excusas desde el primer día</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function () {
+  var items = document.querySelectorAll('.sd3c-bonus-reveal');
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e, i) {
+      if (e.isIntersecting) {
+        setTimeout(function () { e.target.classList.add('visible'); }, i * 140);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  items.forEach(function (el) { io.observe(el); });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "SD3C Bonus",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "img_portada",
+      "label": "Imagen portada recetario"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_app",
+      "label": "Imagen app Notion"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SD3C Bonus"
+    }
+  ]
+}
+{% endschema %}
