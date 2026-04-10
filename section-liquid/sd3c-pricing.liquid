@@ -15,13 +15,13 @@
   .sd3c-pricing-section { background: var(--fondo); padding: 44px 20px; border-top: 1px solid #d4c4bc; }
   @keyframes sd3cPricingDrop { from { opacity:0; transform:scale(.96) translateY(16px); } to { opacity:1; transform:scale(1) translateY(0); } }
   .sd3c-pricing-box { max-width: 480px; margin: 0 auto; text-align: center; animation: sd3cPricingDrop .55s ease .1s both; }
-  .sd3c-pricing-stars { color: #f5a623; font-size: 1.2rem; margin-bottom: 4px; }
-  .sd3c-pricing-reviews { font-size: .85rem; color: #777; margin-bottom: 22px; }
-  .sd3c-pricing-main { font-weight: 900; font-size: 2.5rem; color: #111; line-height: 1; margin-bottom: 6px; }
-  .sd3c-pricing-old { font-size: 1rem; color: #aaa; text-decoration: line-through; margin-bottom: 16px; }
+  .sd3c-pricing-stars { color: #f5a623; font-size: 19px; margin-bottom: 4px; }
+  .sd3c-pricing-reviews { font-size: 14px; color: #777; margin-bottom: 22px; }
+  .sd3c-pricing-main { font-weight: 900; font-size: 40px; color: #111; line-height: 1; margin-bottom: 6px; }
+  .sd3c-pricing-old { font-size: 16px; color: #aaa; text-decoration: line-through; margin-bottom: 16px; }
   .sd3c-pricing-savings-btn {
     display: inline-block; background: linear-gradient(135deg, #9dbcb3, #7a9d8e);
-    color: var(--blanco); font-weight: 800; font-size: 1rem; padding: 13px 28px;
+    color: var(--blanco); font-weight: 800; font-size: 16px; padding: 13px 28px;
     border-radius: 30px; margin-bottom: 10px;
     box-shadow: 0 4px 14px rgba(122,157,142,.45);
     text-decoration: none; cursor: pointer; transition: transform .18s, box-shadow .18s;
@@ -31,29 +31,29 @@
     background: var(--verde-fondo); border: 2px solid var(--verde-claro);
     border-radius: 12px; padding: 16px 18px; margin: 14px 0; text-align: center;
   }
-  .sd3c-pc-header { font-size: .85rem; font-weight: 700; color: var(--verde); margin-bottom: 10px; }
+  .sd3c-pc-header { font-size: 14px; font-weight: 700; color: var(--verde); margin-bottom: 10px; }
   .sd3c-pc-digits { display: flex; justify-content: center; gap: 6px; align-items: flex-end; margin-bottom: 10px; }
   .sd3c-pc-unit { display: flex; flex-direction: column; align-items: center; gap: 2px; }
   .sd3c-pc-num {
-    background: var(--verde); color: var(--blanco); font-size: 1.8rem;
+    background: var(--verde); color: var(--blanco); font-size: 29px;
     font-weight: 900; padding: 6px 14px; border-radius: 8px; min-width: 52px; line-height: 1;
   }
-  .sd3c-pc-lbl { font-size: .65rem; font-weight: 700; color: var(--rosa); text-transform: uppercase; letter-spacing: .5px; }
-  .sd3c-pc-sep { font-size: 1.8rem; font-weight: 900; color: var(--rosa); line-height: 1; padding-bottom: 6px; }
-  .sd3c-pc-footer { font-size: .75rem; color: #888; }
+  .sd3c-pc-lbl { font-size: 11px; font-weight: 700; color: var(--rosa); text-transform: uppercase; letter-spacing: .5px; }
+  .sd3c-pc-sep { font-size: 29px; font-weight: 900; color: var(--rosa); line-height: 1; padding-bottom: 6px; }
+  .sd3c-pc-footer { font-size: 12px; color: #888; }
   .sd3c-pricing-offer-btn {
     display: block; background: var(--rosa); color: var(--gris-oscuro);
-    font-weight: 800; font-size: 1.05rem; padding: 15px; border-radius: 10px;
+    font-weight: 800; font-size: 17px; padding: 15px; border-radius: 10px;
     text-decoration: none; margin-bottom: 24px; cursor: pointer;
     transition: transform .18s, box-shadow .18s;
     box-shadow: 0 8px 0 #c4a0aa, 0 12px 24px rgba(216,167,177,.4);
   }
   .sd3c-pricing-offer-btn:hover { transform: translateY(3px); box-shadow: 0 5px 0 #c4a0aa, 0 8px 18px rgba(216,167,177,.3); }
   .sd3c-pricing-trust-list { list-style: none; text-align: left; display: inline-block; margin-bottom: 22px; }
-  .sd3c-pricing-trust-list li { font-size: .88rem; color: #444; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-  .sd3c-pricing-live { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: .88rem; font-weight: 700; color: #333; margin-bottom: 10px; }
+  .sd3c-pricing-trust-list li { font-size: 14px; color: #444; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  .sd3c-pricing-live { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; font-weight: 700; color: #333; margin-bottom: 10px; }
   .sd3c-pricing-live-dot { width: 10px; height: 10px; border-radius: 50%; background: #3483fa; flex-shrink: 0; animation: sd3cBlink 1.4s infinite; }
-  .sd3c-pricing-urgency { font-weight: 800; font-size: .85rem; color: var(--rojo); text-transform: uppercase; letter-spacing: .5px; }
+  .sd3c-pricing-urgency { font-weight: 800; font-size: 14px; color: var(--rojo); text-transform: uppercase; letter-spacing: .5px; }
   @keyframes sd3cBlink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
 </style>
 
@@ -69,7 +69,7 @@
     <a href="{{ section.settings.cta_url }}" class="sd3c-pricing-savings-btn">{{ section.settings.savings_text }}</a>
 
     <div class="sd3c-pricing-countdown">
-      <div style="font-size:.88rem;color:#555;margin-bottom:10px;line-height:1.5;">Tu lugar solo está reservado por <strong>15 minutos</strong>,<br>en caso de no acceder se cederá a otra persona.</div>
+      <div style="font-size:14px;color:#555;margin-bottom:10px;line-height:1.5;">Tu lugar solo está reservado por <strong>15 minutos</strong>,<br>en caso de no acceder se cederá a otra persona.</div>
       <div class="sd3c-pc-header">{{ section.settings.countdown_header }}</div>
       <div class="sd3c-pc-digits">
         <div class="sd3c-pc-unit">
