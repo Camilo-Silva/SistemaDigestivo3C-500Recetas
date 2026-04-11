@@ -19,9 +19,9 @@
   .sd3c-regalo-book-card .rb-ebook-img { width: 100%; max-width: 260px; border-radius: 12px; margin: 10px auto 18px; display: block; box-shadow: 0 6px 28px rgba(0,0,0,.35); }
   .sd3c-regalo-book-card .rb-title { font-size: 21px; font-weight: 900; margin-bottom: 5px; line-height: 1.3; }
   .sd3c-regalo-book-card .rb-subtitle { font-size: 15px; color: rgba(255,255,255,.6); margin-bottom: 26px; }
-  .sd3c-regalo-code-box { background: rgba(255,255,255,.08); border: 2px dashed rgba(255,255,255,.35); border-radius: 12px; padding: 20px 16px; }
-  .sd3c-regalo-code-box .rc-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: rgba(255,255,255,.5); margin-bottom: 8px; }
-  .sd3c-regalo-code-box .rc-code { font-size: 45px; font-weight: 900; letter-spacing: .35em; color: #f9d55b; font-family: 'Courier New', monospace; line-height: 1; }
+  .sd3c-regalo-code-box { background: rgba(255,255,255,.08); border: 2px solid rgba(249,213,91,.5); border-radius: 12px; padding: 20px 16px; }
+  .sd3c-regalo-code-box .rc-free-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.5); margin-bottom: 6px; }
+  .sd3c-regalo-code-box .rc-price { font-size: 52px; font-weight: 900; color: #f9d55b; line-height: 1; }
   .sd3c-regalo-code-box .rc-desc { font-size: 13px; color: rgba(255,255,255,.55); margin-top: 8px; }
   .sd3c-regalo-cta-btn { display: inline-block; background: #f9d55b; color: #2a2a42; font-weight: 800; font-size: 17px; padding: 17px 42px; border-radius: 30px; text-decoration: none; transition: transform .18s, box-shadow .18s; box-shadow: 0 6px 28px rgba(249,213,91,.35); margin-top: 8px; }
   .sd3c-regalo-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(249,213,91,.5); }
@@ -30,26 +30,26 @@
 
 <section class="sd3c-regalo-section">
   <div style="max-width:780px;margin:0 auto;padding:0 20px;">
-    <div class="sd3c-regalo-tag">🎁 Exclusivo para compradores</div>
-    <h2>Y además… un regalo de nuestra parte</h2>
-    <p class="sd3c-regalo-sub">Porque queremos acompañarte más allá de la alimentación, te regalamos un ebook completo para que empieces a transformar también tus hábitos y creencias limitantes.</p>
+    <div class="sd3c-regalo-tag">{{ section.settings.tag_text }}</div>
+    <h2>{{ section.settings.heading }}</h2>
+    <p class="sd3c-regalo-sub">{{ section.settings.subheading }}</p>
 
     <div class="sd3c-regalo-book-card">
-      <div class="rb-pretitle">📖 Ebook digital — Para vos, sin costo</div>
+      <div class="rb-pretitle">{{ section.settings.pretitle }}</div>
       {% if section.settings.img_ebook != blank %}
-        <img class="rb-ebook-img" src="{{ section.settings.img_ebook | img_url: 'master' }}" alt="Dejar Costumbres que te Estancan — Ebook">
+        <img class="rb-ebook-img" src="{{ section.settings.img_ebook | img_url: 'master' }}" alt="{{ section.settings.ebook_title }}">
       {% endif %}
-      <div class="rb-title">Dejar Costumbres que te Estancan</div>
-      <div class="rb-subtitle">Libertáte de hábitos limitantes y transforma tu vida</div>
+      <div class="rb-title">{{ section.settings.ebook_title }}</div>
+      <div class="rb-subtitle">{{ section.settings.ebook_subtitle }}</div>
       <div class="sd3c-regalo-code-box">
-        <div class="rc-label">Tu código de descuento</div>
-        <div class="rc-code">VIDA</div>
-        <div class="rc-desc">100% de descuento · Acceso gratuito · Solo para vos</div>
+        <div class="rc-free-label">{{ section.settings.price_label }}</div>
+        <div class="rc-price">{{ section.settings.price_value }}</div>
+        <div class="rc-desc">{{ section.settings.price_desc }}</div>
       </div>
     </div>
 
-    <a href="{{ section.settings.cta_url }}" class="sd3c-regalo-cta-btn">🎁 Quiero canjear mi regalo →</a>
-    <p class="sd3c-regalo-disclaimer">Al hacer clic serás redirigida a nuestros productos. Allí encontrarás las instrucciones para aplicar el código <strong style="color:#f9d55b;">VIDA</strong> y descargar tu ebook gratis.</p>
+    <a href="{{ section.settings.cta_url }}" class="sd3c-regalo-cta-btn">{{ section.settings.cta_text }}</a>
+    <p class="sd3c-regalo-disclaimer">{{ section.settings.disclaimer }}</p>
   </div>
 </section>
 
@@ -58,14 +58,96 @@
   "name": "SD3C Regalo",
   "settings": [
     {
+      "type": "header",
+      "content": "Encabezado de sección"
+    },
+    {
+      "type": "text",
+      "id": "tag_text",
+      "label": "Etiqueta superior",
+      "default": "🎁 Exclusivo para compradores"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título principal",
+      "default": "Y además… un regalo de nuestra parte"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subtítulo",
+      "default": "Porque queremos acompañarte más allá de la alimentación, te regalamos un ebook completo para que empieces a transformar también tus hábitos y creencias limitantes."
+    },
+    {
+      "type": "header",
+      "content": "Ebook"
+    },
+    {
+      "type": "text",
+      "id": "pretitle",
+      "label": "Pretítulo de la card",
+      "default": "📖 Ebook digital — Para vos, sin costo"
+    },
+    {
       "type": "image_picker",
       "id": "img_ebook",
       "label": "Imagen portada ebook"
     },
     {
+      "type": "text",
+      "id": "ebook_title",
+      "label": "Título del ebook",
+      "default": "Dejar Costumbres que te Estancan"
+    },
+    {
+      "type": "text",
+      "id": "ebook_subtitle",
+      "label": "Subtítulo del ebook",
+      "default": "Libertáte de hábitos limitantes y transforma tu vida"
+    },
+    {
+      "type": "header",
+      "content": "Precio / Canje"
+    },
+    {
+      "type": "text",
+      "id": "price_label",
+      "label": "Etiqueta de precio",
+      "default": "Precio para vos"
+    },
+    {
+      "type": "text",
+      "id": "price_value",
+      "label": "Valor del precio",
+      "default": "$0.00"
+    },
+    {
+      "type": "text",
+      "id": "price_desc",
+      "label": "Descripción debajo del precio",
+      "default": "100% de descuento · Acceso gratuito · Solo para vos"
+    },
+    {
+      "type": "header",
+      "content": "Botón y disclaimer"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Texto del botón",
+      "default": "🎁 Quiero canjear mi regalo →"
+    },
+    {
       "type": "url",
       "id": "cta_url",
-      "label": "URL botón canjear regalo"
+      "label": "URL del botón"
+    },
+    {
+      "type": "textarea",
+      "id": "disclaimer",
+      "label": "Texto aclaratorio bajo el botón",
+      "default": "Al hacer clic serás redirigida a nuestros productos. El ebook está incluido sin costo adicional con tu compra."
     }
   ],
   "presets": [

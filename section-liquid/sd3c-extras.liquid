@@ -13,7 +13,7 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', system-ui, sans-serif; }
 
-  .sd3c-extras-section { background: #fdf8f2; padding: 72px 20px; border-top: 3px solid #ead5be; }
+  .sd3c-extras-section { background: #fdf8f2; padding: 72px 20px; border-top: 3px solid #ead5be; overflow: hidden; }
   .sd3c-extras-tag { display: inline-block; background: #f5e4e6; color: var(--rojo); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 12px; border-radius: 99px; margin-bottom: 16px; }
   .sd3c-extras-heading { font-size: clamp(22px,4vw,34px); font-weight: 900; margin-bottom: 10px; }
   .sd3c-extras-sub { font-size: clamp(15px,2vw,18px); color: var(--gris-medio); margin-bottom: 0; max-width: 640px; }
@@ -39,15 +39,19 @@
   .sd3c-extras-reveal { opacity: 0; transform: translateY(18px); transition: opacity .5s, transform .5s; }
   .sd3c-extras-reveal.visible { opacity: 1; transform: translateY(0); }
 
-  @media (max-width: 400px) {
-    .sd3c-ep-grid { grid-template-columns: 1fr; }
+  @media (max-width: 480px) {
+    .sd3c-extras-section { padding: 48px 12px; }
+    .sd3c-extras-inner { padding: 0 !important; }
+    .sd3c-ep-grid { gap: 10px; }
+    .sd3c-ep-card-body { padding: 10px 10px 14px; }
+    .sd3c-ep-card-img { height: 130px; padding: 10px; }
   }
 </style>
 
 {{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' | stylesheet_tag }}
 
 <section class="sd3c-extras-section">
-  <div style="max-width:780px;margin:0 auto;padding:0 20px;">
+    <div class="sd3c-extras-inner" style="max-width:780px;margin:0 auto;padding:0 20px;">
     <div class="sd3c-extras-tag">También incluido en tu compra</div>
     <h2 class="sd3c-extras-heading">6 productos completos que se suman a tu acceso</h2>
     <p class="sd3c-extras-sub">Cada uno tiene un valor individual de <strong>$14.990</strong>. Los recibís todos incluidos, sin costo adicional, al adquirir el Sistema Digestivo 3C.</p>

@@ -1,0 +1,2052 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESET Financiero 3D | Controla tu Dinero y Genera Ingresos Extra</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* ===== VARIABLES ===== */
+        :root {
+            --red:       #c9a227;
+            --red-dark:  #8a6a00;
+            --dark:      #0d1917;
+            --light-bg:  #f5f0e0;
+            --text:      #2a2010;
+            --white:     #fff;
+            --yellow:    #ffd60a;
+            --green:     #6b5a00;
+            --green-mid: #c9a227;
+            --shadow:    0 4px 20px rgba(0,0,0,0.1);
+            --cream:     #faf8f0;
+            --blue-light:#f5f0d8;
+            --pink-light:#ede8c8;
+            --violet:    #e5ddb0;
+        }
+
+        /* ===== FLOATING MOBILE CTA ===== */
+        @keyframes floatBounce {
+            0%,100% { transform:translateX(-50%) translateY(0) scale(1); box-shadow:0 6px 24px rgba(0,0,0,0.35); }
+            40%      { transform:translateX(-50%) translateY(-6px) scale(1.06); box-shadow:0 14px 32px rgba(0,0,0,0.3); }
+            60%      { transform:translateX(-50%) translateY(-3px) scale(1.03); }
+        }
+        .float-cta {
+            display:none;
+            position:fixed;
+            bottom:20px;
+            right:28px;
+            left:auto;
+            transform:none;
+            z-index:9999;
+            background:linear-gradient(135deg,#e8c84e,#c9a227);
+            color:#0d1917;
+            font-family:'Montserrat',sans-serif;
+            font-weight:800;
+            font-size:1rem;
+            padding:14px 32px;
+            border-radius:50px;
+            box-shadow:0 6px 24px rgba(0,0,0,0.35);
+            text-decoration:none;
+            white-space:nowrap;
+            letter-spacing:.5px;
+            align-items:center;
+            gap:10px;
+            animation:floatBounce-right 2.2s ease-in-out infinite;
+        }
+        @keyframes floatBounce-right {
+            0%,100% { transform:translateY(0) scale(1); box-shadow:0 6px 24px rgba(0,0,0,0.35); }
+            40%      { transform:translateY(-6px) scale(1.06); box-shadow:0 14px 32px rgba(0,0,0,0.3); }
+            60%      { transform:translateY(-3px) scale(1.03); }
+        }
+        .float-cta:hover { animation:none; transform:translateY(-2px) scale(1.04); box-shadow:0 10px 28px rgba(0,0,0,0.4); }
+        .float-cta { display:flex; }
+        @media(max-width:768px) {
+            .float-cta {
+                right:auto;
+                left:50%;
+                transform:translateX(-50%);
+                animation:floatBounce 2.2s ease-in-out infinite;
+            }
+            .float-cta:hover { transform:translateX(-50%) translateY(-2px) scale(1.04); }
+        }
+
+        /* ===== RESET ===== */
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Open Sans',sans-serif; color:var(--text); line-height:1.7; background:var(--cream); }
+        h1,h2,h3,h4 { font-family:'Montserrat',sans-serif; line-height:1.2; }
+        .container { max-width:900px; margin:0 auto; padding:0 20px; }
+
+        /* ===== COUNTDOWN EN PRICING BOX ===== */
+        .pricing-countdown {
+            background:linear-gradient(135deg,#fdf8e8,#f5f0d8);
+            border:2px solid #c9a227;
+            border-radius:12px;
+            padding:16px 18px;
+            margin:14px 0;
+            text-align:center;
+            font-family:'Montserrat',sans-serif;
+        }
+        .pricing-countdown .pc-header {
+            font-size:.85rem;
+            font-weight:700;
+            color:#8a6a00;
+            margin-bottom:10px;
+        }
+        .pricing-countdown .pc-digits {
+            display:flex;
+            justify-content:center;
+            gap:6px;
+            align-items:flex-end;
+            margin-bottom:10px;
+        }
+        .pricing-countdown .pc-unit {
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap:2px;
+        }
+        .pricing-countdown .pc-num {
+            background:#8a6a00;
+            color:#fff;
+            font-size:1.8rem;
+            font-weight:900;
+            padding:6px 14px;
+            border-radius:8px;
+            min-width:52px;
+            line-height:1;
+        }
+        .pricing-countdown .pc-lbl {
+            font-size:.65rem;
+            font-weight:700;
+            color:#c9a227;
+            text-transform:uppercase;
+            letter-spacing:.5px;
+        }
+        .pricing-countdown .pc-sep {
+            font-size:1.8rem;
+            font-weight:900;
+            color:#c9a227;
+            line-height:1;
+            padding-bottom:6px;
+        }
+        .pricing-countdown .pc-footer {
+            font-size:.75rem;
+            color:#888;
+            font-family:'Open Sans',sans-serif;
+        }
+
+        /* ===== TICKER BAR ===== */
+        .ticker-bar {
+            background:#0d1917;
+            padding:10px 0;
+            overflow:hidden;
+            position:relative;
+            border-top:2px solid #c9a227;
+            border-bottom:2px solid #c9a227;
+        }
+        .ticker-track {
+            display:flex;
+            width:max-content;
+            animation: ticker-scroll 34s linear infinite;
+        }
+        .ticker-bar:hover .ticker-track { animation-play-state:paused; }
+        .ticker-item {
+            display:inline-flex;
+            align-items:center;
+            gap:9px;
+            white-space:nowrap;
+            padding:0 48px;
+            font-family:'Montserrat',sans-serif;
+            font-weight:700;
+            font-size:.85rem;
+            color:#fff;
+            text-transform:uppercase;
+            letter-spacing:.6px;
+        }
+        .ticker-item .t-icon {
+            font-size:.9rem;
+            flex-shrink:0;
+            width:16px;
+            text-align:center;
+            color:#fff;
+        }
+        @keyframes ticker-scroll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(160deg, #0d1917 0%, #1a2c1e 100%);
+            color:#fff;
+            text-align:center;
+            padding:75px 20px 65px;
+        }
+        .pre-headline {
+            display:inline-block;
+            background:rgba(201,162,39,.15);
+            border:1px solid #e8c84e;
+            color:#e8c84e;
+            font-family:'Montserrat',sans-serif;
+            font-size:.82rem;
+            font-weight:700;
+            padding:6px 18px;
+            border-radius:20px;
+            margin-bottom:20px;
+            text-transform:uppercase;
+            letter-spacing:1.2px;
+        }
+        .hero h1 { font-size:2.8rem; font-weight:900; margin-bottom:20px; color:#fff; }
+        .hero h1 .hl  { color:#e8c84e; }
+        .hero-sub {
+            font-size:1.15rem;
+            color:rgba(255,255,255,.75);
+            max-width:680px;
+            margin:0 auto 8px;
+        }
+        .hero-social-proof { font-size:.9rem; color:rgba(255,255,255,.6); margin-bottom:38px; }
+        .hero-social-proof span { color:#e8c84e; font-weight:700; }
+
+        /* ===== WHAT-FOR PILLS ===== */
+        .hero-pills {
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:10px;
+            margin:0 auto 36px;
+            max-width:680px;
+        }
+        .hero-pill {
+            display:inline-flex;
+            align-items:center;
+            gap:6px;
+            background:rgba(255,255,255,.08);
+            border:1.5px solid rgba(201,162,39,.55);
+            color:#e8c84e;
+            font-family:'Montserrat',sans-serif;
+            font-size:.8rem;
+            font-weight:700;
+            padding:7px 14px;
+            border-radius:30px;
+        }
+        .hero-pill i { color:var(--red); font-size:.85rem; }
+
+        /* ===== CTA BUTTON ===== */
+        .cta-wrap { text-align:center; }
+        .cta-btn {
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            gap:10px;
+            background:linear-gradient(180deg,#e8c84e,#c9a227);
+            color:#0d1917;
+            font-family:'Montserrat',sans-serif;
+            font-size:1.2rem;
+            font-weight:900;
+            text-decoration:none;
+            padding:22px 36px;
+            border-radius:10px;
+            text-transform:uppercase;
+            letter-spacing:.5px;
+            box-shadow:0 8px 0 #8a6a00, 0 12px 30px rgba(201,162,39,.4);
+            transition:all .15s ease;
+            max-width:640px;
+            width:100%;
+            margin:10px auto;
+            position:relative;
+            overflow:hidden;
+        }
+        .cta-btn::after {
+            content:'';
+            position:absolute;
+            top:0; left:-100%;
+            width:60%; height:100%;
+            background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);
+            animation:shimmer 2.5s infinite;
+        }
+        @keyframes shimmer { 0%{left:-100%} 100%{left:200%} }
+        .cta-btn:hover {
+            transform:translateY(3px);
+            box-shadow:0 5px 0 #8a6a00, 0 8px 18px rgba(201,162,39,.3);
+        }
+        .cta-sub { font-size:.78rem; color:rgba(255,255,255,.6); margin-top:8px; }
+        .cta-sub.light { color:rgba(255,255,255,.6); }
+
+        /* ===== SECTION LABEL ===== */
+        .section-label {
+            display:inline-block;
+            background:rgba(201,162,39,.12);
+            color:#c9a227;
+            font-family:'Montserrat',sans-serif;
+            font-size:.75rem;
+            font-weight:700;
+            padding:4px 14px;
+            border-radius:20px;
+            margin-bottom:12px;
+            text-transform:uppercase;
+            letter-spacing:1.2px;
+        }
+
+        /* ===== PAIN POINTS ===== */
+        .pain-section {
+            background:#fff;
+            padding:60px 20px;
+            border-top:1px solid #e0d8a0;
+        }
+        .pain-grid {
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:18px;
+            margin-top:32px;
+        }
+        .pain-card {
+            background:linear-gradient(135deg,#fdf8e8,#f5edd8);
+            border:1px solid #e0d8a0;
+            border-radius:12px;
+            padding:20px;
+            text-align:center;
+        }
+        .pain-icon {
+            display:flex; align-items:center; justify-content:center;
+            width:52px; height:52px; border-radius:14px;
+            background:linear-gradient(135deg,#f5e8a0,#e8c84e);
+            margin:0 auto 14px;
+            font-size:1.4rem;
+            color:var(--red-dark);
+        }
+        .pain-card p { font-size:.88rem; color:#555; }
+        .pain-card strong { display:block; font-family:'Montserrat',sans-serif; font-size:.95rem; color:#333; margin-bottom:6px; }
+        .pain-conclusion {
+            background:linear-gradient(135deg,#fdf8e8,#f5edd8);
+            border:2px solid #c9a227;
+            border-radius:14px;
+            padding:24px 32px;
+            margin-top:36px;
+            text-align:center;
+        }
+        .pain-conclusion p { font-family:'Montserrat',sans-serif; font-weight:700; font-size:1.05rem; color:var(--dark); margin-bottom:6px; }
+        .pain-conclusion span { color:#666; font-size:.95rem; font-family:'Open Sans',sans-serif; font-weight:400; }
+
+        /* ===== ROMPER CREENCIA ===== */
+        .belief-section {
+            background:linear-gradient(160deg,#0d1917 0%,#1a2c1e 100%);
+            color:#fff;
+            padding:70px 20px;
+            text-align:center;
+        }
+        .belief-section .section-label { background:rgba(201,162,39,.15); color:#e8c84e; }
+        .belief-section h2 { font-size:2rem; margin-bottom:10px; color:#fff; }
+        .belief-section .belief-intro { font-size:1rem; color:rgba(255,255,255,.7); margin-bottom:36px; }
+        .belief-no-grid {
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:18px;
+            margin-bottom:40px;
+        }
+        .belief-no-card {
+            background:rgba(255,255,255,.06);
+            border:1.5px solid rgba(255,100,100,.3);
+            border-radius:12px;
+            padding:18px 28px;
+            display:flex;
+            align-items:center;
+            gap:12px;
+            font-family:'Montserrat',sans-serif;
+            font-weight:700;
+            font-size:1rem;
+            color:#ffbcbc;
+            min-width:260px;
+            text-align:left;
+        }
+        .belief-no-card i { font-size:1.3rem; color:#ff6b6b; flex-shrink:0; }
+        .belief-punch {
+            background:rgba(201,162,39,.1);
+            border:1.5px solid rgba(201,162,39,.4);
+            border-radius:14px;
+            padding:28px 36px;
+            max-width:640px;
+            margin:0 auto;
+        }
+        .belief-punch p {
+            font-size:1.1rem;
+            font-family:'Montserrat',sans-serif;
+            font-weight:700;
+            color:rgba(255,255,255,.75);
+            margin-bottom:10px;
+        }
+        .belief-punch strong { color:#fff; font-size:1.18rem; }
+        .belief-arrows {
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:12px;
+            margin-top:28px;
+        }
+        .belief-arrow-item {
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            background:rgba(255,255,255,.08);
+            border:1px solid rgba(255,255,255,.15);
+            border-radius:30px;
+            padding:10px 22px;
+            font-family:'Montserrat',sans-serif;
+            font-weight:700;
+            font-size:.9rem;
+            color:#fff;
+        }
+        .belief-arrow-item i { color:#e8c84e; }
+
+        /* ===== SOLUTION / MECHANISM ===== */
+        .solution-section {
+            background:var(--cream);
+            padding:70px 20px;
+            text-align:center;
+        }
+        .method-badge {
+            display:inline-flex;
+            align-items:center;
+            gap:10px;
+            background:linear-gradient(135deg,#fdf8e8,#f5edd8);
+            border:2px solid #c9a227;
+            border-radius:14px;
+            padding:12px 28px;
+            font-family:'Montserrat',sans-serif;
+            font-weight:900;
+            font-size:1.25rem;
+            color:var(--dark);
+            margin-bottom:32px;
+        }
+        .method-badge i { color:var(--red); font-size:1.4rem; }
+        .steps-grid {
+            display:grid;
+            grid-template-columns:1fr 1fr 1fr;
+            gap:18px;
+            max-width:860px;
+            margin:0 auto 32px;
+        }
+        .step-card {
+            background:#fff;
+            border:1.5px solid #e0d8a0;
+            border-radius:14px;
+            padding:28px 22px;
+            text-align:center;
+        }
+        .step-number {
+            font-family:'Montserrat',sans-serif;
+            font-weight:900;
+            font-size:2.2rem;
+            color:var(--red);
+            line-height:1;
+            margin-bottom:10px;
+        }
+        .step-icon {
+            font-size:1.8rem;
+            margin-bottom:12px;
+            display:block;
+        }
+        .step-card h3 {
+            font-family:'Montserrat',sans-serif;
+            font-weight:800;
+            font-size:.97rem;
+            color:var(--dark);
+            margin-bottom:10px;
+            text-transform:uppercase;
+            letter-spacing:.5px;
+        }
+        .step-card p { font-size:.88rem; color:#555; line-height:1.6; margin-bottom:0; }
+        .step-card ul {
+            list-style:none;
+            text-align:left;
+            margin-top:10px;
+        }
+        .step-card ul li {
+            font-size:.85rem;
+            color:#555;
+            margin-bottom:5px;
+            display:flex;
+            align-items:flex-start;
+            gap:7px;
+        }
+        .step-card ul li i { color:var(--red); font-size:.8rem; margin-top:4px; flex-shrink:0; }
+        .method-not-list {
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:12px;
+            margin-top:24px;
+        }
+        .method-not-item {
+            background:rgba(201,162,39,.08);
+            border:1px solid rgba(201,162,39,.25);
+            border-radius:30px;
+            padding:8px 20px;
+            font-family:'Montserrat',sans-serif;
+            font-weight:700;
+            font-size:.85rem;
+            color:var(--red-dark);
+        }
+        .method-not-item i { color:var(--red); margin-right:4px; }
+
+        /* ===== BENEFITS ===== */
+        .benefits-section { background:var(--blue-light); padding:70px 20px; }
+        .section-title { text-align:center; font-size:2.1rem; margin-bottom:8px; }
+        .section-subtitle { text-align:center; color:#666; margin-bottom:44px; font-size:.97rem; }
+        .benefits-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+        .benefit-card {
+            background:#fff;
+            border-radius:12px;
+            box-shadow:var(--shadow);
+            border-left:4px solid var(--red);
+            overflow:hidden;
+            cursor:pointer;
+        }
+        .benefit-card-header {
+            display:flex;
+            align-items:center;
+            gap:12px;
+            padding:16px 18px;
+            user-select:none;
+        }
+        .b-icon { font-size:1.2rem; color:var(--red); flex-shrink:0; }
+        .benefit-card-header h4 { font-size:.95rem; margin:0; flex:1; color:var(--dark); }
+        .b-arr {
+            font-size:.7rem;
+            color:var(--red);
+            transition:transform .3s;
+            flex-shrink:0;
+        }
+        .benefit-card.open .b-arr { transform:rotate(180deg); }
+        .benefit-card-body {
+            max-height:0;
+            overflow:hidden;
+            transition:max-height .35s ease, padding .3s ease;
+            padding:0 18px;
+            font-size:.88rem;
+            color:#555;
+        }
+        .benefit-card.open .benefit-card-body { max-height:200px; padding:0 18px 16px; }
+
+        /* ===== QUÉ INCLUYE ===== */
+        .includes-section {
+            background:#fff;
+            padding:60px 20px;
+            border-top:1px solid #e0d8a0;
+        }
+        .includes-box {
+            background:linear-gradient(135deg,#fdf8e8,#f5edd8);
+            border:2px solid #c9a227;
+            border-radius:16px;
+            padding:36px 40px;
+            max-width:640px;
+            margin:32px auto 0;
+        }
+        .includes-box h3 {
+            font-family:'Montserrat',sans-serif;
+            font-weight:900;
+            font-size:1.25rem;
+            color:var(--dark);
+            margin-bottom:20px;
+            text-align:center;
+        }
+        .includes-list {
+            list-style:none;
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:12px;
+        }
+        .includes-list li {
+            display:flex;
+            align-items:center;
+            gap:9px;
+            font-size:.93rem;
+            color:var(--text);
+            font-family:'Open Sans',sans-serif;
+        }
+        .includes-list li i { color:var(--red); font-size:.9rem; flex-shrink:0; }
+
+        /* ===== TESTIMONIALS CAROUSEL ===== */
+        .testimonials-section { padding:70px 0; background:var(--pink-light); overflow:hidden; }
+        .testimonials-section > .container { padding-bottom:40px; }
+        .carousel-wrapper { overflow:hidden; cursor:grab; }
+        .carousel-wrapper.is-dragging { cursor:grabbing; user-select:none; }
+        .carousel-row {
+            display:flex;
+            width:max-content;
+            gap:20px;
+            padding:0 10px 20px;
+            animation: scroll-left 38s linear infinite;
+        }
+        .carousel-row--right {
+            animation: scroll-right 38s linear infinite;
+        }
+        @keyframes scroll-left {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes scroll-right {
+            0%   { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+        .carousel-wrapper:hover .carousel-row { animation-play-state:paused; }
+        .t-card {
+            background:#fff;
+            border-radius:14px;
+            padding:24px;
+            border:1px solid #e0d8a0;
+            position:relative;
+            width:360px;
+            flex-shrink:0;
+            box-shadow:0 2px 14px rgba(201,162,39,.08);
+        }
+        .t-card::before {
+            content:'"';
+            position:absolute;
+            top:-8px; left:18px;
+            font-size:4.5rem;
+            color:var(--red);
+            font-family:Georgia,serif;
+            line-height:1;
+            opacity:.15;
+        }
+        .stars { color:var(--yellow); font-size:1rem; margin-bottom:10px; }
+        .t-text { font-size:.93rem; color:#444; font-style:italic; margin-bottom:16px; }
+        .t-author { display:flex; align-items:center; gap:11px; }
+        .t-avatar {
+            width:44px; height:44px;
+            border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            font-family:'Montserrat',sans-serif;
+            font-weight:700;
+            font-size:.95rem;
+            color:#fff;
+            flex-shrink:0;
+            overflow:hidden;
+            border:2px solid rgba(201,162,39,.4);
+        }
+        .t-avatar img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+        .t-name  { font-weight:700; font-size:.88rem; color:#222; }
+        .t-city  { font-size:.78rem; color:#888; }
+        .verified {
+            display:inline-flex; align-items:center; gap:3px;
+            background:#fdf8e8; color:#8a6a00;
+            font-size:.7rem; font-weight:700;
+            padding:2px 8px; border-radius:10px; margin-top:3px;
+        }
+
+        /* ===== PRODUCT CARD ===== */
+        .product-card-section { background:var(--cream); padding:0 0 40px; }
+        .product-card {
+            background:#fff;
+            border:1px solid #e0d8a0;
+            border-radius:0;
+            max-width:100%;
+            margin:0 auto;
+            overflow:hidden;
+            box-shadow:0 4px 20px rgba(0,0,0,.09);
+        }
+        .product-card-img { width:100%; display:block; background:#f1ebe5; }
+        .product-card-body { padding:22px 24px 28px; }
+        .product-card-title {
+            font-family:'Montserrat',sans-serif;
+            font-weight:900;
+            font-size:1.35rem;
+            color:#111;
+            margin-bottom:14px;
+            line-height:1.25;
+        }
+        .product-price-row {
+            display:flex;
+            align-items:center;
+            gap:12px;
+            margin-bottom:14px;
+            flex-wrap:wrap;
+        }
+        .product-price-old { font-size:.95rem; color:#999; text-decoration:line-through; }
+        .product-price-new {
+            font-family:'Montserrat',sans-serif;
+            font-weight:900;
+            font-size:1.6rem;
+            color:#111;
+        }
+        .product-off-badge {
+            background:var(--red);
+            color:#fff;
+            font-family:'Montserrat',sans-serif;
+            font-weight:700;
+            font-size:.75rem;
+            padding:4px 10px;
+            border-radius:6px;
+            text-transform:uppercase;
+            letter-spacing:.5px;
+        }
+        .product-stock {
+            display:inline-flex;
+            align-items:center;
+            gap:6px;
+            font-size:.82rem;
+            font-family:'Montserrat',sans-serif;
+            font-weight:700;
+            color:#e65100;
+            margin-bottom:18px;
+        }
+        .product-stock-dot {
+            width:7px; height:7px; border-radius:50%;
+            background:#f44336; animation:blink 1s infinite; flex-shrink:0;
+        }
+        .product-cta {
+            display:block;
+            background:linear-gradient(180deg,#e8c84e,#c9a227);
+            color:#fff;
+            text-align:center;
+            font-family:'Montserrat',sans-serif;
+            font-weight:700;
+            font-size:1rem;
+            padding:14px;
+            border-radius:8px;
+            text-decoration:none;
+            transition:opacity .15s;
+            position:relative;
+            overflow:hidden;
+        }
+        .product-cta::after {
+            content:'';
+            position:absolute;
+            top:0; left:-100%;
+            width:60%; height:100%;
+            background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);
+            animation:shimmer 2.5s infinite;
+        }
+        .product-cta:hover { opacity:.88; }
+
+        /* ===== PRICING BOX ===== */
+        .pricing-section { background:var(--cream); padding:44px 20px; border-top:1px solid #e0d8a0; }
+        .pricing-box { max-width:480px; margin:0 auto; text-align:center; }
+        .pricing-stars { color:#f5a623; font-size:1.2rem; margin-bottom:4px; }
+        .pricing-reviews { font-size:.85rem; color:#777; margin-bottom:22px; }
+        .pricing-reviews strong { color:#333; }
+        .pricing-main-price {
+            font-family:'Montserrat',sans-serif;
+            font-weight:900;
+            font-size:2.5rem;
+            color:#111;
+            line-height:1;
+            margin-bottom:6px;
+        }
+        .pricing-old-price { font-size:1rem; color:#aaa; text-decoration:line-through; margin-bottom:16px; }
+        .pricing-savings-btn {
+            display:inline-block;
+            background:linear-gradient(135deg,#e8c84e,#c9a227);
+            color:#0d1917;
+            font-family:'Montserrat',sans-serif;
+            font-weight:800;
+            font-size:1rem;
+            padding:13px 28px;
+            border-radius:30px;
+            margin-bottom:10px;
+            box-shadow:0 4px 14px rgba(201,162,39,.45);
+            text-decoration:none;
+            cursor:pointer;
+            transition:transform .18s ease, box-shadow .18s ease;
+            position:relative;
+            overflow:hidden;
+        }
+        .pricing-savings-btn::after {
+            content:'';
+            position:absolute;
+            top:0; left:-100%;
+            width:60%; height:100%;
+            background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);
+            animation:shimmer 2.5s infinite;
+        }
+        .pricing-savings-btn:hover {
+            transform:scale(1.06) translateY(-2px);
+            box-shadow:0 8px 24px rgba(201,162,39,.65);
+        }
+        .pricing-launch { font-size:.82rem; color:#666; margin-bottom:24px; }
+        .pricing-launch i { color:#f5a623; }
+        .pricing-offer-btn {
+            display:block;
+            background:linear-gradient(180deg,#e8c84e,#c9a227);
+            color:#0d1917;
+            font-family:'Montserrat',sans-serif;
+            font-weight:800;
+            font-size:1.05rem;
+            padding:15px;
+            border-radius:10px;
+            text-decoration:none;
+            margin-bottom:24px;
+            cursor:pointer;
+            transition:transform .18s ease, box-shadow .18s ease;
+            position:relative;
+            overflow:hidden;
+            box-shadow:0 8px 0 #8a6a00, 0 12px 24px rgba(201,162,39,.4);
+        }
+        .pricing-offer-btn::after {
+            content:'';
+            position:absolute;
+            top:0; left:-100%;
+            width:60%; height:100%;
+            background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);
+            animation:shimmer 2.5s infinite;
+        }
+        .pricing-offer-btn:hover {
+            transform:translateY(3px);
+            box-shadow:0 5px 0 #8a6a00, 0 8px 18px rgba(201,162,39,.3);
+        }
+        .pricing-trust-list {
+            list-style:none;
+            text-align:left;
+            display:inline-block;
+            margin-bottom:22px;
+        }
+        .pricing-trust-list li {
+            font-size:.88rem;
+            color:#444;
+            margin-bottom:8px;
+            display:flex;
+            align-items:center;
+            gap:8px;
+        }
+        .pricing-live {
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:8px;
+            font-size:.88rem;
+            font-family:'Montserrat',sans-serif;
+            font-weight:700;
+            color:#333;
+            margin-bottom:10px;
+        }
+        .pricing-live-dot {
+            width:10px; height:10px; border-radius:50%;
+            background:#c9a227; flex-shrink:0;
+        }
+        .pricing-urgency {
+            font-family:'Montserrat',sans-serif;
+            font-weight:800;
+            font-size:.85rem;
+            color:var(--red);
+            text-transform:uppercase;
+            letter-spacing:.5px;
+        }
+
+        /* ===== OFFER STACK ===== */
+        .offer-section { background:var(--cream); color:var(--text); text-align:center; }
+        .offer-band { padding:50px 5px; }
+        .offer-band--dark { background:var(--cream); color:var(--dark); padding:50px 20px; }
+        .offer-section .section-label { background:rgba(201,162,39,.12); color:var(--red-dark); }
+        .offer-section .section-title  { color:var(--dark); }
+        .offer-section .section-subtitle { color:#555; }
+
+        /* ── Bonus Carousel ── */
+        .bonus-carousel { position:relative; max-width:100%; margin:0 auto; padding:0; }
+        .bc-track-wrapper { overflow:hidden; border-radius:16px; }
+        .bc-track { display:flex; transition:transform .7s cubic-bezier(.4,0,.2,1); will-change:transform; }
+        .bc-slide { min-width:100%; }
+        .bc-card {
+            background:#fff;
+            border:2px solid rgba(201,162,39,.25);
+            border-radius:16px;
+            text-align:center;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            box-shadow:0 4px 18px rgba(201,162,39,.10);
+            overflow:hidden;
+        }
+        .bc-mockup {
+            width:100%; background:#f9f0f3;
+            display:flex; align-items:center; justify-content:center;
+            overflow:hidden; border-bottom:2px solid rgba(201,162,39,.15);
+            min-height:200px;
+        }
+        .bc-mockup img { width:100%; height:auto; display:block; object-fit:cover; }
+        .bc-mockup-placeholder { color:rgba(201,162,39,.35); font-size:3.5rem; }
+        .bc-body { padding:28px 28px 32px; display:flex; flex-direction:column; align-items:center; width:100%; }
+        .bc-name {
+            font-family:'Montserrat',sans-serif;
+            font-weight:700; font-size:1.1rem;
+            color:var(--dark); margin-bottom:12px; line-height:1.35; max-width:70%;
+        }
+        .bc-badge {
+            display:inline-block; background:rgba(201,162,39,.12);
+            color:var(--red-dark); font-size:.72rem; font-weight:700;
+            padding:4px 14px; border-radius:10px; margin-bottom:10px;
+        }
+        .bc-desc { font-size:.88rem; color:#666; margin-top:8px; line-height:1.6; }
+        .bc-arrow {
+            position:absolute; top:calc(50% - 22px); transform:translateY(-50%);
+            width:40px; height:40px; border-radius:50%;
+            background:#fff; border:2px solid rgba(201,162,39,.5); color:var(--red);
+            font-size:1.5rem; cursor:pointer;
+            display:flex; align-items:center; justify-content:center;
+            transition:background .2s, border-color .2s, transform .2s;
+            z-index:5; line-height:1; box-shadow:0 2px 10px rgba(0,0,0,.15); padding:0;
+        }
+        .bc-arrow:hover { background:rgba(201,162,39,.12); border-color:var(--red); transform:translateY(-50%) scale(1.08); }
+        .bc-prev { left:5px; }
+        .bc-next { right:5px; }
+        .bc-dots { display:flex; gap:8px; justify-content:center; margin-top:16px; }
+        .bc-dot {
+            width:10px; height:10px; border-radius:50%;
+            background:rgba(201,162,39,.25); border:none; cursor:pointer;
+            transition:background .25s, transform .25s; padding:0;
+        }
+        .bc-dot.bc-dot--active { background:var(--red); transform:scale(1.3); }
+        .value-stack {
+            margin-top:32px; padding:36px;
+            background:rgba(255,255,255,.7); border:2px solid #e0d8a0;
+            border-radius:16px; max-width:760px;
+            margin-left:auto; margin-right:auto; text-align:center;
+        }
+        .real-value { text-decoration:line-through; color:#8a6a00; font-size:1rem; font-weight:600; margin-bottom:8px; }
+        .big-price { font-family:'Montserrat',sans-serif; font-size:3.2rem; font-weight:900; color:var(--red); line-height:1; }
+        .ars-price { font-size:1.1rem; color:#777; margin-top:6px; }
+
+        /* ===== PARA QUIÉN ES / NO ES ===== */
+        .forwho-section { background:#fff; padding:70px 20px; border-top:1px solid #e0d8a0; }
+        .forwho-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:36px; }
+        .forwho-card {
+            border-radius:14px;
+            padding:28px 24px;
+        }
+        .forwho-card--yes {
+            background:linear-gradient(135deg,#fdf8e8,#f5edd8);
+            border:2px solid #c9a227;
+        }
+        .forwho-card--no {
+            background:linear-gradient(135deg,#fff5f5,#ffe8e8);
+            border:2px solid #f5c4c4;
+        }
+        .forwho-card h3 {
+            font-family:'Montserrat',sans-serif;
+            font-weight:900;
+            font-size:1.1rem;
+            margin-bottom:18px;
+            display:flex;
+            align-items:center;
+            gap:8px;
+        }
+        .forwho-card--yes h3 { color:#1a6e2e; }
+        .forwho-card--no  h3 { color:#8b2020; }
+        .forwho-list { list-style:none; }
+        .forwho-list li {
+            display:flex;
+            align-items:flex-start;
+            gap:10px;
+            font-size:.92rem;
+            color:#444;
+            margin-bottom:12px;
+            line-height:1.5;
+        }
+        .forwho-list li i { flex-shrink:0; margin-top:2px; font-size:.95rem; }
+        .forwho-list--yes li i { color:#2e7d45; }
+        .forwho-list--no  li i { color:#cc3333; }
+
+        /* ===== GUARANTEE ===== */
+        .guarantee-section { background:var(--cream); color:var(--dark); padding:70px 20px; text-align:center; }
+        .guarantee-box {
+            border:2px solid #e0d8a0;
+            padding:45px;
+            border-radius:16px;
+            background:rgba(255,255,255,.7);
+            max-width:760px;
+            margin:0 auto;
+        }
+        .g-icon   { font-size:4rem; margin-bottom:18px; color:var(--red); }
+        .b-icon i { color:var(--red); }
+        .guarantee-box h2 { color:var(--dark); margin-bottom:18px; font-size:1.9rem; }
+        .guarantee-box p  { font-size:1.02rem; color:#555; margin-bottom:18px; }
+        .guarantee-list { list-style:none; text-align:left; display:inline-block; margin:18px 0; }
+        .guarantee-list li {
+            display:flex; align-items:center; gap:10px;
+            font-size:.97rem; color:#444; margin-bottom:10px;
+        }
+        .guarantee-list li i { color:var(--red); }
+
+        /* ===== CLOSING ===== */
+        .closing-section {
+            background:linear-gradient(135deg,#fdf8e8,#f5edd8);
+            padding:60px 20px;
+            text-align:center;
+            border-top:1px solid #e0d8a0;
+        }
+        .closing-section h2 { font-size:2rem; color:var(--dark); margin-bottom:14px; }
+        .closing-section p { font-size:1.08rem; color:#8a6a00; max-width:600px; margin:0 auto 10px; }
+        .closing-punch {
+            font-family:'Montserrat',sans-serif;
+            font-weight:900;
+            font-size:1.4rem;
+            color:var(--red);
+            margin:18px 0 32px;
+        }
+
+        /* ===== FAQ ===== */
+        .faq-section { padding:70px 20px; background:var(--violet); }
+        .faq-section h2 { text-align:center; font-size:2rem; margin-bottom:38px; }
+        .faq-item { background:#fff; border-radius:10px; margin-bottom:10px; border:1px solid #e0d8a0; overflow:hidden; }
+        .faq-q {
+            padding:17px 22px;
+            font-family:'Montserrat',sans-serif;
+            font-weight:700;
+            font-size:.97rem;
+            cursor:pointer;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            color:var(--dark);
+            user-select:none;
+        }
+        .faq-q .arr { transition:transform .3s; font-size:.75rem; color:var(--red); }
+        .faq-a {
+            padding:0 22px;
+            font-size:.93rem;
+            color:#555;
+            max-height:0;
+            overflow:hidden;
+            transition:max-height .4s ease, padding .3s ease;
+        }
+        .faq-item.open .faq-a  { max-height:400px; padding:0 22px 18px; }
+        .faq-item.open .arr    { transform:rotate(180deg); }
+
+        /* ===== FINAL CTA ===== */
+        .final-cta {
+            background:linear-gradient(135deg,#0d1917,#c9a227);
+            color:#fff;
+            padding:70px 20px;
+            text-align:center;
+        }
+        .final-cta h2 { font-size:2.3rem; margin-bottom:14px; }
+        .final-cta p  { font-size:1.08rem; color:rgba(255,255,255,.85); margin-bottom:28px; max-width:680px; margin-left:auto; margin-right:auto; }
+
+        /* ===== PAYMENT ===== */
+        .payment-section { background:#fff; padding:44px 20px; text-align:center; border-top:1px solid #e0d8a0; }
+        .payment-section h3 {
+            font-family:'Montserrat',sans-serif; font-size:.85rem; font-weight:600;
+            color:#999; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:22px;
+        }
+        .pay-img { display:block; max-width:420px; width:100%; margin:0 auto 18px; }
+        .ml-img { display:block; max-width:280px; width:100%; margin:0 auto 24px; }
+        .cuotas-note { font-size:.88rem; color:#555; margin-top:4px; }
+        .ssl-badge {
+            display:inline-flex; align-items:center; gap:6px;
+            background:#fdf8e8; color:#8a6a00; font-size:.78rem; font-weight:700;
+            padding:6px 14px; border-radius:20px; margin-top:14px;
+            font-family:'Montserrat',sans-serif;
+        }
+
+        /* ===== FOOTER ===== */
+        footer { background:#0d0d0d; color:#555; text-align:center; padding:28px 20px; font-size:.78rem; }
+        footer a { color:#777; text-decoration:none; }
+        footer a:hover { color:#fff; }
+
+        /* ===== TOAST ===== */
+        .toast-container {
+            position:fixed; top:60px; right:14px;
+            z-index:10000; display:flex; flex-direction:column;
+            gap:7px; pointer-events:none;
+        }
+        .toast {
+            background:#fff; border-left:3px solid var(--green-mid);
+            border-radius:8px; padding:8px 11px;
+            box-shadow:0 4px 16px rgba(0,0,0,.14);
+            display:flex; align-items:center; gap:8px;
+            max-width:240px; font-size:.75rem;
+            animation:toastIn .3s ease forwards;
+            font-family:'Open Sans',sans-serif;
+        }
+        .toast.out { animation:toastOut .3s ease forwards; }
+        .t-av {
+            width:30px; height:30px; border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            font-family:'Montserrat',sans-serif; font-weight:700;
+            font-size:.78rem; color:#fff; flex-shrink:0;
+        }
+        .toast-body strong { display:block; color:#111; font-size:.78rem; line-height:1.2; }
+        .toast-body span   { color:#666; font-size:.72rem; }
+        .toast-check { color:var(--green-mid); font-size:.95rem; margin-left:auto; flex-shrink:0; }
+        @keyframes toastIn  { from{opacity:0;transform:translateX(28px)} to{opacity:1;transform:translateX(0)} }
+        @keyframes toastOut { from{opacity:1;transform:translateX(0)} to{opacity:0;transform:translateX(28px)} }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+        /* ===== RESPONSIVE ===== */
+        @media(max-width:768px){
+            .hero h1            { font-size:2rem; }
+            .benefits-grid      { grid-template-columns:1fr; }
+            .pain-grid          { grid-template-columns:1fr; }
+            .steps-grid         { grid-template-columns:1fr; }
+            .includes-list      { grid-template-columns:1fr; }
+            .forwho-grid        { grid-template-columns:1fr; }
+            .belief-no-grid     { flex-direction:column; align-items:center; }
+            .belief-no-card     { min-width:0; width:100%; max-width:360px; }
+            .t-card             { width:290px; }
+            .guarantee-box      { padding:24px 16px; }
+            .cta-btn            { font-size:1rem; padding:18px 18px; }
+            .big-price          { font-size:2.4rem; }
+            .final-cta h2       { font-size:1.7rem; }
+            .section-title      { font-size:1.75rem; }
+            .product-card-section   { padding:0 0 32px; }
+            .product-card       { max-width:100%; border-radius:0; box-shadow:none; border-left:none; border-right:none; }
+            .product-card-body  { padding:20px 20px 24px; }
+            .includes-box       { padding:24px 20px; }
+            .closing-section h2 { font-size:1.6rem; }
+            .belief-punch       { padding:20px 18px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════ TICKER BAR ═══════════════════ -->
+<div class="ticker-bar" aria-label="Información de compra" role="marquee">
+    <div class="ticker-track">
+        <span class="ticker-item"><i class="t-icon fa-solid fa-shield-halved"></i> Pago 100% Seguro con Mercado Pago</span>
+        <span class="ticker-item"><i class="t-icon fa-solid fa-bolt"></i> 70% OFF por Tiempo Limitado</span>
+        <span class="ticker-item"><i class="t-icon fa-solid fa-envelope"></i> Acceso Inmediato por Mail</span>
+        <span class="ticker-item"><i class="t-icon fa-solid fa-chart-line"></i> Método RESET Financiero 3D — Controlá tu dinero en 3 días</span>
+        <span class="ticker-item"><i class="t-icon fa-solid fa-lock"></i> PAGO 100% SEGURO — TARJETAS DE TODO EL MUNDO</span>
+        <span class="ticker-item"><i class="t-icon fa-solid fa-shield-halved"></i> Pago 100% Seguro con Mercado Pago</span>
+        <span class="ticker-item"><i class="t-icon fa-solid fa-bolt"></i> 70% OFF por Tiempo Limitado</span>
+        <span class="ticker-item"><i class="t-icon fa-solid fa-envelope"></i> Acceso Inmediato por Mail</span>
+        <span class="ticker-item"><i class="t-icon fa-solid fa-chart-line"></i> Método RESET Financiero 3D — Controlá tu dinero en 3 días</span>
+        <span class="ticker-item"><i class="t-icon fa-solid fa-lock"></i> PAGO 100% SEGURO — TARJETAS DE TODO EL MUNDO</span>
+    </div>
+</div>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<header class="hero">
+    <div class="container">
+        <p class="pre-headline"><i class="fa-solid fa-coins"></i> Para quienes sienten que el dinero nunca alcanza</p>
+        <h1>
+            Controla todo tu dinero en <span class="hl">3 días</span>, descubre por qué<br>
+            nunca te alcanza y crea tu primera<br>
+            <span class="hl">fuente de ingresos extra</span>
+        </h1>
+        <p class="hero-sub" style="margin-bottom:16px;">Sin restringirte ni usar herramientas complicadas. Para cualquier persona, con cualquier nivel de ingresos.</p>
+        <p class="hero-sub" style="font-weight:600;color:#e8c84e;">Usando el Método RESET Financiero 3D: un sistema simple en Notion que combina reprogramación mental + control financiero real + generación de ingresos.</p>
+
+        <div class="hero-pills" style="margin-top:28px;">
+            <span class="hero-pill"><i class="fa-solid fa-check"></i> Sin restringirte</span>
+            <span class="hero-pill"><i class="fa-solid fa-check"></i> Sin herramientas complicadas</span>
+            <span class="hero-pill"><i class="fa-solid fa-check"></i> Sistema en Notion</span>
+            <span class="hero-pill"><i class="fa-solid fa-check"></i> Resultados en 3 días</span>
+            <span class="hero-pill"><i class="fa-solid fa-check"></i> Ingresos extra reales</span>
+        </div>
+
+        <div class="cta-wrap">
+            <a href="#comprar" class="cta-btn"><i class="fa-solid fa-arrow-right"></i> QUIERO TOMAR EL CONTROL DE MI DINERO</a>
+            <p class="cta-sub"><i class="fa-solid fa-lock"></i> Compra segura &nbsp;·&nbsp; <i class="fa-solid fa-bolt"></i> Acceso instantáneo &nbsp;·&nbsp; <i class="fa-solid fa-shield-halved"></i> Garantía sin preguntas</p>
+        </div>
+
+        <img src="image/Reset-3D/MockUpPack-Landing.png" alt="Pack completo RESET Financiero 3D + 4 Bonos" style="display:block;width:100%;max-width:640px;margin:32px auto 0;border-radius:14px;box-shadow:0 8px 40px rgba(0,0,0,.45);">
+    </div>
+</header>
+
+<!-- ═══════════════════ DOLOR / IDENTIFICACIÓN ═══════════════════ -->
+<section class="pain-section">
+    <div class="container">
+        <div class="section-label"><i class="fa-solid fa-triangle-exclamation"></i> ¿Te sentís identificado/a?</div>
+        <h2 class="section-title" style="text-align:left;font-size:1.8rem;margin-bottom:8px;">Si sentís que…</h2>
+        <p style="color:#666;font-size:.97rem;">No es falta de disciplina. <strong>Es falta de un sistema.</strong></p>
+        <div class="pain-grid">
+            <div class="pain-card">
+                <div class="pain-icon"><i class="fa-solid fa-money-bill-wind"></i></div>
+                <strong>El dinero "se te va" y no sabés exactamente en qué</strong>
+                <p>Llega el fin de mes y no entendés a dónde fue todo. Trabajás, ganás y sin embargo siempre falta algo.</p>
+            </div>
+            <div class="pain-card">
+                <div class="pain-icon"><i class="fa-solid fa-piggy-bank"></i></div>
+                <strong>Intentaste ahorrar pero nunca es suficiente</strong>
+                <p>Empezás con buenas intenciones y después algo siempre aparece. No es mala suerte — es que el sistema no existe.</p>
+            </div>
+            <div class="pain-card">
+                <div class="pain-icon"><i class="fa-solid fa-table-cells"></i></div>
+                <strong>Sabés que deberías organizarte, pero no sabés cómo</strong>
+                <p>Planillas, apps, agendas — probaste de todo. Nada dura más de una semana porque nada está hecho para tu realidad.</p>
+            </div>
+            <div class="pain-card">
+                <div class="pain-icon"><i class="fa-solid fa-face-frown"></i></div>
+                <strong>Te frustras porque sentís que ganás poco</strong>
+                <p>No es el sueldo. Es que sin visibilidad real sobre tu dinero, cualquier ingreso parece insuficiente — y no lo es.</p>
+            </div>
+        </div>
+        <div class="pain-conclusion">
+            <p>No es falta de disciplina.</p>
+            <span>Es falta de un sistema. Y el sistema empieza con visibilidad.</span>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════ ROMPER CREENCIA ═══════════════════ -->
+<section class="belief-section">
+    <div class="container">
+        <div class="section-label"><i class="fa-solid fa-bomb"></i> La verdad que nadie te dice</div>
+        <h2>El problema no es cuánto ganás…</h2>
+        <p class="belief-intro">Es que no tenés visibilidad ni control real sobre tu dinero. Y lo que no ves, no podés mejorar.</p>
+
+        <div class="belief-arrows">
+            <div class="belief-arrow-item">
+                <i class="fa-solid fa-arrow-right"></i>
+                Lo que no ves <strong>&nbsp;→&nbsp; no lo podés mejorar</strong>
+            </div>
+            <div class="belief-arrow-item">
+                <i class="fa-solid fa-arrow-right"></i>
+                Lo que no ves <strong>&nbsp;→&nbsp; no lo podés escalar</strong>
+            </div>
+        </div>
+
+        <div class="belief-no-grid" style="margin-top:36px;">
+            <div class="belief-no-card">
+                <i class="fa-solid fa-xmark"></i>
+                Restringirte y privarte de todo
+            </div>
+            <div class="belief-no-card">
+                <i class="fa-solid fa-xmark"></i>
+                Usar planillas complicadas
+            </div>
+            <div class="belief-no-card">
+                <i class="fa-solid fa-xmark"></i>
+                Ganar más para organizarte
+            </div>
+        </div>
+
+        <div class="belief-punch">
+            <p><i class="fa-solid fa-arrow-right"></i> La verdad que nadie te contó:</p>
+            <strong>Con visibilidad y un sistema simple, cualquier ingreso se puede controlar, optimizar y escalar.</strong>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════ SOLUCIÓN / MECANISMO ÚNICO ═══════════════════ -->
+<section class="solution-section">
+    <div class="container">
+        <div class="section-label"><i class="fa-solid fa-seedling"></i> La solución</div>
+        <h2 class="section-title">El Método RESET Financiero 3D</h2>
+        <p class="section-subtitle">Un sistema diseñado para sacarte del caos financiero en 3 pasos concretos</p>
+
+        <div class="method-badge">
+            <i class="fa-solid fa-fire"></i>
+            🔥 Método RESET Financiero 3D
+        </div>
+
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <span class="step-icon">🧠</span>
+                <h3>Reseteo Mental</h3>
+                <p>Rompés la creencia de escasez y dejás de operar desde la supervivencia. El dinero empieza a fluir cuando cambiás el chip.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <span class="step-icon">📊</span>
+                <h3>Control Total en Notion</h3>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> Ves el 100% de tu dinero</li>
+                    <li><i class="fa-solid fa-check"></i> Detectás todas tus fugas invisibles</li>
+                    <li><i class="fa-solid fa-check"></i> Entendés exactamente por qué no te alcanza</li>
+                </ul>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <span class="step-icon">🚀</span>
+                <h3>Expansión de Ingresos</h3>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> Creás nuevas fuentes de ingreso</li>
+                    <li><i class="fa-solid fa-check"></i> Tomás decisiones con claridad</li>
+                    <li><i class="fa-solid fa-check"></i> Construís crecimiento real</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="method-not-list">
+            <span class="method-not-item"><i class="fa-solid fa-arrow-right"></i> No es una planilla aburrida</span>
+            <span class="method-not-item"><i class="fa-solid fa-arrow-right"></i> No es un curso caro y largo</span>
+            <span class="method-not-item"><i class="fa-solid fa-arrow-right"></i> Es un sistema que se aplica en 3 días</span>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════ PRODUCT SHOWCASE + PRECIO ═══════════════════ -->
+<section class="product-card-section" id="comprar">
+    <div class="product-card">
+        <div class="bc-mockup" style="background:#f1ebe5;padding:0;">
+            <img src="image/Reset-3D/MockUp1-EbookReset.png" alt="RESET Financiero 3D — Sistema en Notion" style="width:100%;height:auto;max-height:none;object-fit:cover;display:block;">
+        </div>
+        <div class="product-card-body">
+            <div class="product-card-title">RESET Financiero 3D: Controlá tu Dinero, Eliminá Fugas y Creá tu Primera Fuente de Ingresos Extra<br>+ 4 Bonos</div>
+            <div class="product-price-row">
+                <span class="product-price-old">$33.330</span>
+                <span class="product-price-new">$9.999</span>
+                <span class="product-off-badge">OFERTA -70% OFF</span>
+            </div>
+            <div class="product-stock"><span class="product-stock-dot"></span> Precio en oferta — pocas horas disponible</div>
+            <a href="#" class="product-cta">COMPRAR AHORA — ACCESO INMEDIATO</a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════ PRICING BOX ═══════════════════ -->
+<section class="pricing-section">
+    <div class="pricing-box">
+        <div class="pricing-stars">★★★★★</div>
+        <div class="pricing-reviews"><strong>4.9/5</strong> — reservado para los primeros compradores</div>
+
+        <div class="pricing-main-price">$9.999</div>
+        <div class="pricing-old-price">$33.330</div>
+        <a href="#" class="pricing-savings-btn"><i class="fa-solid fa-fire"></i> AHORRÁS $23.331</a>
+
+        <div class="pricing-countdown">
+            <div class="pc-header"><i class="fa-regular fa-bell"></i> Precio en oferta: ¡Últimas horas con 70% OFF!</div>
+            <div class="pc-digits">
+                <div class="pc-unit">
+                    <span class="pc-num" id="ub-h">01</span>
+                    <span class="pc-lbl">horas</span>
+                </div>
+                <span class="pc-sep">:</span>
+                <div class="pc-unit">
+                    <span class="pc-num" id="ub-m">00</span>
+                    <span class="pc-lbl">minutos</span>
+                </div>
+                <span class="pc-sep">:</span>
+                <div class="pc-unit">
+                    <span class="pc-num" id="ub-s">00</span>
+                    <span class="pc-lbl">segundos</span>
+                </div>
+            </div>
+            <div class="pc-footer">Cuando el contador llegue a cero, el precio vuelve a $33.330.</div>
+        </div>
+
+        <a href="#" class="pricing-offer-btn"><i class="fa-solid fa-coins"></i> ¡QUIERO TOMAR EL CONTROL AHORA!</a>
+
+        <ul class="pricing-trust-list">
+            <li><i class="fa-solid fa-bolt" style="color:#f5a623"></i> Acceso inmediato por mail</li>
+            <li><i class="fa-solid fa-lock" style="color:#555"></i> Pago seguro mediante Mercado Pago</li>
+            <li><i class="fa-solid fa-square-check" style="color:#d8a7b1"></i> Garantía "Claridad Financiera o No Pagás"</li>
+        </ul>
+
+        <div class="pricing-live">
+            <div class="pricing-live-dot"></div>
+            <span><span id="pricing-live-count">12</span> personas viendo este sistema ahora</span>
+        </div>
+        <div class="pricing-urgency"><i class="fa-solid fa-fire"></i> El precio en oferta está por vencer</div>
+    </div>
+</section>
+
+<!-- ═══════════════════ BENEFICIOS ═══════════════════ -->
+<section class="benefits-section">
+    <div class="container">
+        <h2 class="section-title">En solo 3 días vas a pasar de…</h2>
+        <p class="section-subtitle">No saber qué pasa con tu dinero → a tener control total, claridad absoluta y una nueva dirección</p>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-card-header">
+                    <span class="b-icon"><i class="fa-solid fa-eye"></i></span>
+                    <h4>Visibilidad total de tu dinero</h4>
+                    <span class="b-arr">▼</span>
+                </div>
+                <div class="benefit-card-body">Por primera vez en tu vida vas a ver el 100% de a dónde va cada peso que entra. Sin sorpresas, sin "no sé qué pasó". El sistema de Notion organiza todo automáticamente para que lo puedas ver de un vistazo.</div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-card-header">
+                    <span class="b-icon"><i class="fa-solid fa-magnifying-glass-dollar"></i></span>
+                    <h4>Descubrís tus fugas invisibles</h4>
+                    <span class="b-arr">▼</span>
+                </div>
+                <div class="benefit-card-body">Todas las pequeñas salidas de dinero que no ves pero se acumulan. Suscripciones olvidadas, gastos automáticos, patrones de consumo inconscientes. Una vez que los ves, los podés cortar en segundos.</div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-card-header">
+                    <span class="b-icon"><i class="fa-solid fa-brain"></i></span>
+                    <h4>Reprogramación de creencias</h4>
+                    <span class="b-arr">▼</span>
+                </div>
+                <div class="benefit-card-body">Dejás de operar desde la escasez y el miedo. Las decisiones financieras dejan de ser estresantes y empezás a tomar el control con claridad mental. El dinero se comporta diferente cuando tu mente cambia.</div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-card-header">
+                    <span class="b-icon"><i class="fa-solid fa-chart-line"></i></span>
+                    <h4>Primera fuente de ingresos extra</h4>
+                    <span class="b-arr">▼</span>
+                </div>
+                <div class="benefit-card-body">Dejás de enfocarte solo en recortar y empezás a expandir. El método incluye un proceso paso a paso para identificar y activar tu primera fuente de ingresos adicional — sin importar tu situación actual.</div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-card-header">
+                    <span class="b-icon"><i class="fa-solid fa-check-to-slot"></i></span>
+                    <h4>Decisiones claras y sin estrés</h4>
+                    <span class="b-arr">▼</span>
+                </div>
+                <div class="benefit-card-body">Cuando tenés el sistema activo, cada decisión financiera se vuelve simple y clara. Sabés si podés, cuánto podés, y qué hacer para poder más. Sin culpa, sin ansiedad y sin bloqueos.</div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-card-header">
+                    <span class="b-icon"><i class="fa-solid fa-bolt"></i></span>
+                    <h4>Todo en tu Notion — para siempre</h4>
+                    <span class="b-arr">▼</span>
+                </div>
+                <div class="benefit-card-body">No es una planilla que abandonás en una semana. El sistema vive en Notion, se actualiza con tu realidad y crece con vos. Una vez configurado, te lleva menos de 5 minutos por día mantenerlo.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════ QUÉ INCLUYE ═══════════════════ -->
+<section class="includes-section">
+    <div class="container">
+        <div class="section-label"><i class="fa-solid fa-box-open"></i> Contenido del sistema</div>
+        <h2 class="section-title">¿Qué incluye el RESET Financiero 3D?</h2>
+        <p class="section-subtitle">Todo lo que necesitás para empezar hoy mismo — sin vueltas ni complicaciones</p>
+        <div class="includes-box">
+            <h3><i class="fa-solid fa-diamond" style="color:var(--red);margin-right:8px;"></i> Sistema RESET Financiero 3D</h3>
+            <ul class="includes-list">
+                <li><i class="fa-solid fa-check-circle"></i> Sistema completo en Notion listo para usar</li>
+                <li><i class="fa-solid fa-check-circle"></i> Paso a paso del Método RESET 3D</li>
+                <li><i class="fa-solid fa-check-circle"></i> Guía para detectar fugas de dinero</li>
+                <li><i class="fa-solid fa-check-circle"></i> Estructura para ingresos y gastos</li>
+                <li><i class="fa-solid fa-check-circle"></i> Método para la primera fuente de ingresos extra</li>
+                <li><i class="fa-solid fa-check-circle"></i> Reprogramación de creencias financieras</li>
+                <li><i class="fa-solid fa-check-circle"></i> Dashboard de control financiero</li>
+                <li><i class="fa-solid fa-check-circle"></i> Acceso de por vida — tuyo para siempre</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════ TESTIMONIOS ═══════════════════ -->
+<section class="testimonials-section">
+    <div class="container">
+        <div class="section-label"><i class="fa-solid fa-comments"></i> Resultados reales</div>
+        <h2 class="section-title">Personas Como Vos Que Ya Lo Vivieron</h2>
+        <p class="section-subtitle">Del caos financiero al control total — así funciona el método</p>
+    </div>
+    <div class="carousel-wrapper">
+
+        <!-- ── Fila 1 ── -->
+        <div class="carousel-row">
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Siempre pensé que el problema era que ganaba poco. Después de los 3 días del RESET descubrí que gastaba $18.000 al mes en suscripciones que no sabía que tenía. Solo con eso recuperé la inversión en el primer día."</p>
+                <div class="t-author">
+                    <div class="t-avatar" style="background:linear-gradient(135deg,#d8a7b1,#a39384)">MA</div>
+                    <div><div class="t-name">Martín A.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Buenos Aires</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Nunca pude sostener ningún sistema de organización financiera. El Notion del RESET es diferente — es tan simple que no hay manera de abandonarlo. Al mes de usarlo ya tenía mi primer ingreso extra de $25.000."</p>
+                <div class="t-author">
+                    <div class="t-avatar" style="background:linear-gradient(135deg,#7b2d8b,#4a1060)">LG</div>
+                    <div><div class="t-name">Lucía G.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Córdoba</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Lo que más me impactó fue la parte de reprogramación mental. Yo creía que el dinero era 'difícil' y que yo no era hábil con los números. Después del día 1 del RESET ese bloqueo desapareció y todo fue más fácil."</p>
+                <div class="t-author">
+                    <div class="t-avatar" style="background:linear-gradient(135deg,#e07b00,#c45c00)">CR</div>
+                    <div><div class="t-name">Carolina R.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Rosario</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <!-- duplicado seamless -->
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Siempre pensé que el problema era que ganaba poco. Después de los 3 días del RESET descubrí que gastaba $18.000 al mes en suscripciones que no sabía que tenía. Solo con eso recuperé la inversión en el primer día."</p>
+                <div class="t-author">
+                    <div class="t-avatar" style="background:linear-gradient(135deg,#d8a7b1,#a39384)">MA</div>
+                    <div><div class="t-name">Martín A.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Buenos Aires</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Nunca pude sostener ningún sistema de organización financiera. El Notion del RESET es diferente — es tan simple que no hay manera de abandonarlo. Al mes de usarlo ya tenía mi primer ingreso extra de $25.000."</p>
+                <div class="t-author">
+                    <div class="t-avatar" style="background:linear-gradient(135deg,#7b2d8b,#4a1060)">LG</div>
+                    <div><div class="t-name">Lucía G.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Córdoba</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Lo que más me impactó fue la parte de reprogramación mental. Yo creía que el dinero era 'difícil' y que yo no era hábil con los números. Después del día 1 del RESET ese bloqueo desapareció y todo fue más fácil."</p>
+                <div class="t-author">
+                    <div class="t-avatar" style="background:linear-gradient(135deg,#e07b00,#c45c00)">CR</div>
+                    <div><div class="t-name">Carolina R.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Rosario</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Fila 2 ── -->
+        <div class="carousel-row carousel-row--right">
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Probé apps, planillas, coaching. Nada me duraba. El RESET me funcionó porque no me pide ser disciplinado todos los días — me pide 3 días de enfoque y después el sistema solo. Tres semanas después mi dinero tiene un destino claro."</p>
+                <div class="t-author">
+                    <div class="t-avatar" style="background:linear-gradient(135deg,#007bc1,#005a8e)">FH</div>
+                    <div><div class="t-name">Facundo H.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Mendoza</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Tenía deudas y no entendía por qué. El sistema me mostró exactamente en qué gastaba de más. En dos semanas de aplicar el RESET reduje mis gastos fijos un 30% sin sentir que me privaba de nada. Increíble."</p>
+                <div class="t-author">
+                    <div class="t-avatar" style="background:linear-gradient(135deg,#1a1f71,#3546c5)">SL</div>
+                    <div><div class="t-name">Sofía L.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Salta</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Compré con dudas porque ya había gastado en cursos que no servían. Pero el precio era accesible y la garantía me tranquilizó. Resultado: en el día 2 del RESET ya tenía más claridad financiera que en 5 años de intentar organizarme solo."</p>
+                <div class="t-author">
+                    <div class="t-avatar" style="background:linear-gradient(135deg,#3d9970,#2d6a4f)">AV</div>
+                    <div><div class="t-name">Agustín V.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Santa Fe</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <!-- duplicado seamless -->
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Probé apps, planillas, coaching. Nada me duraba. El RESET me funcionó porque no me pide ser disciplinado todos los días — me pide 3 días de enfoque y después el sistema solo. Tres semanas después mi dinero tiene un destino claro."</p>
+                <div class="t-author">
+                    <div class="t-avatar" style="background:linear-gradient(135deg,#007bc1,#005a8e)">FH</div>
+                    <div><div class="t-name">Facundo H.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Mendoza</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Tenía deudas y no entendía por qué. El sistema me mostró exactamente en qué gastaba de más. En dos semanas de aplicar el RESET reduje mis gastos fijos un 30% sin sentir que me privaba de nada. Increíble."</p>
+                <div class="t-author">
+                    <div class="t-avatar" style="background:linear-gradient(135deg,#1a1f71,#3546c5)">SL</div>
+                    <div><div class="t-name">Sofía L.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Salta</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p class="t-text">"Compré con dudas porque ya había gastado en cursos que no servían. Pero el precio era accesible y la garantía me tranquilizó. Resultado: en el día 2 del RESET ya tenía más claridad financiera que en 5 años de intentar organizarme solo."</p>
+                <div class="t-author">
+                    <div class="t-avatar" style="background:linear-gradient(135deg,#3d9970,#2d6a4f)">AV</div>
+                    <div><div class="t-name">Agustín V.</div><div class="t-city"><i class="fa-solid fa-location-dot"></i> Santa Fe</div><div class="verified">✔ Compra verificada</div></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ═══════════════════ MID CTA ═══════════════════ -->
+<section style="background:var(--cream);padding:32px 20px;text-align:center;border-top:3px solid var(--pink-light);border-bottom:3px solid var(--pink-light);">
+    <div class="container">
+        <p style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.15rem;color:var(--text);margin-bottom:6px;">¿Ya te reconociste en alguna de estas situaciones?</p>
+        <p style="color:#777;margin-bottom:20px;font-size:.95rem;">El sistema completo + 4 bonos por un único pago de <strong style="color:var(--red);">$9.999</strong></p>
+        <a href="#comprar" class="cta-btn" style="display:inline-flex;"><i class="fa-solid fa-coins"></i> QUIERO EL CONTROL DE MI DINERO AHORA</a>
+        <p style="margin-top:14px;font-size:.8rem;color:#aaa;"><i class="fa-solid fa-shield-halved"></i> Garantía "Claridad Financiera o No Pagás" &nbsp;·&nbsp; <i class="fa-solid fa-bolt"></i> Acceso instantáneo</p>
+    </div>
+</section>
+
+<!-- ═══════════════════ OFERTA STACK / BONOS ═══════════════════ -->
+<section class="offer-section">
+
+    <div class="offer-band">
+        <div class="container">
+            <div class="section-label"><i class="fa-solid fa-gift"></i> La oferta completa</div>
+            <h2 class="section-title">Esto No Es Solo un Ebook.</h2>
+            <p class="section-subtitle">Hoy te llevás el <strong style="color:var(--red)">Sistema RESET Financiero 3D completo</strong> con todos los bonos incluidos — sin costo adicional.</p>
+            <p style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.2rem;color:var(--dark);margin-top:28px;"><i class="fa-solid fa-box-open"></i> Todo lo que recibís hoy:</p>
+        </div>
+    </div>
+
+    <!-- CAROUSEL BONOS -->
+    <div class="offer-band">
+        <div class="container">
+            <div class="bonus-carousel" id="bonus-carousel">
+                <div class="bc-track-wrapper">
+                    <div class="bc-track" id="bc-track">
+
+                        <div class="bc-slide">
+                            <div class="bc-card">
+                                <div class="bc-mockup" style="background:#f1ebe5;">
+                                    <img src="image/Reset-3D/MockUp1-EbookReset.png" alt="Sistema Principal — RESET Financiero 3D">
+                                </div>
+                                <div class="bc-body">
+                                    <div class="bc-name">Sistema Principal: "RESET Financiero 3D — Controlá tu Dinero, Eliminá Fugas y Creá tu Primera Fuente de Ingresos Extra"</div>
+                                    <div class="bc-badge">INCLUIDO EN TU COMPRA</div>
+                                    <p class="bc-desc">El sistema completo en Notion: paso a paso del método 3D, dashboard de control financiero, guía de detección de fugas, estructura de ingresos y gastos, y método para definir tu primera fuente de ingresos extra. Acceso de por vida, listo para usar.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bc-slide">
+                            <div class="bc-card">
+                                <div class="bc-mockup" style="background:#f1ebe5;">
+                                    <img src="image/Reset-3D/MockUp2-Bono1.png" alt="Bono 1 — Mentalidad de expansión">
+                                </div>
+                                <div class="bc-body">
+                                    <div class="bc-name">🎁 Bonus 1 — Guía Rápida: Mentalidad de Expansión en 10 Minutos</div>
+                                    <div class="bc-badge">GRATIS CON TU COMPRA</div>
+                                    <p class="bc-desc">La mayoría intenta mejorar su dinero cambiando lo que hace, pero ignora cómo piensa. Si tu mentalidad opera desde la escasez, cualquier sistema tarde o temprano se rompe. Esta guía te da 5 pasos concretos para detectar tus patrones automáticos, reencuadrarlos al instante y activar una intención de expansión diaria. No necesitás horas — necesitás 10 minutos y enfoque.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bc-slide">
+                            <div class="bc-card">
+                                <div class="bc-mockup" style="background:#f1ebe5;">
+                                    <img src="image/Reset-3D/MockUp3-Bono2.png" alt="Bono 2 — 50 ideas de ingresos extra">
+                                </div>
+                                <div class="bc-body">
+                                    <div class="bc-name">🎁 Bonus 2 — 50 Ideas de Ingresos Extra (Reales y Aplicables)</div>
+                                    <div class="bc-badge">GRATIS CON TU COMPRA</div>
+                                    <p class="bc-desc">No necesitás reinventar nada. Necesitás empezar. 50 fuentes de ingresos adicionales organizadas por categoría: servicios simples, digitales, con conocimiento, reventa, creativas, tecnológicas, locales y escalables. No todas son para vos — pero al menos 2 o 3 sí lo son. Y eso es suficiente para empezar.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bc-slide">
+                            <div class="bc-card">
+                                <div class="bc-mockup" style="background:#f1ebe5;">
+                                    <img src="image/Reset-3D/MockUp4-Bono3.png" alt="Bono 3 — Cómo hacer rendir tu dinero sin ser experto">
+                                </div>
+                                <div class="bc-body">
+                                    <div class="bc-name">🎁 Bonus 3 — Cómo Hacer Rendir tu Dinero sin Ser Experto</div>
+                                    <div class="bc-badge">GRATIS CON TU COMPRA</div>
+                                    <p class="bc-desc">El dinero que no usás debería estar generando algo. Esta guía te explica en simple cómo: usar billeteras virtuales y cuentas remuneradas con rendimiento diario, optimizar el tiempo entre que cobrás y que pagás, separar tu dinero en capas y mantener la lógica de que cada peso trabaja. Sin conocimientos financieros ni riesgo. Acumulado en el tiempo, marca una diferencia enorme.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bc-slide">
+                            <div class="bc-card">
+                                <div class="bc-mockup" style="background:#f1ebe5;">
+                                    <img src="image/Reset-3D/MockUp5-Bono4.png" alt="Bono 4 — Plantilla Notion RESET Financiero 3D">
+                                </div>
+                                <div class="bc-body">
+                                    <div class="bc-name">🎁 Bonus 4 — Plantilla Notion RESET Financiero 3D + Tutorial Paso a Paso</div>
+                                    <div class="bc-badge">GRATIS CON TU COMPRA</div>
+                                    <p class="bc-desc">La plantilla completa en Notion lista para duplicar: dashboard principal, base de datos de ingresos y gastos, vista de flujo mensual e indicadores simples. Incluye un tutorial en video (15–20 min) que te muestra cómo duplicarla, cargar tus datos y usarla en 5 minutos diarios. Todo listo para arrancar desde cero.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <button class="bc-arrow bc-prev" aria-label="Anterior">&#8249;</button>
+                <button class="bc-arrow bc-next" aria-label="Siguiente">&#8250;</button>
+                <div class="bc-dots" id="bc-dots"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VALOR TOTAL -->
+    <div class="offer-band--dark" style="padding-top:0;padding-left:0;padding-right:0;">
+        <img src="image/Reset-3D/MockUpPack-Landing.png" alt="Pack completo RESET Financiero 3D + 4 Bonos" style="width:100%;height:auto;display:block;">
+        <div class="container">
+            <div class="value-stack" style="padding-top:32px;margin-top:0;">
+                <div class="real-value">Ebook $33.330 + 4 Bonos ($10.000 c/u) = Valor real del paquete: $73.330 ARS — hoy lo llevás todo por solo:</div>
+                <div class="big-price">$9.999</div>
+                <div class="ars-price">pesos argentinos — un único pago</div>
+            </div>
+            <div class="cta-wrap" style="margin-top:28px">
+                <a href="#" class="cta-btn"><i class="fa-solid fa-arrow-right"></i> QUIERO ACCESO INMEDIATO AHORA</a>
+                <p class="cta-sub" style="color:#aaa"><i class="fa-solid fa-bolt"></i> Descarga instantánea &nbsp;·&nbsp; <i class="fa-solid fa-lock"></i> Pago 100% seguro &nbsp;·&nbsp; <i class="fa-solid fa-shield-halved"></i> Garantía incluida</p>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- ═══════════════════ PARA QUIÉN ES / NO ES ═══════════════════ -->
+<section class="forwho-section">
+    <div class="container">
+        <div class="section-label"><i class="fa-solid fa-user-check"></i> ¿Es para vos?</div>
+        <h2 class="section-title">Esto es para vos incluso si…</h2>
+        <p class="section-subtitle">El RESET funciona para quien está dispuesto a aplicar el sistema — no para quien busca soluciones mágicas.</p>
+        <div class="forwho-grid">
+            <div class="forwho-card forwho-card--yes">
+                <h3><i class="fa-solid fa-circle-check" style="color:#2e7d45;"></i> Este sistema es para vos si:</h3>
+                <ul class="forwho-list forwho-list--yes">
+                    <li><i class="fa-solid fa-check"></i> Sentís que ganás poco — justamente por eso necesitás control</li>
+                    <li><i class="fa-solid fa-check"></i> No sabés usar herramientas digitales — el sistema es simple y guiado</li>
+                    <li><i class="fa-solid fa-check"></i> Ya intentaste organizarte antes — nunca con un sistema completo como este</li>
+                    <li><i class="fa-solid fa-check"></i> Querés algo simple y efectivo que se sostenga en el tiempo</li>
+                </ul>
+            </div>
+            <div class="forwho-card forwho-card--no">
+                <h3><i class="fa-solid fa-circle-xmark" style="color:#cc3333;"></i> No es para vos si:</h3>
+                <ul class="forwho-list forwho-list--no">
+                    <li><i class="fa-solid fa-xmark"></i> Buscás hacerte rico/a de la noche a la mañana sin esfuerzo</li>
+                    <li><i class="fa-solid fa-xmark"></i> No estás dispuesto/a a aplicar el sistema durante 3 días</li>
+                    <li><i class="fa-solid fa-xmark"></i> Querés que alguien resuelva tu situación financiera por vos</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════ FORMAS DE PAGO ═══════════════════ -->
+<section class="payment-section" style="padding-top:44px;padding-bottom:0;">
+    <div class="container" style="padding-bottom:0;">
+        <img src="image/ML.png" alt="MercadoLíder Platinum" class="ml-img" style="margin-bottom:24px;">
+    </div>
+    <div style="border-top:1px solid #d8c8c0;margin:0 -20px;"></div>
+    <div class="container" style="padding-top:24px;padding-bottom:44px;">
+        <h3>Métodos de pago</h3>
+        <img src="image/MetodosPago.png" alt="Métodos de pago: Mercado Pago, Visa, Mastercard" class="pay-img">
+        <div><span class="ssl-badge"><i class="fa-solid fa-lock"></i> Sitio protegido con SSL — Tus datos nunca se comparten con terceros</span></div>
+    </div>
+</section>
+
+<!-- ═══════════════════ GARANTÍA ═══════════════════ -->
+<section class="guarantee-section">
+    <div class="container">
+        <div class="guarantee-box">
+            <div class="g-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="section-label" style="margin-bottom:14px;"><i class="fa-solid fa-shield-halved"></i> Garantía de 7 días</div>
+            <h2>"Claridad Financiera o No Pagás"</h2>
+            <p>Probalo 7 días. Si no sentís mayor claridad y control sobre tu dinero, simplemente no es para ti.</p>
+            <ul class="guarantee-list">
+                <li><i class="fa-solid fa-check-circle"></i> Visibilidad total de tu dinero</li>
+                <li><i class="fa-solid fa-check-circle"></i> Fugas identificadas y cortadas</li>
+                <li><i class="fa-solid fa-check-circle"></i> Primera dirección clara de ingresos extra</li>
+            </ul>
+            <p><strong style="color:var(--red)">Te devolvemos el dinero. Sin riesgos. Sin preguntas.</strong></p>
+            <p>El sistema funciona. Pero si con vos no funciona, el riesgo lo asumo <em>yo</em> — no vos.</p>
+            <p style="font-size:.88rem;color:#999"><i class="fa-solid fa-envelope"></i> Solo mandás un mail a soporte y listo. Sin formularios, sin burocracia, sin excusas.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════ CIERRE EMOCIONAL ═══════════════════ -->
+<section class="closing-section">
+    <div class="container">
+        <h2>Seguir como estás también tiene un costo.</h2>
+        <p>Más confusión. Más frustración. Más meses sintiendo que no avanzás.</p>
+        <p class="closing-punch">👉 O podés tomar el control hoy.</p>
+        <p style="font-size:.95rem;color:#555;max-width:500px;margin:0 auto;">El sistema está diseñado para aplicarse inmediatamente. Mientras antes empieces, antes salís del ciclo.</p>
+    </div>
+</section>
+
+<!-- ═══════════════════ FAQ ═══════════════════ -->
+<section class="faq-section">
+    <div class="container">
+        <h2><i class="fa-solid fa-circle-question"></i> Preguntas Frecuentes</h2>
+
+        <div class="faq-item">
+            <div class="faq-q">¿Cómo recibo el sistema después de comprar? <span class="arr">▼</span></div>
+            <div class="faq-a">Inmediatamente después del pago recibís un email con el link de acceso al sistema en Notion. Acceso instantáneo, 24/7, desde cualquier dispositivo — celular, tablet o computadora. Sin esperas.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿Necesito saber usar Notion para aplicar el sistema? <span class="arr">▼</span></div>
+            <div class="faq-a">No. El sistema viene completamente armado y listo para usar. La guía paso a paso te muestra exactamente qué hacer en cada sección. Si nunca usaste Notion, en 10 minutos ya estarás navegando sin problemas.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿Funciona si tengo ingresos muy bajos o variables? <span class="arr">▼</span></div>
+            <div class="faq-a">El método está diseñado específicamente para quien siente que "nunca alcanza". Ingresos bajos, variables o irregulares — el sistema se adapta a tu realidad y te da visibilidad sobre lo que tenés para que puedas tomás mejores decisiones con lo que tenés hoy.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿En cuánto tiempo veo resultados? <span class="arr">▼</span></div>
+            <div class="faq-a">El nombre lo dice: 3 días. En el día 1 ya tenés visibilidad de tu situación financiera real. En el día 2 identificás tus fugas. En el día 3 tenés un plan de acción claro. Los resultados financieros concretos se construyen en las semanas siguientes aplicando el sistema.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿Hay que pagar Notion para usar el sistema? <span class="arr">▼</span></div>
+            <div class="faq-a">No. El sistema funciona 100% con la versión gratuita de Notion, que podés usar ilimitado en tu celular o computadora. No necesitás ninguna suscripción adicional para acceder al sistema completo.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿Sirve si ya intenté organizarme antes sin éxito? <span class="arr">▼</span></div>
+            <div class="faq-a">Especialmente para vos. La mayoría de los sistemas que existen requieren disciplina diaria perfecta — y eso no es sostenible. El RESET Financiero 3D está construido para que funcione aunque no seas "bueno con los números" o hayas fallado antes con otras herramientas.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿Qué pasa con los bonos? ¿Son reales? <span class="arr">▼</span></div>
+            <div class="faq-a">Sí, los 4 bonos están incluidos en tu compra sin costo adicional. Los recibís junto con el sistema principal en el mismo email de acceso. Son herramientas complementarias que funcionan junto con el método principal para que tengas todo lo que necesitás desde el día 1.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿La garantía de devolución es real? <span class="arr">▼</span></div>
+            <div class="faq-a">100% real. Si dentro de los 7 días no notás ningún resultado de mayor claridad sobre tu dinero, mandás un email a soporte y te devolvemos el dinero completo — sin preguntas, sin formularios y sin demoras. El riesgo es nuestro, no tuyo.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿Tengo acceso de por vida al material? <span class="arr">▼</span></div>
+            <div class="faq-a">Sí. El sistema y todos los bonos son tuyos para siempre — los guardás en tu Notion y los usás cuando quieras, cuantas veces quieras. Sin suscripciones, sin vencimientos.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿Funciona si estoy en crisis financiera o en deuda? <span class="arr">▼</span></div>
+            <div class="faq-a">El RESET Financiero 3D es especialmente útil en esos momentos porque te da claridad cuando más la necesitás. Saber exactamente cuánto entra, cuánto sale y a dónde va es el primer paso para salir de cualquier situación financiera difícil — y eso es exactamente lo que el sistema te entrega en los primeros 3 días.</div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════ FINAL CTA ═══════════════════ -->
+<section class="final-cta">
+    <div class="container">
+        <h2>Empezá hoy tu RESET Financiero 3D<br>y tomá el control de tu dinero de una vez.</h2>
+        <p>La confusión, la frustración y esa sensación de no avanzar no son "parte de la vida". Tienen solución — y el sistema está acá. Simple, aplicable en 3 días y diseñado para vos.</p>
+        <div class="cta-wrap">
+            <a href="#comprar" class="cta-btn"><i class="fa-solid fa-coins"></i> QUIERO ACCEDER AL MÉTODO RESET FINANCIERO 3D</a>
+            <p class="cta-sub light">Solo $9.999 ARS &nbsp;·&nbsp; Acceso en segundos &nbsp;·&nbsp; Garantía "Claridad Financiera o No Pagás"</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer>
+    <div class="container">
+        <p>© 2026 Vida en Calma · Todos los derechos reservados</p>
+        <p style="margin-top:4px;font-size:.72rem;color:#444;max-width:700px;margin-left:auto;margin-right:auto;">
+            Este producto es un sistema educativo digital de finanzas personales. No constituye asesoramiento financiero, legal ni profesional. Los resultados individuales pueden variar según la situación y el compromiso de cada persona.
+        </p>
+        <p style="margin-top:8px">
+            <a href="#">Términos y Condiciones</a> &nbsp;·&nbsp;
+            <a href="#">Política de Privacidad</a> &nbsp;·&nbsp;
+            <a href="#">Contacto y Soporte</a>
+        </p>
+    </div>
+</footer>
+
+<!-- Botón flotante -->
+<a href="#comprar" class="float-cta"><i class="fa-solid fa-coins"></i> ACCEDER AHORA</a>
+
+<!-- ═══════════════════ TOAST CONTAINER ═══════════════════ -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ═══════════════════ JAVASCRIPT ═══════════════════ -->
+<script>
+/* ─── 1. COUNTDOWN TIMER ─── */
+(function () {
+    var KEY = 'vc_reset3d_countdown_v1';
+    var end = +sessionStorage.getItem(KEY);
+    if (!end || end < Date.now()) {
+        end = Date.now() + (60 * 60) * 1000;
+        sessionStorage.setItem(KEY, end);
+    }
+    function tick() {
+        var diff = Math.max(0, end - Date.now());
+        var h = Math.floor(diff / 3600000);
+        var m = Math.floor((diff % 3600000) / 60000);
+        var s = Math.floor((diff % 60000) / 1000);
+        document.getElementById('ub-h').textContent = String(h).padStart(2, '0');
+        document.getElementById('ub-m').textContent = String(m).padStart(2, '0');
+        document.getElementById('ub-s').textContent = String(s).padStart(2, '0');
+    }
+    tick();
+    setInterval(tick, 1000);
+})();
+
+/* ─── 2. LIVE VIEWERS COUNTER ─── */
+(function () {
+    var pool = [6, 8, 9, 11, 12, 14, 15, 18];
+    function pickRandom() { return pool[Math.floor(Math.random() * pool.length)]; }
+    var els = [document.getElementById('pricing-live-count')];
+    var cur = pickRandom();
+    els.forEach(function(el){ if(el) el.textContent = cur; });
+    setInterval(function () {
+        cur = pickRandom();
+        els.forEach(function(el){ if(el) el.textContent = cur; });
+    }, 4500);
+})();
+
+/* ─── 3. PURCHASE TOAST NOTIFICATIONS ─── */
+(function () {
+    var buyers = [
+        { name: 'Valentina M.',  city: 'Buenos Aires',  ini: 'VM', bg: 'linear-gradient(135deg,#d8a7b1,#a39384)' },
+        { name: 'Martín A.',     city: 'Córdoba',        ini: 'MA', bg: 'linear-gradient(135deg,#3d9970,#2d6a4f)' },
+        { name: 'Sofía P.',      city: 'Rosario',        ini: 'SP', bg: 'linear-gradient(135deg,#7b2d8b,#4a1060)' },
+        { name: 'Diego F.',      city: 'Mendoza',        ini: 'DF', bg: 'linear-gradient(135deg,#e07b00,#c45c00)' },
+        { name: 'Camila B.',     city: 'Mar del Plata',  ini: 'CB', bg: 'linear-gradient(135deg,#007bc1,#005a8e)' },
+        { name: 'Nicolás T.',    city: 'Salta',          ini: 'NT', bg: 'linear-gradient(135deg,#1a1f71,#3546c5)' },
+        { name: 'Florencia C.',  city: 'La Plata',       ini: 'FC', bg: 'linear-gradient(135deg,#d8a7b1,#a39384)' },
+        { name: 'Rodrigo A.',    city: 'Tucumán',        ini: 'RA', bg: 'linear-gradient(135deg,#3d9970,#2d6a4f)' },
+        { name: 'Lucía G.',      city: 'Santa Fe',       ini: 'LG', bg: 'linear-gradient(135deg,#7b2d8b,#4a1060)' },
+        { name: 'Agustín L.',    city: 'Bahía Blanca',   ini: 'AL', bg: 'linear-gradient(135deg,#e07b00,#c45c00)' },
+        { name: 'Carolina V.',   city: 'San Juan',       ini: 'CV', bg: 'linear-gradient(135deg,#007bc1,#005a8e)' },
+        { name: 'Facundo H.',    city: 'Neuquén',        ini: 'FH', bg: 'linear-gradient(135deg,#1a1f71,#3546c5)' },
+        { name: 'Julieta S.',    city: 'Paraná',         ini: 'JS', bg: 'linear-gradient(135deg,#d8a7b1,#a39384)' },
+        { name: 'Emiliano R.',   city: 'Posadas',        ini: 'ER', bg: 'linear-gradient(135deg,#3d9970,#2d6a4f)' },
+        { name: 'Natalia Q.',    city: 'La Rioja',       ini: 'NQ', bg: 'linear-gradient(135deg,#7b2d8b,#4a1060)' }
+    ];
+    var times = ['hace 1 min', 'hace 2 min', 'hace 3 min', 'hace 5 min', 'recién ahora', 'hace 8 min'];
+    var container = document.getElementById('toastContainer');
+    var idx = Math.floor(Math.random() * buyers.length);
+
+    function showToast() {
+        var b   = buyers[idx % buyers.length]; idx++;
+        var t   = times[Math.floor(Math.random() * times.length)];
+        var div = document.createElement('div');
+        div.className = 'toast';
+        div.innerHTML =
+            '<div class="t-av" style="background:' + b.bg + '">' + b.ini + '</div>' +
+            '<div class="toast-body">' +
+            '<strong>' + b.name + ' de ' + b.city + '</strong>' +
+            '<span>acaba de acceder al RESET — ' + t + '</span>' +
+            '</div>' +
+            '<div class="toast-check">✔</div>';
+        container.appendChild(div);
+        setTimeout(function () {
+            div.classList.add('out');
+            setTimeout(function () { div.remove(); }, 380);
+        }, 4800);
+    }
+
+    setTimeout(function () {
+        showToast();
+        setInterval(showToast, 25000 + Math.random() * 15000);
+    }, 30000);
+})();
+
+/* ─── 4. FAQ ACCORDION ─── */
+document.querySelectorAll('.faq-q').forEach(function (q) {
+    q.addEventListener('click', function () {
+        var item   = q.parentElement;
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(function (i) { i.classList.remove('open'); });
+        if (!isOpen) { item.classList.add('open'); }
+    });
+});
+
+/* ─── 5. BENEFITS ACCORDION ─── */
+document.querySelectorAll('.benefit-card').forEach(function (card) {
+    card.addEventListener('click', function () {
+        var isOpen = card.classList.contains('open');
+        document.querySelectorAll('.benefit-card').forEach(function (c) { c.classList.remove('open'); });
+        if (!isOpen) { card.classList.add('open'); }
+    });
+});
+
+/* ─── 6. CAROUSEL DRAG (testimonios) ─── */
+(function () {
+    var wrapper = document.querySelector('.carousel-wrapper');
+    if (!wrapper) return;
+    var rows = Array.from(wrapper.querySelectorAll('.carousel-row'));
+    var DURATION = 38;
+
+    function getTranslateX(el) {
+        var t = window.getComputedStyle(el).transform;
+        if (!t || t === 'none') return 0;
+        var vals = t.replace('matrix(', '').replace(')', '').split(',');
+        return parseFloat(vals[4]) || 0;
+    }
+
+    function resumeRows(finalXArr) {
+        rows.forEach(function (row, i) {
+            row.style.animation = 'none';
+            row.style.transform = 'translateX(' + finalXArr[i] + 'px)';
+            void row.offsetWidth;
+            var animName = row.classList.contains('carousel-row--right') ? 'scroll-right' : 'scroll-left';
+            row.style.animation = animName + ' ' + DURATION + 's linear infinite';
+            row.style.animationPlayState = 'running';
+        });
+    }
+
+    var isDown    = false;
+    var startX    = 0;
+    var startY    = 0;
+    var startArr  = [];
+    var direction = null;
+
+    function clientX(e) { return e.touches ? e.touches[0].clientX : e.clientX; }
+    function clientY(e) { return e.touches ? e.touches[0].clientY : e.clientY; }
+
+    wrapper.addEventListener('mouseleave', function () {
+        if (isDown) return;
+        rows.forEach(function (row) { row.style.animationPlayState = ''; });
+    });
+
+    function onStart(e) {
+        isDown    = true;
+        startX    = clientX(e);
+        startY    = clientY(e);
+        direction = null;
+        startArr  = rows.map(getTranslateX);
+    }
+
+    function onMove(e) {
+        if (!isDown) return;
+        var dx = clientX(e) - startX;
+        var dy = clientY(e) - startY;
+        if (direction === null && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
+            direction = Math.abs(dx) >= Math.abs(dy) ? 'h' : 'v';
+            if (direction === 'h') {
+                rows.forEach(function (row) { row.style.animation = 'none'; });
+                wrapper.classList.add('is-dragging');
+            }
+        }
+        if (direction === 'h') {
+            if (e.cancelable) e.preventDefault();
+            rows.forEach(function (row, i) {
+                row.style.transform = 'translateX(' + (startArr[i] + dx) + 'px)';
+            });
+        }
+    }
+
+    function onEnd(e) {
+        if (!isDown) return;
+        isDown = false;
+        if (direction === 'h') {
+            var finalXArr = rows.map(getTranslateX);
+            wrapper.classList.remove('is-dragging');
+            resumeRows(finalXArr);
+        }
+        direction = null;
+    }
+
+    wrapper.addEventListener('mousedown',  onStart);
+    window.addEventListener('mousemove',   onMove);
+    window.addEventListener('mouseup',     onEnd);
+    wrapper.addEventListener('touchstart', onStart, { passive: true });
+    window.addEventListener('touchmove',   onMove,  { passive: false });
+    window.addEventListener('touchend',    onEnd);
+})();
+
+/* ─── 7. BONUS CAROUSEL ─── */
+(function () {
+    var carousel = document.getElementById('bonus-carousel');
+    if (!carousel) return;
+    var track    = document.getElementById('bc-track');
+    var slides   = Array.from(carousel.querySelectorAll('.bc-slide'));
+    var dotsWrap = document.getElementById('bc-dots');
+    var total    = slides.length;
+    var current  = 0;
+    var autoTimer;
+    var INTERVAL = 4000;
+
+    slides.forEach(function (_, i) {
+        var dot = document.createElement('button');
+        dot.className = 'bc-dot' + (i === 0 ? ' bc-dot--active' : '');
+        dot.setAttribute('aria-label', 'Ir a ' + (i + 1));
+        dot.addEventListener('click', function () { goTo(i); resetTimer(); });
+        dotsWrap.appendChild(dot);
+    });
+
+    function goTo(index) {
+        current = (index + total) % total;
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        carousel.querySelectorAll('.bc-dot').forEach(function (d, i) {
+            d.classList.toggle('bc-dot--active', i === current);
+        });
+    }
+
+    function next() { goTo(current + 1); }
+    function prev() { goTo(current - 1); }
+
+    function resetTimer() {
+        clearInterval(autoTimer);
+        autoTimer = setInterval(next, INTERVAL);
+    }
+
+    carousel.querySelector('.bc-prev').addEventListener('click', function () { prev(); resetTimer(); });
+    carousel.querySelector('.bc-next').addEventListener('click', function () { next(); resetTimer(); });
+
+    var touchStartX = 0;
+    carousel.addEventListener('touchstart', function (e) {
+        touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    carousel.addEventListener('touchend', function (e) {
+        var diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) { diff > 0 ? next() : prev(); resetTimer(); }
+    }, { passive: true });
+
+    carousel.addEventListener('mouseenter', function () { clearInterval(autoTimer); });
+    carousel.addEventListener('mouseleave', resetTimer);
+
+    resetTimer();
+})();
+</script>
+</body>
+</html>

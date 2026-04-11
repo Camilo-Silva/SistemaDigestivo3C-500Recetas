@@ -1,5 +1,5 @@
 <style>
-  .sd3c-toast-container { position: fixed; bottom: 90px; left: 16px; z-index: 1000; display: flex; flex-direction: column; gap: 10px; font-family: 'Segoe UI', system-ui, sans-serif; }
+  .sd3c-toast-container { position: fixed; top: 20px; left: 16px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; font-family: 'Segoe UI', system-ui, sans-serif; }
   .sd3c-toast {
     background: #fff; border-radius: 12px; padding: 12px 14px;
     display: flex; align-items: center; gap: 11px;
@@ -7,13 +7,13 @@
     max-width: 290px; animation: sd3cToastIn .35s cubic-bezier(.18,.89,.32,1.28);
   }
   .sd3c-toast.out { animation: sd3cToastOut .32s ease forwards; }
-  @keyframes sd3cToastIn  { from { opacity:0; transform:translateY(16px) scale(.94); } to { opacity:1; transform:translateY(0) scale(1); } }
-  @keyframes sd3cToastOut { to   { opacity:0; transform:translateY(10px) scale(.96); } }
-  .sd3c-t-av { width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.78rem; font-weight:800; color:#fff; flex-shrink:0; }
+  @keyframes sd3cToastIn  { from { opacity:0; transform:translateY(-16px) scale(.94); } to { opacity:1; transform:translateY(0) scale(1); } }
+  @keyframes sd3cToastOut { to   { opacity:0; transform:translateY(-10px) scale(.96); } }
+  .sd3c-t-av { width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; color:#fff; flex-shrink:0; }
   .sd3c-toast-body { flex:1; }
-  .sd3c-toast-body strong { display:block; font-size:.82rem; color:#111; line-height:1.3; }
-  .sd3c-toast-body span   { display:block; font-size:.75rem; color:#888; margin-top:2px; }
-  .sd3c-toast-check { color:#3483fa; font-size:1rem; flex-shrink:0; }
+  .sd3c-toast-body strong { display:block; font-size:13px; color:#111; line-height:1.3; }
+  .sd3c-toast-body span   { display:block; font-size:12px; color:#888; margin-top:2px; }
+  .sd3c-toast-check { color:#3483fa; font-size:16px; flex-shrink:0; }
 </style>
 
 <div class="sd3c-toast-container" id="sd3cToastContainer"></div>

@@ -1,0 +1,602 @@
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+  /* ── Cart Upsell Drawer ── */
+  .cupsell-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    z-index: 9998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease;
+  }
+  .cupsell-overlay.cupsell-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .cupsell-drawer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: #f8f3ef;
+    border-radius: 18px 18px 0 0;
+    box-shadow: 0 -6px 32px rgba(0,0,0,.16);
+    transform: translateY(100%);
+    transition: transform .4s cubic-bezier(.4,0,.2,1);
+    max-height: 80vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .cupsell-drawer.cupsell-open {
+    transform: translateY(0);
+  }
+
+  /* ── Header ── */
+  .cupsell-header {
+    position: sticky;
+    top: 0;
+    background: #f8f3ef;
+    padding: 12px 15px 10px;
+    border-bottom: 1px solid #e8dfd8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1;
+  }
+  .cupsell-header-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 14px;
+    color: #111;
+  }
+  .cupsell-header-sub {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 11px;
+    color: #888;
+    margin-top: 2px;
+  }
+  .cupsell-close {
+    background: #e8dfd8;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 17px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .cupsell-close:hover { background: #d6c9bf; }
+
+  /* ── Grid de productos ── */
+  .cupsell-body {
+    padding: 11px 11px 24px;
+  }
+  .cupsell-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 9px;
+  }
+  @media (max-width: 640px) {
+    .cupsell-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ── Card ── */
+  .cupsell-card {
+    background: #fff;
+    border: 1px solid #e2dbd5;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: box-shadow .15s, transform .15s;
+  }
+  .cupsell-card:hover {
+    box-shadow: 0 5px 18px rgba(0,0,0,.12);
+    transform: translateY(-2px);
+  }
+  .cupsell-card-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+  }
+  .cupsell-card-body {
+    padding: 8px 9px 10px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .cupsell-badge {
+    display: inline-block;
+    background: #ad6639;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: .3px;
+    margin-bottom: 4px;
+    width: fit-content;
+  }
+  .cupsell-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    color: #111;
+    line-height: 1.3;
+    margin-bottom: 5px;
+    flex: 1;
+  }
+  .cupsell-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 7px;
+    flex-wrap: wrap;
+  }
+  .cupsell-price-old {
+    font-size: 10px;
+    color: #bbb;
+    text-decoration: line-through;
+    font-family: 'Open Sans', sans-serif;
+  }
+  .cupsell-price-new {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 14px;
+    color: #ad6639;
+  }
+  /* ── Botón Agregar al carrito ── */
+  .cupsell-atc-btn {
+    display: block;
+    width: 100%;
+    background: linear-gradient(180deg, #27ae60, #1e9e4f);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    padding: 7px 4px;
+    border-radius: 6px;
+    text-decoration: none;
+    box-shadow: 0 3px 0 #155a2a;
+    transition: all .13s ease;
+    position: relative;
+    z-index: 1;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .cupsell-atc-btn:hover { transform: translateY(2px); box-shadow: 0 1px 0 #155a2a; }
+  .cupsell-atc-btn.cupsell-added {
+    background: linear-gradient(180deg, #2e86de, #1a73ce);
+    box-shadow: 0 3px 0 #0f4f9e;
+    pointer-events: none;
+  }
+  .cupsell-atc-btn.cupsell-loading { opacity: .7; pointer-events: none; }
+</style>
+
+<!-- Overlay oscuro -->
+<div class="cupsell-overlay" id="cupsellOverlay"></div>
+
+<!-- Drawer -->
+<div class="cupsell-drawer" id="cupsellDrawer" role="dialog" aria-modal="true" aria-label="Productos recomendados">
+
+  <div class="cupsell-header">
+    <div>
+      <div class="cupsell-header-title">🛍 También te puede interesar</div>
+      <div class="cupsell-header-sub">Completá tu pedido con uno de estos productos</div>
+    </div>
+    <button class="cupsell-close" id="cupsellClose" aria-label="Cerrar">&#215;</button>
+  </div>
+
+  <div class="cupsell-body">
+    <div class="cupsell-grid">
+
+      <!-- ── Producto 1 ── -->
+      <div class="cupsell-card" data-href="{{ section.settings.p1_img_url | default: section.settings.p1_cta_url }}">
+        {% if section.settings.p1_image != blank %}
+          <img src="{{ section.settings.p1_image | img_url: 'master' }}" alt="{{ section.settings.p1_title }}" class="cupsell-card-img">
+        {% endif %}
+        <div class="cupsell-card-body">
+          {% if section.settings.p1_badge != blank %}
+            <span class="cupsell-badge">{{ section.settings.p1_badge }}</span>
+          {% endif %}
+          <div class="cupsell-title">{{ section.settings.p1_title }}</div>
+          <div class="cupsell-price-row">
+            {% if section.settings.p1_price_old != blank %}
+              <span class="cupsell-price-old">{{ section.settings.p1_price_old }}</span>
+            {% endif %}
+            <span class="cupsell-price-new">{{ section.settings.p1_price_new }}</span>
+          </div>
+          {% if section.settings.p1_variant_id != blank %}
+            <button class="cupsell-atc-btn" data-variant="{{ section.settings.p1_variant_id }}" data-fallback="{{ section.settings.p1_cta_url }}">🛒 Agregar al carrito</button>
+          {% else %}
+            <a href="{{ section.settings.p1_cta_url }}" class="cupsell-atc-btn">🛒 Ver producto</a>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- ── Producto 2 ── -->
+      <div class="cupsell-card" data-href="{{ section.settings.p2_img_url | default: section.settings.p2_cta_url }}">
+        {% if section.settings.p2_image != blank %}
+          <img src="{{ section.settings.p2_image | img_url: 'master' }}" alt="{{ section.settings.p2_title }}" class="cupsell-card-img">
+        {% endif %}
+        <div class="cupsell-card-body">
+          {% if section.settings.p2_badge != blank %}
+            <span class="cupsell-badge">{{ section.settings.p2_badge }}</span>
+          {% endif %}
+          <div class="cupsell-title">{{ section.settings.p2_title }}</div>
+          <div class="cupsell-price-row">
+            {% if section.settings.p2_price_old != blank %}
+              <span class="cupsell-price-old">{{ section.settings.p2_price_old }}</span>
+            {% endif %}
+            <span class="cupsell-price-new">{{ section.settings.p2_price_new }}</span>
+          </div>
+          {% if section.settings.p2_variant_id != blank %}
+            <button class="cupsell-atc-btn" data-variant="{{ section.settings.p2_variant_id }}" data-fallback="{{ section.settings.p2_cta_url }}">🛒 Agregar al carrito</button>
+          {% else %}
+            <a href="{{ section.settings.p2_cta_url }}" class="cupsell-atc-btn">🛒 Ver producto</a>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- ── Producto 3 ── -->
+      <div class="cupsell-card" data-href="{{ section.settings.p3_img_url | default: section.settings.p3_cta_url }}">
+        {% if section.settings.p3_image != blank %}
+          <img src="{{ section.settings.p3_image | img_url: 'master' }}" alt="{{ section.settings.p3_title }}" class="cupsell-card-img">
+        {% endif %}
+        <div class="cupsell-card-body">
+          {% if section.settings.p3_badge != blank %}
+            <span class="cupsell-badge">{{ section.settings.p3_badge }}</span>
+          {% endif %}
+          <div class="cupsell-title">{{ section.settings.p3_title }}</div>
+          <div class="cupsell-price-row">
+            {% if section.settings.p3_price_old != blank %}
+              <span class="cupsell-price-old">{{ section.settings.p3_price_old }}</span>
+            {% endif %}
+            <span class="cupsell-price-new">{{ section.settings.p3_price_new }}</span>
+          </div>
+          {% if section.settings.p3_variant_id != blank %}
+            <button class="cupsell-atc-btn" data-variant="{{ section.settings.p3_variant_id }}" data-fallback="{{ section.settings.p3_cta_url }}">🛒 Agregar al carrito</button>
+          {% else %}
+            <a href="{{ section.settings.p3_cta_url }}" class="cupsell-atc-btn">🛒 Ver producto</a>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- ── Producto 4 ── -->
+      <div class="cupsell-card" data-href="{{ section.settings.p4_img_url | default: section.settings.p4_cta_url }}">
+        {% if section.settings.p4_image != blank %}
+          <img src="{{ section.settings.p4_image | img_url: 'master' }}" alt="{{ section.settings.p4_title }}" class="cupsell-card-img">
+        {% endif %}
+        <div class="cupsell-card-body">
+          {% if section.settings.p4_badge != blank %}
+            <span class="cupsell-badge">{{ section.settings.p4_badge }}</span>
+          {% endif %}
+          <div class="cupsell-title">{{ section.settings.p4_title }}</div>
+          <div class="cupsell-price-row">
+            {% if section.settings.p4_price_old != blank %}
+              <span class="cupsell-price-old">{{ section.settings.p4_price_old }}</span>
+            {% endif %}
+            <span class="cupsell-price-new">{{ section.settings.p4_price_new }}</span>
+          </div>
+          {% if section.settings.p4_variant_id != blank %}
+            <button class="cupsell-atc-btn" data-variant="{{ section.settings.p4_variant_id }}" data-fallback="{{ section.settings.p4_cta_url }}">🛒 Agregar al carrito</button>
+          {% else %}
+            <a href="{{ section.settings.p4_cta_url }}" class="cupsell-atc-btn">🛒 Ver producto</a>
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var dismissed = false;
+  var drawer  = document.getElementById('cupsellDrawer');
+  var overlay = document.getElementById('cupsellOverlay');
+  var closeBtn = document.getElementById('cupsellClose');
+
+  function openDrawer() {
+    if (dismissed) return;
+    drawer.classList.add('cupsell-open');
+    overlay.classList.add('cupsell-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDrawer() {
+    dismissed = true;
+    drawer.classList.remove('cupsell-open');
+    overlay.classList.remove('cupsell-open');
+    document.body.style.overflow = '';
+  }
+
+  // Abrir con delay configurable
+  var delay = parseInt('{{ section.settings.delay_ms | default: 900 }}', 10);
+  setTimeout(openDrawer, delay);
+
+  closeBtn.addEventListener('click', closeDrawer);
+  overlay.addEventListener('click', closeDrawer);
+
+  // Tecla Escape
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeDrawer();
+  });
+
+  // Click en card fuera del botón → navega a data-href
+  drawer.querySelectorAll('.cupsell-card[data-href]').forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      if (e.target.closest('.cupsell-atc-btn')) return;
+      var url = card.dataset.href;
+      if (url) window.location.href = url;
+    });
+  });
+
+  // Agregar al carrito via AJAX
+  drawer.querySelectorAll('.cupsell-atc-btn[data-variant]').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var variantId = btn.dataset.variant;
+      var fallback  = btn.dataset.fallback;
+      btn.classList.add('cupsell-loading');
+      btn.textContent = 'Agregando...';
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ id: variantId, quantity: 1 })
+      })
+      .then(function (res) { if (!res.ok) throw new Error(); return res.json(); })
+      .then(function () {
+        btn.classList.remove('cupsell-loading');
+        btn.classList.add('cupsell-added');
+        btn.textContent = '✓ Agregado!';
+        document.dispatchEvent(new CustomEvent('cart:refresh'));
+        setTimeout(function () {
+          closeDrawer();
+          window.location.reload();
+        }, 900);
+      })
+      .catch(function () {
+        btn.classList.remove('cupsell-loading');
+        btn.textContent = '🛒 Agregar al carrito';
+        if (fallback) window.location.href = fallback;
+      });
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Cart Upsell",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "range",
+      "id": "delay_ms",
+      "label": "Delay antes de aparecer (ms)",
+      "min": 0,
+      "max": 5000,
+      "step": 200,
+      "default": 1000
+    },
+    {
+      "type": "header",
+      "content": "Producto 1 — Reiniciá tu Cuerpo"
+    },
+    {
+      "type": "image_picker",
+      "id": "p1_image",
+      "label": "Imagen"
+    },
+    {
+      "type": "text",
+      "id": "p1_badge",
+      "label": "Badge",
+      "default": "MÁS VENDIDO"
+    },
+    {
+      "type": "text",
+      "id": "p1_title",
+      "label": "Nombre del producto",
+      "default": "Reiniciá tu Cuerpo — Método Reset Antiinflamatorio"
+    },
+    {
+      "type": "text",
+      "id": "p1_price_new",
+      "label": "Precio oferta",
+      "default": "$9.999"
+    },
+    {
+      "type": "text",
+      "id": "p1_price_old",
+      "label": "Precio tachado (vacío para ocultar)",
+      "default": "$33.330"
+    },
+    {
+      "type": "text",
+      "id": "p1_variant_id",
+      "label": "Variant ID de Shopify",
+      "info": "Admin > Productos > variante > URL (número al final). Sin esto muestra 'Ver producto'."
+    },
+    {
+      "type": "url",
+      "id": "p1_cta_url",
+      "label": "URL de respaldo (si no hay Variant ID)"
+    },
+    {
+      "type": "url",
+      "id": "p1_img_url",
+      "label": "URL click en card (vacío = usa URL de respaldo)"
+    },
+    {
+      "type": "header",
+      "content": "Producto 2 — 500 Recetas SD3C"
+    },
+    {
+      "type": "image_picker",
+      "id": "p2_image",
+      "label": "Imagen"
+    },
+    {
+      "type": "text",
+      "id": "p2_badge",
+      "label": "Badge",
+      "default": "NUEVO"
+    },
+    {
+      "type": "text",
+      "id": "p2_title",
+      "label": "Nombre del producto",
+      "default": "500 Recetas Sin Pensar — Sistema Digestivo 3C"
+    },
+    {
+      "type": "text",
+      "id": "p2_price_new",
+      "label": "Precio oferta",
+      "default": "$14.999"
+    },
+    {
+      "type": "text",
+      "id": "p2_price_old",
+      "label": "Precio tachado (vacío para ocultar)",
+      "default": "$29.999"
+    },
+    {
+      "type": "text",
+      "id": "p2_variant_id",
+      "label": "Variant ID de Shopify",
+      "info": "Admin > Productos > variante > URL (número al final). Sin esto muestra 'Ver producto'."
+    },
+    {
+      "type": "url",
+      "id": "p2_cta_url",
+      "label": "URL de respaldo (si no hay Variant ID)"
+    },
+    {
+      "type": "url",
+      "id": "p2_img_url",
+      "label": "URL click en card (vacío = usa URL de respaldo)"
+    },
+    {
+      "type": "header",
+      "content": "Producto 3 — Dejar Costumbres"
+    },
+    {
+      "type": "image_picker",
+      "id": "p3_image",
+      "label": "Imagen"
+    },
+    {
+      "type": "text",
+      "id": "p3_badge",
+      "label": "Badge",
+      "default": "EBOOK DIGITAL"
+    },
+    {
+      "type": "text",
+      "id": "p3_title",
+      "label": "Nombre del producto",
+      "default": "Dejar Costumbres que te ESTANCAN"
+    },
+    {
+      "type": "text",
+      "id": "p3_price_new",
+      "label": "Precio oferta",
+      "default": "$9.999"
+    },
+    {
+      "type": "text",
+      "id": "p3_price_old",
+      "label": "Precio tachado (vacío para ocultar)",
+      "default": "$19.999"
+    },
+    {
+      "type": "text",
+      "id": "p3_variant_id",
+      "label": "Variant ID de Shopify",
+      "info": "Admin > Productos > variante > URL (número al final). Sin esto muestra 'Ver producto'."
+    },
+    {
+      "type": "url",
+      "id": "p3_cta_url",
+      "label": "URL de respaldo (si no hay Variant ID)"
+    },
+    {
+      "type": "url",
+      "id": "p3_img_url",
+      "label": "URL click en card (vacío = usa URL de respaldo)"
+    },
+    {
+      "type": "header",
+      "content": "Producto 4 — Reset Financiero 3D"
+    },
+    {
+      "type": "image_picker",
+      "id": "p4_image",
+      "label": "Imagen"
+    },
+    {
+      "type": "text",
+      "id": "p4_badge",
+      "label": "Badge",
+      "default": "FINANZAS"
+    },
+    {
+      "type": "text",
+      "id": "p4_title",
+      "label": "Nombre del producto",
+      "default": "RESET Financiero 3D — Controlá tu Dinero"
+    },
+    {
+      "type": "text",
+      "id": "p4_price_new",
+      "label": "Precio oferta",
+      "default": "$9.999"
+    },
+    {
+      "type": "text",
+      "id": "p4_price_old",
+      "label": "Precio tachado (vacío para ocultar)",
+      "default": "$33.330"
+    },
+    {
+      "type": "text",
+      "id": "p4_variant_id",
+      "label": "Variant ID de Shopify",
+      "info": "Admin > Productos > variante > URL (número al final). Sin esto muestra 'Ver producto'."
+    },
+    {
+      "type": "url",
+      "id": "p4_cta_url",
+      "label": "URL de respaldo (si no hay Variant ID)"
+    },
+    {
+      "type": "url",
+      "id": "p4_img_url",
+      "label": "URL click en card (vacío = usa URL de respaldo)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cart Upsell"
+    }
+  ]
+}
+{% endschema %}
