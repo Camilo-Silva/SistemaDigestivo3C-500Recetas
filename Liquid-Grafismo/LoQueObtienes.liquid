@@ -1,0 +1,407 @@
+<div id="gf-benefits" style="background-color: #F9F9F9; padding: 20px 16px 24px; border-radius: 12px; font-family: sans-serif; max-width: 1000px; margin: 0 auto;">
+  <h2 style="text-align: center; font-size: 22px; font-weight: 800; margin: 0 0 18px; color: #333;">
+    Lo que obtenés con <span style="color:#FF8C42">Grafismo Fonético</span>
+  </h2>
+
+  <div class="gf-benefits-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+    {% assign beneficios =
+      "Método fonético paso a paso para enseñar a leer y escribir en casa,
+       Secuencia progresiva de letras y sonidos — sin saltearte nada,
+       Actividades de grafismo para que la mano aprenda a escribir bien,
+       Ejercicios de conciencia fonológica (unir sonidos y formar palabras),
+       Material listo para usar: sin preparar clases ni buscar recursos,
+       Guía para madres sin formación docente — lenguaje simple y claro,
+       Adaptado para niños de 3 a 10 años (inicial y primaria),
+       Funciona con 10 a 15 minutos al día, sin interrumpir la rutina,
+       Soporte ante dudas frecuentes con respuestas concretas,
+       Acceso inmediato por mail — empezás hoy mismo" | split: "," %}
+
+    {% for item in beneficios %}
+      <div style="display:flex; align-items:flex-start; gap:8px; font-size: 14px; color: #444; padding: 10px 10px 10px 12px; border-left: 3px solid #FF8C42; background:#fff; border-radius:8px;">
+        <span style="flex-shrink:0; width:18px; height:18px; display:inline-grid; place-items:center; border-radius:50%; background:#FF8C42; color:#fff; font-size:12px; line-height:18px; margin-top:2px;">✓</span>
+        <span>{{ item | strip }}</span>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  @media (max-width: 640px){
+    #gf-benefits .gf-benefits-grid{
+      grid-template-columns: 1fr !important;
+      gap: 10px !important;
+    }
+    #gf-benefits h2{ font-size: 18px !important; }
+  }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Historias reales – Grafismo Fonético</title>
+<style>
+  :root{
+    --bg: #F7FAFF;
+    --card:#ffffff;
+    --text:#0f172a;
+    --muted:#64748b;
+    --primary:#6A5AE0;
+    --accent:#22c55e;
+    --ring: rgba(99,102,241,.25);
+    --soft: rgba(2,6,23,.06);
+    --radius: 18px;
+    --shadow: 0 10px 34px rgba(2,6,23,.10);
+  }
+
+  body{ margin:0; background:var(--bg); color:var(--text);
+        font-family: system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial,sans-serif; }
+
+  .wrap{ width:min(1100px,92vw); margin:42px auto; }
+
+  .title{ font-weight: 900; font-size: clamp(24px,3.6vw,36px); margin:0 0 18px; }
+  .title .accent{ background:linear-gradient(90deg,var(--primary),var(--accent));
+                  -webkit-background-clip:text; background-clip:text; color:transparent; }
+
+  /* ======= Card unificada ======= */
+  .card{
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border:1px solid rgba(2,6,23,.06);
+    overflow:hidden;
+  }
+
+  .card-inner{
+    display:grid;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 900px){
+    .card-inner{ grid-template-columns: 1.05fr 1fr; }
+  }
+
+  /* ==== Media con flechas === */
+  .media-wrap{
+    position: relative;
+    background: #0b102014;
+    padding: 18px;
+  }
+  .media{
+    position: relative;
+    border-radius: 16px;
+    overflow:hidden;
+    box-shadow: 0 8px 26px var(--soft);
+    aspect-ratio: 1 / 1;
+    background:#00000008;
+  }
+  .media img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+  .badge{
+    position:absolute; top:14px; left:14px;
+    padding:6px 10px; font-size:12px; font-weight:700; color:#fff;
+    border-radius:999px;
+    background: linear-gradient(92deg,var(--primary),var(--accent));
+    box-shadow:0 14px 28px rgba(0,0,0,.18);
+  }
+
+  /* Flechas a los lados de la imagen */
+  .nav-btn{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:42px; height:42px; border-radius:999px;
+    border:1px solid rgba(2,6,23,.10);
+    background:#fff; box-shadow: var(--shadow);
+    display:grid; place-items:center; cursor:pointer;
+    transition: transform .18s ease, background .18s ease;
+    z-index: 3;
+  }
+  .nav-btn:hover{ transform: translateY(-50%) scale(1.04); }
+  .nav-prev{ left: 4px; }
+  .nav-next{ right: 4px; }
+  .nav-btn svg{ width:20px; height:20px; }
+
+  /* ==== Panel de testimonio === */
+  .testi{
+    padding: clamp(16px,2.2vw,22px);
+    display:grid; align-content:center;
+    background:
+      radial-gradient(1200px 200px at 0% 0%, rgba(106,90,224,.06), transparent 60%),
+      radial-gradient(1200px 200px at 100% 100%, rgba(34,197,94,.06), transparent 60%);
+  }
+
+  .quote-mark{
+    width: 34px; height: 34px;
+    border-radius: 10px;
+    display:grid; place-items:center;
+    background: linear-gradient(92deg, #EEF2FF, #ECFDF5);
+    border: 1px solid rgba(2,6,23,.06);
+    color: var(--primary); font-weight: 900;
+    margin-bottom:10px;
+  }
+
+  .quote{ margin:0; font-size: clamp(15px, 2.2vw, 17px); line-height: 1.55; }
+  .bullets{ margin: 10px 0 0; padding:0; list-style:none; color:#334155; font-size:14px; }
+  .bullets li{ display:flex; align-items:flex-start; gap:8px; margin:6px 0; }
+  .bullets li:before{
+    content:""; display:inline-block; width:14px; height:14px; margin-top:3px;
+    border-radius:4px; background: linear-gradient(90deg,var(--primary),var(--accent));
+    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>') center/12px 12px no-repeat;
+  }
+  .name{ margin:10px 0 0; color: var(--muted); font-size:13px; }
+
+  /* ==== Paginación y nota ==== */
+  .controls{
+    display:flex; justify-content:center; align-items:center; gap:8px;
+    padding:12px 0 0;
+  }
+  .dot{
+    width:8px; height:8px; border-radius:999px; background:#cbd5e1; border:none; cursor:pointer;
+    transition:transform .18s ease, background .18s ease;
+  }
+  .dot[aria-current="true"]{ background:var(--primary); transform:scale(1.18); }
+
+  .note{
+    display:flex; align-items:flex-start; gap:10px;
+    font-size:12.5px; color:#5f6b84;
+    margin-top:14px;
+    padding:10px 12px;
+    border-radius:12px;
+    background: #fff;
+    border:1px dashed rgba(2,6,23,.10);
+  }
+  .note i{
+    width:18px; height:18px; flex: 0 0 18px;
+    background: linear-gradient(90deg,var(--primary),var(--accent));
+    -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="white" d="M12 2a10 10 0 100 20 10 10 0 000-20Zm1 15h-2v-6h2v6Zm0-8h-2V7h2v2Z"/></svg>') center/contain no-repeat;
+            mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="white" d="M12 2a10 10 0 100 20 10 10 0 000-20Zm1 15h-2v-6h2v6Zm0-8h-2V7h2v2Z"/></svg>') center/contain no-repeat;
+  }
+
+  /* ====== Carrusel (pista) ====== */
+  .track{ overflow:hidden; }
+  .slides{
+    display:grid; grid-auto-flow: column; grid-auto-columns: 100%;
+    transition: transform .45s ease;
+  }
+
+  /* ayuda visual al arrastrar */
+  .dragging .media{ cursor:grabbing; }
+</style>
+</head>
+<body>
+
+<div class="wrap" id="antiDieta">
+  <h2 class="title">Historias reales de <span class="accent">nuestras familias</span></h2>
+
+  <div class="track" aria-roledescription="carrusel">
+    <div class="slides" role="listbox" aria-label="Testimonios">
+
+      <!-- ===== Slide 1 ===== -->
+      <article class="card" role="group" aria-roledescription="slide" aria-label="1 de 3">
+        <div class="card-inner">
+          <div class="media-wrap">
+            <button class="nav-btn nav-prev" aria-label="Anterior" type="button">
+              <svg viewBox="0 0 24 24"><path d="M15.5 19l-7-7 7-7" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            </button>
+            <div class="media">
+              <img src="https://randomuser.me/api/portraits/women/40.jpg"
+                   alt="Romina B., mamá de Buenos Aires" width="600" height="600" />
+              <span class="badge">Visible en 10 días</span>
+            </div>
+            <button class="nav-btn nav-next" aria-label="Siguiente" type="button">
+              <svg viewBox="0 0 24 24"><path d="M8.5 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            </button>
+          </div>
+          <div class="testi">
+            <div class="quote-mark">&quot;</div>
+            <p class="quote">
+              Mi hijo confundía la B con la D y no entendía por qué. Con Grafismo Fonético
+              en menos de dos semanas ya las distinguía solo. No podía creerlo.
+            </p>
+            <ul class="bullets">
+              <li>Confusión de letras resuelta en días.</li>
+              <li>Avanza solo, sin que yo le explique todo.</li>
+              <li>Se siente capaz y eso lo motiva a seguir.</li>
+            </ul>
+            <p class="name">— Romina B., Buenos Aires · mamá de niño de 7 años</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ===== Slide 2 ===== -->
+      <article class="card" role="group" aria-roledescription="slide" aria-label="2 de 3">
+        <div class="card-inner">
+          <div class="media-wrap">
+            <button class="nav-btn nav-prev" aria-label="Anterior" type="button">
+              <svg viewBox="0 0 24 24"><path d="M15.5 19l-7-7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="media">
+              <img src="https://randomuser.me/api/portraits/women/52.jpg"
+                   alt="Andrea M., mamá de Rosario" width="600" height="600" />
+              <span class="badge">Sin ser maestra</span>
+            </div>
+            <button class="nav-btn nav-next" aria-label="Siguiente" type="button">
+              <svg viewBox="0 0 24 24"><path d="M8.5 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <div class="testi">
+            <div class="quote-mark">&quot;</div>
+            <p class="quote">
+              Soy diseñadora, no maestra. Tenía miedo de hacer las cosas mal.
+              El método me dijo exactamente qué hacer cada día y mi hija
+              empezó a leer sílabas sola en tres semanas.
+            </p>
+            <ul class="bullets">
+              <li>No necesitás saber dar clases.</li>
+              <li>Cada paso está explicado para madres.</li>
+              <li>15 minutos al día son suficientes.</li>
+            </ul>
+            <p class="name">— Andrea M., Rosario · mamá de niña de 6 años</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ===== Slide 3 ===== -->
+      <article class="card" role="group" aria-roledescription="slide" aria-label="3 de 3">
+        <div class="card-inner">
+          <div class="media-wrap">
+            <button class="nav-btn nav-prev" aria-label="Anterior" type="button">
+              <svg viewBox="0 0 24 24"><path d="M15.5 19l-7-7 7-7" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            </button>
+            <div class="media">
+              <img src="https://randomuser.me/api/portraits/women/43.jpg"
+                   alt="Natalia V., mamá de Mendoza" width="600" height="600" />
+              <span class="badge">Avance real en 3 semanas</span>
+            </div>
+            <button class="nav-btn nav-next" aria-label="Siguiente" type="button">
+              <svg viewBox="0 0 24 24"><path d="M8.5 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            </button>
+          </div>
+          <div class="testi">
+            <div class="quote-mark">&quot;</div>
+            <p class="quote">
+              Probé videos, fichas sueltas y hasta una app. Nada duró más de tres días.
+              Grafismo Fonético tiene un orden claro. Mi hijo avanzó más en tres semanas
+              que en todo el año anterior.
+            </p>
+            <ul class="bullets">
+              <li>Secuencia progresiva — cada paso construye sobre el anterior.</li>
+              <li>No hay que improvisar ni buscar más recursos.</li>
+              <li>Los avances se ven y eso engancha al chico a seguir.</li>
+            </ul>
+            <p class="name">— Natalia V., Mendoza · mamá de niño de 9 años</p>
+          </div>
+        </div>
+      </article>
+
+        </div>
+
+    <!-- puntos -->
+    <div class="controls" aria-label="Paginación"></div>
+
+    <!-- nota -->
+    <div class="note">
+      <i></i>
+      <span>Experiencias reales de familias que aplicaron el método. Cada niño avanza a su ritmo; los tiempos pueden variar.</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const root = document.getElementById('antiDieta');
+  const slidesWrap = root.querySelector('.slides');
+  const cards = Array.from(root.querySelectorAll('.card'));
+  const controls = root.querySelector('.controls');
+
+  // Config
+  const AUTOPLAY = true;     // ← poner false si no querés autoplay
+  const INTERVAL = 4800;
+
+  let index = 0, timer = null;
+
+  // Construir puntos
+  cards.forEach((_, i)=>{
+    const b = document.createElement('button');
+    b.className = 'dot';
+    b.type = 'button';
+    b.setAttribute('aria-label','Ir al testimonio '+(i+1));
+    if(i===0) b.setAttribute('aria-current','true');
+    b.addEventListener('click', ()=> goTo(i));
+    controls.appendChild(b);
+  });
+  const dots = Array.from(root.querySelectorAll('.dot'));
+
+  function goTo(i){
+    index = (i + cards.length) % cards.length;
+    slidesWrap.style.transform = `translateX(-${index*100}%)`;
+    dots.forEach((d,k)=> k===index ? d.setAttribute('aria-current','true') : d.removeAttribute('aria-current'));
+    restart();
+  }
+  function next(){ goTo(index+1); }
+  function prev(){ goTo(index-1); }
+
+  // Flechas (dentro de cada media)
+  root.querySelectorAll('.nav-next').forEach(btn=> btn.addEventListener('click', next));
+  root.querySelectorAll('.nav-prev').forEach(btn=> btn.addEventListener('click', prev));
+
+  // Teclado
+  root.addEventListener('keydown', (e)=>{
+    if(e.key==='ArrowRight') next();
+    if(e.key==='ArrowLeft') prev();
+  });
+
+  // Drag / Swipe
+  const track = root.querySelector('.track');
+  let startX=0, curX=0, dragging=false;
+
+  const start = (x)=>{ dragging=true; startX=curX=x; root.classList.add('dragging'); };
+  const move  = (x)=>{ if(!dragging) return; curX=x; };
+  const end   = ()=>{ if(!dragging) return; const dx=curX-startX; if(Math.abs(dx)>45) (dx<0?next():prev()); dragging=false; root.classList.remove('dragging'); };
+
+  track.addEventListener('mousedown', e=> start(e.clientX));
+  window.addEventListener('mousemove', e=> move(e.clientX));
+  window.addEventListener('mouseup', end);
+
+  track.addEventListener('touchstart', e=> start(e.touches[0].clientX), {passive:true});
+  track.addEventListener('touchmove',  e=> move(e.touches[0].clientX), {passive:true});
+  track.addEventListener('touchend', end);
+
+  // Autoplay
+  function restart(){
+    if(!AUTOPLAY) return;
+    clearInterval(timer);
+    timer = setInterval(next, INTERVAL);
+  }
+  if (AUTOPLAY) restart();
+
+  ['mouseenter','focusin'].forEach(evt=> root.addEventListener(evt, ()=> clearInterval(timer)));
+  ['mouseleave','focusout'].forEach(evt=> root.addEventListener(evt, ()=> AUTOPLAY && restart()));
+
+  // inicio
+  goTo(0);
+})();
+</script>
+
+</body>
+</html>

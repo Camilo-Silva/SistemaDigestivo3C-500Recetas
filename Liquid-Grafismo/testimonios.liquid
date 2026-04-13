@@ -1,0 +1,383 @@
+<!-- ===== Testimonios Grafismo Fonético — Carrusel ===== -->
+<style>
+  .gf-testimonios {
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+    max-width: 640px;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 40px auto;
+    padding: 0 24px;
+    overflow: hidden;
+  }
+  .gf-testimonios__titulo {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: #2a4a3e;
+    margin: 0 0 6px;
+  }
+  .gf-testimonios__subtitulo {
+    text-align: center;
+    font-size: 15px;
+    color: #5a7a6e;
+    margin: 0 0 28px;
+  }
+  .gf-carousel-wrap {
+    position: relative;
+    padding: 0 28px;
+  }
+  .gf-carousel {
+    overflow: hidden;
+    border-radius: 16px;
+  }
+  .gf-carousel__track {
+    display: flex;
+    transition: transform 0.45s cubic-bezier(.4,0,.2,1);
+    will-change: transform;
+  }
+  .gf-carousel__slide {
+    min-width: 100%;
+    box-sizing: border-box;
+  }
+  .gf-card {
+    background: #fff;
+    border: 1px solid #d6e8e2;
+    border-radius: 16px;
+    padding: 28px 24px 22px;
+    box-shadow: 0 4px 20px rgba(60,120,90,.09);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .gf-card__stars {
+    display: flex;
+    gap: 3px;
+  }
+  .gf-card__stars svg {
+    width: 18px;
+    height: 18px;
+    fill: #f4a025;
+  }
+  .gf-card__texto {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #333;
+    font-style: italic;
+    margin: 0;
+  }
+  .gf-card__texto::before { content: '\201C'; }
+  .gf-card__texto::after  { content: '\201D'; }
+  .gf-card__autor {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-top: 1px solid #eaf3ef;
+    padding-top: 14px;
+  }
+  .gf-card__foto {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex: 0 0 52px;
+    border: 2px solid #c8e6dc;
+    background: #eaf4f0;
+  }
+  .gf-card__nombre {
+    font-size: 15px;
+    font-weight: 700;
+    color: #2a4a3e;
+    line-height: 1.2;
+  }
+  .gf-card__lugar {
+    font-size: 13px;
+    color: #7a9d8e;
+    margin-top: 2px;
+  }
+  .gf-card__tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    background: #eaf4f0;
+    color: #3a7a62;
+    border-radius: 999px;
+    padding: 2px 10px;
+    margin-top: 4px;
+  }
+  .gf-carousel__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1.5px solid #c8e6dc;
+    box-shadow: 0 2px 10px rgba(60,120,90,.14);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2a6b55;
+    z-index: 2;
+    padding: 0;
+    transition: background .2s;
+  }
+  .gf-carousel__btn:hover { background: #eaf4f0; }
+  .gf-carousel__btn--prev { left: 0; }
+  .gf-carousel__btn--next { right: 0; }
+  .gf-carousel__btn svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .gf-carousel__dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  .gf-carousel__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #c8e6dc;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background .25s, transform .25s;
+  }
+  .gf-carousel__dot.is-active {
+    background: #2a6b55;
+    transform: scale(1.4);
+  }
+  /* ---- Mobile first ---- */
+  @media (max-width: 600px) {
+    .gf-testimonios { padding: 0 16px; margin: 28px auto; }
+    .gf-testimonios__titulo { font-size: 18px; }
+    .gf-testimonios__subtitulo { font-size: 14px; margin-bottom: 20px; }
+    .gf-carousel-wrap { padding: 0 36px; }
+    .gf-carousel__btn { width: 30px; height: 30px; }
+    .gf-carousel__btn--prev { left: 0; }
+    .gf-carousel__btn--next { right: 0; }
+    .gf-carousel__btn svg { width: 13px; height: 13px; }
+    .gf-card { padding: 18px 14px 14px; gap: 10px; }
+    .gf-card__texto { font-size: 14px; line-height: 1.65; }
+    .gf-card__foto { width: 44px; height: 44px; flex: 0 0 44px; }
+    .gf-card__nombre { font-size: 14px; }
+    .gf-card__lugar { font-size: 12px; }
+    .gf-carousel__dots { margin-top: 14px; gap: 7px; }
+    .gf-carousel__dot { width: 7px; height: 7px; }
+  }
+</style>
+
+<section class="gf-testimonios" aria-label="Testimonios Grafismo Fonético">
+  <h2 class="gf-testimonios__titulo">Lo que dicen las mamás que ya lo probaron</h2>
+  <p class="gf-testimonios__subtitulo">Resultados reales de familias argentinas</p>
+
+  <div class="gf-carousel-wrap">
+
+    <div class="gf-carousel">
+      <div class="gf-carousel__track" id="gfTrack">
+
+        <!-- Slide 1 -->
+        <div class="gf-carousel__slide">
+          <article class="gf-card">
+            <div class="gf-card__stars">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <p class="gf-card__texto">Mi hija dejó de tener miedo a leer y ahora lo hace con confianza en solo dos semanas. No lo podía creer.</p>
+            <div class="gf-card__autor">
+              <img class="gf-card__foto" src="https://randomuser.me/api/portraits/women/40.jpg" alt="Foto de Mariana G." loading="lazy" width="52" height="52">
+              <div>
+                <div class="gf-card__nombre">Mariana G.</div>
+                <div class="gf-card__lugar">Buenos Aires, Argentina</div>
+                <span class="gf-card__tag">Mamá de niña de 6 años</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="gf-carousel__slide">
+          <article class="gf-card">
+            <div class="gf-card__stars">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <p class="gf-card__texto">No sabía cómo ayudar a mi hijo que se frustraba mucho. Este método me dio la guía exacta y ahora disfruta aprender desde casa.</p>
+            <div class="gf-card__autor">
+              <img class="gf-card__foto" src="https://randomuser.me/api/portraits/women/47.jpg" alt="Foto de Lucía R." loading="lazy" width="52" height="52">
+              <div>
+                <div class="gf-card__nombre">Lucía R.</div>
+                <div class="gf-card__lugar">Córdoba, Argentina</div>
+                <span class="gf-card__tag">Mamá de niño de 7 años</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="gf-carousel__slide">
+          <article class="gf-card">
+            <div class="gf-card__stars">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <p class="gf-card__texto">Probé varios recursos y ninguno funcionó. Con esta guía clara y paso a paso, mi hijo avanzó rápido y sin lágrimas. Por fin encontré algo que realmente sirve.</p>
+            <div class="gf-card__autor">
+              <img class="gf-card__foto" src="https://randomuser.me/api/portraits/women/52.jpg" alt="Foto de Andrea M." loading="lazy" width="52" height="52">
+              <div>
+                <div class="gf-card__nombre">Andrea M.</div>
+                <div class="gf-card__lugar">Rosario, Argentina</div>
+                <span class="gf-card__tag">Mamá de niño de 8 años</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="gf-carousel__slide">
+          <article class="gf-card">
+            <div class="gf-card__stars">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <p class="gf-card__texto">Las tareas eran una batalla campal todos los días. Con solo 10 minutos de Grafismo Fonético, mi hijo espera el momento de practicar. Cambió todo en casa.</p>
+            <div class="gf-card__autor">
+              <img class="gf-card__foto" src="https://randomuser.me/api/portraits/women/43.jpg" alt="Foto de Valeria P." loading="lazy" width="52" height="52">
+              <div>
+                <div class="gf-card__nombre">Valeria P.</div>
+                <div class="gf-card__lugar">Mendoza, Argentina</div>
+                <span class="gf-card__tag">Mamá de niño de 5 años</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="gf-carousel__slide">
+          <article class="gf-card">
+            <div class="gf-card__stars">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <p class="gf-card__texto">Tenía miedo de que mi hija tuviera algún trastorno. Empecé con Grafismo Fonético y en una semana ya reconocía las letras que antes confundía. Me saqué un peso enorme.</p>
+            <div class="gf-card__autor">
+              <img class="gf-card__foto" src="https://randomuser.me/api/portraits/women/58.jpg" alt="Foto de Sofía N." loading="lazy" width="52" height="52">
+              <div>
+                <div class="gf-card__nombre">Sofía N.</div>
+                <div class="gf-card__lugar">La Plata, Argentina</div>
+                <span class="gf-card__tag">Mamá de niña de 4 años</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="gf-carousel__slide">
+          <article class="gf-card">
+            <div class="gf-card__stars">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <p class="gf-card__texto">No soy maestra y me generaba mucha inseguridad acompañar a mi hijo. El método es tan claro y ordenado que me sentí capaz desde el primer día. Ya lleva tres semanas y avanza increíble.</p>
+            <div class="gf-card__autor">
+              <img class="gf-card__foto" src="https://randomuser.me/api/portraits/women/65.jpg" alt="Foto de Carolina T." loading="lazy" width="52" height="52">
+              <div>
+                <div class="gf-card__nombre">Carolina T.</div>
+                <div class="gf-card__lugar">Mar del Plata, Argentina</div>
+                <span class="gf-card__tag">Mamá de niño de 9 años</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+      </div><!-- /track -->
+    </div><!-- /carousel -->
+
+    <button class="gf-carousel__btn gf-carousel__btn--prev" id="gfPrev" aria-label="Testimonio anterior">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="gf-carousel__btn gf-carousel__btn--next" id="gfNext" aria-label="Testimonio siguiente">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+
+  </div><!-- /wrap -->
+
+  <div class="gf-carousel__dots" id="gfDots" role="tablist" aria-label="Navegar testimonios"></div>
+
+</section>
+
+<script>
+(function () {
+  var track  = document.getElementById('gfTrack');
+  var prev   = document.getElementById('gfPrev');
+  var next   = document.getElementById('gfNext');
+  var dotsEl = document.getElementById('gfDots');
+  if (!track || !prev || !next || !dotsEl) return;
+
+  var slides  = track.querySelectorAll('.gf-carousel__slide');
+  var total   = slides.length;
+  var current = 0;
+  var timer;
+
+  slides.forEach(function (_, i) {
+    var dot = document.createElement('button');
+    dot.className = 'gf-carousel__dot' + (i === 0 ? ' is-active' : '');
+    dot.setAttribute('aria-label', 'Testimonio ' + (i + 1));
+    dot.setAttribute('role', 'tab');
+    dot.addEventListener('click', function () { stop(); goTo(i); start(); });
+    dotsEl.appendChild(dot);
+  });
+
+  function goTo(n) {
+    current = (n + total) % total;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    dotsEl.querySelectorAll('.gf-carousel__dot').forEach(function (d, i) {
+      d.classList.toggle('is-active', i === current);
+    });
+  }
+
+  function start() { timer = setInterval(function () { goTo(current + 1); }, 8000); }
+  function stop()  { clearInterval(timer); }
+
+  prev.addEventListener('click', function () { stop(); goTo(current - 1); start(); });
+  next.addEventListener('click', function () { stop(); goTo(current + 1); start(); });
+
+  var sx = 0;
+  track.parentElement.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; }, { passive: true });
+  track.parentElement.addEventListener('touchend', function (e) {
+    var dx = sx - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 40) { stop(); goTo(current + (dx > 0 ? 1 : -1)); start(); }
+  }, { passive: true });
+
+  track.parentElement.addEventListener('mouseenter', stop);
+  track.parentElement.addEventListener('mouseleave', start);
+
+  start();
+}());
+</script>

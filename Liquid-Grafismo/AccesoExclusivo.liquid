@@ -1,0 +1,155 @@
+<!-- ==== Módulo de Precio Premium (Gold • v14 WHITE) ==== -->
+<style>
+  .x-price-card{
+    --gold-1:#f3dc9a; --gold-2:#d8a84e; --text:#1b1b1b;
+    position:relative;border-radius:22px;padding:20px 18px;color:var(--text);
+    background:#ffffff; /* ✅ interior blanco */
+    box-shadow:
+      0 10px 26px rgba(0,0,0,.10),
+      inset 0 0 0 1px rgba(0,0,0,.05);
+    overflow:hidden;isolation:isolate;
+  }
+  /* Borde dorado */
+  .x-price-card::before{
+    content:"";position:absolute;inset:0;border-radius:22px;padding:2px;
+    background:linear-gradient(135deg, rgba(243,220,154,.95), rgba(216,168,78,.55) 40%, rgba(243,220,154,.95));
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;
+  }
+  /* Brillo en movimiento → dorado */
+  .x-price-card::after{
+    content:"";position:absolute;inset:-30%;border-radius:inherit;
+    background:linear-gradient(
+      115deg,
+      rgba(243,220,154,0) 40%,
+      rgba(243,220,154,.45) 50%,
+      rgba(243,220,154,0) 60%
+    );
+    filter:blur(6px);
+    mix-blend-mode:normal;           /* ✅ sobre blanco */
+    transform:translateX(-120%);
+    animation:x-sweep 6.2s ease-in-out infinite;
+  }
+  @keyframes x-sweep{0%{transform:translateX(-120%)}15%{transform:translateX(10%)}100%{transform:translateX(140%)}}
+
+  .x-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center;}
+  .x-price{
+    font-size:clamp(28px,4.2vw,44px);font-weight:900;line-height:1;color:#8b6b16;
+    text-shadow:0 1px 0 rgba(255,255,255,.6), 0 10px 25px rgba(243,220,154,.35);
+  }
+  .x-compare{
+    font-size:clamp(14px,2.2vw,18px);
+    color:#8f8f8f;
+    text-decoration:line-through;opacity:.9;
+  }
+
+  .x-badge{display:inline-flex;align-items:center;gap:8px;margin-top:10px;
+    background:linear-gradient(135deg,var(--gold-2),var(--gold-1));color:#1a1206;font-weight:900;font-size:14px;
+    padding:9px 16px;border-radius:999px;box-shadow:0 10px 24px rgba(216,168,78,.35), inset 0 0 0 1px rgba(255,255,255,.25);
+    position:relative;justify-content:center;}
+  .x-badge-wrap{display:flex;justify-content:center;}
+  .x-badge::after{content:"";position:absolute;inset:-1px;border-radius:999px;
+    background:radial-gradient(100px 40px at 10% 0%, rgba(255,255,255,.55), transparent 60%);
+    mix-blend-mode:screen;opacity:.9;animation:x-bpulse 3s ease-in-out infinite;}
+  @keyframes x-bpulse{0%,100%{opacity:.75}50%{opacity:1}}
+
+  .x-urgency{margin-top:10px;font-size:14px;font-weight:800;color:#8b6b16;text-align:center;}
+
+  /* === CTA Outline dashed (dorado) === */
+  .x-cta-wrap{display:flex;justify-content:center;margin-top:14px}
+  .x-cta-outline{
+    --stroke:#d8a84e; --r:16; --padX:20px; --padY:14px;
+    position:relative;display:inline-block;border-radius:var(--r);
+    padding:var(--padY) var(--padX); color:#8b6b16; font-weight:900;
+    text-transform:uppercase; font-size:13px; letter-spacing:.4px; text-align:center;
+    background:#fff; /* sobre blanco, sin relleno adicional */
+  }
+  .x-cta-text{position:relative;z-index:2;display:block;white-space:normal}
+  .x-cta-svg{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:visible;width:100%;height:100%;}
+  .x-cta-svg rect{
+    fill:none; stroke:var(--stroke); stroke-width:2;
+    vector-effect:non-scaling-stroke;
+    stroke-linecap:round; stroke-linejoin:round;
+  }
+  @keyframes dashLoop { to { stroke-dashoffset: -1000; } }
+</style>
+
+<!-- Precio actual = 14.999 (50% OFF). Precio comparativo: 29.999 -->
+<div class="x-price-card" data-current="14999" data-compare="29999">
+  <div class="x-row">
+    <div class="x-price"><span class="x-price-value">$14.999</span></div>
+    <span class="x-compare">$29.999</span>
+  </div>
+
+  <div class="x-badge-wrap">
+    <div class="x-badge">
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M21 3H3v18l9-4 9 4V3z"/></svg>
+      <span class="x-save-label">AHORRÁ $ 15.000</span>
+    </div>
+  </div>
+
+  <p class="x-urgency">🔥 ¡50% OFF solo por hoy! Acceso inmediato al comprar.</p>
+
+  <!-- CTA centrado con borde dashed -->
+  <div class="x-cta-wrap">
+    <div class="x-cta-outline" id="ctaOutline">
+      <span class="x-cta-text">✨ Acceso exclusivo a la colección completa ✨</span>
+      <svg class="x-cta-svg" aria-hidden="true">
+        <rect id="ctaRect" x="1" y="1" rx="16" ry="16" />
+      </svg>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const card = document.currentScript.previousElementSibling;
+  if(!card || !card.classList.contains('x-price-card')) return;
+
+  // Formato precios sin decimales (ARS)
+  const nf = new Intl.NumberFormat('es-AR',{style:'currency',currency:'ARS',minimumFractionDigits:0,maximumFractionDigits:0});
+  const current = Number(card.getAttribute('data-current')||0);
+  const compare = Number(card.getAttribute('data-compare')||0);
+  const priceEl   = card.querySelector('.x-price-value');
+  const compareEl = card.querySelector('.x-compare');
+  const saveEl    = card.querySelector('.x-save-label');
+  if(current>0) priceEl.textContent  = nf.format(current);
+  if(compare>0) compareEl.textContent= nf.format(compare);
+  if(current>0 && compare>0 && compare>current){
+    const save = compare-current; saveEl.textContent = `AHORRÁ ${nf.format(save)}`;
+  }
+
+  // === CTA borde dashed ===
+  const box  = card.querySelector('#ctaOutline');
+  const svg  = box.querySelector('svg');
+  const rect = box.querySelector('#ctaRect');
+
+  function layoutDashed(){
+    const w = Math.ceil(box.clientWidth);
+    const h = Math.ceil(box.clientHeight);
+    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+    svg.setAttribute('width',  w);
+    svg.setAttribute('height', h);
+    rect.setAttribute('width',  Math.max(0, w-2));
+    rect.setAttribute('height', Math.max(0, h-2));
+    rect.setAttribute('rx', 16);
+    rect.setAttribute('ry', 16);
+
+    let L = 0;
+    try { L = rect.getTotalLength(); } catch(e){ L = (w+w+h+h); }
+    const dashLen = 10;
+    const segments = Math.max(18, Math.round(L / 28));
+    const gapLen = Math.max(6, (L / segments) - dashLen);
+    rect.style.strokeDasharray = `${dashLen} ${gapLen}`;
+    rect.style.animation = `dashLoop 45s linear infinite`;
+  }
+
+  layoutDashed();
+  if('ResizeObserver' in window){
+    new ResizeObserver(layoutDashed).observe(box);
+  } else {
+    window.addEventListener('resize', layoutDashed);
+  }
+})();
+</script>
