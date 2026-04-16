@@ -52,7 +52,7 @@
       ⏳ Acceso disponible hoy con todos los bonus incluidos. El bonus de la App puede retirarse en cualquier momento.
     </div>
     <div class="sd3c-urgencia-cta-wrap">
-      <a href="{{ section.settings.cta_url }}" class="sd3c-urgencia-btn">{{ section.settings.cta_text }}</a>
+      <a href="{% if section.settings.open_upsell %}#upsell-modal{% else %}{{ section.settings.cta_url }}{% endif %}" class="sd3c-urgencia-btn">{{ section.settings.cta_text }}</a>
       <div class="sd3c-urgencia-trust">
         <span><i class="fa-solid fa-lock"></i> Compra segura</span>
         <span><i class="fa-solid fa-bolt"></i> Acceso inmediato</span>
@@ -67,9 +67,15 @@
   "name": "SD3C Urgencia",
   "settings": [
     {
+      "type": "checkbox",
+      "id": "open_upsell",
+      "label": "Abrir modal de upsell al hacer clic",
+      "default": false
+    },
+    {
       "type": "url",
       "id": "cta_url",
-      "label": "URL del botón CTA"
+      "label": "URL del botón CTA (cuando no se usa el modal)"
     },
     {
       "type": "text",

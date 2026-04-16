@@ -66,7 +66,7 @@
 
     <div class="sd3c-pricing-main">{{ section.settings.price_new }}</div>
     <div class="sd3c-pricing-old">{{ section.settings.price_old }}</div>
-    <a href="{{ section.settings.cta_url }}" class="sd3c-pricing-savings-btn">{{ section.settings.savings_text }}</a>
+    <a href="{% if section.settings.open_upsell %}#upsell-modal{% else %}{{ section.settings.cta_url }}{% endif %}" class="sd3c-pricing-savings-btn">{{ section.settings.savings_text }}</a>
 
     <div class="sd3c-pricing-countdown">
       <div style="font-size:14px;color:#555;margin-bottom:10px;line-height:1.5;">Tu lugar solo está reservado por <strong>15 minutos</strong>,<br>en caso de no acceder se cederá a otra persona.</div>
@@ -90,7 +90,7 @@
       <div class="sd3c-pc-footer">Cuando el contador llegue a cero, el precio vuelve al valor original.</div>
     </div>
 
-    <a href="{{ section.settings.cta_url }}" class="sd3c-pricing-offer-btn">{{ section.settings.cta_text }}</a>
+    <a href="{% if section.settings.open_upsell %}#upsell-modal{% else %}{{ section.settings.cta_url }}{% endif %}" class="sd3c-pricing-offer-btn">{{ section.settings.cta_text }}</a>
 
     <ul class="sd3c-pricing-trust-list">
       <li><i class="fa-solid fa-bolt"></i> Acceso inmediato por mail</li>
@@ -169,9 +169,15 @@
       "default": "⏰ Precio especial solo por HOY — Últimas horas con 50% OFF"
     },
     {
+      "type": "checkbox",
+      "id": "open_upsell",
+      "label": "Abrir modal de upsell al hacer clic",
+      "default": false
+    },
+    {
       "type": "url",
       "id": "cta_url",
-      "label": "URL del botón comprar"
+      "label": "URL del botón comprar (cuando no se usa el modal)"
     },
     {
       "type": "text",

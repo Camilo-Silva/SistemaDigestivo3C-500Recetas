@@ -1,0 +1,970 @@
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+  /* ── Upsell Modal Overlay ── */
+  .upm-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.55);
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+  .upm-overlay.upm-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* ── Modal ── */
+  .upm-modal {
+    background: #fff;
+    border-radius: 18px;
+    width: 100%;
+    max-width: 460px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0,0,0,.3);
+    transform: scale(.94) translateY(14px);
+    transition: transform .35s cubic-bezier(.4,0,.2,1);
+    overflow: hidden;
+  }
+  .upm-overlay.upm-open .upm-modal {
+    transform: scale(1) translateY(0);
+  }
+
+  /* ── Header ── */
+  .upm-header {
+    padding: 22px 24px 16px;
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+    flex-shrink: 0;
+  }
+  .upm-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+    color: #111;
+    line-height: 1.15;
+    margin: 0 0 5px;
+  }
+  .upm-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 17px;
+    color: #1a1a2e;
+    line-height: 1.25;
+    margin: 0 0 12px;
+  }
+  .upm-timer-row {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    color: #555;
+  }
+  .upm-timer-count {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: #e03e3e;
+    transition: color .3s;
+  }
+  .upm-timer-count.upm-urgent {
+    color: #c0392b;
+    animation: upm-pulse .6s ease infinite alternate;
+  }
+  @keyframes upm-pulse {
+    from { opacity: 1; }
+    to   { opacity: .55; }
+  }
+
+  /* ── Scrollable body ── */
+  .upm-body {
+    flex: 1;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 14px 16px 10px;
+  }
+
+  /* ── Cards ── */
+  .upm-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 2px solid #e8e8e8;
+    border-radius: 12px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: border-color .15s, box-shadow .15s;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .upm-card:last-child { margin-bottom: 0; }
+  .upm-card:hover {
+    border-color: #bbb;
+    box-shadow: 0 3px 12px rgba(0,0,0,.07);
+  }
+  .upm-card.upm-selected {
+    border-color: #111;
+    box-shadow: 0 3px 14px rgba(0,0,0,.1);
+  }
+
+  /* ── Card image ── */
+  .upm-card-img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+    background: #f5f5f5;
+    display: block;
+  }
+  .upm-card-img-empty {
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+    background: #f0f0f0;
+    flex-shrink: 0;
+  }
+
+  /* ── Card info ── */
+  .upm-card-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .upm-card-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #111;
+    line-height: 1.3;
+    margin-bottom: 5px;
+  }
+  .upm-card-pricing {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 2px;
+  }
+  .upm-card-discount {
+    background: #e03e3e;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .upm-card-price-old {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: #aaa;
+    text-decoration: line-through;
+  }
+  .upm-card-price-new {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    color: #111;
+    display: block;
+    margin-top: 1px;
+  }
+
+  /* ── Checkbox ── */
+  .upm-checkbox {
+    width: 26px;
+    height: 26px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color .15s, background .15s;
+    background: #fff;
+  }
+  .upm-card.upm-selected .upm-checkbox {
+    border-color: #111;
+    background: #111;
+  }
+  .upm-checkbox-svg {
+    width: 13px;
+    height: 11px;
+    opacity: 0;
+    transition: opacity .15s;
+  }
+  .upm-card.upm-selected .upm-checkbox-svg { opacity: 1; }
+
+  /* ── Footer ── */
+  .upm-footer {
+    padding: 12px 18px 18px;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+    background: #fff;
+  }
+  .upm-btn-skip {
+    background: none;
+    border: none;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #999;
+    cursor: pointer;
+    padding: 11px 6px;
+    flex-shrink: 0;
+    transition: color .15s;
+    line-height: 1;
+  }
+  .upm-btn-skip:hover { color: #444; }
+  .upm-btn-add {
+    flex: 1;
+    background: #c4c4c4;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 13px 16px;
+    cursor: not-allowed;
+    transition: background .2s, opacity .2s;
+    text-align: center;
+    line-height: 1;
+  }
+  .upm-btn-add.upm-active {
+    background: #2c2c2c;
+    cursor: pointer;
+  }
+  .upm-btn-add.upm-active:hover { background: #111; }
+  .upm-btn-add.upm-loading {
+    opacity: .7;
+    cursor: wait;
+  }
+
+  /* ── Savings bar ── */
+  .upm-savings-bar {
+    padding: 10px 18px;
+    background: #fafafa;
+    border-top: 1px solid #ebebeb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .upm-savings-left {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+  }
+  .upm-savings-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: #111;
+  }
+  .upm-savings-sub {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    color: #999;
+  }
+  .upm-savings-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+  }
+  .upm-savings-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .upm-savings-badge {
+    background: #e03e3e;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .upm-savings-old {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    color: #aaa;
+    text-decoration: line-through;
+  }
+  .upm-savings-new {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    color: #111;
+    line-height: 1.1;
+  }
+</style>
+
+<!-- Overlay del modal -->
+<div class="upm-overlay" id="upmOverlay" role="dialog" aria-modal="true" aria-label="Oferta relámpago">
+  <div class="upm-modal" id="upmModal">
+
+    <!-- Header -->
+    <div class="upm-header">
+      <p class="upm-title">⚡ OFERTA RELÁMPAGO!</p>
+      <p class="upm-subtitle">{{ section.settings.subtitle | default: '¡LO QUE NO AGREGAS HOY NO ESTARÁ DISPONIBLE DESPUÉS!' }}</p>
+      <div class="upm-timer-row">Oferta expira en&nbsp;<span class="upm-timer-count" id="upmCountdown">05:00</span></div>
+    </div>
+
+    <!-- Cards de productos -->
+    <div class="upm-body">
+
+      {% if section.settings.p1_title != blank %}
+      <div class="upm-card"
+           data-variant="{{ section.settings.p1_variant_id }}"
+           data-fallback="{{ section.settings.p1_cta_url }}"
+           data-price-new="{{ section.settings.p1_price_new }}"
+           data-price-old="{{ section.settings.p1_price_old }}"
+           data-discount="{{ section.settings.p1_discount }}">
+        {% if section.settings.p1_image != blank %}
+          <img src="{{ section.settings.p1_image | img_url: 'master' }}" alt="{{ section.settings.p1_title }}" class="upm-card-img">
+        {% else %}
+          <div class="upm-card-img-empty"></div>
+        {% endif %}
+        <div class="upm-card-info">
+          <div class="upm-card-name">{{ section.settings.p1_title }}</div>
+          <div class="upm-card-pricing">
+            {% if section.settings.p1_discount != blank %}
+              <span class="upm-card-discount">{{ section.settings.p1_discount }}</span>
+            {% endif %}
+            {% if section.settings.p1_price_old != blank %}
+              <span class="upm-card-price-old">{{ section.settings.p1_price_old }}</span>
+            {% endif %}
+          </div>
+          {% if section.settings.p1_price_new != blank %}
+            <span class="upm-card-price-new">{{ section.settings.p1_price_new }}</span>
+          {% endif %}
+        </div>
+        <div class="upm-checkbox">
+          <svg class="upm-checkbox-svg" viewBox="0 0 13 11" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="1,5.5 5,9.5 12,1.5"/>
+          </svg>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if section.settings.p2_title != blank %}
+      <div class="upm-card"
+           data-variant="{{ section.settings.p2_variant_id }}"
+           data-fallback="{{ section.settings.p2_cta_url }}"
+           data-price-new="{{ section.settings.p2_price_new }}"
+           data-price-old="{{ section.settings.p2_price_old }}"
+           data-discount="{{ section.settings.p2_discount }}">
+        {% if section.settings.p2_image != blank %}
+          <img src="{{ section.settings.p2_image | img_url: 'master' }}" alt="{{ section.settings.p2_title }}" class="upm-card-img">
+        {% else %}
+          <div class="upm-card-img-empty"></div>
+        {% endif %}
+        <div class="upm-card-info">
+          <div class="upm-card-name">{{ section.settings.p2_title }}</div>
+          <div class="upm-card-pricing">
+            {% if section.settings.p2_discount != blank %}
+              <span class="upm-card-discount">{{ section.settings.p2_discount }}</span>
+            {% endif %}
+            {% if section.settings.p2_price_old != blank %}
+              <span class="upm-card-price-old">{{ section.settings.p2_price_old }}</span>
+            {% endif %}
+          </div>
+          {% if section.settings.p2_price_new != blank %}
+            <span class="upm-card-price-new">{{ section.settings.p2_price_new }}</span>
+          {% endif %}
+        </div>
+        <div class="upm-checkbox">
+          <svg class="upm-checkbox-svg" viewBox="0 0 13 11" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="1,5.5 5,9.5 12,1.5"/>
+          </svg>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if section.settings.p3_title != blank %}
+      <div class="upm-card"
+           data-variant="{{ section.settings.p3_variant_id }}"
+           data-fallback="{{ section.settings.p3_cta_url }}"
+           data-price-new="{{ section.settings.p3_price_new }}"
+           data-price-old="{{ section.settings.p3_price_old }}"
+           data-discount="{{ section.settings.p3_discount }}">
+        {% if section.settings.p3_image != blank %}
+          <img src="{{ section.settings.p3_image | img_url: 'master' }}" alt="{{ section.settings.p3_title }}" class="upm-card-img">
+        {% else %}
+          <div class="upm-card-img-empty"></div>
+        {% endif %}
+        <div class="upm-card-info">
+          <div class="upm-card-name">{{ section.settings.p3_title }}</div>
+          <div class="upm-card-pricing">
+            {% if section.settings.p3_discount != blank %}
+              <span class="upm-card-discount">{{ section.settings.p3_discount }}</span>
+            {% endif %}
+            {% if section.settings.p3_price_old != blank %}
+              <span class="upm-card-price-old">{{ section.settings.p3_price_old }}</span>
+            {% endif %}
+          </div>
+          {% if section.settings.p3_price_new != blank %}
+            <span class="upm-card-price-new">{{ section.settings.p3_price_new }}</span>
+          {% endif %}
+        </div>
+        <div class="upm-checkbox">
+          <svg class="upm-checkbox-svg" viewBox="0 0 13 11" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="1,5.5 5,9.5 12,1.5"/>
+          </svg>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if section.settings.p4_title != blank %}
+      <div class="upm-card"
+           data-variant="{{ section.settings.p4_variant_id }}"
+           data-fallback="{{ section.settings.p4_cta_url }}"
+           data-price-new="{{ section.settings.p4_price_new }}"
+           data-price-old="{{ section.settings.p4_price_old }}"
+           data-discount="{{ section.settings.p4_discount }}">
+        {% if section.settings.p4_image != blank %}
+          <img src="{{ section.settings.p4_image | img_url: 'master' }}" alt="{{ section.settings.p4_title }}" class="upm-card-img">
+        {% else %}
+          <div class="upm-card-img-empty"></div>
+        {% endif %}
+        <div class="upm-card-info">
+          <div class="upm-card-name">{{ section.settings.p4_title }}</div>
+          <div class="upm-card-pricing">
+            {% if section.settings.p4_discount != blank %}
+              <span class="upm-card-discount">{{ section.settings.p4_discount }}</span>
+            {% endif %}
+            {% if section.settings.p4_price_old != blank %}
+              <span class="upm-card-price-old">{{ section.settings.p4_price_old }}</span>
+            {% endif %}
+          </div>
+          {% if section.settings.p4_price_new != blank %}
+            <span class="upm-card-price-new">{{ section.settings.p4_price_new }}</span>
+          {% endif %}
+        </div>
+        <div class="upm-checkbox">
+          <svg class="upm-checkbox-svg" viewBox="0 0 13 11" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="1,5.5 5,9.5 12,1.5"/>
+          </svg>
+        </div>
+      </div>
+      {% endif %}
+
+    </div><!-- /upm-body -->
+
+    <!-- Barra de ahorro -->
+    <div id="upmSavings" class="upm-savings-bar" style="display:none">
+      <div class="upm-savings-left">
+        <span class="upm-savings-label">Te ahorrás</span>
+        <span class="upm-savings-sub">Añadés al carrito</span>
+      </div>
+      <div class="upm-savings-right">
+        <div class="upm-savings-meta">
+          <span class="upm-savings-badge" id="upmSavingsBadge" style="display:none"></span>
+          <span class="upm-savings-old" id="upmSavingsOld" style="display:none"></span>
+        </div>
+        <span class="upm-savings-new" id="upmSavingsNew"></span>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="upm-footer">
+      <button class="upm-btn-skip" id="upmSkip" type="button">Omitir</button>
+      <button class="upm-btn-add" id="upmAddBtn" type="button" disabled>Añadir al carrito</button>
+    </div>
+    <!-- Barra de estado (debug) -->
+    <div id="upmStatus" style="display:none;padding:10px 18px;font-family:'Open Sans',sans-serif;font-size:13px;text-align:center;border-top:1px solid #f0f0f0;"></div>
+
+  </div><!-- /upm-modal -->
+</div><!-- /upm-overlay -->
+
+<script>
+(function () {
+  var CHECKOUT_URL    = '/checkout';
+  var MAIN_VARIANT_ID = '{{ section.settings.main_variant_id }}'.trim();
+  var TIMER_SECS      = parseInt('{{ section.settings.timer_secs | default: 300 }}', 10);
+
+  var overlay  = document.getElementById('upmOverlay');
+  var addBtn   = document.getElementById('upmAddBtn');
+  var skipBtn  = document.getElementById('upmSkip');
+  var countEl  = document.getElementById('upmCountdown');
+  var cards    = Array.from(overlay.querySelectorAll('.upm-card'));
+
+  var remaining     = TIMER_SECS;
+  var timerInterval = null;
+  var isProcessing  = false;
+
+  /* ── Utilidades ── */
+  function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+  function getSelected() {
+    return cards.filter(function (c) { return c.classList.contains('upm-selected'); });
+  }
+
+  function refreshAddBtn() {
+    var selected = getSelected();
+    var has = selected.length > 0;
+    addBtn.disabled = !has;
+    addBtn.classList.toggle('upm-active', has);
+
+    var savingsBar  = document.getElementById('upmSavings');
+    var badgeEl     = document.getElementById('upmSavingsBadge');
+    var oldEl       = document.getElementById('upmSavingsOld');
+    var newEl       = document.getElementById('upmSavingsNew');
+
+    if (!has) { savingsBar.style.display = 'none'; return; }
+
+    var totalNew = 0;
+    var totalOld = 0;
+    var singleDiscount = selected.length === 1 ? (selected[0].dataset.discount || '').trim() : '';
+
+    selected.forEach(function (card) {
+      var pNew = parseInt((card.dataset.priceNew || '').replace(/[^0-9]/g, ''), 10) || 0;
+      var pOld = parseInt((card.dataset.priceOld || '').replace(/[^0-9]/g, ''), 10) || 0;
+      totalNew += pNew;
+      totalOld += pOld > 0 ? pOld : pNew;
+    });
+
+    if (singleDiscount) {
+      badgeEl.textContent = singleDiscount;
+      badgeEl.style.display = 'inline-block';
+    } else {
+      badgeEl.style.display = 'none';
+    }
+
+    if (totalOld > totalNew) {
+      oldEl.textContent = '$' + totalOld.toLocaleString('es-AR');
+      oldEl.style.display = 'inline';
+    } else {
+      oldEl.style.display = 'none';
+    }
+
+    newEl.textContent = '$' + totalNew.toLocaleString('es-AR');
+    savingsBar.style.display = 'flex';
+  }
+
+  /* ── Timer ── */
+  function updateTimerDisplay() {
+    var m = Math.floor(remaining / 60);
+    var s = remaining % 60;
+    countEl.textContent = pad(m) + ':' + pad(s);
+    if (remaining <= 30) countEl.classList.add('upm-urgent');
+  }
+
+  function startTimer() {
+    remaining = TIMER_SECS;
+    updateTimerDisplay();
+    timerInterval = setInterval(function () {
+      remaining--;
+      updateTimerDisplay();
+      if (remaining <= 0) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        hideModal();
+        /* Timer agotado: agrega el principal y va al checkout sin upsells */
+        goToCheckout([], true);
+      }
+    }, 1000);
+  }
+
+  function stopTimer() {
+    if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+  }
+
+  /* ── Abrir / cerrar modal ── */
+  function showModal() {
+    if (overlay.classList.contains('upm-open')) return;
+    cards.forEach(function (c) { c.classList.remove('upm-selected'); });
+    refreshAddBtn();
+    overlay.classList.add('upm-open');
+    document.body.style.overflow = 'hidden';
+    startTimer();
+  }
+
+  function hideModal() {
+    stopTimer();
+    overlay.classList.remove('upm-open');
+    document.body.style.overflow = '';
+  }
+
+  /* ── Ir al checkout: agrega upsells seleccionados y redirige ── */
+  function goToCheckout(extraVids, silent) {
+    if (isProcessing) return;
+    isProcessing = true;
+
+    var statusEl = document.getElementById('upmStatus');
+
+    /* Asegurarse de que el overlay esté visible para mostrar el status */
+    if (!silent) overlay.classList.add('upm-open');
+
+    function showStatus(msg, color) {
+      if (silent) return;
+      statusEl.style.display = 'block';
+      statusEl.style.color = color || '#333';
+      statusEl.innerHTML = msg;
+    }
+
+    /* Filtrar solo IDs válidos — enviar como string, no parseInt */
+    var items = extraVids
+      .filter(function (vid) { return vid && vid.trim().length > 0; })
+      .map(function (vid) { return { id: vid.trim(), quantity: 1 }; });
+
+    /* Siempre incluir el producto principal al inicio */
+    if (MAIN_VARIANT_ID) {
+      items.unshift({ id: MAIN_VARIANT_ID, quantity: 1 });
+    }
+
+    showStatus('Enviando... IDs: [' + items.map(function(i){return i.id;}).join(', ') + ']');
+
+    if (items.length === 0) {
+      showStatus('Sin upsells → redirigiendo...', '#888');
+      setTimeout(function () { hideModal(); window.location.href = CHECKOUT_URL; }, silent ? 100 : 800);
+      return;
+    }
+
+    /* Validar que los IDs sean Variant IDs reales antes de intentar agregar */
+    showStatus('Validando IDs...');
+    Promise.all(items.map(function (item) {
+      return fetch('/variants/' + item.id + '.js')
+        .then(function (r) { return { id: item.id, ok: r.ok }; })
+        .catch(function () { return { id: item.id, ok: false }; });
+    })).then(function (results) {
+      var invalid = results.filter(function (r) { return !r.ok; });
+      if (invalid.length > 0) {
+        showStatus(
+          '❌ Variant ID incorrecto: <strong>' + invalid.map(function (r) { return r.id; }).join(', ') + '</strong><br>' +
+          '<small style="color:#555">Ese es el Product ID, no el Variant ID.<br>' +
+          'En Shopify Admin: Productos → [producto] → clic en la variante → URL → número final</small>',
+          '#c0392b'
+        );
+        statusEl.innerHTML += '<br><a href="' + CHECKOUT_URL + '" style="color:#fff;background:#111;padding:6px 14px;border-radius:6px;text-decoration:none;display:inline-block;margin-top:8px;font-size:12px;">Ir al checkout de todas formas →</a>';
+        isProcessing = false;
+        return;
+      }
+
+      /* Verificar qué items ya están en el carrito para no duplicar */
+      fetch('/cart.js')
+        .then(function (r) { return r.json(); })
+        .then(function (cart) {
+          var inCart = (cart.items || []).map(function (i) { return String(i.variant_id); });
+          var newItems = results
+            .filter(function (r) { return r.ok; })
+            .map(function (r) { return { id: r.id, quantity: 1 }; })
+            .filter(function (i) { return inCart.indexOf(i.id) === -1; });
+
+          if (newItems.length === 0) {
+            showStatus('✅ Todo ya está en el carrito', 'green');
+            setTimeout(function () { hideModal(); window.location.href = CHECKOUT_URL; }, silent ? 100 : 800);
+            return;
+          }
+
+          showStatus('Agregando al carrito...');
+          doAddToCart(newItems);
+        })
+        .catch(function () {
+          /* Si no podemos leer el carrito, agregar de todas formas */
+          var newItems = results.filter(function (r) { return r.ok; }).map(function (r) { return { id: r.id, quantity: 1 }; });
+          doAddToCart(newItems);
+        });
+    });
+
+    function doAddToCart(newItems) {
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ items: newItems })
+      })
+      .then(function (res) {
+        if (!res.ok) {
+          return res.text().then(function (body) {
+            var msg = body.length < 400 ? body : body.slice(0, 400);
+            try { var j = JSON.parse(body); msg = j.description || j.message || msg; } catch(e) {}
+            showStatus('❌ Error ' + res.status + ': ' + msg, '#c0392b');
+            statusEl.innerHTML += '<br><a href="' + CHECKOUT_URL + '" style="color:#fff;background:#111;padding:6px 14px;border-radius:6px;text-decoration:none;display:inline-block;margin-top:8px;font-size:12px;">Ir al checkout de todas formas →</a>';
+            isProcessing = false;
+            throw new Error('shown');
+          });
+        }
+        return res.json();
+      })
+      .then(function (data) {
+        showStatus('✅ ' + (data.items ? data.items.map(function(i){ return i.title; }).join(' + ') : 'Agregado'), 'green');
+        setTimeout(function () { hideModal(); window.location.href = CHECKOUT_URL; }, 1200);
+      })
+      .catch(function (err) {
+        if (err.message !== 'shown') {
+          showStatus('❌ Error de red: ' + err.message, '#c0392b');
+          statusEl.innerHTML += '<br><a href="' + CHECKOUT_URL + '" style="color:#fff;background:#111;padding:6px 14px;border-radius:6px;text-decoration:none;display:inline-block;margin-top:8px;font-size:12px;">Ir al checkout de todas formas →</a>';
+          isProcessing = false;
+        }
+      });
+    }
+  }
+
+  /* ── Selección de cards ── */
+  cards.forEach(function (card) {
+    card.addEventListener('click', function () {
+      if (isProcessing) return;
+      card.classList.toggle('upm-selected');
+      refreshAddBtn();
+    });
+  });
+
+  /* ── Botón "Añadir al carrito" ── */
+  addBtn.addEventListener('click', function () {
+    if (!addBtn.classList.contains('upm-active') || isProcessing) return;
+    stopTimer();
+    addBtn.classList.add('upm-loading');
+    addBtn.textContent = 'Agregando...';
+
+    var extraVids = getSelected().map(function (c) {
+      return (c.dataset.variant || '').trim();
+    });
+
+    /* NO llamar hideModal() aquí — goToCheckout lo hace después de mostrar el resultado */
+    goToCheckout(extraVids);
+  });
+
+  /* ── Botón "Omitir" ── */
+  skipBtn.addEventListener('click', function () {
+    if (isProcessing) return;
+    stopTimer();
+    var extraVids = getSelected().map(function (c) {
+      return (c.dataset.variant || '').trim();
+    });
+    goToCheckout(extraVids, true);
+  });
+
+  /* ── ESC: solo cierra el modal, no redirige ── */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('upm-open')) {
+      hideModal();
+    }
+  });
+
+  /* ── Trigger externo ──
+     <a href="#upsell-modal">  o  <button data-upsell-modal>
+  ── */
+  document.addEventListener('click', function (e) {
+    var trigger = e.target.closest('[href="#upsell-modal"], [data-upsell-modal]');
+    if (trigger) {
+      e.preventDefault();
+      showModal();
+    }
+  });
+
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Upsell Modal",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo del modal",
+      "default": "¡LO QUE NO AGREGAS HOY NO ESTARÁ DISPONIBLE DESPUÉS!"
+    },
+    {
+      "type": "text",
+      "id": "main_variant_id",
+      "label": "Variant ID del producto PRINCIPAL",
+      "info": "El producto que el cliente eligió comprar. Se agrega siempre al carrito al confirmar."
+    },
+    {
+      "type": "range",
+      "id": "timer_secs",
+      "label": "Duración del contador (segundos)",
+      "min": 60,
+      "max": 600,
+      "step": 30,
+      "default": 300
+    },
+
+    {
+      "type": "header",
+      "content": "Producto 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "p1_image",
+      "label": "Imagen"
+    },
+    {
+      "type": "text",
+      "id": "p1_title",
+      "label": "Nombre del producto",
+      "default": "Nombre del producto 1"
+    },
+    {
+      "type": "text",
+      "id": "p1_discount",
+      "label": "Badge de descuento (ej: -50%)",
+      "default": "-50%"
+    },
+    {
+      "type": "text",
+      "id": "p1_price_old",
+      "label": "Precio tachado (vacío para ocultar)"
+    },
+    {
+      "type": "text",
+      "id": "p1_price_new",
+      "label": "Precio final",
+      "default": "$9.990"
+    },
+    {
+      "type": "text",
+      "id": "p1_variant_id",
+      "label": "Variant ID de Shopify",
+      "info": "Admin › Productos › variante › número al final de la URL"
+    },
+    {
+      "type": "url",
+      "id": "p1_cta_url",
+      "label": "URL de respaldo (si no hay Variant ID)"
+    },
+    {
+      "type": "header",
+      "content": "Producto 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "p2_image",
+      "label": "Imagen"
+    },
+    {
+      "type": "text",
+      "id": "p2_title",
+      "label": "Nombre del producto"
+    },
+    {
+      "type": "text",
+      "id": "p2_discount",
+      "label": "Badge de descuento (ej: -50%)",
+      "default": "-50%"
+    },
+    {
+      "type": "text",
+      "id": "p2_price_old",
+      "label": "Precio tachado (vacío para ocultar)"
+    },
+    {
+      "type": "text",
+      "id": "p2_price_new",
+      "label": "Precio final"
+    },
+    {
+      "type": "text",
+      "id": "p2_variant_id",
+      "label": "Variant ID de Shopify"
+    },
+    {
+      "type": "url",
+      "id": "p2_cta_url",
+      "label": "URL de respaldo (si no hay Variant ID)"
+    },
+    {
+      "type": "header",
+      "content": "Producto 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "p3_image",
+      "label": "Imagen"
+    },
+    {
+      "type": "text",
+      "id": "p3_title",
+      "label": "Nombre del producto"
+    },
+    {
+      "type": "text",
+      "id": "p3_discount",
+      "label": "Badge de descuento (ej: -50%)",
+      "default": "-50%"
+    },
+    {
+      "type": "text",
+      "id": "p3_price_old",
+      "label": "Precio tachado (vacío para ocultar)"
+    },
+    {
+      "type": "text",
+      "id": "p3_price_new",
+      "label": "Precio final"
+    },
+    {
+      "type": "text",
+      "id": "p3_variant_id",
+      "label": "Variant ID de Shopify"
+    },
+    {
+      "type": "url",
+      "id": "p3_cta_url",
+      "label": "URL de respaldo (si no hay Variant ID)"
+    },
+    {
+      "type": "header",
+      "content": "Producto 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "p4_image",
+      "label": "Imagen"
+    },
+    {
+      "type": "text",
+      "id": "p4_title",
+      "label": "Nombre del producto"
+    },
+    {
+      "type": "text",
+      "id": "p4_discount",
+      "label": "Badge de descuento (ej: -50%)",
+      "default": "-50%"
+    },
+    {
+      "type": "text",
+      "id": "p4_price_old",
+      "label": "Precio tachado (vacío para ocultar)"
+    },
+    {
+      "type": "text",
+      "id": "p4_price_new",
+      "label": "Precio final"
+    },
+    {
+      "type": "text",
+      "id": "p4_variant_id",
+      "label": "Variant ID de Shopify"
+    },
+    {
+      "type": "url",
+      "id": "p4_cta_url",
+      "label": "URL de respaldo (si no hay Variant ID)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Upsell Modal"
+    }
+  ]
+}
+{% endschema %}

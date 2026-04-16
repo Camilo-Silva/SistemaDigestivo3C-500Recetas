@@ -59,7 +59,7 @@
         <span class="sd3c-off-badge">OFERTA ESPECIAL</span>
       </div>
       <div class="sd3c-product-stock"><span class="sd3c-stock-dot"></span> Precio especial — disponible por tiempo limitado</div>
-      <a href="{{ section.settings.cta_url }}" class="sd3c-product-cta-btn">{{ section.settings.cta_text }}</a>
+      <a href="{% if section.settings.open_upsell %}#upsell-modal{% else %}{{ section.settings.cta_url }}{% endif %}" class="sd3c-product-cta-btn">{{ section.settings.cta_text }}</a>
     </div>
   </div>
 </section>
@@ -92,9 +92,15 @@
       "default": "$14.999"
     },
     {
+      "type": "checkbox",
+      "id": "open_upsell",
+      "label": "Abrir modal de upsell al hacer clic",
+      "default": false
+    },
+    {
       "type": "url",
       "id": "cta_url",
-      "label": "URL del botón comprar"
+      "label": "URL del botón comprar (cuando no se usa el modal)"
     },
     {
       "type": "text",

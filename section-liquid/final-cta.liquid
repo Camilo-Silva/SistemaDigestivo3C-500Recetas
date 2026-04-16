@@ -22,7 +22,7 @@
         <h2>{{ section.settings.headline }}</h2>
         <p>{{ section.settings.body }}</p>
         <div class="cta-wrap">
-            <a href="{{ section.settings.cta_url }}" class="cta-btn"><i class="fa-solid fa-leaf"></i> {{ section.settings.cta_text }}</a>
+            <a href="{% if section.settings.open_upsell %}#upsell-modal{% else %}{{ section.settings.cta_url }}{% endif %}" class="cta-btn"><i class="fa-solid fa-leaf"></i> {{ section.settings.cta_text }}</a>
             <p class="cta-sub light">{{ section.settings.trust_text }}</p>
         </div>
     </div>
@@ -51,9 +51,15 @@
       "default": "QUIERO DESINFLAMARME SIN COMPLICARME"
     },
     {
+      "type": "checkbox",
+      "id": "open_upsell",
+      "label": "Abrir modal de upsell al hacer clic",
+      "default": false
+    },
+    {
       "type": "url",
       "id": "cta_url",
-      "label": "URL del botón CTA (link de pago)"
+      "label": "URL del botón CTA (cuando no se usa el modal)"
     },
     {
       "type": "text",

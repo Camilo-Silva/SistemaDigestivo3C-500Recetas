@@ -1,11 +1,11 @@
 <style>
   :root {
-    --rosa: #d8a7b1;
-    --gris-oscuro: #1C1C1E;
+    --verde-cta: #07AB00;
+    --blanco: #FFFFFF;
   }
   @keyframes sd3cFloatPulse {
-    0%,100% { transform: translateX(-50%) scale(1);    box-shadow: 0 8px 32px rgba(0,0,0,.22); }
-    50%     { transform: translateX(-50%) scale(1.05); box-shadow: 0 12px 40px rgba(0,0,0,.32); }
+    0%,100% { transform: translateX(-50%) scale(1);    box-shadow: 0 8px 32px rgba(7,171,0,.30); }
+    50%     { transform: translateX(-50%) scale(1.05); box-shadow: 0 12px 40px rgba(7,171,0,.45); }
   }
   .sd3c-float-cta {
     position: fixed;
@@ -14,8 +14,8 @@
     transform: translateX(-50%);
     z-index: 999;
     width: min(460px, calc(100% - 32px));
-    background: var(--rosa);
-    color: var(--gris-oscuro);
+    background: var(--verde-cta);
+    color: var(--blanco);
     text-align: center;
     font-size: 16px;
     font-weight: 800;
@@ -30,7 +30,7 @@
   .sd3c-float-cta:hover {
     animation: none;
     transform: translateX(-50%) scale(1.07) translateY(-2px);
-    box-shadow: 0 14px 44px rgba(0,0,0,.35);
+    box-shadow: 0 14px 44px rgba(7,171,0,.50);
   }
 </style>
 
@@ -47,14 +47,14 @@
     {
       "type": "checkbox",
       "id": "open_upsell",
-      "label": "Abrir modal de Upsell al hacer clic",
-      "info": "Actívalo si usas la sección 'Upsell Modal' en la página. Si está desactivado, va directo a la URL de abajo.",
+      "label": "Abrir modal de upsell al hacer clic",
+      "info": "Actívalo si usas la sección 'Upsell Modal' en la página.",
       "default": false
     },
     {
       "type": "url",
       "id": "cta_url",
-      "label": "URL directa al checkout (cuando el modal está desactivado)"
+      "label": "URL del botón flotante (cuando el modal está desactivado)"
     },
     {
       "type": "text",

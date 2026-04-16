@@ -1,39 +1,155 @@
-<div id="gf-benefits" style="background-color: #F9F9F9; padding: 20px 16px 24px; border-radius: 12px; font-family: sans-serif; max-width: 1000px; margin: 0 auto;">
-  <h2 style="text-align: center; font-size: 22px; font-weight: 800; margin: 0 0 18px; color: #333;">
-    Lo que obtenés con <span style="color:#FF8C42">Grafismo Fonético</span>
-  </h2>
-
-  <div class="gf-benefits-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-    {% assign beneficios =
-      "Método fonético paso a paso para enseñar a leer y escribir en casa,
-       Secuencia progresiva de letras y sonidos — sin saltearte nada,
-       Actividades de grafismo para que la mano aprenda a escribir bien,
-       Ejercicios de conciencia fonológica (unir sonidos y formar palabras),
-       Material listo para usar: sin preparar clases ni buscar recursos,
-       Guía para madres sin formación docente — lenguaje simple y claro,
-       Adaptado para niños de 3 a 10 años (inicial y primaria),
-       Funciona con 10 a 15 minutos al día, sin interrumpir la rutina,
-       Soporte ante dudas frecuentes con respuestas concretas,
-       Acceso inmediato por mail — empezás hoy mismo" | split: "," %}
-
-    {% for item in beneficios %}
-      <div style="display:flex; align-items:flex-start; gap:8px; font-size: 14px; color: #444; padding: 10px 10px 10px 12px; border-left: 3px solid #FF8C42; background:#fff; border-radius:8px;">
-        <span style="flex-shrink:0; width:18px; height:18px; display:inline-grid; place-items:center; border-radius:50%; background:#FF8C42; color:#fff; font-size:12px; line-height:18px; margin-top:2px;">✓</span>
-        <span>{{ item | strip }}</span>
-      </div>
-    {% endfor %}
-  </div>
-</div>
-
 <style>
-  @media (max-width: 640px){
-    #gf-benefits .gf-benefits-grid{
-      grid-template-columns: 1fr !important;
-      gap: 10px !important;
-    }
-    #gf-benefits h2{ font-size: 18px !important; }
+  #gf-benefits {
+    background: #F9F0E3;
+    padding: 24px 16px 28px;
+    border-radius: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  #gf-benefits h2 {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 900;
+    margin: 0 0 20px;
+    color: #3B2009;
+    line-height: 1.3;
+  }
+  #gf-benefits h2 span { color: #C85C3A; }
+
+  .gf-benefits-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .gf-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 12px 12px 14px;
+    background: #FFFDF8;
+    border-radius: 10px;
+    border-left: 3px solid #C85C3A;
+  }
+  .gf-item__icon {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    display: inline-grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #C85C3A;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 1px;
+  }
+  .gf-item__title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #3B2009;
+    margin: 0 0 2px;
+    line-height: 1.3;
+  }
+  .gf-item__sub {
+    font-size: 12px;
+    color: #7A5C3A;
+    margin: 0;
+    line-height: 1.4;
+  }
+  @media (max-width: 640px) {
+    .gf-benefits-grid { grid-template-columns: 1fr; }
+    #gf-benefits h2  { font-size: 18px; }
   }
 </style>
+
+<div id="gf-benefits">
+  <h2>Lo que obtenés con <span>Grafismo Fonético</span></h2>
+
+  <div class="gf-benefits-grid">
+
+    <div class="gf-item">
+      <span class="gf-item__icon">✓</span>
+      <div>
+        <p class="gf-item__title">Método fonético paso a paso</p>
+        <p class="gf-item__sub">Para enseñar a leer y escribir desde casa, sin experiencia docente.</p>
+      </div>
+    </div>
+
+    <div class="gf-item">
+      <span class="gf-item__icon">✓</span>
+      <div>
+        <p class="gf-item__title">Secuencia progresiva de sonidos</p>
+        <p class="gf-item__sub">Letras ordenadas de menor a mayor dificultad, sin saltearte nada.</p>
+      </div>
+    </div>
+
+    <div class="gf-item">
+      <span class="gf-item__icon">✓</span>
+      <div>
+        <p class="gf-item__title">Actividades de grafismo</p>
+        <p class="gf-item__sub">Ejercicios para que la mano aprenda el trazo correcto desde el inicio.</p>
+      </div>
+    </div>
+
+    <div class="gf-item">
+      <span class="gf-item__icon">✓</span>
+      <div>
+        <p class="gf-item__title">Conciencia fonológica</p>
+        <p class="gf-item__sub">Une sonidos, forma palabras y desarrolla la base lectora real.</p>
+      </div>
+    </div>
+
+    <div class="gf-item">
+      <span class="gf-item__icon">✓</span>
+      <div>
+        <p class="gf-item__title">Material listo para usar</p>
+        <p class="gf-item__sub">Sin preparar clases ni buscar más recursos. Todo ya está hecho.</p>
+      </div>
+    </div>
+
+    <div class="gf-item">
+      <span class="gf-item__icon">✓</span>
+      <div>
+        <p class="gf-item__title">Guía para madres sin título</p>
+        <p class="gf-item__sub">Lenguaje simple, claro y sin tecnicismos educativos.</p>
+      </div>
+    </div>
+
+    <div class="gf-item">
+      <span class="gf-item__icon">✓</span>
+      <div>
+        <p class="gf-item__title">Para niños de 3 a 10 años</p>
+        <p class="gf-item__sub">Adaptado para nivel inicial y primaria.</p>
+      </div>
+    </div>
+
+    <div class="gf-item">
+      <span class="gf-item__icon">✓</span>
+      <div>
+        <p class="gf-item__title">10–15 minutos al día</p>
+        <p class="gf-item__sub">Se integra a la rutina sin interrumpirla.</p>
+      </div>
+    </div>
+
+    <div class="gf-item">
+      <span class="gf-item__icon">✓</span>
+      <div>
+        <p class="gf-item__title">Respuestas a dudas frecuentes</p>
+        <p class="gf-item__sub">Soporte con respuestas concretas ante las consultas más comunes.</p>
+      </div>
+    </div>
+
+    <div class="gf-item">
+      <span class="gf-item__icon">✓</span>
+      <div>
+        <p class="gf-item__title">Acceso inmediato por mail</p>
+        <p class="gf-item__sub">Llegás al material hoy mismo, al instante de comprar.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 
 
@@ -63,16 +179,16 @@
 <title>Historias reales – Grafismo Fonético</title>
 <style>
   :root{
-    --bg: #F7FAFF;
-    --card:#ffffff;
-    --text:#0f172a;
-    --muted:#64748b;
-    --primary:#6A5AE0;
-    --accent:#22c55e;
-    --ring: rgba(99,102,241,.25);
-    --soft: rgba(2,6,23,.06);
+    --bg: #FDF5EC;
+    --card:#FFFAF5;
+    --text:#2D1407;
+    --muted:#8B7355;
+    --primary:#D4733A;
+    --accent:#7a9d8e;
+    --ring: rgba(212,115,58,.20);
+    --soft: rgba(45,20,7,.06);
     --radius: 18px;
-    --shadow: 0 10px 34px rgba(2,6,23,.10);
+    --shadow: 0 10px 34px rgba(45,20,7,.10);
   }
 
   body{ margin:0; background:var(--bg); color:var(--text);
@@ -105,7 +221,7 @@
   /* ==== Media con flechas === */
   .media-wrap{
     position: relative;
-    background: #0b102014;
+    background: #F0E4D2;
     padding: 18px;
   }
   .media{
@@ -146,22 +262,22 @@
     padding: clamp(16px,2.2vw,22px);
     display:grid; align-content:center;
     background:
-      radial-gradient(1200px 200px at 0% 0%, rgba(106,90,224,.06), transparent 60%),
-      radial-gradient(1200px 200px at 100% 100%, rgba(34,197,94,.06), transparent 60%);
+      radial-gradient(1200px 200px at 0% 0%, rgba(212,115,58,.07), transparent 60%),
+      radial-gradient(1200px 200px at 100% 100%, rgba(122,157,142,.07), transparent 60%);
   }
 
   .quote-mark{
     width: 34px; height: 34px;
     border-radius: 10px;
     display:grid; place-items:center;
-    background: linear-gradient(92deg, #EEF2FF, #ECFDF5);
-    border: 1px solid rgba(2,6,23,.06);
+    background: linear-gradient(92deg, #FDECD8, #E8F4EF);
+    border: 1px solid rgba(212,115,58,.15);
     color: var(--primary); font-weight: 900;
     margin-bottom:10px;
   }
 
   .quote{ margin:0; font-size: clamp(15px, 2.2vw, 17px); line-height: 1.55; }
-  .bullets{ margin: 10px 0 0; padding:0; list-style:none; color:#334155; font-size:14px; }
+  .bullets{ margin: 10px 0 0; padding:0; list-style:none; color:#5C3D2A; font-size:14px; }
   .bullets li{ display:flex; align-items:flex-start; gap:8px; margin:6px 0; }
   .bullets li:before{
     content:""; display:inline-block; width:14px; height:14px; margin-top:3px;
@@ -183,12 +299,12 @@
 
   .note{
     display:flex; align-items:flex-start; gap:10px;
-    font-size:12.5px; color:#5f6b84;
+    font-size:12.5px; color:#8B7355;
     margin-top:14px;
     padding:10px 12px;
     border-radius:12px;
-    background: #fff;
-    border:1px dashed rgba(2,6,23,.10);
+    background: #FFFAF5;
+    border:1px dashed rgba(212,115,58,.25);
   }
   .note i{
     width:18px; height:18px; flex: 0 0 18px;

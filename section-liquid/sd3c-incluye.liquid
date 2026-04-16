@@ -31,8 +31,6 @@
   }
   .sd3c-iv2-group-header.principal { background: var(--verde); color: var(--blanco); }
   .sd3c-iv2-group-header.bonus     { background: #eaf4f0; color: var(--verde); }
-  .sd3c-iv2-group-header.premium   { background: linear-gradient(90deg, #f5e8ec, #f5e4e6); color: var(--rojo); }
-  .sd3c-iv2-group-header.regalo    { background: linear-gradient(90deg, #2a2a42, #3e3468); color: #f9d55b; }
   .sd3c-iv2-item {
     display: flex; align-items: flex-start; gap: 14px;
     padding: 14px 20px; border-top: 1px solid #f0e8e2;
@@ -48,7 +46,6 @@
   }
   .sd3c-iv2-badge--verde { background: var(--verde-fondo); color: var(--verde); border: 1px solid var(--verde-claro); }
   .sd3c-iv2-badge--rosa  { background: #f5e4e6; color: var(--rojo); }
-  .sd3c-iv2-badge--gold  { background: #fdf3d0; color: #9a7a00; }
   .sd3c-iv2-total-row {
     background: var(--verde); color: var(--blanco);
     border-radius: 14px; padding: 18px 22px;
@@ -106,37 +103,6 @@
         </div>
       </div>
 
-      <div class="sd3c-iv2-group">
-        <div class="sd3c-iv2-group-header premium">⭐ 6 productos extras — valor {{ section.settings.valor_extras }}</div>
-        <div class="sd3c-iv2-item">
-          <span class="sd3c-iv2-check" style="color:var(--rojo);">✔</span>
-          <div><strong>Reiniciá tu Cuerpo — Ebook completo (14 días)</strong><span>El método natural para desinflamarte desde adentro. Paso a paso diario, rutinas express y seguimiento de síntomas.</span></div>
-        </div>
-        <div class="sd3c-iv2-item">
-          <span class="sd3c-iv2-check" style="color:var(--rojo);">✔</span>
-          <div><strong>Guía: Qué Comer Cuando No Tenés Tiempo</strong><span>Soluciones antiinflamatorias rápidas para días caóticos, sin planificar y sin cocinar.</span></div>
-        </div>
-        <div class="sd3c-iv2-item">
-          <span class="sd3c-iv2-check" style="color:var(--rojo);">✔</span>
-          <div><strong>Rutinas Express Antiinflamación</strong><span>Rutinas de mañana y noche de menos de 10 minutos para activar tu sistema natural.</span></div>
-        </div>
-        <div class="sd3c-iv2-item">
-          <span class="sd3c-iv2-check" style="color:var(--rojo);">✔</span>
-          <div><strong>Lista Anti-Hinchazón del Super + Plan de Emergencia 24 hs + Menú 7 días sin cocina</strong><span>Tres guías prácticas para tener siempre una salida lista.</span></div>
-        </div>
-      </div>
-
-      <div class="sd3c-iv2-group">
-        <div class="sd3c-iv2-group-header regalo">🎁 Regalo exclusivo para compradores</div>
-        <div class="sd3c-iv2-item">
-          <span class="sd3c-iv2-check" style="color:#f9d55b;">✔</span>
-          <div>
-            <strong>Dejar Costumbres que te Estancan — Ebook <span class="sd3c-iv2-badge sd3c-iv2-badge--gold">GRATIS</span></strong>
-            <span>Libertate de hábitos limitantes y transforma tu vida. Lo recibís sin costo adicional con tu compra.</span>
-          </div>
-        </div>
-      </div>
-
     </div>
 
     <div class="sd3c-iv2-total-row sd3c-reveal">
@@ -168,12 +134,6 @@
 {
   "name": "SD3C Incluye",
   "settings": [
-    {
-      "type": "text",
-      "id": "valor_extras",
-      "label": "Valor 6 productos extras",
-      "default": "$89.940"
-    },
     {
       "type": "text",
       "id": "valor_total",

@@ -122,7 +122,7 @@
       <span class="sd3c-badge">🌿 Sin hinchazón</span>
       <span class="sd3c-badge">📱 App incluida</span>
     </div>
-    <a href="{{ section.settings.cta_url }}" class="sd3c-btn-cta grande">{{ section.settings.cta_text }}</a>
+    <a href="{% if section.settings.open_upsell %}#upsell-modal{% else %}{{ section.settings.cta_url }}{% endif %}" class="sd3c-btn-cta grande">{{ section.settings.cta_text }}</a>
     <div class="sd3c-trust-bar">
       <span><i class="fa-solid fa-lock"></i> Compra segura</span>
       <span><i class="fa-solid fa-bolt"></i> Acceso inmediato</span>
@@ -154,9 +154,15 @@
       "default": "Come mejor sin pensar: accede a 500 recetas organizadas por tiempo, momento y necesidad, y olvídate para siempre del estrés diario de decidir qué cocinar."
     },
     {
+      "type": "checkbox",
+      "id": "open_upsell",
+      "label": "Abrir modal de upsell al hacer clic",
+      "default": false
+    },
+    {
       "type": "url",
       "id": "cta_url",
-      "label": "URL del botón CTA"
+      "label": "URL del botón CTA (cuando no se usa el modal)"
     },
     {
       "type": "text",
